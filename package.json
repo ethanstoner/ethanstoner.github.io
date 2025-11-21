@@ -1,0 +1,23 @@
+{
+  "name": "ethanstoner-portfolio",
+  "version": "1.0.0",
+  "description": "Ethan Stoner's portfolio website with black theme",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve . -p 3001",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report"
+  },
+  "keywords": ["portfolio", "ethanstoner", "qa", "playwright"],
+  "author": "Ethan Stoner",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}
