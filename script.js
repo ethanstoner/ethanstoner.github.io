@@ -70,12 +70,11 @@ function initSmoothScroll() {
             // Use custom smooth scroll (1000ms for smooth animation)
             smoothScrollTo(desiredPosition, 1000);
             
-            // Update URL hash after scroll completes
+            // Update URL without hash (clean URL)
             setTimeout(() => {
                 if (history.pushState) {
-                    history.pushState(null, null, href);
-                } else {
-                    window.location.hash = href;
+                    // Replace hash with clean URL
+                    history.pushState(null, null, window.location.pathname + window.location.search);
                 }
             }, 1100);
             
@@ -135,10 +134,20 @@ function initAll() {
                 link.classList.add('active');
             }
         });
+        
+        // Clean URL hash if it exists (remove hash from URL)
+        if (window.location.hash && history.replaceState) {
+            history.replaceState(null, null, window.location.pathname + window.location.search);
+        }
     }
 
     window.addEventListener('scroll', updateActiveNavLink);
     updateActiveNavLink();
+    
+    // Remove hash on page load if present
+    if (window.location.hash && history.replaceState) {
+        history.replaceState(null, null, window.location.pathname + window.location.search);
+    }
 }
 
 // Initialize when DOM is ready
