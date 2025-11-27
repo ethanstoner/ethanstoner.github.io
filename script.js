@@ -26,6 +26,15 @@ function initSmoothScroll() {
                 behavior: 'smooth'
             });
             
+            // Update URL hash after scroll
+            setTimeout(() => {
+                if (history.pushState) {
+                    history.pushState(null, null, href);
+                } else {
+                    window.location.hash = href;
+                }
+            }, 100);
+            
             return false;
         });
     });
