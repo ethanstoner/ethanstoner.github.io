@@ -67,8 +67,8 @@ function initSmoothScroll() {
             const targetTop = target.offsetTop;
             const desiredPosition = Math.max(0, targetTop - headerOffset);
             
-            // Use custom smooth scroll
-            smoothScrollTo(desiredPosition, 800);
+            // Use custom smooth scroll (1000ms for smooth animation)
+            smoothScrollTo(desiredPosition, 1000);
             
             // Update URL hash after scroll completes
             setTimeout(() => {
@@ -77,7 +77,7 @@ function initSmoothScroll() {
                 } else {
                     window.location.hash = href;
                 }
-            }, 900);
+            }, 1100);
             
             return false;
         });
