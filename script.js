@@ -46,10 +46,16 @@ function smoothScrollTo(targetPosition, duration = 1000) {
 
 // Smooth scroll function
 function initSmoothScroll() {
-    // Only target anchor links, not mailto: or external links
-    const anchors = document.querySelectorAll('a[href^="#"]:not([href^="mailto:"]):not([href^="http"]):not([target="_blank"])');
+    // Only target anchor links (internal page links), exclude mailto: and external links
+    const anchors = document.querySelectorAll('a[href^="#"]');
     
     anchors.forEach((anchor) => {
+        // Skip if it's a mailto: link or external link
+        const href = anchor.getAttribute('href');
+        if (!href || href.startsWith('mailto:') || href.startsWith('http')) {
+            return;
+        }
+        
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             
