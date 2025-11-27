@@ -131,62 +131,62 @@
                     <div class="projects-grid">
                         <div class="project-card">
                             <div class="project-header">
-                                <h3 class="project-title">ECS Service Deployment</h3>
-                                <span class="project-badge">AWS</span>
+                                <h3 class="project-title">Skyblock AH Sniper</h3>
+                                <span class="project-badge">Java</span>
                             </div>
                             <p class="project-description">
-                                Containerized backend deployed to AWS ECS (Fargate) with ALB routing, secure IAM task roles, and CloudWatch logs. CI/CD pipeline: GitHub Actions builds, tests, and deploys automatically. <strong style="color: rgba(255, 255, 255, 0.8);">Impact:</strong> Fully automated deployments with < 2 minutes deploy time. Zero manual credential usage — full IAM role deployment.
+                                Minecraft 1.8.9 Forge mod that monitors Hypixel Skyblock auction house and alerts on profitable deals. Features price tracking, profit calculation, auto-buy functionality, and Coflnet API integration. <strong style="color: rgba(255, 255, 255, 0.8);">Impact:</strong> Real-time auction monitoring with configurable profit margins. Price learning system builds database over time for accurate market analysis.
                             </p>
                             <p class="project-description" style="margin-top: 16px; font-size: 14px; color: rgba(255, 255, 255, 0.5);">
-                                <strong style="color: rgba(255, 255, 255, 0.7);">Architecture:</strong> Browser → ALB → ECS Service → Task Role → S3/Logs. Used CloudFormation for infrastructure-as-code.
+                                <strong style="color: rgba(255, 255, 255, 0.7);">Architecture:</strong> Chat Monitor → Auction Parser → Price Tracker → Alert System → GUI Overlay. Built with Gradle, Forge 1.8.9 API, JSON config persistence.
                             </p>
                             <div class="project-features">
-                                <span class="feature-tag">ECS Fargate</span>
-                                <span class="feature-tag">ALB</span>
-                                <span class="feature-tag">CI/CD</span>
-                                <span class="feature-tag">CloudFormation</span>
+                                <span class="feature-tag">Java</span>
+                                <span class="feature-tag">Gradle</span>
+                                <span class="feature-tag">Minecraft Forge</span>
+                                <span class="feature-tag">API Integration</span>
                             </div>
-                            <a href="[repo link]" target="_blank" rel="noopener noreferrer" class="project-link">View Project</a>
+                            <a href="https://github.com/ethanstoner" target="_blank" rel="noopener noreferrer" class="project-link">View Project</a>
                         </div>
 
                         <div class="project-card">
                             <div class="project-header">
-                                <h3 class="project-title">GPU 3D Asset Pipeline</h3>
+                                <h3 class="project-title">Sora Prompt Generator Bot</h3>
                                 <span class="project-badge">Python</span>
                             </div>
                             <p class="project-description">
-                                RTX 4090–powered pipeline for automated Roblox asset generation. AI-based modeling + batch processing. Fully containerized workflow for reproducibility. <strong style="color: rgba(255, 255, 255, 0.8);">Impact:</strong> Reduced manual 3D asset creation time by 80% via GPU automation. Processes hundreds of assets in parallel.
+                                Lightweight Discord bot that generates viral Sora 2 video prompts using Groq API. Docker-ready with resource limits, 10 prompt templates, and fast responses. Designed for mini PC deployment. <strong style="color: rgba(255, 255, 255, 0.8);">Impact:</strong> Automated prompt generation with multiple styles (CCTV, body cam, Olympic broadcast, etc.). Resource-efficient design uses <256MB memory.
                             </p>
                             <p class="project-description" style="margin-top: 16px; font-size: 14px; color: rgba(255, 255, 255, 0.5);">
-                                <strong style="color: rgba(255, 255, 255, 0.7);">Architecture:</strong> Prompt → GPU Container → Mesh Generator → Optimizer → Output Folder. CUDA acceleration with multiprocessing.
+                                <strong style="color: rgba(255, 255, 255, 0.7);">Architecture:</strong> Discord Command → Groq API → Template Engine → Response. Docker containerized with CPU/memory limits. Automatic reconnection and error handling.
                             </p>
                             <div class="project-features">
-                                <span class="feature-tag">GPU Acceleration</span>
-                                <span class="feature-tag">AI Modeling</span>
-                                <span class="feature-tag">Automation</span>
-                                <span class="feature-tag">CUDA</span>
+                                <span class="feature-tag">Python</span>
+                                <span class="feature-tag">Docker</span>
+                                <span class="feature-tag">Discord API</span>
+                                <span class="feature-tag">Groq API</span>
                             </div>
-                            <a href="[repo link]" target="_blank" rel="noopener noreferrer" class="project-link">View Project</a>
+                            <a href="https://github.com/ethanstoner" target="_blank" rel="noopener noreferrer" class="project-link">View Project</a>
                         </div>
 
                         <div class="project-card">
                             <div class="project-header">
-                                <h3 class="project-title">AI-Powered Discord Bot</h3>
-                                <span class="project-badge">Node.js</span>
+                                <h3 class="project-title">Free Chatbot API</h3>
+                                <span class="project-badge">Python</span>
                             </div>
                             <p class="project-description">
-                                Built using AI APIs and agentic tooling in Cursor. Supports slash commands, logging, error recovery. Fully containerized for easy deployment. <strong style="color: rgba(255, 255, 255, 0.8);">Roadmap:</strong> ECS deployment + metrics. Designed for 24/7 uptime with automatic reconnection and health monitoring.
+                                Production-ready Python chatbot featuring character personality (Song Hui) with Groq API integration. Automatic rate limit handling, token-aware throttling, and optimized conversation history. <strong style="color: rgba(255, 255, 255, 0.8);">Impact:</strong> Handles 30 requests/minute with automatic throttling. Never hits rate limits through intelligent request management. Response time: ~200-500ms.
                             </p>
                             <p class="project-description" style="margin-top: 16px; font-size: 14px; color: rgba(255, 255, 255, 0.5);">
-                                <strong style="color: rgba(255, 255, 255, 0.7);">Features:</strong> Context-aware responses, rate limiting, Docker containerization. Handles multiple simultaneous users.
+                                <strong style="color: rgba(255, 255, 255, 0.7);">Features:</strong> Character backstory (~5000 tokens), automatic rate limit detection, smart retry logic, token-efficient message formatting. Uses llama-3.1-8b-instant model.
                             </p>
                             <div class="project-features">
-                                <span class="feature-tag">AI Integration</span>
-                                <span class="feature-tag">Docker</span>
-                                <span class="feature-tag">Scalable</span>
-                                <span class="feature-tag">Discord API</span>
+                                <span class="feature-tag">Python</span>
+                                <span class="feature-tag">Groq API</span>
+                                <span class="feature-tag">Rate Limiting</span>
+                                <span class="feature-tag">AI Chatbot</span>
                             </div>
-                            <a href="[repo link]" target="_blank" rel="noopener noreferrer" class="project-link">View Project</a>
+                            <a href="https://github.com/ethanstoner" target="_blank" rel="noopener noreferrer" class="project-link">View Project</a>
                         </div>
                     </div>
                 </div>
@@ -201,28 +201,28 @@
                     </div>
                     <div class="skills-matrix">
                         <div class="skill-category">
-                            <h3 class="skill-category-title">Cloud</h3>
-                            <p class="skill-list">ECS, ECR, Fargate, ALB, IAM, VPC</p>
+                            <h3 class="skill-category-title">Programming Languages</h3>
+                            <p class="skill-list">Python, Java, JavaScript, TypeScript, Node.js</p>
                         </div>
                         <div class="skill-category">
-                            <h3 class="skill-category-title">Containers</h3>
-                            <p class="skill-list">Docker, multi-stage builds</p>
+                            <h3 class="skill-category-title">APIs & Integration</h3>
+                            <p class="skill-list">Discord API, Groq API, REST APIs, WebSocket clients</p>
                         </div>
                         <div class="skill-category">
-                            <h3 class="skill-category-title">CI/CD</h3>
-                            <p class="skill-list">GitHub Actions, automated deploy pipelines</p>
+                            <h3 class="skill-category-title">Containerization</h3>
+                            <p class="skill-list">Docker, Docker Compose, multi-stage builds, resource limits</p>
                         </div>
                         <div class="skill-category">
-                            <h3 class="skill-category-title">Programming</h3>
-                            <p class="skill-list">Python, TypeScript, JavaScript, Node.js, Java</p>
+                            <h3 class="skill-category-title">Build Tools</h3>
+                            <p class="skill-list">Gradle, Python venv, npm, package management</p>
                         </div>
                         <div class="skill-category">
-                            <h3 class="skill-category-title">GPU Workflows</h3>
-                            <p class="skill-list">RTX-based AI pipelines, batch rendering, CUDA</p>
+                            <h3 class="skill-category-title">AI & Automation</h3>
+                            <p class="skill-list">Groq API integration, rate limiting, token management, chatbot development</p>
                         </div>
                         <div class="skill-category">
-                            <h3 class="skill-category-title">Infra/Automation</h3>
-                            <p class="skill-list">Service orchestration, monitoring basics, distributed job runners</p>
+                            <h3 class="skill-category-title">Game Development</h3>
+                            <p class="skill-list">Minecraft Forge modding, Java game APIs, mod development</p>
                         </div>
                     </div>
                 </div>
