@@ -57,7 +57,7 @@ function initSmoothScroll() {
                 } else {
                     window.location.hash = href;
                 }
-            }, 850);
+            }, 900);
             
             return false;
         });

@@ -1396,13 +1396,15 @@ html {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 html {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none !important;  /* IE and Edge */
+    scrollbar-width: none !important;  /* Firefox */
+    overflow: -moz-scrollbars-none;  /* Old Firefox */
 }
 
 body {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none !important;  /* IE and Edge */
+    scrollbar-width: none !important;  /* Firefox */
+    overflow: -moz-scrollbars-none;  /* Old Firefox */
 }
 
 /* Remove background animation */
