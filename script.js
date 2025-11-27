@@ -148,6 +148,24 @@ function initAll() {
     if (window.location.hash && history.replaceState) {
         history.replaceState(null, null, window.location.pathname + window.location.search);
     }
+
+    // Scroll to top button
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    if (scrollToTopBtn) {
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        // Scroll to top on click
+        scrollToTopBtn.addEventListener('click', () => {
+            smoothScrollTo(0, 800);
+        });
+    }
 }
 
 // Initialize when DOM is ready
