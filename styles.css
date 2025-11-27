@@ -913,6 +913,91 @@ html {
     }
 }
 
+/*--------------- skills matrix --------------- */
+.skills-matrix {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 48px;
+    margin-top: 80px;
+}
+
+.skill-category {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 32px;
+    transition: all 0.3s ease;
+}
+
+.skill-category:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.skill-category-title {
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    color: #fff;
+    text-transform: lowercase;
+    font-family: "Roboto Mono", monospace;
+    letter-spacing: 2px;
+    opacity: 0.9;
+}
+
+.skill-list {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.8;
+    font-weight: 300;
+    font-family: "Roboto Mono", monospace;
+    letter-spacing: 0.2px;
+    margin: 0;
+}
+
+/*--------------- roadmap --------------- */
+.roadmap-content {
+    margin-top: 80px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.roadmap-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.roadmap-list li {
+    padding: 20px 0;
+    padding-left: 32px;
+    color: rgba(255, 255, 255, 0.7);
+    position: relative;
+    line-height: 1.8;
+    font-weight: 300;
+    font-family: "Roboto Mono", monospace;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: color 0.3s ease;
+    letter-spacing: 0.2px;
+    font-size: 16px;
+}
+
+.roadmap-list li:last-child {
+    border-bottom: none;
+}
+
+.roadmap-list li:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.roadmap-list li::before {
+    content: '→ ';
+    position: absolute;
+    left: 0;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 400;
+}
+
 /*--------------- tech stack --------------- */
 .tech-grid {
     display: grid;
@@ -1264,6 +1349,17 @@ html {
     .contact-links {
         grid-template-columns: 1fr;
         gap: 24px;
+    }
+    
+    .skills-matrix {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    
+    .roadmap-list li {
+        font-size: 15px;
+        padding: 16px 0;
+        padding-left: 28px;
     }
 
     .contact-link {

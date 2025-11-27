@@ -25,6 +25,8 @@
                 <a href="#hero" class="nav-link">home<span>.</span></a>
                 <a href="#about" class="nav-link">about<span>.</span></a>
                 <a href="#projects" class="nav-link">projects<span>.</span></a>
+                <a href="#skills" class="nav-link">skills<span>.</span></a>
+                <a href="#roadmap" class="nav-link">roadmap<span>.</span></a>
                 <a href="#contact" class="nav-link">contact<span>.</span></a>
             </nav>
         </header>
@@ -102,10 +104,10 @@
                                 <span class="project-badge">AWS</span>
                             </div>
                             <p class="project-description">
-                                Built a production-ready containerized application deployment system on AWS ECS (Fargate) with Application Load Balancer routing. The project solves the problem of manual deployments and infrastructure drift by automating the entire CI/CD pipeline through GitHub Actions.
+                                Containerized backend deployed to AWS ECS (Fargate) with ALB routing, secure IAM task roles, and CloudWatch logs. CI/CD pipeline: GitHub Actions builds, tests, and deploys automatically. <strong style="color: rgba(255, 255, 255, 0.8);">Impact:</strong> Fully automated deployments with < 2 minutes deploy time. Zero manual credential usage — full IAM role deployment.
                             </p>
                             <p class="project-description" style="margin-top: 16px; font-size: 14px; color: rgba(255, 255, 255, 0.5);">
-                                <strong style="color: rgba(255, 255, 255, 0.7);">What I learned:</strong> Deep dive into AWS networking (VPCs, security groups, ALB target groups), container orchestration best practices, and implementing zero-downtime blue-green deployments. Used CloudFormation for infrastructure-as-code.
+                                <strong style="color: rgba(255, 255, 255, 0.7);">Architecture:</strong> Browser → ALB → ECS Service → Task Role → S3/Logs. Used CloudFormation for infrastructure-as-code.
                             </p>
                             <div class="project-features">
                                 <span class="feature-tag">ECS Fargate</span>
@@ -122,10 +124,10 @@
                                 <span class="project-badge">Python</span>
                             </div>
                             <p class="project-description">
-                                Developed an RTX 4090-powered workflow that automates mesh and texture generation for Roblox assets using AI-assisted modeling. The system processes hundreds of assets in parallel, reducing manual 3D modeling time from hours to minutes per asset.
+                                RTX 4090–powered pipeline for automated Roblox asset generation. AI-based modeling + batch processing. Fully containerized workflow for reproducibility. <strong style="color: rgba(255, 255, 255, 0.8);">Impact:</strong> Reduced manual 3D asset creation time by 80% via GPU automation. Processes hundreds of assets in parallel.
                             </p>
                             <p class="project-description" style="margin-top: 16px; font-size: 14px; color: rgba(255, 255, 255, 0.5);">
-                                <strong style="color: rgba(255, 255, 255, 0.7);">Tech highlights:</strong> CUDA acceleration, batch processing with multiprocessing, AI model integration for texture generation, and automated UV mapping. Built custom Python tools for mesh optimization and format conversion.
+                                <strong style="color: rgba(255, 255, 255, 0.7);">Architecture:</strong> Prompt → GPU Container → Mesh Generator → Optimizer → Output Folder. CUDA acceleration with multiprocessing.
                             </p>
                             <div class="project-features">
                                 <span class="feature-tag">GPU Acceleration</span>
@@ -142,10 +144,10 @@
                                 <span class="project-badge">Node.js</span>
                             </div>
                             <p class="project-description">
-                                Created an intelligent Discord chatbot using AI APIs, built with agentic development workflows in Cursor. The bot maintains conversation context, handles multiple simultaneous users, and is fully containerized for easy deployment and scaling.
+                                Built using AI APIs and agentic tooling in Cursor. Supports slash commands, logging, error recovery. Fully containerized for easy deployment. <strong style="color: rgba(255, 255, 255, 0.8);">Roadmap:</strong> ECS deployment + metrics. Designed for 24/7 uptime with automatic reconnection and health monitoring.
                             </p>
                             <p class="project-description" style="margin-top: 16px; font-size: 14px; color: rgba(255, 255, 255, 0.5);">
-                                <strong style="color: rgba(255, 255, 255, 0.7);">Key features:</strong> Context-aware responses, rate limiting, error handling, Docker containerization, and integration with Discord's slash commands. Designed for 24/7 uptime with automatic reconnection and health monitoring.
+                                <strong style="color: rgba(255, 255, 255, 0.7);">Features:</strong> Context-aware responses, rate limiting, Docker containerization. Handles multiple simultaneous users.
                             </p>
                             <div class="project-features">
                                 <span class="feature-tag">AI Integration</span>
@@ -159,6 +161,62 @@
                 </div>
             </section>
 
+            <!-- Skills Section -->
+            <section class="section" id="skills">
+                <div class="page-container">
+                    <div class="section-header">
+                        <h2 class="section-title">skills overview<span>.</span></h2>
+                        <p class="section-subtitle">technologies and tools i work with</p>
+                    </div>
+                    <div class="skills-matrix">
+                        <div class="skill-category">
+                            <h3 class="skill-category-title">Cloud</h3>
+                            <p class="skill-list">ECS, ECR, Fargate, ALB, IAM, VPC</p>
+                        </div>
+                        <div class="skill-category">
+                            <h3 class="skill-category-title">Containers</h3>
+                            <p class="skill-list">Docker, multi-stage builds</p>
+                        </div>
+                        <div class="skill-category">
+                            <h3 class="skill-category-title">CI/CD</h3>
+                            <p class="skill-list">GitHub Actions, automated deploy pipelines</p>
+                        </div>
+                        <div class="skill-category">
+                            <h3 class="skill-category-title">Programming</h3>
+                            <p class="skill-list">Python, TypeScript, JavaScript, Node.js, Java</p>
+                        </div>
+                        <div class="skill-category">
+                            <h3 class="skill-category-title">GPU Workflows</h3>
+                            <p class="skill-list">RTX-based AI pipelines, batch rendering, CUDA</p>
+                        </div>
+                        <div class="skill-category">
+                            <h3 class="skill-category-title">Infra/Automation</h3>
+                            <p class="skill-list">Service orchestration, monitoring basics, distributed job runners</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Roadmap Section -->
+            <section class="section" id="roadmap">
+                <div class="page-container">
+                    <div class="section-header">
+                        <h2 class="section-title">roadmap<span>.</span></h2>
+                        <p class="section-subtitle">what i'm working on (2025–2026)</p>
+                    </div>
+                    <div class="roadmap-content">
+                        <ul class="roadmap-list">
+                            <li>ECS deployment v2 with autoscaling + blue/green</li>
+                            <li>GPU pipeline migration toward cloud inference</li>
+                            <li>Add OpenTelemetry traces + metrics</li>
+                            <li>Build Terraform modules after SAA exam</li>
+                            <li>Deploy Discord bot backend on ECS</li>
+                            <li>Prepare for AWS SAA (target: Aug 2026)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
             <!-- Contact Section -->
             <section class="section" id="contact">
                 <div class="page-container">
@@ -166,9 +224,19 @@
                         <h2 class="section-title">get in touch<span>.</span></h2>
                     </div>
                     <div class="contact-card">
-                        <p class="contact-text">
-                            Available for Cloud / Platform Engineering internships starting 2026–2027. Open to opportunities and collaborations.
+                        <p class="contact-text" style="font-size: 18px; margin-bottom: 32px;">
+                            <strong>Open to Cloud | Platform | Automation Internships (2026–2027)</strong>
                         </p>
+                        <p class="contact-text" style="margin-bottom: 40px;">
+                            I'm available for:
+                        </p>
+                        <ul class="hire-list" style="list-style: none; padding: 0; margin: 0 0 40px 0; max-width: 600px; margin-left: auto; margin-right: auto;">
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">Cloud engineering internships</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">Platform/DevOps support</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">GPU automation tooling</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">Containerized backend work</li>
+                            <li style="padding: 12px 0;">AI-integrated automation projects</li>
+                        </ul>
                         <div class="contact-links">
                             <div class="contact-link-group">
                                 <p>github</p>
@@ -188,6 +256,16 @@
                                         <circle cx="4" cy="4" r="2"></circle>
                                     </svg>
                                     <span>linkedin</span>
+                                </a>
+                            </div>
+                            <div class="contact-link-group">
+                                <p>email me</p>
+                                <a href="mailto:ethanstoner08@gmail.com" class="contact-link">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                    <span>ethanstoner08@gmail.com</span>
                                 </a>
                             </div>
                         </div>
