@@ -1,3 +1,29 @@
+// Enhanced smooth scroll function with custom easing
+function smoothScrollTo(targetPosition, duration = 800) {
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    let startTime = null;
+
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+        const easedProgress = easeInOutCubic(progress);
+        
+        window.scrollTo(0, startPosition + distance * easedProgress);
+        
+        if (timeElapsed < duration) {
+            requestAnimationFrame(animation);
+        }
+    }
+
+    requestAnimationFrame(animation);
+}
+
 // Smooth scroll function
 function initSmoothScroll() {
     const anchors = document.querySelectorAll('a[href^="#"]');
@@ -21,19 +47,17 @@ function initSmoothScroll() {
             const targetTop = target.offsetTop;
             const desiredPosition = Math.max(0, targetTop - headerOffset);
             
-            window.scrollTo({
-                top: desiredPosition,
-                behavior: 'smooth'
-            });
+            // Use custom smooth scroll
+            smoothScrollTo(desiredPosition, 800);
             
-            // Update URL hash after scroll
+            // Update URL hash after scroll completes
             setTimeout(() => {
                 if (history.pushState) {
                     history.pushState(null, null, href);
                 } else {
                     window.location.hash = href;
                 }
-            }, 100);
+            }, 850);
             
             return false;
         });
