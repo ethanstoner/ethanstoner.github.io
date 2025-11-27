@@ -46,7 +46,8 @@ function smoothScrollTo(targetPosition, duration = 1000) {
 
 // Smooth scroll function
 function initSmoothScroll() {
-    const anchors = document.querySelectorAll('a[href^="#"]');
+    // Only target anchor links, not mailto: or external links
+    const anchors = document.querySelectorAll('a[href^="#"]:not([href^="mailto:"]):not([href^="http"]):not([target="_blank"])');
     
     anchors.forEach((anchor) => {
         anchor.addEventListener('click', function (e) {
