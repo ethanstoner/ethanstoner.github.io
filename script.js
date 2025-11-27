@@ -1,8 +1,9 @@
 // Enhanced smooth scroll function with custom easing
-function smoothScrollTo(targetPosition, duration = 800) {
-    const startPosition = window.pageYOffset;
+function smoothScrollTo(targetPosition, duration = 1000) {
+    const startPosition = window.pageYOffset || window.scrollY || document.documentElement.scrollTop;
     const distance = targetPosition - startPosition;
     let startTime = null;
+    let animationFrameId = null;
 
     function easeInOutCubic(t) {
         return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -14,14 +15,33 @@ function smoothScrollTo(targetPosition, duration = 800) {
         const progress = Math.min(timeElapsed / duration, 1);
         const easedProgress = easeInOutCubic(progress);
         
-        window.scrollTo(0, startPosition + distance * easedProgress);
+        const currentPosition = startPosition + distance * easedProgress;
+        
+        // Use multiple methods to ensure scroll works
+        window.scrollTo(0, currentPosition);
+        document.documentElement.scrollTop = currentPosition;
+        if (document.body) {
+            document.body.scrollTop = currentPosition;
+        }
         
         if (timeElapsed < duration) {
-            requestAnimationFrame(animation);
+            animationFrameId = requestAnimationFrame(animation);
+        } else {
+            // Ensure we end at exact target
+            window.scrollTo(0, targetPosition);
+            document.documentElement.scrollTop = targetPosition;
+            if (document.body) {
+                document.body.scrollTop = targetPosition;
+            }
         }
     }
 
-    requestAnimationFrame(animation);
+    // Cancel any existing scroll animation
+    if (window._currentScrollAnimation) {
+        cancelAnimationFrame(window._currentScrollAnimation);
+    }
+    
+    window._currentScrollAnimation = requestAnimationFrame(animation);
 }
 
 // Smooth scroll function

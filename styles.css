@@ -16,14 +16,14 @@ html, body {
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    scroll-behavior: smooth;
+    scroll-behavior: auto !important; /* Disable CSS smooth scroll, use JS instead */
     overflow-x: hidden;
     overflow-y: auto;
 }
 
 /* Ensure smooth scrolling works for all anchor links */
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto !important; /* Disable CSS smooth scroll, use JS instead */
 }
 
 *:focus-visible {
@@ -1390,21 +1390,41 @@ html {
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-::-webkit-scrollbar {
-    display: none;
+* {
+    scrollbar-width: none !important;  /* Firefox - apply to all elements */
+    -ms-overflow-style: none !important;  /* IE and Edge - apply to all elements */
+}
+
+*::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 html {
     -ms-overflow-style: none !important;  /* IE and Edge */
     scrollbar-width: none !important;  /* Firefox */
-    overflow: -moz-scrollbars-none;  /* Old Firefox */
+    overflow: -moz-scrollbars-none !important;  /* Old Firefox */
 }
 
 body {
     -ms-overflow-style: none !important;  /* IE and Edge */
     scrollbar-width: none !important;  /* Firefox */
-    overflow: -moz-scrollbars-none;  /* Old Firefox */
+    overflow: -moz-scrollbars-none !important;  /* Old Firefox */
+}
+
+/* Additional scrollbar hiding for all scrollable elements */
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+*::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 
 /* Remove background animation */
