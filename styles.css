@@ -1488,12 +1488,18 @@ html {
     }
 
     .line {
-        width: 100% !important;
-        max-width: 100% !important;
-        white-space: normal !important;
+        white-space: nowrap !important;
         overflow: visible !important;
-        display: block !important;
-        border-right: none !important;
+        width: auto !important;
+        max-width: 100% !important;
+        display: inline-block !important;
+        border-right: 3px solid rgba(255, 255, 255, 0.9) !important;
+        padding-right: 4px !important;
+    }
+    
+    .anim-typewriter {
+        animation: typewriter-mobile 4s steps(40) 1s 1 normal both,
+                   blinkTextCursor 500ms steps(40) infinite normal !important;
     }
 
     @keyframes typewriter {
