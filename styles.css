@@ -17,8 +17,14 @@ html, body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: auto !important; /* Disable CSS smooth scroll, use JS instead */
-    overflow-x: hidden;
+    overflow-x: hidden !important;
     overflow-y: auto;
+    max-width: 100vw;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
 /* Ensure smooth scrolling works for all anchor links */
@@ -35,11 +41,15 @@ html {
     width: 100%;
     min-height: 100vh;
     position: relative;
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 .main-content {
     width: 100%;
     position: relative;
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 /*--------------- scroll progress --------------- */
@@ -198,6 +208,7 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .hero-title {
@@ -208,6 +219,9 @@ html {
     font-size: 64px;
     margin: 0 auto 32px;
     display: inline-block;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .line {
@@ -218,6 +232,8 @@ html {
     overflow: hidden;
     margin: 0 auto;
     padding-right: 4px;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .anim-typewriter {
@@ -429,6 +445,8 @@ html {
     width: 100%;
     opacity: 1; /* Changed from 0 to 1 for instant visibility */
     will-change: opacity; /* Optimize for performance */
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 /* Better scaling for large monitors */
@@ -492,6 +510,8 @@ html {
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
+    box-sizing: border-box;
+    padding: 0;
 }
 
 .section-header {
@@ -691,7 +711,15 @@ html {
 
 @media (max-width: 1024px) {
     .projects-grid {
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 48px;
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
     }
 }
 
@@ -1282,6 +1310,17 @@ html {
         display: flex;
     }
 
+    /* Disable typewriter animation on mobile for better text wrapping */
+    .anim-typewriter {
+        animation: none !important;
+        border-right: none !important;
+    }
+
+    .line {
+        white-space: normal !important;
+        border-right: none !important;
+    }
+
     .nav {
         position: fixed;
         top: 60px;
@@ -1341,11 +1380,14 @@ html {
         line-height: 1.3;
         letter-spacing: -1.5px;
         margin-bottom: 24px;
+        width: 100%;
+        max-width: 100%;
     }
 
     .line {
-        width: 100%;
-        max-width: 14em;
+        width: 100% !important;
+        max-width: 100% !important;
+        white-space: normal !important;
     }
 
     @keyframes typewriter {
@@ -1354,7 +1396,7 @@ html {
         }
         to {
             width: 100%;
-            max-width: 14em;
+            max-width: 100%;
         }
     }
 
@@ -1390,9 +1432,10 @@ html {
     }
 
     .projects-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
         gap: 32px;
         margin-top: 48px;
+        width: 100%;
     }
 
     .project-card {
@@ -1561,11 +1604,21 @@ html {
         font-size: 26px;
         letter-spacing: -1px;
         margin-bottom: 20px;
-    }
-    
-    .line {
         width: 100%;
-        max-width: 12em;
+        max-width: 100%;
+    }
+
+    /* Disable typewriter animation on small mobile */
+    .anim-typewriter {
+        animation: none !important;
+        border-right: none !important;
+    }
+
+    .line {
+        width: 100% !important;
+        max-width: 100% !important;
+        white-space: normal !important;
+        border-right: none !important;
     }
     
     @keyframes typewriter {
@@ -1574,7 +1627,7 @@ html {
         }
         to {
             width: 100%;
-            max-width: 12em;
+            max-width: 100%;
         }
     }
     
@@ -1609,8 +1662,10 @@ html {
     }
     
     .projects-grid {
+        grid-template-columns: 1fr !important;
         gap: 24px;
         margin-top: 40px;
+        width: 100%;
     }
 
     .project-card {
