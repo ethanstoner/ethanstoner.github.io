@@ -236,6 +236,19 @@ html {
     box-sizing: border-box;
 }
 
+/* Mobile: Force full text display */
+@media (max-width: 768px) {
+    .line.anim-typewriter {
+        white-space: normal !important;
+        overflow: visible !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+        border-right: none !important;
+        animation: none !important;
+    }
+}
+
 .anim-typewriter {
     animation: typewriter 4s steps(40) 1s 1 normal both,
     blinkTextCursor 500ms steps(40) infinite normal;
@@ -1314,11 +1327,23 @@ html {
     .anim-typewriter {
         animation: none !important;
         border-right: none !important;
+        width: 100% !important;
     }
 
     .line {
         white-space: normal !important;
         border-right: none !important;
+        overflow: visible !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+    }
+
+    .hero-title {
+        display: block !important;
+        width: 100% !important;
+        white-space: normal !important;
+        overflow: visible !important;
     }
 
     .nav {
@@ -1380,14 +1405,20 @@ html {
         line-height: 1.3;
         letter-spacing: -1.5px;
         margin-bottom: 24px;
-        width: 100%;
-        max-width: 100%;
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+        white-space: normal !important;
+        overflow: visible !important;
     }
 
     .line {
         width: 100% !important;
         max-width: 100% !important;
         white-space: normal !important;
+        overflow: visible !important;
+        display: block !important;
+        border-right: none !important;
     }
 
     @keyframes typewriter {
@@ -1604,14 +1635,18 @@ html {
         font-size: 26px;
         letter-spacing: -1px;
         margin-bottom: 20px;
-        width: 100%;
-        max-width: 100%;
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+        white-space: normal !important;
+        overflow: visible !important;
     }
 
     /* Disable typewriter animation on small mobile */
     .anim-typewriter {
         animation: none !important;
         border-right: none !important;
+        width: 100% !important;
     }
 
     .line {
@@ -1619,6 +1654,15 @@ html {
         max-width: 100% !important;
         white-space: normal !important;
         border-right: none !important;
+        overflow: visible !important;
+        display: block !important;
+    }
+
+    .hero-title {
+        display: block !important;
+        width: 100% !important;
+        white-space: normal !important;
+        overflow: visible !important;
     }
     
     @keyframes typewriter {
