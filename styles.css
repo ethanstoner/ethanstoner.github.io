@@ -229,6 +229,23 @@ html {
     overflow-wrap: break-word;
 }
 
+/* Mobile: Completely override hero title to display as block */
+@media (max-width: 768px) {
+    h1.hero-title.line.anim-typewriter,
+    h1.hero-title.line,
+    .hero-title.line.anim-typewriter,
+    .hero-title.line,
+    .hero-title {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        word-break: normal !important;
+    }
+}
+
 .line {
     display: inline-block;
     border-right: 3px solid rgba(255, 255, 255, 0.9);
@@ -243,8 +260,11 @@ html {
 
 /* Mobile: Force full text display - completely override typewriter */
 @media (max-width: 768px) {
+    /* Target all possible combinations of classes */
+    h1.hero-title.line.anim-typewriter,
     .hero-title.line.anim-typewriter,
     .line.anim-typewriter,
+    h1.hero-title.line,
     .hero-title.line,
     .line {
         white-space: normal !important;
@@ -256,14 +276,19 @@ html {
         animation: none !important;
         text-overflow: clip !important;
         padding-right: 0 !important;
+        min-width: 0 !important;
     }
     
+    /* Ensure hero title itself is fully visible */
+    h1.hero-title,
     .hero-title {
         white-space: normal !important;
         overflow: visible !important;
         width: 100% !important;
         max-width: 100% !important;
         display: block !important;
+        text-overflow: clip !important;
+        min-width: 0 !important;
     }
 }
 
