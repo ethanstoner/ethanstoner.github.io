@@ -256,7 +256,7 @@ html {
             width: 0;
         }
         to {
-            width: max-content;
+            width: 20em; /* Enough for "Cloud & Platform Engineering." at 32px */
             max-width: 100%;
         }
     }
@@ -296,7 +296,7 @@ html {
             width: 0;
         }
         to {
-            width: max-content;
+            width: 20em; /* Enough for "Cloud & Platform Engineering." at 32px */
             max-width: 100%;
         }
     }
@@ -1404,7 +1404,7 @@ html {
             width: 0;
         }
         to {
-            width: max-content;
+            width: 20em; /* Enough for "Cloud & Platform Engineering." at 32px */
             max-width: 100%;
         }
     }
@@ -1749,7 +1749,7 @@ html {
             width: 0;
         }
         to {
-            width: max-content;
+            width: 18em; /* Enough for "Cloud & Platform Engineering." at 26px */
             max-width: 100%;
         }
     }

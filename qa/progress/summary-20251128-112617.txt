@@ -1,0 +1,41 @@
+QA Execution Summary
+===================
+
+Date/Time: Fri Nov 28 11:26:27 PST 2025
+Project: ethanstoner.github.io
+Duration: 10s
+
+Results:
+  Total Checks: 16
+  Passed: 11
+  Failed: 4
+  Skipped: 1
+
+Check Details:
+  - Backlog Generation: PASSED
+  - API Tests: PASSED
+  - Unit Tests: SKIPPED
+  - Documentation Check: FAILED
+  - Static Analysis: PASSED
+  - Accessibility Testing: PASSED
+  - Security Scan: PASSED
+  - Environment Validation: PASSED
+  - Dependency Check: PASSED
+  - Playwright Setup: PASSED
+  - Code Quality: PASSED
+  - Config Validation: PASSED
+  - File Structure: FAILED
+  - Performance Testing: PASSED
+  - Git Branch Validation: FAILED
+  - Playwright Tests: FAILED
+
+Failed Checks:
+  - Documentation Check
+  - File Structure
+  - Git Branch Validation
+  - Playwright Tests
+
+Artifacts:
+  Reports: qa/reports/
+  Backlog: qa/backlog/TODO.md
+  Summary: qa/progress/summary-20251128-112617.txt
