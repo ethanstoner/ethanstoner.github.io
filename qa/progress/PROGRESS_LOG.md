@@ -53,3 +53,14 @@
 - **Duration:** 10s
 - **Summary:** [qa/progress/summary-20251128-111515.txt](qa/progress/summary-20251128-111515.txt)
 
+
+## 20251128-111940 - ethanstoner.github.io
+
+- **Date/Time:** Fri Nov 28 11:19:52 PST 2025
+- **Checks Run:** 16
+- **Passed:** 11
+- **Failed:** 4
+- **Skipped:** 1
+- **Duration:** 12s
+- **Summary:** [qa/progress/summary-20251128-111940.txt](qa/progress/summary-20251128-111940.txt)
+

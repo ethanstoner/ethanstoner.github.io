@@ -209,6 +209,7 @@ html {
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
+    overflow-x: visible;
 }
 
 .hero-title {
@@ -236,9 +237,12 @@ html {
     box-sizing: border-box;
 }
 
-/* Mobile: Force full text display */
+/* Mobile: Force full text display - completely override typewriter */
 @media (max-width: 768px) {
-    .line.anim-typewriter {
+    .hero-title.line.anim-typewriter,
+    .line.anim-typewriter,
+    .hero-title.line,
+    .line {
         white-space: normal !important;
         overflow: visible !important;
         width: 100% !important;
@@ -246,6 +250,16 @@ html {
         display: block !important;
         border-right: none !important;
         animation: none !important;
+        text-overflow: clip !important;
+        padding-right: 0 !important;
+    }
+    
+    .hero-title {
+        white-space: normal !important;
+        overflow: visible !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
     }
 }
 
@@ -1324,12 +1338,9 @@ html {
     }
 
     /* Disable typewriter animation on mobile for better text wrapping */
-    .anim-typewriter {
-        animation: none !important;
-        border-right: none !important;
-        width: 100% !important;
-    }
-
+    .hero-title.line.anim-typewriter,
+    .line.anim-typewriter,
+    .hero-title.line,
     .line {
         white-space: normal !important;
         border-right: none !important;
@@ -1337,13 +1348,18 @@ html {
         width: 100% !important;
         max-width: 100% !important;
         display: block !important;
+        animation: none !important;
+        text-overflow: clip !important;
+        padding-right: 0 !important;
     }
 
     .hero-title {
         display: block !important;
         width: 100% !important;
+        max-width: 100% !important;
         white-space: normal !important;
         overflow: visible !important;
+        text-overflow: clip !important;
     }
 
     .nav {
@@ -1398,6 +1414,8 @@ html {
     .hero-content {
         width: 100%;
         padding: 0 12px;
+        overflow-x: visible !important;
+        min-width: 0;
     }
 
     .hero-title {
@@ -1643,12 +1661,9 @@ html {
     }
 
     /* Disable typewriter animation on small mobile */
-    .anim-typewriter {
-        animation: none !important;
-        border-right: none !important;
-        width: 100% !important;
-    }
-
+    .hero-title.line.anim-typewriter,
+    .line.anim-typewriter,
+    .hero-title.line,
     .line {
         width: 100% !important;
         max-width: 100% !important;
@@ -1656,13 +1671,18 @@ html {
         border-right: none !important;
         overflow: visible !important;
         display: block !important;
+        animation: none !important;
+        text-overflow: clip !important;
+        padding-right: 0 !important;
     }
 
     .hero-title {
         display: block !important;
         width: 100% !important;
+        max-width: 100% !important;
         white-space: normal !important;
         overflow: visible !important;
+        text-overflow: clip !important;
     }
     
     @keyframes typewriter {
