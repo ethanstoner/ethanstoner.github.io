@@ -90,9 +90,50 @@ function initSmoothScroll() {
     });
 }
 
+// Mobile menu toggle
+function initMobileMenu() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const nav = document.querySelector('.nav');
+    
+    if (mobileMenuToggle && nav) {
+        mobileMenuToggle.addEventListener('click', function() {
+            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+            mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+            nav.classList.toggle('mobile-open');
+            
+            // Prevent body scroll when menu is open
+            if (!isExpanded) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close menu when clicking a nav link
+        const navLinks = nav.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                nav.classList.remove('mobile-open');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!nav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                nav.classList.remove('mobile-open');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+}
+
 // Initialize when DOM is ready
 function initAll() {
     initSmoothScroll();
+    initMobileMenu();
 
     // Scroll progress indicator
     function updateScrollProgress() {

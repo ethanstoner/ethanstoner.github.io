@@ -1,0 +1,17 @@
+Git Branch Validation Report
+Generated: Fri Nov 28 11:06:27 PST 2025
+==============================
+
+Current Branch: main
+
+✅ main branch exists
+ℹ️ dev branch not found (optional)
+
+Branch Protection Checks:
+========================
+⚠️ WARNING: Uncommitted changes detected on main branch
+
+Summary:
+========
+Current branch: main
+Status: ⚠️ Issues found
