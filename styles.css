@@ -229,20 +229,36 @@ html {
     overflow-wrap: break-word;
 }
 
-/* Mobile: Completely override hero title to display as block */
+/* Mobile: Keep typewriter but ensure full text visibility */
 @media (max-width: 768px) {
-    h1.hero-title.line.anim-typewriter,
-    h1.hero-title.line,
-    .hero-title.line.anim-typewriter,
-    .hero-title.line,
     .hero-title {
         display: block !important;
         width: 100% !important;
         max-width: 100% !important;
-        white-space: normal !important;
+    }
+    
+    .line {
+        display: inline-block !important;
+        white-space: nowrap !important;
         overflow: visible !important;
-        text-overflow: clip !important;
-        word-break: normal !important;
+        width: auto !important;
+        max-width: 100% !important;
+        border-right: 3px solid rgba(255, 255, 255, 0.9) !important;
+    }
+    
+    .anim-typewriter {
+        animation: typewriter-mobile 4s steps(40) 1s 1 normal both,
+                   blinkTextCursor 500ms steps(40) infinite normal !important;
+    }
+    
+    @keyframes typewriter-mobile {
+        from {
+            width: 0;
+        }
+        to {
+            width: 100%;
+            max-width: 100%;
+        }
     }
 }
 
@@ -258,37 +274,38 @@ html {
     box-sizing: border-box;
 }
 
-/* Mobile: Force full text display - completely override typewriter */
+/* Mobile: Keep typewriter animation but ensure full text is visible */
 @media (max-width: 768px) {
-    /* Target all possible combinations of classes */
-    h1.hero-title.line.anim-typewriter,
-    .hero-title.line.anim-typewriter,
-    .line.anim-typewriter,
-    h1.hero-title.line,
-    .hero-title.line,
     .line {
-        white-space: normal !important;
+        white-space: nowrap !important;
         overflow: visible !important;
-        width: 100% !important;
+        width: auto !important;
         max-width: 100% !important;
-        display: block !important;
-        border-right: none !important;
-        animation: none !important;
-        text-overflow: clip !important;
-        padding-right: 0 !important;
-        min-width: 0 !important;
+        display: inline-block !important;
+        border-right: 3px solid rgba(255, 255, 255, 0.9) !important;
+        padding-right: 4px !important;
     }
     
-    /* Ensure hero title itself is fully visible */
-    h1.hero-title,
+    .anim-typewriter {
+        animation: typewriter-mobile 4s steps(40) 1s 1 normal both,
+                   blinkTextCursor 500ms steps(40) infinite normal !important;
+    }
+    
+    @keyframes typewriter-mobile {
+        from {
+            width: 0;
+        }
+        to {
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+    
     .hero-title {
-        white-space: normal !important;
-        overflow: visible !important;
+        display: block !important;
         width: 100% !important;
         max-width: 100% !important;
-        display: block !important;
-        text-overflow: clip !important;
-        min-width: 0 !important;
+        overflow: visible !important;
     }
 }
 
@@ -1366,29 +1383,37 @@ html {
         display: flex;
     }
 
-    /* Disable typewriter animation on mobile for better text wrapping */
-    .hero-title.line.anim-typewriter,
-    .line.anim-typewriter,
-    .hero-title.line,
+    /* Keep typewriter animation on mobile but ensure full text visibility */
     .line {
-        white-space: normal !important;
-        border-right: none !important;
+        white-space: nowrap !important;
         overflow: visible !important;
-        width: 100% !important;
+        width: auto !important;
         max-width: 100% !important;
-        display: block !important;
-        animation: none !important;
-        text-overflow: clip !important;
-        padding-right: 0 !important;
+        display: inline-block !important;
+        border-right: 3px solid rgba(255, 255, 255, 0.9) !important;
+        padding-right: 4px !important;
+    }
+    
+    .anim-typewriter {
+        animation: typewriter-mobile 4s steps(40) 1s 1 normal both,
+                   blinkTextCursor 500ms steps(40) infinite normal !important;
+    }
+    
+    @keyframes typewriter-mobile {
+        from {
+            width: 0;
+        }
+        to {
+            width: 100%;
+            max-width: 100%;
+        }
     }
 
     .hero-title {
         display: block !important;
         width: 100% !important;
         max-width: 100% !important;
-        white-space: normal !important;
         overflow: visible !important;
-        text-overflow: clip !important;
     }
 
     .nav {
@@ -1697,29 +1722,37 @@ html {
         overflow: visible !important;
     }
 
-    /* Disable typewriter animation on small mobile */
-    .hero-title.line.anim-typewriter,
-    .line.anim-typewriter,
-    .hero-title.line,
+    /* Keep typewriter animation on small mobile */
     .line {
-        width: 100% !important;
-        max-width: 100% !important;
-        white-space: normal !important;
-        border-right: none !important;
+        white-space: nowrap !important;
         overflow: visible !important;
-        display: block !important;
-        animation: none !important;
-        text-overflow: clip !important;
-        padding-right: 0 !important;
+        width: auto !important;
+        max-width: 100% !important;
+        display: inline-block !important;
+        border-right: 3px solid rgba(255, 255, 255, 0.9) !important;
+        padding-right: 4px !important;
+    }
+    
+    .anim-typewriter {
+        animation: typewriter-mobile-small 4s steps(40) 1s 1 normal both,
+                   blinkTextCursor 500ms steps(40) infinite normal !important;
+    }
+    
+    @keyframes typewriter-mobile-small {
+        from {
+            width: 0;
+        }
+        to {
+            width: 100%;
+            max-width: 100%;
+        }
     }
 
     .hero-title {
         display: block !important;
         width: 100% !important;
         max-width: 100% !important;
-        white-space: normal !important;
         overflow: visible !important;
-        text-overflow: clip !important;
     }
     
     @keyframes typewriter {
