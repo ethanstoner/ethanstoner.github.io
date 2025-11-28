@@ -1,0 +1,1664 @@
+{
+  "config": {
+    "configFile": "/home/ethan/cursor projects/ethanstoner.github.io/playwright.config.ts",
+    "rootDir": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 8
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "qa/reports/playwright"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "qa/reports/playwright/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/ethan/cursor projects/ethanstoner.github.io/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 8
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/home/ethan/cursor projects/ethanstoner.github.io/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 8
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/home/ethan/cursor projects/ethanstoner.github.io/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 8
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/home/ethan/cursor projects/ethanstoner.github.io/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 8
+        },
+        "id": "mobile-chrome",
+        "name": "mobile-chrome",
+        "testDir": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/home/ethan/cursor projects/ethanstoner.github.io/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 8
+        },
+        "id": "mobile-safari",
+        "name": "mobile-safari",
+        "testDir": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/home/ethan/cursor projects/ethanstoner.github.io/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 8
+        },
+        "id": "tablet-chrome",
+        "name": "tablet-chrome",
+        "testDir": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/home/ethan/cursor projects/ethanstoner.github.io/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 8
+        },
+        "id": "viewport-16-9",
+        "name": "viewport-16-9",
+        "testDir": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/home/ethan/cursor projects/ethanstoner.github.io/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 8
+        },
+        "id": "viewport-4-3",
+        "name": "viewport-4-3",
+        "testDir": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/home/ethan/cursor projects/ethanstoner.github.io/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 8
+        },
+        "id": "viewport-21-9",
+        "name": "viewport-21-9",
+        "testDir": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/home/ethan/cursor projects/ethanstoner.github.io/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 8
+        },
+        "id": "viewport-portrait",
+        "name": "viewport-portrait",
+        "testDir": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.57.0",
+    "workers": 8,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "responsive-design.spec.ts",
+      "file": "responsive-design.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Responsive Design",
+          "file": "responsive-design.spec.ts",
+          "line": 21,
+          "column": 6,
+          "specs": [
+            {
+              "title": "layout works correctly at Mobile Portrait (9:16)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3176,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\nMobile Portrait (9:16) Analysis:\n"
+                        },
+                        {
+                          "text": "  - Screenshot: qa/reports/playwright/screenshots/responsive-mobile-portrait.png\n"
+                        },
+                        {
+                          "text": "  - Issues found: 9\n"
+                        },
+                        {
+                          "text": "  - Overlapping elements: 9\n"
+                        },
+                        {
+                          "text": "  - Text readability: OK\n"
+                        }
+                      ],
+                      "stderr": [
+                        {
+                          "text": "Found 9 overlapping elements at Mobile Portrait\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .logo\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .logo-text\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .mobile-menu-toggle\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .logo overlaps with .logo-text\n"
+                        },
+                        {
+                          "text": "  - .logo overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .logo-text overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .mobile-menu-toggle overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - #hero overlaps with .hero-content\n"
+                        },
+                        {
+                          "text": "(node:32449) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "startTime": "2025-11-28T19:45:45.280Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/ethan/cursor projects/ethanstoner.github.io/test-results/responsive-design-Responsi-becd8-ly-at-Mobile-Portrait-9-16--chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a027f4963a965b420d0c-ce498cd64af13a06ac61",
+              "file": "responsive-design.spec.ts",
+              "line": 34,
+              "column": 9
+            },
+            {
+              "title": "layout works correctly at Mobile Landscape (16:9)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 3155,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\nMobile Landscape (16:9) Analysis:\n"
+                        },
+                        {
+                          "text": "  - Screenshot: qa/reports/playwright/screenshots/responsive-mobile-landscape.png\n"
+                        },
+                        {
+                          "text": "  - Issues found: 9\n"
+                        },
+                        {
+                          "text": "  - Overlapping elements: 9\n"
+                        },
+                        {
+                          "text": "  - Text readability: OK\n"
+                        }
+                      ],
+                      "stderr": [
+                        {
+                          "text": "Found 9 overlapping elements at Mobile Landscape\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .logo\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .logo-text\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .mobile-menu-toggle\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .logo overlaps with .logo-text\n"
+                        },
+                        {
+                          "text": "  - .logo overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .logo-text overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .mobile-menu-toggle overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - #hero overlaps with .hero-content\n"
+                        },
+                        {
+                          "text": "(node:32450) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "startTime": "2025-11-28T19:45:45.290Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/ethan/cursor projects/ethanstoner.github.io/test-results/responsive-design-Responsi-b6d44-y-at-Mobile-Landscape-16-9--chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a027f4963a965b420d0c-35abe000be884e5bd00c",
+              "file": "responsive-design.spec.ts",
+              "line": 34,
+              "column": 9
+            },
+            {
+              "title": "layout works correctly at Tablet Portrait (3:4)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 3308,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\nTablet Portrait (3:4) Analysis:\n"
+                        },
+                        {
+                          "text": "  - Screenshot: qa/reports/playwright/screenshots/responsive-tablet-portrait.png\n"
+                        },
+                        {
+                          "text": "  - Issues found: 9\n"
+                        },
+                        {
+                          "text": "  - Overlapping elements: 9\n"
+                        },
+                        {
+                          "text": "  - Text readability: OK\n"
+                        }
+                      ],
+                      "stderr": [
+                        {
+                          "text": "Found 9 overlapping elements at Tablet Portrait\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .logo\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .logo-text\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .mobile-menu-toggle\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .logo overlaps with .logo-text\n"
+                        },
+                        {
+                          "text": "  - .logo overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .logo-text overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .mobile-menu-toggle overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - #hero overlaps with .hero-content\n"
+                        },
+                        {
+                          "text": "(node:32452) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "startTime": "2025-11-28T19:45:45.257Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/ethan/cursor projects/ethanstoner.github.io/test-results/responsive-design-Responsi-51b0f-tly-at-Tablet-Portrait-3-4--chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a027f4963a965b420d0c-16b0e1f3ac27fb138395",
+              "file": "responsive-design.spec.ts",
+              "line": 34,
+              "column": 9
+            },
+            {
+              "title": "layout works correctly at Tablet Landscape (4:3)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 3729,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\nTablet Landscape (4:3) Analysis:\n"
+                        },
+                        {
+                          "text": "  - Screenshot: qa/reports/playwright/screenshots/responsive-tablet-landscape.png\n"
+                        },
+                        {
+                          "text": "  - Issues found: 51\n"
+                        },
+                        {
+                          "text": "  - Overlapping elements: 51\n"
+                        },
+                        {
+                          "text": "  - Text readability: OK\n"
+                        }
+                      ],
+                      "stderr": [
+                        {
+                          "text": "Found 51 overlapping elements at Tablet Landscape\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .logo\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .logo-text\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .logo overlaps with .logo-text\n"
+                        },
+                        {
+                          "text": "  - .logo overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .logo-text overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - #hero overlaps with .hero-content\n"
+                        },
+                        {
+                          "text": "(node:32451) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "startTime": "2025-11-28T19:45:45.280Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/ethan/cursor projects/ethanstoner.github.io/test-results/responsive-design-Responsi-bddfe-ly-at-Tablet-Landscape-4-3--chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a027f4963a965b420d0c-5b3a6060f82325edeb69",
+              "file": "responsive-design.spec.ts",
+              "line": 34,
+              "column": 9
+            },
+            {
+              "title": "layout works correctly at Desktop 16:9 (16:9)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 3789,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\nDesktop 16:9 (16:9) Analysis:\n"
+                        },
+                        {
+                          "text": "  - Screenshot: qa/reports/playwright/screenshots/responsive-desktop-16:9.png\n"
+                        },
+                        {
+                          "text": "  - Issues found: 51\n"
+                        },
+                        {
+                          "text": "  - Overlapping elements: 51\n"
+                        },
+                        {
+                          "text": "  - Text readability: OK\n"
+                        }
+                      ],
+                      "stderr": [
+                        {
+                          "text": "Found 51 overlapping elements at Desktop 16:9\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .logo\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .logo-text\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .logo overlaps with .logo-text\n"
+                        },
+                        {
+                          "text": "  - .logo overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .logo-text overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - #hero overlaps with .hero-content\n"
+                        },
+                        {
+                          "text": "(node:32453) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "startTime": "2025-11-28T19:45:45.273Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/ethan/cursor projects/ethanstoner.github.io/test-results/responsive-design-Responsi-63f95-ectly-at-Desktop-16-9-16-9--chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a027f4963a965b420d0c-0d09dd1c1d111e3ec184",
+              "file": "responsive-design.spec.ts",
+              "line": 34,
+              "column": 9
+            },
+            {
+              "title": "layout works correctly at Desktop 4:3 (4:3)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 5,
+                      "status": "passed",
+                      "duration": 3752,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\nDesktop 4:3 (4:3) Analysis:\n"
+                        },
+                        {
+                          "text": "  - Screenshot: qa/reports/playwright/screenshots/responsive-desktop-4:3.png\n"
+                        },
+                        {
+                          "text": "  - Issues found: 51\n"
+                        },
+                        {
+                          "text": "  - Overlapping elements: 51\n"
+                        },
+                        {
+                          "text": "  - Text readability: OK\n"
+                        }
+                      ],
+                      "stderr": [
+                        {
+                          "text": "Found 51 overlapping elements at Desktop 4:3\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .logo\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .logo-text\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .logo overlaps with .logo-text\n"
+                        },
+                        {
+                          "text": "  - .logo overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .logo-text overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - #hero overlaps with .hero-content\n"
+                        },
+                        {
+                          "text": "(node:32455) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "startTime": "2025-11-28T19:45:45.281Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/ethan/cursor projects/ethanstoner.github.io/test-results/responsive-design-Responsi-8f12c-rrectly-at-Desktop-4-3-4-3--chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a027f4963a965b420d0c-5d7fa2eaeeaba16d452b",
+              "file": "responsive-design.spec.ts",
+              "line": 34,
+              "column": 9
+            },
+            {
+              "title": "layout works correctly at Ultrawide 21:9 (21:9)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 6,
+                      "status": "passed",
+                      "duration": 3800,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\nUltrawide 21:9 (21:9) Analysis:\n"
+                        },
+                        {
+                          "text": "  - Screenshot: qa/reports/playwright/screenshots/responsive-ultrawide-21:9.png\n"
+                        },
+                        {
+                          "text": "  - Issues found: 51\n"
+                        },
+                        {
+                          "text": "  - Overlapping elements: 51\n"
+                        },
+                        {
+                          "text": "  - Text readability: OK\n"
+                        }
+                      ],
+                      "stderr": [
+                        {
+                          "text": "Found 51 overlapping elements at Ultrawide 21:9\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .logo\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .logo-text\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .logo overlaps with .logo-text\n"
+                        },
+                        {
+                          "text": "  - .logo overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .logo-text overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - #hero overlaps with .hero-content\n"
+                        },
+                        {
+                          "text": "(node:32454) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "startTime": "2025-11-28T19:45:45.296Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/ethan/cursor projects/ethanstoner.github.io/test-results/responsive-design-Responsi-6f886-tly-at-Ultrawide-21-9-21-9--chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a027f4963a965b420d0c-6745a6c474e1644c68ba",
+              "file": "responsive-design.spec.ts",
+              "line": 34,
+              "column": 9
+            },
+            {
+              "title": "layout works correctly at Portrait Desktop (9:16)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 7,
+                      "status": "passed",
+                      "duration": 3648,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\nPortrait Desktop (9:16) Analysis:\n"
+                        },
+                        {
+                          "text": "  - Screenshot: qa/reports/playwright/screenshots/responsive-portrait-desktop.png\n"
+                        },
+                        {
+                          "text": "  - Issues found: 51\n"
+                        },
+                        {
+                          "text": "  - Overlapping elements: 51\n"
+                        },
+                        {
+                          "text": "  - Text readability: OK\n"
+                        }
+                      ],
+                      "stderr": [
+                        {
+                          "text": "Found 51 overlapping elements at Portrait Desktop\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .logo\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .logo-text\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .header overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .logo overlaps with .logo-text\n"
+                        },
+                        {
+                          "text": "  - .logo overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .logo-text overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with .nav-link\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with span\n"
+                        },
+                        {
+                          "text": "  - .nav-link overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - span overlaps with #hero\n"
+                        },
+                        {
+                          "text": "  - #hero overlaps with .hero-content\n"
+                        },
+                        {
+                          "text": "(node:32456) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "startTime": "2025-11-28T19:45:45.286Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/ethan/cursor projects/ethanstoner.github.io/test-results/responsive-design-Responsi-2c7df-y-at-Portrait-Desktop-9-16--chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a027f4963a965b420d0c-0985b6dfdaad8fda9e16",
+              "file": "responsive-design.spec.ts",
+              "line": 34,
+              "column": 9
+            },
+            {
+              "title": "no horizontal scrolling on any viewport",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8530,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-28T19:45:48.581Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/ethan/cursor projects/ethanstoner.github.io/test-results/responsive-design-Responsi-5f92f-l-scrolling-on-any-viewport-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a027f4963a965b420d0c-dec43846c64f9c12a122",
+              "file": "responsive-design.spec.ts",
+              "line": 88,
+              "column": 7
+            },
+            {
+              "title": "text remains readable at all viewport sizes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 9170,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-28T19:45:48.653Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/ethan/cursor projects/ethanstoner.github.io/test-results/responsive-design-Responsi-2e20b-dable-at-all-viewport-sizes-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a027f4963a965b420d0c-014b8dda6be545a0b40a",
+              "file": "responsive-design.spec.ts",
+              "line": 102,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-11-28T19:45:44.277Z",
+    "duration": 13628.613,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

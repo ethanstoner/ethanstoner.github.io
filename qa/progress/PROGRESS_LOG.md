@@ -97,3 +97,69 @@
 - **Duration:** 10s
 - **Summary:** [qa/progress/summary-20251128-112617.txt](qa/progress/summary-20251128-112617.txt)
 
+
+## 20251128-113718 - ethanstoner.github.io
+
+- **Date/Time:** Fri Nov 28 11:38:48 PST 2025
+- **Checks Run:** 16
+- **Passed:** 11
+- **Failed:** 4
+- **Skipped:** 1
+- **Duration:** 90s
+- **Summary:** [qa/progress/summary-20251128-113718.txt](qa/progress/summary-20251128-113718.txt)
+
+
+## 20251128-113857 - ethanstoner.github.io
+
+- **Date/Time:** Fri Nov 28 11:40:16 PST 2025
+- **Checks Run:** 16
+- **Passed:** 11
+- **Failed:** 4
+- **Skipped:** 1
+- **Duration:** 79s
+- **Summary:** [qa/progress/summary-20251128-113857.txt](qa/progress/summary-20251128-113857.txt)
+
+
+## 20251128-114024 - ethanstoner.github.io
+
+- **Date/Time:** Fri Nov 28 11:41:41 PST 2025
+- **Checks Run:** 16
+- **Passed:** 11
+- **Failed:** 4
+- **Skipped:** 1
+- **Duration:** 77s
+- **Summary:** [qa/progress/summary-20251128-114024.txt](qa/progress/summary-20251128-114024.txt)
+
+
+## 20251128-114208 - ethanstoner.github.io
+
+- **Date/Time:** Fri Nov 28 11:43:25 PST 2025
+- **Checks Run:** 16
+- **Passed:** 11
+- **Failed:** 4
+- **Skipped:** 1
+- **Duration:** 77s
+- **Summary:** [qa/progress/summary-20251128-114208.txt](qa/progress/summary-20251128-114208.txt)
+
+
+## 20251128-114404 - ethanstoner.github.io
+
+- **Date/Time:** Fri Nov 28 11:45:25 PST 2025
+- **Checks Run:** 16
+- **Passed:** 11
+- **Failed:** 4
+- **Skipped:** 1
+- **Duration:** 81s
+- **Summary:** [qa/progress/summary-20251128-114404.txt](qa/progress/summary-20251128-114404.txt)
+
+
+## 20251128-114543 - ethanstoner.github.io
+
+- **Date/Time:** Fri Nov 28 11:47:05 PST 2025
+- **Checks Run:** 16
+- **Passed:** 11
+- **Failed:** 4
+- **Skipped:** 1
+- **Duration:** 82s
+- **Summary:** [qa/progress/summary-20251128-114543.txt](qa/progress/summary-20251128-114543.txt)
+

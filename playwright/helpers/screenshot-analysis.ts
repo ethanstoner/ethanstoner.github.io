@@ -81,11 +81,17 @@ export async function analyzeScreenshot(
     }
   }
   
-  // Check for overlaps
+  // Check for overlaps (ignore parent-child relationships)
   for (let i = 0; i < elementBounds.length; i++) {
     for (let j = i + 1; j < elementBounds.length; j++) {
       const elem1 = elementBounds[i];
       const elem2 = elementBounds[j];
+      
+      // Skip if one is likely a parent of the other (html, body, container are parents)
+      const parentSelectors = ['html', 'body', '.container', '.main-content'];
+      if (parentSelectors.includes(elem1.selector) || parentSelectors.includes(elem2.selector)) {
+        continue;
+      }
       
       const overlap = calculateOverlap(elem1.bounds, elem2.bounds);
       if (overlap > 0) {
@@ -94,7 +100,8 @@ export async function analyzeScreenshot(
           elem1.bounds.width * elem1.bounds.height,
           elem2.bounds.width * elem2.bounds.height
         );
-        if (overlap > minArea * 0.1) {
+        // Only report if overlap is significant (more than 20% of smaller element) and not a parent-child
+        if (overlap > minArea * 0.2 && minArea > 100) { // Ignore tiny elements
           overlappingElements.push({
             element1: elem1.selector,
             element2: elem2.selector,
