@@ -205,6 +205,63 @@
   },
   "suites": [
     {
+      "title": "error-handling.spec.ts",
+      "file": "error-handling.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Error Handling",
+          "file": "error-handling.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "invalid input shows clear error message",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1025,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-28T19:49:24.381Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/ethan/cursor projects/ethanstoner.github.io/test-results/error-handling-Error-Handl-533ba-t-shows-clear-error-message-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1a72721d9ac5c938e1fe-677cdc236dc5b0842dcb",
+              "file": "error-handling.spec.ts",
+              "line": 9,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
       "title": "responsive-design.spec.ts",
       "file": "responsive-design.spec.ts",
       "column": 0,
@@ -230,10 +287,10 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 3176,
+                      "duration": 3725,
                       "errors": [],
                       "stdout": [
                         {
@@ -284,11 +341,11 @@
                           "text": "  - #hero overlaps with .hero-content\n"
                         },
                         {
-                          "text": "(node:32449) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:37184) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
-                      "startTime": "2025-11-28T19:45:45.280Z",
+                      "startTime": "2025-11-28T19:49:24.370Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -320,10 +377,10 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 1,
-                      "parallelIndex": 1,
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 3155,
+                      "duration": 3870,
                       "errors": [],
                       "stdout": [
                         {
@@ -374,11 +431,11 @@
                           "text": "  - #hero overlaps with .hero-content\n"
                         },
                         {
-                          "text": "(node:32450) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:37185) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
-                      "startTime": "2025-11-28T19:45:45.290Z",
+                      "startTime": "2025-11-28T19:49:24.377Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -410,10 +467,10 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 2,
-                      "parallelIndex": 2,
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
                       "status": "passed",
-                      "duration": 3308,
+                      "duration": 3739,
                       "errors": [],
                       "stdout": [
                         {
@@ -464,11 +521,11 @@
                           "text": "  - #hero overlaps with .hero-content\n"
                         },
                         {
-                          "text": "(node:32452) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:37188) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
-                      "startTime": "2025-11-28T19:45:45.257Z",
+                      "startTime": "2025-11-28T19:49:24.406Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -500,10 +557,10 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 3,
-                      "parallelIndex": 3,
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
                       "status": "passed",
-                      "duration": 3729,
+                      "duration": 4200,
                       "errors": [],
                       "stdout": [
                         {
@@ -680,11 +737,11 @@
                           "text": "  - #hero overlaps with .hero-content\n"
                         },
                         {
-                          "text": "(node:32451) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:37189) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
-                      "startTime": "2025-11-28T19:45:45.280Z",
+                      "startTime": "2025-11-28T19:49:24.371Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -716,10 +773,10 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 4,
-                      "parallelIndex": 4,
+                      "workerIndex": 5,
+                      "parallelIndex": 5,
                       "status": "passed",
-                      "duration": 3789,
+                      "duration": 4385,
                       "errors": [],
                       "stdout": [
                         {
@@ -896,11 +953,11 @@
                           "text": "  - #hero overlaps with .hero-content\n"
                         },
                         {
-                          "text": "(node:32453) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:37192) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
-                      "startTime": "2025-11-28T19:45:45.273Z",
+                      "startTime": "2025-11-28T19:49:24.375Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -932,10 +989,10 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 5,
-                      "parallelIndex": 5,
+                      "workerIndex": 6,
+                      "parallelIndex": 6,
                       "status": "passed",
-                      "duration": 3752,
+                      "duration": 4174,
                       "errors": [],
                       "stdout": [
                         {
@@ -1112,11 +1169,11 @@
                           "text": "  - #hero overlaps with .hero-content\n"
                         },
                         {
-                          "text": "(node:32455) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:37193) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
-                      "startTime": "2025-11-28T19:45:45.281Z",
+                      "startTime": "2025-11-28T19:49:24.409Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -1148,10 +1205,10 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 6,
-                      "parallelIndex": 6,
+                      "workerIndex": 7,
+                      "parallelIndex": 7,
                       "status": "passed",
-                      "duration": 3800,
+                      "duration": 4496,
                       "errors": [],
                       "stdout": [
                         {
@@ -1328,11 +1385,11 @@
                           "text": "  - #hero overlaps with .hero-content\n"
                         },
                         {
-                          "text": "(node:32454) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:37196) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
-                      "startTime": "2025-11-28T19:45:45.296Z",
+                      "startTime": "2025-11-28T19:49:24.371Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -1364,10 +1421,10 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 7,
-                      "parallelIndex": 7,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3648,
+                      "duration": 3555,
                       "errors": [],
                       "stdout": [
                         {
@@ -1544,11 +1601,11 @@
                           "text": "  - #hero overlaps with .hero-content\n"
                         },
                         {
-                          "text": "(node:32456) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+                          "text": "(node:37183) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
                         }
                       ],
                       "retry": 0,
-                      "startTime": "2025-11-28T19:45:45.286Z",
+                      "startTime": "2025-11-28T19:49:25.646Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -1580,15 +1637,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 8530,
+                      "duration": 8542,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-28T19:45:48.581Z",
+                      "startTime": "2025-11-28T19:49:28.270Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -1620,15 +1677,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 1,
-                      "parallelIndex": 1,
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
                       "status": "passed",
-                      "duration": 9170,
+                      "duration": 9226,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2025-11-28T19:45:48.653Z",
+                      "startTime": "2025-11-28T19:49:28.303Z",
                       "annotations": [],
                       "attachments": [
                         {
@@ -1650,15 +1707,187 @@
           ]
         }
       ]
+    },
+    {
+      "title": "smoke.spec.ts",
+      "file": "smoke.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Smoke Tests",
+          "file": "smoke.spec.ts",
+          "line": 6,
+          "column": 6,
+          "specs": [
+            {
+              "title": "app loads without crashing",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 871,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n    at /home/ethan/cursor projects/ethanstoner.github.io/playwright/tests/smoke.spec.ts:28:24",
+                        "location": {
+                          "file": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests/smoke.spec.ts",
+                          "column": 24,
+                          "line": 28
+                        },
+                        "snippet": "  26 |     const errorCount = await errorMessages.count();\n  27 |     \n> 28 |     expect(errorCount).toBe(0);\n     |                        ^\n  29 |     \n  30 |     // Verify page has some content\n  31 |     const body = page.locator('body');"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests/smoke.spec.ts",
+                            "column": 24,
+                            "line": 28
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n\n  26 |     const errorCount = await errorMessages.count();\n  27 |     \n> 28 |     expect(errorCount).toBe(0);\n     |                        ^\n  29 |     \n  30 |     // Verify page has some content\n  31 |     const body = page.locator('body');\n    at /home/ethan/cursor projects/ethanstoner.github.io/playwright/tests/smoke.spec.ts:28:24"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-28T19:49:28.397Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/ethan/cursor projects/ethanstoner.github.io/test-results/smoke-Smoke-Tests-app-loads-without-crashing-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/ethan/cursor projects/ethanstoner.github.io/test-results/smoke-Smoke-Tests-app-loads-without-crashing-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests/smoke.spec.ts",
+                        "column": 24,
+                        "line": 28
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "4219922fea2e2bd3c691-35b1b77d4bc5cc4fa28a",
+              "file": "smoke.spec.ts",
+              "line": 7,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "video-flow.spec.ts",
+      "file": "video-flow.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Video Generation Flow",
+          "file": "video-flow.spec.ts",
+          "line": 17,
+          "column": 6,
+          "specs": [
+            {
+              "title": "user can create a video and see finished result",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "failed",
+                      "duration": 5851,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-testid=\"generate-button\"], button:has-text(\"Generate\"), button:has-text(\"Render\"), button:has-text(\"Create Video\")').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"generate-button\"], button:has-text(\"Generate\"), button:has-text(\"Render\"), button:has-text(\"Create Video\")').first()\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-testid=\"generate-button\"], button:has-text(\"Generate\"), button:has-text(\"Render\"), button:has-text(\"Create Video\")').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"generate-button\"], button:has-text(\"Generate\"), button:has-text(\"Render\"), button:has-text(\"Create Video\")').first()\u001b[22m\n\n    at /home/ethan/cursor projects/ethanstoner.github.io/playwright/tests/video-flow.spec.ts:31:34",
+                        "location": {
+                          "file": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests/video-flow.spec.ts",
+                          "column": 34,
+                          "line": 31
+                        },
+                        "snippet": "  29 |     // Step 3: Click generate button\n  30 |     const generateButton = page.locator(SELECTORS.generateButton).first();\n> 31 |     await expect(generateButton).toBeVisible();\n     |                                  ^\n  32 |     await generateButton.click();\n  33 |     \n  34 |     // Step 4: Wait for job to appear"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests/video-flow.spec.ts",
+                            "column": 34,
+                            "line": 31
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-testid=\"generate-button\"], button:has-text(\"Generate\"), button:has-text(\"Render\"), button:has-text(\"Create Video\")').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"generate-button\"], button:has-text(\"Generate\"), button:has-text(\"Render\"), button:has-text(\"Create Video\")').first()\u001b[22m\n\n\n  29 |     // Step 3: Click generate button\n  30 |     const generateButton = page.locator(SELECTORS.generateButton).first();\n> 31 |     await expect(generateButton).toBeVisible();\n     |                                  ^\n  32 |     await generateButton.click();\n  33 |     \n  34 |     // Step 4: Wait for job to appear\n    at /home/ethan/cursor projects/ethanstoner.github.io/playwright/tests/video-flow.spec.ts:31:34"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-28T19:49:28.701Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/home/ethan/cursor projects/ethanstoner.github.io/test-results/video-flow-Video-Generatio-74152-deo-and-see-finished-result-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/ethan/cursor projects/ethanstoner.github.io/test-results/video-flow-Video-Generatio-74152-deo-and-see-finished-result-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/ethan/cursor projects/ethanstoner.github.io/playwright/tests/video-flow.spec.ts",
+                        "column": 34,
+                        "line": 31
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "5747b988a6246253cd1e-204d5924aab58a465711",
+              "file": "video-flow.spec.ts",
+              "line": 18,
+              "column": 7
+            }
+          ]
+        }
+      ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-11-28T19:45:44.277Z",
-    "duration": 13628.613,
-    "expected": 10,
+    "startTime": "2025-11-28T19:49:20.052Z",
+    "duration": 14384.775000000001,
+    "expected": 11,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 2,
     "flaky": 0
   }
 }

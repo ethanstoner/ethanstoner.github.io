@@ -1,0 +1,186 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e5]: Ethan Stoner
+    - navigation "Main navigation" [ref=e6]:
+      - link "Home" [ref=e7] [cursor=pointer]:
+        - /url: "#hero"
+        - text: home.
+      - link "About" [ref=e8] [cursor=pointer]:
+        - /url: "#about"
+        - text: about.
+      - link "Projects" [ref=e9] [cursor=pointer]:
+        - /url: "#projects"
+        - text: projects.
+      - link "Skills" [ref=e10] [cursor=pointer]:
+        - /url: "#skills"
+        - text: skills.
+      - link "Roadmap" [ref=e11] [cursor=pointer]:
+        - /url: "#roadmap"
+        - text: roadmap.
+      - link "Contact" [ref=e12] [cursor=pointer]:
+        - /url: "#contact"
+        - text: contact.
+  - main [ref=e13]:
+    - generic [ref=e15]:
+      - heading "Cloud & Platform Engineering." [level=1] [ref=e16]
+      - paragraph [ref=e17]: Building scalable infrastructure and automation systems.
+      - paragraph [ref=e18]: I build cloud-based automation and deployment systems using AWS, Docker, and Python. My current work includes ECS deployments with CI/CD, GPU-accelerated automation pipelines, and AI-powered Discord applications.
+      - generic [ref=e19]:
+        - link "view projects" [ref=e20] [cursor=pointer]:
+          - /url: "#projects"
+        - link "get in touch" [ref=e21] [cursor=pointer]:
+          - /url: "#contact"
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - heading "about me." [level=2] [ref=e26]
+        - paragraph [ref=e27]: cloud & platform engineer
+      - generic [ref=e29]:
+        - paragraph [ref=e30]: I specialize in building scalable cloud infrastructure and automation systems. From containerized deployments on AWS ECS to GPU-accelerated pipelines, I focus on creating reliable, efficient systems that solve real problems.
+        - paragraph [ref=e31]: What got me into cloud engineering? The challenge of turning complex infrastructure problems into elegant, automated solutions. I started with simple Python scripts and gradually moved to full-stack cloud deployments. There's something satisfying about seeing a system scale from a local prototype to a production-ready service handling real traffic.
+        - generic [ref=e32]:
+          - generic [ref=e33]:
+            - heading "Expertise" [level=3] [ref=e34]
+            - list [ref=e35]:
+              - listitem [ref=e36]: "> AWS Services: ECS (Fargate), ALB, CloudFormation, IAM"
+              - listitem [ref=e37]: "> Containerization: Docker, container orchestration"
+              - listitem [ref=e38]: "> CI/CD: GitHub Actions, automated deployment pipelines"
+              - listitem [ref=e39]: "> Languages: Python, JavaScript, Node.js"
+              - listitem [ref=e40]: "> Infrastructure: Cloud architecture, scalable systems"
+          - generic [ref=e41]:
+            - heading "Current Focus" [level=3] [ref=e42]
+            - list [ref=e43]:
+              - listitem [ref=e44]: "> ECS service deployments with automated CI/CD"
+              - listitem [ref=e45]: "> GPU-accelerated automation pipelines (RTX 4090)"
+              - listitem [ref=e46]: "> AI-powered applications and Discord bots"
+              - listitem [ref=e47]: "> 3D asset generation and processing workflows"
+              - listitem [ref=e48]: "> Containerized microservices architecture"
+    - generic [ref=e50]:
+      - generic [ref=e51]:
+        - heading "featured projects." [level=2] [ref=e52]
+        - paragraph [ref=e53]: cloud infrastructure and automation systems
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - heading "Vulture Decompiler" [level=3] [ref=e57]
+            - generic [ref=e58]: Python
+          - paragraph [ref=e59]:
+            - text: Comprehensive toolkit for analyzing, decompiling, and deobfuscating Minecraft mods. Features static analysis, multiple decompilers (CFR, JD-CLI, Fernflower), automatic tool installation, and security detection.
+            - strong [ref=e60]: "Impact:"
+            - text: Safe isolated execution in Docker containers. Automatically detects Minecraft versions and downloads mappings. Identifies suspicious patterns like webhooks and token access.
+          - paragraph [ref=e61]:
+            - strong [ref=e62]: "Architecture:"
+            - text: JAR Input → Version Detection → Decompiler Selection → MCP Mapping Download → Deobfuscation → Source Output. Docker-based isolation for security. Supports recompilation back to JAR files.
+          - generic [ref=e63]:
+            - generic [ref=e64]: Python
+            - generic [ref=e65]: Docker
+            - generic [ref=e66]: Java Decompilation
+            - generic [ref=e67]: Security Analysis
+          - link "View Project →" [ref=e68] [cursor=pointer]:
+            - /url: https://github.com/ethanstoner/vulture
+        - generic [ref=e69]:
+          - generic [ref=e70]:
+            - heading "Sora Prompt Generator Bot" [level=3] [ref=e71]
+            - generic [ref=e72]: Python
+          - paragraph [ref=e73]:
+            - text: Lightweight Discord bot that generates viral Sora 2 video prompts using Groq API. Docker-ready with resource limits, 10 prompt templates, and fast responses. Designed for mini PC deployment.
+            - strong [ref=e74]: "Impact:"
+            - text: Automated prompt generation with multiple styles (CCTV, body cam, Olympic broadcast, etc.). Resource-efficient design uses <256MB memory.
+          - paragraph [ref=e75]:
+            - strong [ref=e76]: "Architecture:"
+            - text: Discord Command → Groq API → Template Engine → Response. Docker containerized with CPU/memory limits. Automatic reconnection and error handling.
+          - generic [ref=e77]:
+            - generic [ref=e78]: Python
+            - generic [ref=e79]: Docker
+            - generic [ref=e80]: Discord API
+            - generic [ref=e81]: Groq API
+          - link "View Project →" [ref=e82] [cursor=pointer]:
+            - /url: https://github.com/ethanstoner/sora-bot
+        - generic [ref=e83]:
+          - generic [ref=e84]:
+            - heading "Discord AI Chatbot" [level=3] [ref=e85]
+            - generic [ref=e86]: Python
+          - paragraph [ref=e87]:
+            - text: Production-ready Python chatbot with fully programmable personality system. Responds in chat channels with Groq API integration. Automatic rate limit handling, token-aware throttling, and optimized conversation history.
+            - strong [ref=e88]: "Impact:"
+            - text: "Handles 30 requests/minute with automatic throttling. Never hits rate limits through intelligent request management. Response time: ~200-500ms. Personality can be customized to any character or style."
+          - paragraph [ref=e89]:
+            - strong [ref=e90]: "Features:"
+            - text: Customizable personality system, automatic rate limit detection, smart retry logic, token-efficient message formatting. Uses llama-3.1-8b-instant model for fast responses.
+          - generic [ref=e91]:
+            - generic [ref=e92]: Python
+            - generic [ref=e93]: Groq API
+            - generic [ref=e94]: Rate Limiting
+            - generic [ref=e95]: AI Chatbot
+          - link "View Project →" [ref=e96] [cursor=pointer]:
+            - /url: https://github.com/ethanstoner/discord-ai-chatbot
+    - generic [ref=e98]:
+      - generic [ref=e99]:
+        - heading "skills overview." [level=2] [ref=e100]
+        - paragraph [ref=e101]: technologies and tools i work with
+      - generic [ref=e102]:
+        - generic [ref=e103]:
+          - heading "Programming Languages" [level=3] [ref=e104]
+          - paragraph [ref=e105]: Python, Java, JavaScript, TypeScript, Node.js
+        - generic [ref=e106]:
+          - heading "APIs & Integration" [level=3] [ref=e107]
+          - paragraph [ref=e108]: Discord API, Groq API, REST APIs, WebSocket clients
+        - generic [ref=e109]:
+          - heading "Containerization" [level=3] [ref=e110]
+          - paragraph [ref=e111]: Docker, Docker Compose, multi-stage builds, resource limits
+        - generic [ref=e112]:
+          - heading "Build Tools" [level=3] [ref=e113]
+          - paragraph [ref=e114]: Gradle, Python venv, npm, package management
+        - generic [ref=e115]:
+          - heading "AI & Automation" [level=3] [ref=e116]
+          - paragraph [ref=e117]: Groq API integration, rate limiting, token management, chatbot development
+        - generic [ref=e118]:
+          - heading "Game Development" [level=3] [ref=e119]
+          - paragraph [ref=e120]: Minecraft Forge modding, Java game APIs, mod development
+    - generic [ref=e122]:
+      - generic [ref=e123]:
+        - heading "roadmap." [level=2] [ref=e124]
+        - paragraph [ref=e125]: what i'm working on (2025–2026)
+      - list [ref=e127]:
+        - listitem [ref=e128]: → ECS deployment v2 with autoscaling + blue/green
+        - listitem [ref=e129]: → GPU pipeline migration toward cloud inference
+        - listitem [ref=e130]: → Add OpenTelemetry traces + metrics
+        - listitem [ref=e131]: → Build Terraform modules after SAA exam
+        - listitem [ref=e132]: → Deploy Discord bot backend on ECS
+        - listitem [ref=e133]: "→ Prepare for AWS SAA (target: Aug 2026)"
+    - generic [ref=e135]:
+      - heading "get in touch." [level=2] [ref=e137]
+      - generic [ref=e138]:
+        - paragraph [ref=e139]:
+          - strong [ref=e140]: Open to Cloud | Platform | Automation Internships (2026–2027)
+        - paragraph [ref=e141]: "I'm available for:"
+        - list [ref=e142]:
+          - listitem [ref=e143]: Cloud engineering internships
+          - listitem [ref=e144]: Platform/DevOps support
+          - listitem [ref=e145]: GPU automation tooling
+          - listitem [ref=e146]: Containerized backend work
+          - listitem [ref=e147]: AI-integrated automation projects
+        - generic [ref=e148]:
+          - generic [ref=e149]:
+            - paragraph [ref=e150]: github
+            - link "github" [ref=e151] [cursor=pointer]:
+              - /url: https://github.com/ethanstoner
+              - img [ref=e152]
+              - generic [ref=e154]: github
+          - generic [ref=e155]:
+            - paragraph [ref=e156]: follow me
+            - link "linkedin" [ref=e157] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/eastoner/
+              - img [ref=e158]
+              - generic [ref=e162]: linkedin
+          - generic [ref=e163]:
+            - paragraph [ref=e164]: email me
+            - link "ethanstoner08@gmail.com" [ref=e165] [cursor=pointer]:
+              - /url: https://mail.google.com/mail/?view=cm&fs=1&to=ethanstoner08@gmail.com
+              - img [ref=e166]
+              - generic [ref=e169]: ethanstoner08@gmail.com
+  - contentinfo [ref=e170]:
+    - paragraph [ref=e172]: © 2025 ethan stoner. built with cloud infrastructure in mind.
+```

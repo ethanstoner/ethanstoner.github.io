@@ -163,3 +163,25 @@
 - **Duration:** 82s
 - **Summary:** [qa/progress/summary-20251128-114543.txt](qa/progress/summary-20251128-114543.txt)
 
+
+## 20251128-114726 - ethanstoner.github.io
+
+- **Date/Time:** Fri Nov 28 11:48:57 PST 2025
+- **Checks Run:** 16
+- **Passed:** 11
+- **Failed:** 4
+- **Skipped:** 1
+- **Duration:** 91s
+- **Summary:** [qa/progress/summary-20251128-114726.txt](qa/progress/summary-20251128-114726.txt)
+
+
+## 20251128-114919 - ethanstoner.github.io
+
+- **Date/Time:** Fri Nov 28 11:50:43 PST 2025
+- **Checks Run:** 16
+- **Passed:** 11
+- **Failed:** 4
+- **Skipped:** 1
+- **Duration:** 84s
+- **Summary:** [qa/progress/summary-20251128-114919.txt](qa/progress/summary-20251128-114919.txt)
+
