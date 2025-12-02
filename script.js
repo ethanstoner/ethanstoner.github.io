@@ -93,7 +93,16 @@ function initSmoothScroll() {
             
             // Always use custom smooth scroll - function is defined at top of file as window.smoothScrollTo
             // Use 1200ms duration for clearly visible smooth scrolling
-            window.smoothScrollTo(desiredPosition, 1200);
+            // Ensure function exists, if not use native smooth scroll as fallback
+            if (window.smoothScrollTo && typeof window.smoothScrollTo === 'function') {
+                window.smoothScrollTo(desiredPosition, 1200);
+            } else {
+                // Fallback to native smooth scroll
+                window.scrollTo({
+                    top: desiredPosition,
+                    behavior: 'smooth'
+                });
+            }
             
             // Update URL without hash (clean URL)
             setTimeout(() => {
