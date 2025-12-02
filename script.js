@@ -9,8 +9,9 @@ window.smoothScrollTo = function smoothScrollTo(targetPosition, duration = 800) 
     }
     
     // Adjust duration based on distance for consistent feel
-    // Minimum 600ms to ensure smooth visible animation, max 1200ms
-    const adjustedDuration = Math.min(duration, Math.max(600, Math.abs(distance) * 0.8));
+    // Minimum 800ms to ensure smooth visible animation, max 1200ms
+    // Use at least 0.5ms per pixel for smooth animation
+    const adjustedDuration = Math.min(duration, Math.max(800, Math.abs(distance) * 0.5));
     
     // Cancel any existing scroll animation
     if (window._currentScrollAnimation) {
