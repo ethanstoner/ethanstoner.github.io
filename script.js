@@ -217,7 +217,7 @@ function initAll() {
 
     // Ensure hero title text is never cut off after animation completes
     function ensureHeroTitleVisible() {
-        const heroTitle = document.querySelector('.hero-title .line');
+        const heroTitle = document.querySelector('.hero-title.line');
         if (heroTitle) {
             // After typewriter animation completes (5 seconds: 1s delay + 4s animation)
             setTimeout(() => {
