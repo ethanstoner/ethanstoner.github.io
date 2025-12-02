@@ -241,14 +241,26 @@ function initAll() {
                 heroTitle.offsetHeight;
                 
                 // Check if text is cut off and adjust - ensure full text is visible
-                const currentWidth = heroTitle.getBoundingClientRect().width;
-                const neededWidth = heroTitle.scrollWidth;
+                let currentWidth = heroTitle.getBoundingClientRect().width;
+                let neededWidth = heroTitle.scrollWidth;
                 
+                // If text is cut off, expand to full width needed
                 if (neededWidth > currentWidth) {
-                    // Text is cut off - expand to full width needed
                     heroTitle.style.width = neededWidth + 'px';
                     heroTitle.style.maxWidth = '100%';
                     heroTitle.style.overflow = 'visible';
+                    
+                    // Force reflow and check again
+                    heroTitle.offsetHeight;
+                    currentWidth = heroTitle.getBoundingClientRect().width;
+                    neededWidth = heroTitle.scrollWidth;
+                    
+                    // If still cut off, try again with a slightly larger width
+                    if (neededWidth > currentWidth) {
+                        heroTitle.style.width = (neededWidth + 10) + 'px'; // Add small buffer
+                        heroTitle.style.maxWidth = '100%';
+                        heroTitle.style.overflow = 'visible';
+                    }
                 }
                 
                 // Final check after a brief delay to ensure everything is correct
@@ -256,11 +268,11 @@ function initAll() {
                     const finalWidth = heroTitle.getBoundingClientRect().width;
                     const finalNeeded = heroTitle.scrollWidth;
                     if (finalNeeded > finalWidth) {
-                        heroTitle.style.width = finalNeeded + 'px';
+                        heroTitle.style.width = (finalNeeded + 10) + 'px'; // Add buffer
                         heroTitle.style.maxWidth = '100%';
                         heroTitle.style.overflow = 'visible';
                     }
-                }, 300);
+                }, 500);
             }, 5000);
             
             // Also handle window resize - only after animation completes

@@ -60,9 +60,9 @@ async function testTypewriterAndResponsive() {
             console.log(`    ❌ ${issue}`);
         }
         
-        // Test 2: Check during animation (2 seconds in)
-        console.log('  ⏱️  Checking during animation (2s)...');
-        await page.waitForTimeout(2000);
+        // Test 2: Check during animation (2.5 seconds in - after 1s delay + 1.5s animation)
+        console.log('  ⏱️  Checking during animation (2.5s)...');
+        await page.waitForTimeout(2500);
         const duringAnimation = await page.evaluate(() => {
             const line = document.querySelector('.hero-title.line');
             if (!line) return { error: 'Line element not found' };
