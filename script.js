@@ -63,19 +63,31 @@ window.smoothScrollTo = function smoothScrollTo(targetPosition, duration = 800) 
 
 // Smooth scroll function
 function initSmoothScroll() {
-    // Only target anchor links (internal page links), exclude mailto: and external links
-    const anchors = document.querySelectorAll('a[href^="#"]');
+    // Find all anchor links - check both original href and data-target
+    const allLinks = document.querySelectorAll('a');
+    const anchors = Array.from(allLinks).filter(anchor => {
+        const href = anchor.getAttribute('href');
+        const dataTarget = anchor.getAttribute('data-target');
+        const target = href || dataTarget;
+        return target && target.startsWith('#') && !target.startsWith('mailto:') && !target.startsWith('http');
+    });
     
     anchors.forEach((anchor) => {
-        // Skip if it's a mailto: link or external link
-        const href = anchor.getAttribute('href');
-        if (!href || href.startsWith('mailto:') || href.startsWith('http')) {
-            return;
+        // Get the target selector (either from data-target if already set, or from href)
+        let targetSelector = anchor.getAttribute('data-target');
+        if (!targetSelector) {
+            targetSelector = anchor.getAttribute('href');
+            // Store original href in data attribute and change href to prevent browser navigation
+            if (targetSelector && targetSelector.startsWith('#')) {
+                anchor.setAttribute('data-target', targetSelector);
+                anchor.setAttribute('href', 'javascript:void(0)');
+            }
         }
         
-        // Store original href in data attribute and remove href to prevent browser navigation
-        anchor.setAttribute('data-target', href);
-        anchor.setAttribute('href', 'javascript:void(0)');
+        // Skip if no valid target
+        if (!targetSelector || targetSelector === '#' || targetSelector === '' || targetSelector === 'javascript:void(0)') {
+            return;
+        }
         
         // Use capture phase to intercept before browser handles it
         anchor.addEventListener('click', function (e) {
@@ -83,13 +95,13 @@ function initSmoothScroll() {
             e.stopPropagation();
             e.stopImmediatePropagation();
             
-            const targetSelector = this.getAttribute('data-target') || this.getAttribute('href');
+            const selector = this.getAttribute('data-target');
             
-            if (!targetSelector || targetSelector === '#' || targetSelector === '' || targetSelector === 'javascript:void(0)') {
+            if (!selector || selector === '#' || selector === '') {
                 return false;
             }
             
-            const target = document.querySelector(targetSelector);
+            const target = document.querySelector(selector);
             if (!target) {
                 return false;
             }
