@@ -9,7 +9,8 @@ window.smoothScrollTo = function smoothScrollTo(targetPosition, duration = 800) 
     }
     
     // Adjust duration based on distance for consistent feel
-    const adjustedDuration = Math.min(duration, Math.max(300, Math.abs(distance) * 0.5));
+    // Minimum 600ms to ensure smooth visible animation, max 1200ms
+    const adjustedDuration = Math.min(duration, Math.max(600, Math.abs(distance) * 0.8));
     
     // Cancel any existing scroll animation
     if (window._currentScrollAnimation) {
@@ -90,16 +91,9 @@ function initSmoothScroll() {
             const targetTop = target.offsetTop;
             const desiredPosition = Math.max(0, targetTop - headerOffset);
             
-            // Always use custom smooth scroll for consistent behavior across all browsers
-            if (typeof window.smoothScrollTo === 'function') {
-                window.smoothScrollTo(desiredPosition, 800);
-            } else {
-                // Fallback to native if custom function not available
-                window.scrollTo({
-                    top: desiredPosition,
-                    behavior: 'smooth'
-                });
-            }
+            // Always use custom smooth scroll - function is defined at top of file as window.smoothScrollTo
+            // Use 1200ms duration for clearly visible smooth scrolling
+            window.smoothScrollTo(desiredPosition, 1200);
             
             // Update URL without hash (clean URL)
             setTimeout(() => {
