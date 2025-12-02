@@ -63,29 +63,13 @@ window.smoothScrollTo = function smoothScrollTo(targetPosition, duration = 800) 
 
 // Smooth scroll function
 function initSmoothScroll() {
-    // Find all anchor links - check both original href and data-target
-    const allLinks = document.querySelectorAll('a');
-    const anchors = Array.from(allLinks).filter(anchor => {
-        const href = anchor.getAttribute('href');
-        const dataTarget = anchor.getAttribute('data-target');
-        const target = href || dataTarget;
-        return target && target.startsWith('#') && !target.startsWith('mailto:') && !target.startsWith('http');
-    });
+    // Only target anchor links (internal page links), exclude mailto: and external links
+    const anchors = document.querySelectorAll('a[href^="#"]');
     
     anchors.forEach((anchor) => {
-        // Get the target selector (either from data-target if already set, or from href)
-        let targetSelector = anchor.getAttribute('data-target');
-        if (!targetSelector) {
-            targetSelector = anchor.getAttribute('href');
-            // Store original href in data attribute and change href to prevent browser navigation
-            if (targetSelector && targetSelector.startsWith('#')) {
-                anchor.setAttribute('data-target', targetSelector);
-                anchor.setAttribute('href', 'javascript:void(0)');
-            }
-        }
-        
-        // Skip if no valid target
-        if (!targetSelector || targetSelector === '#' || targetSelector === '' || targetSelector === 'javascript:void(0)') {
+        // Skip if it's a mailto: link or external link
+        const href = anchor.getAttribute('href');
+        if (!href || href.startsWith('mailto:') || href.startsWith('http')) {
             return;
         }
         
@@ -95,13 +79,13 @@ function initSmoothScroll() {
             e.stopPropagation();
             e.stopImmediatePropagation();
             
-            const selector = this.getAttribute('data-target');
+            const href = this.getAttribute('href');
             
-            if (!selector || selector === '#' || selector === '') {
+            if (!href || href === '#' || href === '') {
                 return false;
             }
             
-            const target = document.querySelector(selector);
+            const target = document.querySelector(href);
             if (!target) {
                 return false;
             }
@@ -110,19 +94,17 @@ function initSmoothScroll() {
             const targetTop = target.offsetTop;
             const desiredPosition = Math.max(0, targetTop - headerOffset);
             
-            // Remove hash BEFORE scrolling to prevent browser from adding it
+            // Remove hash IMMEDIATELY before anything else
+            window.location.hash = '';
             if (history.replaceState) {
                 history.replaceState(null, null, window.location.pathname + window.location.search);
-            }
-            if (window.location.hash) {
-                window.location.hash = '';
             }
             
             // Always use custom smooth scroll - function is defined at top of file
             // Call it directly since it's always available
             window.smoothScrollTo(desiredPosition, 1200);
             
-            // Aggressively remove hash - use multiple methods
+            // Aggressively remove hash continuously
             const removeHash = () => {
                 if (window.location.hash) {
                     window.location.hash = '';
@@ -132,15 +114,20 @@ function initSmoothScroll() {
                 }
             };
             
-            // Remove immediately and repeatedly
+            // Remove immediately and repeatedly - very aggressive
             removeHash();
             requestAnimationFrame(removeHash);
+            requestAnimationFrame(() => requestAnimationFrame(removeHash));
             setTimeout(removeHash, 0);
+            setTimeout(removeHash, 1);
+            setTimeout(removeHash, 5);
             setTimeout(removeHash, 10);
+            setTimeout(removeHash, 20);
             setTimeout(removeHash, 50);
             setTimeout(removeHash, 100);
             setTimeout(removeHash, 200);
             setTimeout(removeHash, 500);
+            setTimeout(removeHash, 1000);
             
             return false;
         }, true); // Use capture phase
