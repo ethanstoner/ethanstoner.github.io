@@ -244,30 +244,6 @@ html {
         max-width: 100% !important;
         overflow: visible !important;
     }
-    
-    .line {
-        display: inline-block !important;
-        white-space: nowrap !important;
-        overflow: visible !important;
-        width: auto !important;
-        max-width: 100% !important;
-        border-right: 3px solid rgba(255, 255, 255, 0.9) !important;
-    }
-    
-    .anim-typewriter {
-        animation: typewriter-mobile 4s steps(40) 1s 1 normal both,
-                   blinkTextCursor 500ms steps(40) infinite normal !important;
-    }
-    
-    @keyframes typewriter-mobile {
-        from {
-            width: 0;
-        }
-        to {
-            width: 25em; /* Large enough for "Cloud & Platform Engineering." at 32px */
-            max-width: 100%;
-        }
-    }
 }
 
 .line {
@@ -569,11 +545,6 @@ html {
         overflow: visible;
     }
     
-    .line {
-        overflow: visible;
-        max-width: 100%;
-    }
-    
     @keyframes typewriter {
         from {
             width: 0;
@@ -614,11 +585,6 @@ html {
     
     .hero-description {
         font-size: 18px;
-    }
-    
-    .line {
-        overflow: visible;
-        max-width: 100%;
     }
     
     @keyframes typewriter {
@@ -1390,11 +1356,6 @@ html {
         overflow: visible;
     }
     
-    .line {
-        overflow: visible;
-        max-width: 100%;
-    }
-    
     @keyframes typewriter {
         from {
             width: 0;
@@ -1458,16 +1419,7 @@ html {
         display: flex;
     }
 
-    /* Keep typewriter animation on mobile but ensure full text visibility */
-    .line {
-        white-space: nowrap !important;
-        overflow: visible !important;
-        width: auto !important;
-        max-width: 100% !important;
-        display: inline-block !important;
-        border-right: 3px solid rgba(255, 255, 255, 0.9) !important;
-        padding-right: 4px !important;
-    }
+    /* Keep typewriter animation on mobile - don't override base .line styles */
     
     .anim-typewriter {
         animation: typewriter-mobile 4s steps(40) 1s 1 normal both,
@@ -1562,16 +1514,6 @@ html {
         overflow: visible !important;
     }
 
-    .line {
-        white-space: nowrap !important;
-        overflow: visible !important;
-        width: auto !important;
-        max-width: 100% !important;
-        display: inline-block !important;
-        border-right: 3px solid rgba(255, 255, 255, 0.9) !important;
-        padding-right: 4px !important;
-    }
-    
     .anim-typewriter {
         animation: typewriter-mobile 4s steps(40) 1s 1 normal both,
                    blinkTextCursor 500ms steps(40) infinite normal !important;
@@ -1804,16 +1746,6 @@ html {
     }
 
     /* Keep typewriter animation on small mobile */
-    .line {
-        white-space: nowrap !important;
-        overflow: visible !important;
-        width: auto !important;
-        max-width: 100% !important;
-        display: inline-block !important;
-        border-right: 3px solid rgba(255, 255, 255, 0.9) !important;
-        padding-right: 4px !important;
-    }
-    
     .anim-typewriter {
         animation: typewriter-mobile-small 4s steps(40) 1s 1 normal both,
                    blinkTextCursor 500ms steps(40) infinite normal !important;
