@@ -73,19 +73,23 @@ function initSmoothScroll() {
             return;
         }
         
+        // Store original href in data attribute and remove href to prevent browser navigation
+        anchor.setAttribute('data-target', href);
+        anchor.setAttribute('href', 'javascript:void(0)');
+        
         // Use capture phase to intercept before browser handles it
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
             
-            const href = this.getAttribute('href');
+            const targetSelector = this.getAttribute('data-target') || this.getAttribute('href');
             
-            if (!href || href === '#' || href === '') {
+            if (!targetSelector || targetSelector === '#' || targetSelector === '' || targetSelector === 'javascript:void(0)') {
                 return false;
             }
             
-            const target = document.querySelector(href);
+            const target = document.querySelector(targetSelector);
             if (!target) {
                 return false;
             }
@@ -98,6 +102,9 @@ function initSmoothScroll() {
             if (history.replaceState) {
                 history.replaceState(null, null, window.location.pathname + window.location.search);
             }
+            if (window.location.hash) {
+                window.location.hash = '';
+            }
             
             // Always use custom smooth scroll - function is defined at top of file
             // Call it directly since it's always available
@@ -106,9 +113,7 @@ function initSmoothScroll() {
             // Aggressively remove hash - use multiple methods
             const removeHash = () => {
                 if (window.location.hash) {
-                    // Method 1: Direct assignment
                     window.location.hash = '';
-                    // Method 2: History API
                     if (history.replaceState) {
                         history.replaceState(null, null, window.location.pathname + window.location.search);
                     }
