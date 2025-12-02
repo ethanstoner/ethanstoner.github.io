@@ -227,12 +227,12 @@ function initAll() {
                 // Force a reflow to ensure styles are applied
                 heroTitle.offsetHeight;
                 
-                // Get the actual text width needed (including border and padding)
+                // Get the actual text width needed
                 const textWidth = heroTitle.scrollWidth;
                 const container = heroTitle.parentElement;
                 const containerWidth = container ? container.clientWidth : window.innerWidth;
                 
-                // Always set to auto first to get natural width
+                // Set width to auto to get natural width, but ensure it fits
                 heroTitle.style.width = 'auto';
                 heroTitle.style.maxWidth = '100%';
                 heroTitle.style.overflow = 'visible';
@@ -240,22 +240,27 @@ function initAll() {
                 // Force another reflow
                 heroTitle.offsetHeight;
                 
-                // Check if text is cut off and adjust
-                if (heroTitle.scrollWidth > heroTitle.clientWidth) {
-                    // Text is cut off - expand to full width
-                    heroTitle.style.width = heroTitle.scrollWidth + 'px';
+                // Check if text is cut off and adjust - ensure full text is visible
+                const currentWidth = heroTitle.getBoundingClientRect().width;
+                const neededWidth = heroTitle.scrollWidth;
+                
+                if (neededWidth > currentWidth) {
+                    // Text is cut off - expand to full width needed
+                    heroTitle.style.width = neededWidth + 'px';
                     heroTitle.style.maxWidth = '100%';
                     heroTitle.style.overflow = 'visible';
                 }
                 
                 // Final check after a brief delay to ensure everything is correct
                 setTimeout(() => {
-                    if (heroTitle.scrollWidth > heroTitle.clientWidth) {
-                        heroTitle.style.width = heroTitle.scrollWidth + 'px';
+                    const finalWidth = heroTitle.getBoundingClientRect().width;
+                    const finalNeeded = heroTitle.scrollWidth;
+                    if (finalNeeded > finalWidth) {
+                        heroTitle.style.width = finalNeeded + 'px';
                         heroTitle.style.maxWidth = '100%';
                         heroTitle.style.overflow = 'visible';
                     }
-                }, 200);
+                }, 300);
             }, 5000);
             
             // Also handle window resize - only after animation completes

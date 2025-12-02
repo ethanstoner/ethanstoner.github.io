@@ -238,20 +238,22 @@ html {
 
 /* When hero-title has line class, it should behave as typewriter */
 .hero-title.line {
-    display: inline-block; /* Inline-block for typewriter width animation */
-    width: 0; /* Start at 0 for animation */
-    overflow: hidden; /* Hidden during animation */
-    white-space: nowrap; /* Prevent text wrapping during animation */
+    display: inline-block !important; /* Inline-block for typewriter width animation */
+    width: 0 !important; /* Start at 0 for animation */
+    overflow: hidden !important; /* Hidden during animation - CRITICAL */
+    white-space: nowrap !important; /* Prevent text wrapping during animation */
     border-right: 3px solid rgba(255, 255, 255, 0.9); /* Cursor */
     padding-right: 4px;
-    max-width: none; /* Remove max-width constraint during animation */
+    max-width: none !important; /* Remove max-width constraint during animation */
     margin: 0 auto;
+    box-sizing: content-box; /* Include border+padding in width calculation */
 }
 
 .hero-title.line.animation-complete {
-    width: auto;
-    overflow: visible;
-    max-width: 100%; /* Apply max-width only after animation completes */
+    width: auto !important;
+    overflow: visible !important;
+    max-width: 100% !important; /* Apply max-width only after animation completes */
+    box-sizing: border-box;
 }
 
 /* Mobile: Keep typewriter but ensure full text visibility */
@@ -259,13 +261,16 @@ html {
     .hero-title.line {
         display: inline-block !important; /* Keep inline-block for animation */
         width: 0 !important; /* Start at 0 */
-        overflow: hidden !important; /* Hidden during animation */
-        max-width: 100% !important;
+        overflow: hidden !important; /* Hidden during animation - CRITICAL */
+        max-width: none !important; /* No max-width during animation */
+        box-sizing: content-box !important;
     }
     
     .hero-title.line.animation-complete {
         width: auto !important;
         overflow: visible !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 }
 
@@ -1518,15 +1523,19 @@ html {
     .hero-title.line {
         display: inline-block !important;
         width: 0 !important; /* Start at 0 for animation */
-        overflow: hidden !important; /* Hidden during animation */
+        overflow: hidden !important; /* Hidden during animation - CRITICAL */
         white-space: nowrap !important;
         border-right: 3px solid rgba(255, 255, 255, 0.9) !important;
         padding-right: 4px !important;
+        max-width: none !important; /* No max-width during animation */
+        box-sizing: content-box !important;
     }
     
     .hero-title.line.animation-complete {
         width: auto !important;
         overflow: visible !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .anim-typewriter {
@@ -1760,15 +1769,19 @@ html {
     .hero-title.line {
         display: inline-block !important;
         width: 0 !important; /* Start at 0 for animation */
-        overflow: hidden !important; /* Hidden during animation */
+        overflow: hidden !important; /* Hidden during animation - CRITICAL */
         white-space: nowrap !important;
         border-right: 3px solid rgba(255, 255, 255, 0.9) !important;
         padding-right: 4px !important;
+        max-width: none !important; /* No max-width during animation */
+        box-sizing: content-box !important;
     }
     
     .hero-title.line.animation-complete {
         width: auto !important;
         overflow: visible !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     /* Keep typewriter animation on small mobile */
