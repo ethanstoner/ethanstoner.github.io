@@ -275,25 +275,37 @@ html {
     border-right: 3px solid rgba(255, 255, 255, 0.9);
     text-align: center;
     white-space: nowrap;
-    overflow: visible;
+    overflow: hidden; /* Hidden during animation for typewriter effect */
     margin: 0 auto;
     padding-right: 4px;
     max-width: 100%;
     box-sizing: border-box;
-    width: auto;
+    width: 0; /* Start at 0 for animation */
     min-width: 0;
+}
+
+/* After animation completes, allow overflow to be visible */
+.line.animation-complete {
+    overflow: visible;
+    width: auto;
+    max-width: 100%;
 }
 
 /* Mobile: Keep typewriter animation but ensure full text is visible */
 @media (max-width: 768px) {
     .line {
         white-space: nowrap !important;
-        overflow: visible !important;
-        width: auto !important;
+        overflow: hidden !important; /* Hidden during animation */
+        width: 0 !important; /* Start at 0 for animation */
         max-width: 100% !important;
         display: inline-block !important;
         border-right: 3px solid rgba(255, 255, 255, 0.9) !important;
         padding-right: 4px !important;
+    }
+    
+    .line.animation-complete {
+        overflow: visible !important;
+        width: auto !important;
     }
     
     .anim-typewriter {

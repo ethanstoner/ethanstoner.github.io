@@ -215,36 +215,44 @@ function initAll() {
         });
     }
 
-    // Ensure hero title text is never cut off
+    // Ensure hero title text is never cut off after animation completes
     function ensureHeroTitleVisible() {
         const heroTitle = document.querySelector('.hero-title .line');
         if (heroTitle) {
-            // After typewriter animation completes (5 seconds), ensure full width
+            // After typewriter animation completes (5 seconds: 1s delay + 4s animation)
             setTimeout(() => {
+                // Mark animation as complete
+                heroTitle.classList.add('animation-complete');
+                
                 // Remove width constraint to allow natural sizing
                 heroTitle.style.width = 'auto';
                 heroTitle.style.maxWidth = '100%';
                 heroTitle.style.overflow = 'visible';
                 
-                // Check if text is still cut off and adjust
-                if (heroTitle.scrollWidth > heroTitle.clientWidth) {
-                    heroTitle.style.width = heroTitle.scrollWidth + 'px';
+                // Ensure text is fully visible - use scrollWidth if needed
+                const container = heroTitle.parentElement;
+                if (container && heroTitle.scrollWidth > container.clientWidth) {
+                    // Text might be constrained by parent, ensure it fits
+                    heroTitle.style.width = Math.min(heroTitle.scrollWidth, container.clientWidth) + 'px';
                     heroTitle.style.maxWidth = '100%';
                 }
             }, 5000);
             
-            // Also handle window resize
+            // Also handle window resize - only after animation completes
             let resizeTimeout;
             window.addEventListener('resize', () => {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(() => {
-                    heroTitle.style.width = 'auto';
-                    heroTitle.style.maxWidth = '100%';
-                    if (heroTitle.scrollWidth > heroTitle.clientWidth) {
-                        heroTitle.style.width = heroTitle.scrollWidth + 'px';
+                if (heroTitle.classList.contains('animation-complete')) {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(() => {
+                        heroTitle.style.width = 'auto';
                         heroTitle.style.maxWidth = '100%';
-                    }
-                }, 250);
+                        const container = heroTitle.parentElement;
+                        if (container && heroTitle.scrollWidth > container.clientWidth) {
+                            heroTitle.style.width = Math.min(heroTitle.scrollWidth, container.clientWidth) + 'px';
+                            heroTitle.style.maxWidth = '100%';
+                        }
+                    }, 250);
+                }
             });
         }
     }
