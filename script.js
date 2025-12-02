@@ -101,11 +101,12 @@ function initSmoothScroll() {
             
             // Always use custom smooth scroll - function is defined at top of file as window.smoothScrollTo
             // Use 1200ms duration for clearly visible smooth scrolling
-            // Ensure function exists, if not use native smooth scroll as fallback
-            if (window.smoothScrollTo && typeof window.smoothScrollTo === 'function') {
+            // The function should always be available, but ensure it exists
+            if (typeof window.smoothScrollTo === 'function') {
                 window.smoothScrollTo(desiredPosition, 1200);
             } else {
-                // Fallback to native smooth scroll
+                // Fallback: define function inline if missing (shouldn't happen but safety)
+                console.warn('smoothScrollTo not found, using native smooth scroll');
                 window.scrollTo({
                     top: desiredPosition,
                     behavior: 'smooth'
