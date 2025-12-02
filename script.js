@@ -1,5 +1,5 @@
 // Enhanced smooth scroll function with custom easing - make it globally accessible
-window.smoothScrollTo = function smoothScrollTo(targetPosition, duration = 1000) {
+window.smoothScrollTo = function smoothScrollTo(targetPosition, duration = 800) {
     const startPosition = window.pageYOffset || window.scrollY || document.documentElement.scrollTop;
     const distance = targetPosition - startPosition;
     
@@ -7,6 +7,9 @@ window.smoothScrollTo = function smoothScrollTo(targetPosition, duration = 1000)
     if (Math.abs(distance) < 1) {
         return;
     }
+    
+    // Adjust duration based on distance for consistent feel
+    const adjustedDuration = Math.min(duration, Math.max(300, Math.abs(distance) * 0.5));
     
     // Cancel any existing scroll animation
     if (window._currentScrollAnimation) {
@@ -25,28 +28,28 @@ window.smoothScrollTo = function smoothScrollTo(targetPosition, duration = 1000)
         if (!isAnimating) return;
         
         const elapsed = timestamp - startTime;
-        const progress = Math.min(elapsed / duration, 1);
+        const progress = Math.min(elapsed / adjustedDuration, 1);
         const eased = easeInOutCubic(progress);
         
         const currentPos = Math.round(startPosition + distance * eased);
         
-        // Scroll to current position
-        window.scrollTo({
-            top: currentPos,
-            left: 0,
-            behavior: 'auto'
-        });
+        // Scroll to current position using multiple methods for compatibility
+        window.scrollTo(0, currentPos);
+        document.documentElement.scrollTop = currentPos;
+        if (document.body) {
+            document.body.scrollTop = currentPos;
+        }
         
         if (progress < 1) {
             // Continue animation
             window._currentScrollAnimation = requestAnimationFrame(animate);
         } else {
             // Ensure exact target
-            window.scrollTo({
-                top: targetPosition,
-                left: 0,
-                behavior: 'auto'
-            });
+            window.scrollTo(0, targetPosition);
+            document.documentElement.scrollTop = targetPosition;
+            if (document.body) {
+                document.body.scrollTop = targetPosition;
+            }
             isAnimating = false;
             window._currentScrollAnimation = null;
         }
@@ -87,11 +90,16 @@ function initSmoothScroll() {
             const targetTop = target.offsetTop;
             const desiredPosition = Math.max(0, targetTop - headerOffset);
             
-            // Use native smooth scroll behavior for reliability
-            window.scrollTo({
-                top: desiredPosition,
-                behavior: 'smooth'
-            });
+            // Always use custom smooth scroll for consistent behavior across all browsers
+            if (typeof window.smoothScrollTo === 'function') {
+                window.smoothScrollTo(desiredPosition, 800);
+            } else {
+                // Fallback to native if custom function not available
+                window.scrollTo({
+                    top: desiredPosition,
+                    behavior: 'smooth'
+                });
+            }
             
             // Update URL without hash (clean URL)
             setTimeout(() => {
