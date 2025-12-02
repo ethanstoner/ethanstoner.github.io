@@ -244,14 +244,14 @@ html {
     white-space: nowrap; /* Prevent text wrapping during animation */
     border-right: 3px solid rgba(255, 255, 255, 0.9); /* Cursor */
     padding-right: 4px;
-    max-width: 100%;
+    max-width: none; /* Remove max-width constraint during animation */
     margin: 0 auto;
 }
 
 .hero-title.line.animation-complete {
     width: auto;
     overflow: visible;
-    max-width: 100%;
+    max-width: 100%; /* Apply max-width only after animation completes */
 }
 
 /* Mobile: Keep typewriter but ensure full text visibility */
@@ -322,7 +322,7 @@ html {
     }
     to {
         width: 60em; /* Very large to ensure text never gets cut off on all screen sizes */
-        max-width: 100%;
+        /* Note: max-width constraint applied via .animation-complete class after animation */
     }
 }
 
@@ -1782,8 +1782,8 @@ html {
             width: 0;
         }
         to {
-            width: 22em; /* Large enough for "Cloud & Platform Engineering." at 26px */
-            max-width: 100%;
+            width: 26em; /* Large enough for "Cloud & Platform Engineering." at 26px with extra margin */
+            /* max-width applied after animation via .animation-complete */
         }
     }
 
