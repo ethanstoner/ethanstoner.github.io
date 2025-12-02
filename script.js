@@ -240,12 +240,22 @@ function initAll() {
     removeHashOnLoad();
     
     // Listen for hash changes and remove them immediately
+    // Use capture phase to catch it early
     window.addEventListener('hashchange', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         if (history.replaceState) {
             history.replaceState(null, null, window.location.pathname + window.location.search);
         }
-    }, false);
+        return false;
+    }, true);
+    
+    // Also intercept popstate to prevent hash
+    window.addEventListener('popstate', function(e) {
+        if (window.location.hash && history.replaceState) {
+            history.replaceState(null, null, window.location.pathname + window.location.search);
+        }
+    });
 
     // Scroll to top button
     const scrollToTopBtn = document.getElementById('scrollToTop');
