@@ -256,25 +256,25 @@ html {
     box-sizing: border-box;
 }
 
-/* Override for typewriter - must come after base .hero-title */
+/* When hero-title has line class, override display immediately */
 .hero-title.line {
-    width: 0; /* Animation will control this */
+    display: inline-block !important;
 }
 
-/* When hero-title has line class, it should behave as typewriter */
+/* Override for typewriter - must come after base .hero-title */
 .hero-title.line {
-    display: inline-block !important; /* Override block display */
-    width: 0; /* Start at 0 - animation will control this */
+    display: inline-block !important; /* Override block display - CRITICAL for animation */
+    width: 0 !important; /* Start at 0 - animation will control this */
     overflow: hidden !important; /* Override visible - hidden during animation */
     white-space: nowrap !important; /* Prevent text wrapping during animation */
     border-right: 3px solid rgba(255, 255, 255, 0.9); /* Cursor */
     padding-right: 4px;
     max-width: none !important; /* Remove max-width constraint during animation */
     margin: 0 auto;
-    box-sizing: content-box; /* Include border+padding in width */
+    box-sizing: content-box !important; /* Include border+padding in width */
     min-width: 0;
     /* Ensure animation can override width */
-    animation-fill-mode: both; /* Keep width: 0 before animation, final width after */
+    animation-fill-mode: both !important; /* Keep width: 0 before animation, final width after */
 }
 
 .hero-title.line.animation-complete {
@@ -333,11 +333,17 @@ html {
         }
     }
     
-    .hero-title {
+    /* Only apply block display to hero-title that doesn't have .line class */
+    .hero-title:not(.line) {
         display: block !important;
         width: 100% !important;
         max-width: 100% !important;
         overflow: visible !important;
+    }
+    
+    /* Ensure .line class keeps inline-block */
+    .hero-title.line {
+        display: inline-block !important;
     }
 }
 
@@ -351,7 +357,7 @@ html {
         width: 0;
     }
     to {
-        width: 60em; /* Very large to ensure text never gets cut off on all screen sizes */
+        width: 1000px; /* Large enough to fit "Cloud & Platform Engineering." at 64px font size */
         /* Note: max-width constraint applied via .animation-complete class after animation */
     }
 }
