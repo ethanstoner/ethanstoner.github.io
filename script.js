@@ -273,19 +273,53 @@ function initAll() {
                 }
                 
                 // Ensure text is fully visible - set width to scrollWidth
+                // First, remove any constraints to get true scrollWidth
+                heroTitle.style.width = 'auto';
+                heroTitle.style.maxWidth = 'none';
+                heroTitle.style.overflow = 'visible';
+                
+                // Force reflow
+                heroTitle.offsetHeight;
+                
+                // Get the actual needed width
                 const finalNeededWidth = heroTitle.scrollWidth;
+                const viewportWidth = window.innerWidth;
+                const container = heroTitle.parentElement;
+                const containerWidth = container ? container.clientWidth : viewportWidth;
+                
+                // Set width to needed width
                 heroTitle.style.width = finalNeededWidth + 'px';
                 heroTitle.style.overflow = 'visible';
                 
-                // Check viewport constraints
-                const viewportWidth = window.innerWidth;
+                // On mobile, if text is wider than viewport, we need to handle it differently
                 if (viewportWidth <= 768) {
-                    // Mobile: constrain to viewport
-                    heroTitle.style.maxWidth = '100%';
+                    // Mobile: if text is wider than viewport, allow it but prevent horizontal scroll on body
+                    if (finalNeededWidth > viewportWidth - 48) { // Account for padding
+                        // Text is wider - set to viewport width but allow overflow visible
+                        heroTitle.style.width = finalNeededWidth + 'px';
+                        heroTitle.style.maxWidth = 'none'; // Allow expansion
+                        // Ensure body doesn't scroll horizontally
+                        document.body.style.overflowX = 'hidden';
+                    } else {
+                        heroTitle.style.width = finalNeededWidth + 'px';
+                        heroTitle.style.maxWidth = '100%';
+                    }
                 } else {
-                    // Desktop: allow expansion beyond container if needed
-                    heroTitle.style.maxWidth = 'none';
+                    // Desktop: allow expansion beyond container
+                    heroTitle.style.width = finalNeededWidth + 'px';
+                    heroTitle.style.maxWidth = 'none'; // Allow expansion
                 }
+                
+                // Final verification after a delay
+                setTimeout(() => {
+                    const checkWidth = heroTitle.getBoundingClientRect().width;
+                    const checkNeeded = heroTitle.scrollWidth;
+                    if (checkNeeded > checkWidth) {
+                        heroTitle.style.width = checkNeeded + 'px';
+                        heroTitle.style.maxWidth = 'none';
+                        heroTitle.style.overflow = 'visible';
+                    }
+                }, 500);
                 
                 // Final check after a brief delay to ensure everything is correct
                 setTimeout(() => {
