@@ -1,47 +1,59 @@
-// Enhanced smooth scroll function with custom easing
-function smoothScrollTo(targetPosition, duration = 1000) {
+// Enhanced smooth scroll function with custom easing - make it globally accessible
+window.smoothScrollTo = function smoothScrollTo(targetPosition, duration = 1000) {
     const startPosition = window.pageYOffset || window.scrollY || document.documentElement.scrollTop;
     const distance = targetPosition - startPosition;
-    let startTime = null;
-    let animationFrameId = null;
+    
+    // If already at target, don't animate
+    if (Math.abs(distance) < 1) {
+        return;
+    }
+    
+    // Cancel any existing scroll animation
+    if (window._currentScrollAnimation) {
+        cancelAnimationFrame(window._currentScrollAnimation);
+        window._currentScrollAnimation = null;
+    }
+    
+    const startTime = performance.now();
+    let isAnimating = true;
 
     function easeInOutCubic(t) {
         return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     }
 
-    function animation(currentTime) {
-        if (startTime === null) startTime = currentTime;
-        const timeElapsed = currentTime - startTime;
-        const progress = Math.min(timeElapsed / duration, 1);
-        const easedProgress = easeInOutCubic(progress);
+    function animate(timestamp) {
+        if (!isAnimating) return;
         
-        const currentPosition = startPosition + distance * easedProgress;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = easeInOutCubic(progress);
         
-        // Use multiple methods to ensure scroll works
-        window.scrollTo(0, currentPosition);
-        document.documentElement.scrollTop = currentPosition;
-        if (document.body) {
-            document.body.scrollTop = currentPosition;
-        }
+        const currentPos = Math.round(startPosition + distance * eased);
         
-        if (timeElapsed < duration) {
-            animationFrameId = requestAnimationFrame(animation);
+        // Scroll to current position
+        window.scrollTo({
+            top: currentPos,
+            left: 0,
+            behavior: 'auto'
+        });
+        
+        if (progress < 1) {
+            // Continue animation
+            window._currentScrollAnimation = requestAnimationFrame(animate);
         } else {
-            // Ensure we end at exact target
-            window.scrollTo(0, targetPosition);
-            document.documentElement.scrollTop = targetPosition;
-            if (document.body) {
-                document.body.scrollTop = targetPosition;
-            }
+            // Ensure exact target
+            window.scrollTo({
+                top: targetPosition,
+                left: 0,
+                behavior: 'auto'
+            });
+            isAnimating = false;
+            window._currentScrollAnimation = null;
         }
     }
 
-    // Cancel any existing scroll animation
-    if (window._currentScrollAnimation) {
-        cancelAnimationFrame(window._currentScrollAnimation);
-    }
-    
-    window._currentScrollAnimation = requestAnimationFrame(animation);
+    // Start animation
+    window._currentScrollAnimation = requestAnimationFrame(animate);
 }
 
 // Smooth scroll function
@@ -58,6 +70,7 @@ function initSmoothScroll() {
         
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
+            e.stopPropagation();
             
             const href = this.getAttribute('href');
             
@@ -74,8 +87,11 @@ function initSmoothScroll() {
             const targetTop = target.offsetTop;
             const desiredPosition = Math.max(0, targetTop - headerOffset);
             
-            // Use custom smooth scroll (1000ms for smooth animation)
-            smoothScrollTo(desiredPosition, 1000);
+            // Use native smooth scroll behavior for reliability
+            window.scrollTo({
+                top: desiredPosition,
+                behavior: 'smooth'
+            });
             
             // Update URL without hash (clean URL)
             setTimeout(() => {
