@@ -93,36 +93,33 @@ function initSmoothScroll() {
             const targetTop = target.offsetTop;
             const desiredPosition = Math.max(0, targetTop - headerOffset);
             
-            // Remove hash from URL immediately for clean URLs (before scrolling)
-            // Use replaceState to prevent adding to history
+            // Remove hash from URL immediately - use direct assignment for reliability
             if (history.replaceState) {
                 history.replaceState(null, null, window.location.pathname + window.location.search);
             }
-            
-            // Always use custom smooth scroll - function is defined at top of file as window.smoothScrollTo
-            // Use 1200ms duration for clearly visible smooth scrolling
-            // The function should always be available, but ensure it exists
-            if (typeof window.smoothScrollTo === 'function') {
-                window.smoothScrollTo(desiredPosition, 1200);
-            } else {
-                // Fallback: define function inline if missing (shouldn't happen but safety)
-                console.warn('smoothScrollTo not found, using native smooth scroll');
-                window.scrollTo({
-                    top: desiredPosition,
-                    behavior: 'smooth'
-                });
+            // Also directly clear hash
+            if (window.location.hash) {
+                window.location.hash = '';
             }
+            
+            // Always use custom smooth scroll - function is defined at top of file
+            // Call it directly since it's always available
+            window.smoothScrollTo(desiredPosition, 1200);
             
             // Remove hash repeatedly to catch any browser-added hash
             const removeHash = () => {
-                if (window.location.hash && history.replaceState) {
-                    history.replaceState(null, null, window.location.pathname + window.location.search);
+                if (window.location.hash) {
+                    window.location.hash = '';
+                    if (history.replaceState) {
+                        history.replaceState(null, null, window.location.pathname + window.location.search);
+                    }
                 }
             };
             removeHash();
             setTimeout(removeHash, 10);
             setTimeout(removeHash, 50);
             setTimeout(removeHash, 100);
+            setTimeout(removeHash, 200);
             
             return false;
         });
@@ -245,18 +242,34 @@ function initAll() {
     window.addEventListener('hashchange', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        if (history.replaceState) {
-            history.replaceState(null, null, window.location.pathname + window.location.search);
+        if (window.location.hash) {
+            window.location.hash = '';
+            if (history.replaceState) {
+                history.replaceState(null, null, window.location.pathname + window.location.search);
+            }
         }
         return false;
     }, true);
     
     // Also intercept popstate to prevent hash
     window.addEventListener('popstate', function(e) {
-        if (window.location.hash && history.replaceState) {
-            history.replaceState(null, null, window.location.pathname + window.location.search);
+        if (window.location.hash) {
+            window.location.hash = '';
+            if (history.replaceState) {
+                history.replaceState(null, null, window.location.pathname + window.location.search);
+            }
         }
     });
+    
+    // Continuously monitor and remove hash
+    setInterval(function() {
+        if (window.location.hash) {
+            window.location.hash = '';
+            if (history.replaceState) {
+                history.replaceState(null, null, window.location.pathname + window.location.search);
+            }
+        }
+    }, 100);
 
     // Scroll to top button
     const scrollToTopBtn = document.getElementById('scrollToTop');
