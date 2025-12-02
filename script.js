@@ -231,10 +231,25 @@ function initAll() {
                 
                 // Ensure text is fully visible - use scrollWidth if needed
                 const container = heroTitle.parentElement;
-                if (container && heroTitle.scrollWidth > container.clientWidth) {
-                    // Text might be constrained by parent, ensure it fits
-                    heroTitle.style.width = Math.min(heroTitle.scrollWidth, container.clientWidth) + 'px';
-                    heroTitle.style.maxWidth = '100%';
+                if (container) {
+                    // Check if text is cut off
+                    if (heroTitle.scrollWidth > heroTitle.clientWidth) {
+                        // Text is cut off, expand to fit
+                        heroTitle.style.width = heroTitle.scrollWidth + 'px';
+                        heroTitle.style.maxWidth = '100%';
+                    } else {
+                        // Text fits, use auto width
+                        heroTitle.style.width = 'auto';
+                        heroTitle.style.maxWidth = '100%';
+                    }
+                    
+                    // Ensure it doesn't exceed container
+                    if (heroTitle.scrollWidth > container.clientWidth) {
+                        heroTitle.style.width = container.clientWidth + 'px';
+                        heroTitle.style.maxWidth = '100%';
+                        // If still cut off, allow horizontal scroll on just this element
+                        heroTitle.style.overflowX = 'visible';
+                    }
                 }
             }, 5000);
             
