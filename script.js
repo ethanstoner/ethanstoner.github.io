@@ -403,59 +403,6 @@ function initAll() {
     ensureHeroTitleVisible();
 }
 
-// Initialize typewriter animation immediately - JavaScript-based for reliability
-function initTypewriter() {
-    const heroTitle = document.querySelector('.hero-title.line');
-    if (heroTitle) {
-        // Get the full text content before clearing
-        const fullText = heroTitle.textContent.trim();
-        const span = heroTitle.querySelector('span');
-        const dotText = span ? span.textContent : '.';
-        const mainText = fullText.replace(dotText, '').trim();
-        
-        // Clear the content immediately and prepare for animation
-        heroTitle.innerHTML = '';
-        heroTitle.style.borderRight = '3px solid rgba(255, 255, 255, 0.9)';
-        heroTitle.style.paddingRight = '4px';
-        heroTitle.style.display = 'inline-block';
-        heroTitle.style.overflow = 'visible';
-        heroTitle.style.whiteSpace = 'nowrap';
-        heroTitle.style.width = 'auto';
-        heroTitle.style.maxWidth = 'none';
-        
-        // Remove the anim-typewriter class to prevent CSS animation conflicts
-        heroTitle.classList.remove('anim-typewriter');
-        
-        // Create cursor blinking
-        let cursorVisible = true;
-        const cursorInterval = setInterval(() => {
-            if (heroTitle) {
-                heroTitle.style.borderRightColor = cursorVisible ? 'rgba(255, 255, 255, 0.9)' : 'transparent';
-                cursorVisible = !cursorVisible;
-            }
-        }, 500);
-        
-        // Type out the text character by character
-        let currentIndex = 0;
-        const typeDelay = 80; // milliseconds per character (faster typing)
-        const startDelay = 1000; // 1 second initial delay
-        
-        setTimeout(() => {
-            const typeInterval = setInterval(() => {
-                if (currentIndex < mainText.length) {
-                    // Build the text with the dot span
-                    heroTitle.innerHTML = mainText.substring(0, currentIndex + 1) + '<span>' + dotText + '</span>';
-                    currentIndex++;
-                } else {
-                    clearInterval(typeInterval);
-                    // Keep cursor blinking after animation
-                    heroTitle.classList.add('animation-complete');
-                }
-            }, typeDelay);
-        }, startDelay);
-    }
-}
-
 // Typewriter animation is now handled inline in index.html for immediate execution
 
 // Initialize when DOM is ready
