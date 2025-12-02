@@ -272,35 +272,19 @@ function initAll() {
                     }
                 }
                 
-                // Check container constraints
-                const container = heroTitle.parentElement;
-                const viewportWidth = window.innerWidth;
+                // Ensure text is fully visible - set width to scrollWidth
+                const finalNeededWidth = heroTitle.scrollWidth;
+                heroTitle.style.width = finalNeededWidth + 'px';
+                heroTitle.style.overflow = 'visible';
                 
-                if (container) {
-                    const containerWidth = container.clientWidth;
-                    // On mobile, constrain to viewport. On larger screens, allow expansion
-                    if (viewportWidth <= 768) {
-                        // Mobile: constrain to viewport but ensure text fits
-                        if (neededWidth > viewportWidth - 48) { // Account for padding
-                            // Text is too wide for viewport - use smaller font or allow slight overflow
-                            heroTitle.style.width = (viewportWidth - 48) + 'px';
-                            heroTitle.style.maxWidth = '100%';
-                            heroTitle.style.overflow = 'visible'; // Allow slight overflow if needed
-                        } else {
-                            heroTitle.style.width = neededWidth + 'px';
-                            heroTitle.style.maxWidth = '100%';
-                        }
-                    } else {
-                        // Desktop: allow expansion beyond container if needed
-                        if (neededWidth > containerWidth) {
-                            heroTitle.style.width = neededWidth + 'px';
-                            heroTitle.style.maxWidth = 'none'; // Allow expansion
-                            heroTitle.style.overflow = 'visible';
-                        } else {
-                            heroTitle.style.width = neededWidth + 'px';
-                            heroTitle.style.maxWidth = '100%';
-                        }
-                    }
+                // Check viewport constraints
+                const viewportWidth = window.innerWidth;
+                if (viewportWidth <= 768) {
+                    // Mobile: constrain to viewport
+                    heroTitle.style.maxWidth = '100%';
+                } else {
+                    // Desktop: allow expansion beyond container if needed
+                    heroTitle.style.maxWidth = 'none';
                 }
                 
                 // Final check after a brief delay to ensure everything is correct
