@@ -221,6 +221,25 @@ html {
     min-width: 0;
 }
 
+/* Allow hero-title to expand beyond container if needed to prevent text cutoff */
+.hero-content .hero-title.line.animation-complete {
+    max-width: none; /* Allow expansion beyond container */
+    width: auto;
+}
+
+/* On smaller screens, ensure text fits */
+@media (max-width: 768px) {
+    .hero-content {
+        max-width: 100%;
+        padding: 0 12px;
+    }
+    
+    .hero-content .hero-title.line.animation-complete {
+        max-width: 100%; /* Constrain to viewport on mobile */
+        width: auto;
+    }
+}
+
 .hero-title {
     font-weight: 300;
     text-align: center;

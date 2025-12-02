@@ -272,19 +272,34 @@ function initAll() {
                     }
                 }
                 
-                // Now apply max-width constraint if container is smaller
+                // Check container constraints
                 const container = heroTitle.parentElement;
+                const viewportWidth = window.innerWidth;
+                
                 if (container) {
                     const containerWidth = container.clientWidth;
-                    if (neededWidth > containerWidth) {
-                        // Text is wider than container - allow it to expand container if needed
-                        // Or set to container width with overflow visible
-                        heroTitle.style.width = neededWidth + 'px';
-                        heroTitle.style.maxWidth = 'none'; // Allow expansion beyond container
-                        heroTitle.style.overflow = 'visible';
+                    // On mobile, constrain to viewport. On larger screens, allow expansion
+                    if (viewportWidth <= 768) {
+                        // Mobile: constrain to viewport but ensure text fits
+                        if (neededWidth > viewportWidth - 48) { // Account for padding
+                            // Text is too wide for viewport - use smaller font or allow slight overflow
+                            heroTitle.style.width = (viewportWidth - 48) + 'px';
+                            heroTitle.style.maxWidth = '100%';
+                            heroTitle.style.overflow = 'visible'; // Allow slight overflow if needed
+                        } else {
+                            heroTitle.style.width = neededWidth + 'px';
+                            heroTitle.style.maxWidth = '100%';
+                        }
                     } else {
-                        // Text fits in container - apply max-width
-                        heroTitle.style.maxWidth = '100%';
+                        // Desktop: allow expansion beyond container if needed
+                        if (neededWidth > containerWidth) {
+                            heroTitle.style.width = neededWidth + 'px';
+                            heroTitle.style.maxWidth = 'none'; // Allow expansion
+                            heroTitle.style.overflow = 'visible';
+                        } else {
+                            heroTitle.style.width = neededWidth + 'px';
+                            heroTitle.style.maxWidth = '100%';
+                        }
                     }
                 }
                 
