@@ -214,6 +214,42 @@ function initAll() {
             smoothScrollTo(0, 800);
         });
     }
+
+    // Ensure hero title text is never cut off
+    function ensureHeroTitleVisible() {
+        const heroTitle = document.querySelector('.hero-title .line');
+        if (heroTitle) {
+            // After typewriter animation completes (5 seconds), ensure full width
+            setTimeout(() => {
+                // Remove width constraint to allow natural sizing
+                heroTitle.style.width = 'auto';
+                heroTitle.style.maxWidth = '100%';
+                heroTitle.style.overflow = 'visible';
+                
+                // Check if text is still cut off and adjust
+                if (heroTitle.scrollWidth > heroTitle.clientWidth) {
+                    heroTitle.style.width = heroTitle.scrollWidth + 'px';
+                    heroTitle.style.maxWidth = '100%';
+                }
+            }, 5000);
+            
+            // Also handle window resize
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    heroTitle.style.width = 'auto';
+                    heroTitle.style.maxWidth = '100%';
+                    if (heroTitle.scrollWidth > heroTitle.clientWidth) {
+                        heroTitle.style.width = heroTitle.scrollWidth + 'px';
+                        heroTitle.style.maxWidth = '100%';
+                    }
+                }, 250);
+            });
+        }
+    }
+    
+    ensureHeroTitleVisible();
 }
 
 // Initialize when DOM is ready
