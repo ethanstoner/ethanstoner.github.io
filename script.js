@@ -219,7 +219,7 @@ function initAll() {
     function ensureHeroTitleVisible() {
         const heroTitle = document.querySelector('.hero-title.line');
         if (heroTitle) {
-            // After typewriter animation completes (5 seconds: 1s delay + 4s animation)
+            // After typewriter animation completes (5.5 seconds: 1s delay + 4s animation + 0.5s buffer)
             setTimeout(() => {
                 // Mark animation as complete
                 heroTitle.classList.add('animation-complete');

@@ -258,14 +258,15 @@ html {
 
 /* When hero-title has line class, it should behave as typewriter */
 .hero-title.line {
-    display: inline-block; /* Inline-block for typewriter width animation */
-    width: 0; /* Start at 0 for animation */
-    overflow: hidden; /* Hidden during animation */
-    white-space: nowrap; /* Prevent text wrapping during animation */
+    display: inline-block !important; /* Override block display */
+    width: 0 !important; /* Override 100% width - start at 0 for animation */
+    overflow: hidden !important; /* Override visible - hidden during animation */
+    white-space: nowrap !important; /* Prevent text wrapping during animation */
     border-right: 3px solid rgba(255, 255, 255, 0.9); /* Cursor */
     padding-right: 4px;
-    max-width: none; /* Remove max-width constraint during animation */
+    max-width: none !important; /* Remove max-width constraint during animation */
     margin: 0 auto;
+    box-sizing: content-box; /* Include border+padding in width */
 }
 
 .hero-title.line.animation-complete {
