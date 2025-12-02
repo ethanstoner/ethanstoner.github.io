@@ -325,95 +325,87 @@
     </div>
 
     <script>
-        // Run typewriter immediately when script loads - use MutationObserver for early detection
+        // Run typewriter immediately - execute as early as possible
         (function() {
+            let typewriterStarted = false;
+            
             function runTypewriter() {
+                if (typewriterStarted) return;
+                
                 const heroTitle = document.querySelector('.hero-title.line');
-                if (heroTitle) {
-                    // Get the full text content before clearing
-                    const fullText = heroTitle.textContent.trim();
-                    if (fullText.length === 0) return; // Already cleared
-                    
-                    const span = heroTitle.querySelector('span');
-                    const dotText = span ? span.textContent : '.';
-                    const mainText = fullText.replace(dotText, '').trim();
-                    
-                    // Clear the content immediately and make visible
-                    heroTitle.innerHTML = '';
-                    heroTitle.style.borderRight = '3px solid rgba(255, 255, 255, 0.9)';
-                    heroTitle.style.paddingRight = '4px';
-                    heroTitle.style.display = 'inline-block';
-                    heroTitle.style.overflow = 'visible';
-                    heroTitle.style.whiteSpace = 'nowrap';
-                    heroTitle.style.width = 'auto';
-                    heroTitle.style.maxWidth = 'none';
-                    heroTitle.style.color = '#fff'; // Make text visible
-                    heroTitle.classList.remove('anim-typewriter');
-                    heroTitle.classList.add('typing-started');
-                    
-                    // Create cursor blinking
-                    let cursorVisible = true;
-                    const cursorInterval = setInterval(() => {
-                        if (heroTitle && heroTitle.parentElement) {
-                            heroTitle.style.borderRightColor = cursorVisible ? 'rgba(255, 255, 255, 0.9)' : 'transparent';
-                            cursorVisible = !cursorVisible;
+                if (!heroTitle) return;
+                
+                // Get the full text content before clearing
+                const fullText = heroTitle.textContent.trim();
+                if (fullText.length === 0) {
+                    // Already cleared, wait a bit and try again
+                    setTimeout(runTypewriter, 50);
+                    return;
+                }
+                
+                typewriterStarted = true;
+                
+                const span = heroTitle.querySelector('span');
+                const dotText = span ? span.textContent : '.';
+                const mainText = fullText.replace(dotText, '').trim();
+                
+                // Clear the content immediately
+                heroTitle.innerHTML = '';
+                heroTitle.style.borderRight = '3px solid rgba(255, 255, 255, 0.9)';
+                heroTitle.style.paddingRight = '4px';
+                heroTitle.style.display = 'inline-block';
+                heroTitle.style.overflow = 'visible';
+                heroTitle.style.whiteSpace = 'nowrap';
+                heroTitle.style.width = 'auto';
+                heroTitle.style.maxWidth = 'none';
+                heroTitle.style.color = '#fff';
+                heroTitle.classList.remove('anim-typewriter');
+                heroTitle.classList.add('typing-started');
+                
+                // Create cursor blinking
+                let cursorVisible = true;
+                const cursorInterval = setInterval(() => {
+                    if (heroTitle && heroTitle.parentElement) {
+                        heroTitle.style.borderRightColor = cursorVisible ? 'rgba(255, 255, 255, 0.9)' : 'transparent';
+                        cursorVisible = !cursorVisible;
+                    } else {
+                        clearInterval(cursorInterval);
+                    }
+                }, 500);
+                
+                // Type out the text character by character
+                let currentIndex = 0;
+                const typeDelay = 80;
+                const startDelay = 1000;
+                
+                setTimeout(() => {
+                    const typeInterval = setInterval(() => {
+                        if (currentIndex < mainText.length && heroTitle && heroTitle.parentElement) {
+                            heroTitle.innerHTML = mainText.substring(0, currentIndex + 1) + '<span>' + dotText + '</span>';
+                            currentIndex++;
                         } else {
-                            clearInterval(cursorInterval);
-                        }
-                    }, 500);
-                    
-                    // Type out the text character by character
-                    let currentIndex = 0;
-                    const typeDelay = 80;
-                    const startDelay = 1000;
-                    
-                    setTimeout(() => {
-                        const typeInterval = setInterval(() => {
-                            if (currentIndex < mainText.length && heroTitle && heroTitle.parentElement) {
-                                heroTitle.innerHTML = mainText.substring(0, currentIndex + 1) + '<span>' + dotText + '</span>';
-                                currentIndex++;
-                            } else {
-                                clearInterval(typeInterval);
-                                if (heroTitle) {
-                                    heroTitle.classList.add('animation-complete');
-                                }
+                            clearInterval(typeInterval);
+                            if (heroTitle) {
+                                heroTitle.classList.add('animation-complete');
                             }
-                        }, typeDelay);
-                    }, startDelay);
-                }
+                        }
+                    }, typeDelay);
+                }, startDelay);
             }
             
-            // Use MutationObserver to catch element as soon as it's added to DOM
-            const observer = new MutationObserver((mutations, obs) => {
-                const heroTitle = document.querySelector('.hero-title.line');
-                if (heroTitle && heroTitle.textContent.trim().length > 0) {
-                    obs.disconnect();
-                    runTypewriter();
-                }
-            });
-            
-            // Start observing immediately
-            if (document.body) {
-                observer.observe(document.body, { childList: true, subtree: true });
-            }
-            
-            // Also try on DOMContentLoaded and with delays as fallback
+            // Try multiple times to catch the element
             if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', () => {
-                    observer.disconnect();
-                    runTypewriter();
-                });
+                document.addEventListener('DOMContentLoaded', runTypewriter);
             } else {
                 runTypewriter();
             }
-            setTimeout(() => {
-                observer.disconnect();
-                runTypewriter();
-            }, 50);
-            setTimeout(() => {
-                observer.disconnect();
-                runTypewriter();
-            }, 200);
+            
+            // Also try immediately and with delays
+            runTypewriter();
+            setTimeout(runTypewriter, 10);
+            setTimeout(runTypewriter, 50);
+            setTimeout(runTypewriter, 100);
+            setTimeout(runTypewriter, 200);
         })();
     </script>
     <script src="script.js"></script>
