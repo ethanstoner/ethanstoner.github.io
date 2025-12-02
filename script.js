@@ -241,25 +241,50 @@ function initAll() {
                 heroTitle.offsetHeight;
                 
                 // Check if text is cut off and adjust - ensure full text is visible
-                let currentWidth = heroTitle.getBoundingClientRect().width;
+                // First, set to auto to get natural width
+                heroTitle.style.width = 'auto';
+                heroTitle.style.maxWidth = 'none'; // Remove max-width temporarily
+                heroTitle.style.overflow = 'visible';
+                
+                // Force reflow
+                heroTitle.offsetHeight;
+                
+                // Get actual needed width
                 let neededWidth = heroTitle.scrollWidth;
+                let currentWidth = heroTitle.getBoundingClientRect().width;
                 
                 // If text is cut off, expand to full width needed
                 if (neededWidth > currentWidth) {
+                    // Set width to exactly what's needed
                     heroTitle.style.width = neededWidth + 'px';
-                    heroTitle.style.maxWidth = '100%';
+                    heroTitle.style.maxWidth = 'none'; // No max-width constraint
                     heroTitle.style.overflow = 'visible';
                     
-                    // Force reflow and check again
+                    // Force reflow and verify
                     heroTitle.offsetHeight;
                     currentWidth = heroTitle.getBoundingClientRect().width;
                     neededWidth = heroTitle.scrollWidth;
                     
-                    // If still cut off, try again with a slightly larger width
+                    // If still cut off, expand further
                     if (neededWidth > currentWidth) {
-                        heroTitle.style.width = (neededWidth + 10) + 'px'; // Add small buffer
-                        heroTitle.style.maxWidth = '100%';
+                        heroTitle.style.width = neededWidth + 'px';
+                        heroTitle.style.maxWidth = 'none';
+                    }
+                }
+                
+                // Now apply max-width constraint if container is smaller
+                const container = heroTitle.parentElement;
+                if (container) {
+                    const containerWidth = container.clientWidth;
+                    if (neededWidth > containerWidth) {
+                        // Text is wider than container - allow it to expand container if needed
+                        // Or set to container width with overflow visible
+                        heroTitle.style.width = neededWidth + 'px';
+                        heroTitle.style.maxWidth = 'none'; // Allow expansion beyond container
                         heroTitle.style.overflow = 'visible';
+                    } else {
+                        // Text fits in container - apply max-width
+                        heroTitle.style.maxWidth = '100%';
                     }
                 }
                 
@@ -268,8 +293,8 @@ function initAll() {
                     const finalWidth = heroTitle.getBoundingClientRect().width;
                     const finalNeeded = heroTitle.scrollWidth;
                     if (finalNeeded > finalWidth) {
-                        heroTitle.style.width = (finalNeeded + 10) + 'px'; // Add buffer
-                        heroTitle.style.maxWidth = '100%';
+                        heroTitle.style.width = finalNeeded + 'px';
+                        heroTitle.style.maxWidth = 'none';
                         heroTitle.style.overflow = 'visible';
                     }
                 }, 500);

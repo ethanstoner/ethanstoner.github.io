@@ -217,6 +217,7 @@ html {
     align-items: center;
     box-sizing: border-box;
     overflow-x: visible;
+    overflow-y: visible;
     min-width: 0;
 }
 
