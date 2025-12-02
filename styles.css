@@ -143,7 +143,7 @@ html {
     text-decoration: none;
     font-size: 15px;
     letter-spacing: 0.5px;
-    z-index: 1; /* Ensure nav links are clickable */
+    z-index: auto; /* Remove z-index to prevent stacking issues */
     pointer-events: auto; /* Ensure clicks work */
 }
 
@@ -256,10 +256,15 @@ html {
     box-sizing: border-box;
 }
 
+/* Override for typewriter - must come after base .hero-title */
+.hero-title.line {
+    width: 0; /* Animation will control this */
+}
+
 /* When hero-title has line class, it should behave as typewriter */
 .hero-title.line {
     display: inline-block !important; /* Override block display */
-    width: 0 !important; /* Override 100% width - start at 0 for animation */
+    width: 0; /* Start at 0 - animation will control this */
     overflow: hidden !important; /* Override visible - hidden during animation */
     white-space: nowrap !important; /* Prevent text wrapping during animation */
     border-right: 3px solid rgba(255, 255, 255, 0.9); /* Cursor */
@@ -267,6 +272,9 @@ html {
     max-width: none !important; /* Remove max-width constraint during animation */
     margin: 0 auto;
     box-sizing: content-box; /* Include border+padding in width */
+    min-width: 0;
+    /* Ensure animation can override width */
+    animation-fill-mode: both; /* Keep width: 0 before animation, final width after */
 }
 
 .hero-title.line.animation-complete {
