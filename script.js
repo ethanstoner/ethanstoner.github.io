@@ -224,33 +224,32 @@ function initAll() {
                 // Mark animation as complete
                 heroTitle.classList.add('animation-complete');
                 
-                // Remove width constraint to allow natural sizing
-                heroTitle.style.width = 'auto';
-                heroTitle.style.maxWidth = '100%';
-                heroTitle.style.overflow = 'visible';
-                
-                // Ensure text is fully visible - use scrollWidth if needed
+                // Get the actual text width needed
+                const textWidth = heroTitle.scrollWidth;
                 const container = heroTitle.parentElement;
-                if (container) {
-                    // Check if text is cut off
+                const containerWidth = container ? container.clientWidth : window.innerWidth;
+                
+                // Set width to fit the text, but not exceed container
+                if (textWidth > containerWidth) {
+                    // Text is wider than container - use container width but allow overflow visible
+                    heroTitle.style.width = containerWidth + 'px';
+                    heroTitle.style.maxWidth = '100%';
+                    heroTitle.style.overflow = 'visible'; // Allow text to be visible even if it exceeds
+                } else {
+                    // Text fits in container - use auto width
+                    heroTitle.style.width = 'auto';
+                    heroTitle.style.maxWidth = '100%';
+                    heroTitle.style.overflow = 'visible';
+                }
+                
+                // Double-check: if text is still cut off, expand to full text width
+                setTimeout(() => {
                     if (heroTitle.scrollWidth > heroTitle.clientWidth) {
-                        // Text is cut off, expand to fit
                         heroTitle.style.width = heroTitle.scrollWidth + 'px';
                         heroTitle.style.maxWidth = '100%';
-                    } else {
-                        // Text fits, use auto width
-                        heroTitle.style.width = 'auto';
-                        heroTitle.style.maxWidth = '100%';
+                        heroTitle.style.overflow = 'visible';
                     }
-                    
-                    // Ensure it doesn't exceed container
-                    if (heroTitle.scrollWidth > container.clientWidth) {
-                        heroTitle.style.width = container.clientWidth + 'px';
-                        heroTitle.style.maxWidth = '100%';
-                        // If still cut off, allow horizontal scroll on just this element
-                        heroTitle.style.overflowX = 'visible';
-                    }
-                }
+                }, 100);
             }, 5000);
             
             // Also handle window resize - only after animation completes

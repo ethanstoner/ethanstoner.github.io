@@ -321,7 +321,7 @@ html {
         width: 0;
     }
     to {
-        width: 50em; /* Very large to ensure text never gets cut off */
+        width: 60em; /* Very large to ensure text never gets cut off on all screen sizes */
         max-width: 100%;
     }
 }
