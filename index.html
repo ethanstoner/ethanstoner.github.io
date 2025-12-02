@@ -381,7 +381,12 @@
                 setTimeout(() => {
                     const typeInterval = setInterval(() => {
                         if (currentIndex < mainText.length && heroTitle && heroTitle.parentElement) {
-                            heroTitle.innerHTML = mainText.substring(0, currentIndex + 1) + '<span>' + dotText + '</span>';
+                            // Only show the period when we've typed all the main text
+                            if (currentIndex + 1 === mainText.length) {
+                                heroTitle.innerHTML = mainText.substring(0, currentIndex + 1) + '<span>' + dotText + '</span>';
+                            } else {
+                                heroTitle.innerHTML = mainText.substring(0, currentIndex + 1);
+                            }
                             currentIndex++;
                         } else {
                             clearInterval(typeInterval);
