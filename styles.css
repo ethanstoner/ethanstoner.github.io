@@ -227,19 +227,25 @@ html {
     line-height: 1.2;
     font-size: 64px;
     margin: 0 auto 32px;
-    display: inline-block; /* Changed from block to inline-block for typewriter */
-    width: auto; /* Changed from 100% to auto - animation will control width */
+    display: block;
+    width: 100%;
     max-width: 100%;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    overflow: hidden; /* Hidden during animation */
+    overflow: visible;
     box-sizing: border-box;
 }
 
 /* When hero-title has line class, it should behave as typewriter */
 .hero-title.line {
+    display: inline-block; /* Inline-block for typewriter width animation */
     width: 0; /* Start at 0 for animation */
     overflow: hidden; /* Hidden during animation */
+    white-space: nowrap; /* Prevent text wrapping during animation */
+    border-right: 3px solid rgba(255, 255, 255, 0.9); /* Cursor */
+    padding-right: 4px;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 .hero-title.line.animation-complete {
@@ -250,10 +256,15 @@ html {
 
 /* Mobile: Keep typewriter but ensure full text visibility */
 @media (max-width: 768px) {
-    .hero-title {
-        display: block !important;
-        width: 100% !important;
+    .hero-title.line {
+        display: inline-block !important; /* Keep inline-block for animation */
+        width: 0 !important; /* Start at 0 */
+        overflow: hidden !important; /* Hidden during animation */
         max-width: 100% !important;
+    }
+    
+    .hero-title.line.animation-complete {
+        width: auto !important;
         overflow: visible !important;
     }
 }
