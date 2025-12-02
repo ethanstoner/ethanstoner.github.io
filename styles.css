@@ -259,22 +259,13 @@ html {
 /* When hero-title has line class, override display immediately */
 .hero-title.line {
     display: inline-block !important;
+    /* Hide text initially - JavaScript will show it via typewriter animation */
+    color: transparent !important;
 }
 
-/* Override for typewriter - must come after base .hero-title */
-.hero-title.line {
-    display: inline-block !important; /* Override block display - CRITICAL for animation */
-    width: 0 !important; /* Start at 0 - animation will control this */
-    overflow: hidden !important; /* Override visible - hidden during animation */
-    white-space: nowrap !important; /* Prevent text wrapping during animation */
-    border-right: 3px solid rgba(255, 255, 255, 0.9); /* Cursor */
-    padding-right: 4px;
-    max-width: none !important; /* Remove max-width constraint during animation */
-    margin: 0 auto;
-    box-sizing: content-box !important; /* Include border+padding in width */
-    min-width: 0;
-    /* Ensure animation can override width */
-    animation-fill-mode: both !important; /* Keep width: 0 before animation, final width after */
+/* Show text when animation starts */
+.hero-title.line.typing-started {
+    color: #fff !important;
 }
 
 .hero-title.line.animation-complete {

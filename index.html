@@ -325,18 +325,20 @@
     </div>
 
     <script>
-        // Run typewriter immediately when script loads
+        // Run typewriter immediately when script loads - use MutationObserver for early detection
         (function() {
             function runTypewriter() {
                 const heroTitle = document.querySelector('.hero-title.line');
-                if (heroTitle && heroTitle.textContent.trim().length > 0) {
+                if (heroTitle) {
                     // Get the full text content before clearing
                     const fullText = heroTitle.textContent.trim();
+                    if (fullText.length === 0) return; // Already cleared
+                    
                     const span = heroTitle.querySelector('span');
                     const dotText = span ? span.textContent : '.';
                     const mainText = fullText.replace(dotText, '').trim();
                     
-                    // Clear the content immediately
+                    // Clear the content immediately and make visible
                     heroTitle.innerHTML = '';
                     heroTitle.style.borderRight = '3px solid rgba(255, 255, 255, 0.9)';
                     heroTitle.style.paddingRight = '4px';
@@ -345,7 +347,9 @@
                     heroTitle.style.whiteSpace = 'nowrap';
                     heroTitle.style.width = 'auto';
                     heroTitle.style.maxWidth = 'none';
+                    heroTitle.style.color = '#fff'; // Make text visible
                     heroTitle.classList.remove('anim-typewriter');
+                    heroTitle.classList.add('typing-started');
                     
                     // Create cursor blinking
                     let cursorVisible = true;
@@ -379,15 +383,37 @@
                 }
             }
             
-            // Try multiple times to catch the element
+            // Use MutationObserver to catch element as soon as it's added to DOM
+            const observer = new MutationObserver((mutations, obs) => {
+                const heroTitle = document.querySelector('.hero-title.line');
+                if (heroTitle && heroTitle.textContent.trim().length > 0) {
+                    obs.disconnect();
+                    runTypewriter();
+                }
+            });
+            
+            // Start observing immediately
+            if (document.body) {
+                observer.observe(document.body, { childList: true, subtree: true });
+            }
+            
+            // Also try on DOMContentLoaded and with delays as fallback
             if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', runTypewriter);
+                document.addEventListener('DOMContentLoaded', () => {
+                    observer.disconnect();
+                    runTypewriter();
+                });
             } else {
                 runTypewriter();
             }
-            // Also try after a small delay as fallback
-            setTimeout(runTypewriter, 50);
-            setTimeout(runTypewriter, 200);
+            setTimeout(() => {
+                observer.disconnect();
+                runTypewriter();
+            }, 50);
+            setTimeout(() => {
+                observer.disconnect();
+                runTypewriter();
+            }, 200);
         })();
     </script>
     <script src="script.js"></script>
