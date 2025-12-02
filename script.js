@@ -76,6 +76,7 @@ function initSmoothScroll() {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
+            e.stopImmediatePropagation();
             
             const href = this.getAttribute('href');
             
@@ -92,6 +93,12 @@ function initSmoothScroll() {
             const targetTop = target.offsetTop;
             const desiredPosition = Math.max(0, targetTop - headerOffset);
             
+            // Remove hash from URL immediately for clean URLs (before scrolling)
+            // Use replaceState to prevent adding to history
+            if (history.replaceState) {
+                history.replaceState(null, null, window.location.pathname + window.location.search);
+            }
+            
             // Always use custom smooth scroll - function is defined at top of file as window.smoothScrollTo
             // Use 1200ms duration for clearly visible smooth scrolling
             // Ensure function exists, if not use native smooth scroll as fallback
@@ -105,13 +112,16 @@ function initSmoothScroll() {
                 });
             }
             
-            // Update URL without hash (clean URL)
-            setTimeout(() => {
-                if (history.pushState) {
-                    // Replace hash with clean URL
-                    history.pushState(null, null, window.location.pathname + window.location.search);
+            // Remove hash repeatedly to catch any browser-added hash
+            const removeHash = () => {
+                if (window.location.hash && history.replaceState) {
+                    history.replaceState(null, null, window.location.pathname + window.location.search);
                 }
-            }, 1100);
+            };
+            removeHash();
+            setTimeout(removeHash, 10);
+            setTimeout(removeHash, 50);
+            setTimeout(removeHash, 100);
             
             return false;
         });
@@ -212,6 +222,7 @@ function initAll() {
         });
         
         // Clean URL hash if it exists (remove hash from URL)
+        // Remove hash from URL on page load for clean URLs
         if (window.location.hash && history.replaceState) {
             history.replaceState(null, null, window.location.pathname + window.location.search);
         }
@@ -220,10 +231,21 @@ function initAll() {
     window.addEventListener('scroll', updateActiveNavLink);
     updateActiveNavLink();
     
-    // Remove hash on page load if present
-    if (window.location.hash && history.replaceState) {
-        history.replaceState(null, null, window.location.pathname + window.location.search);
-    }
+    // Remove hash on page load if present and prevent hash from appearing
+    const removeHashOnLoad = () => {
+        if (window.location.hash && history.replaceState) {
+            history.replaceState(null, null, window.location.pathname + window.location.search);
+        }
+    };
+    removeHashOnLoad();
+    
+    // Listen for hash changes and remove them immediately
+    window.addEventListener('hashchange', function(e) {
+        e.preventDefault();
+        if (history.replaceState) {
+            history.replaceState(null, null, window.location.pathname + window.location.search);
+        }
+    }, false);
 
     // Scroll to top button
     const scrollToTopBtn = document.getElementById('scrollToTop');
