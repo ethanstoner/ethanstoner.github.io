@@ -73,6 +73,7 @@ function initSmoothScroll() {
             return;
         }
         
+        // Use capture phase to intercept before browser handles it
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -93,36 +94,39 @@ function initSmoothScroll() {
             const targetTop = target.offsetTop;
             const desiredPosition = Math.max(0, targetTop - headerOffset);
             
-            // Remove hash from URL immediately - use direct assignment for reliability
+            // Remove hash BEFORE scrolling to prevent browser from adding it
             if (history.replaceState) {
                 history.replaceState(null, null, window.location.pathname + window.location.search);
-            }
-            // Also directly clear hash
-            if (window.location.hash) {
-                window.location.hash = '';
             }
             
             // Always use custom smooth scroll - function is defined at top of file
             // Call it directly since it's always available
             window.smoothScrollTo(desiredPosition, 1200);
             
-            // Remove hash repeatedly to catch any browser-added hash
+            // Aggressively remove hash - use multiple methods
             const removeHash = () => {
                 if (window.location.hash) {
+                    // Method 1: Direct assignment
                     window.location.hash = '';
+                    // Method 2: History API
                     if (history.replaceState) {
                         history.replaceState(null, null, window.location.pathname + window.location.search);
                     }
                 }
             };
+            
+            // Remove immediately and repeatedly
             removeHash();
+            requestAnimationFrame(removeHash);
+            setTimeout(removeHash, 0);
             setTimeout(removeHash, 10);
             setTimeout(removeHash, 50);
             setTimeout(removeHash, 100);
             setTimeout(removeHash, 200);
+            setTimeout(removeHash, 500);
             
             return false;
-        });
+        }, true); // Use capture phase
     });
 }
 
