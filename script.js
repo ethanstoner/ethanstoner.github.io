@@ -441,19 +441,24 @@ function initAll() {
         });
     }
 
-    // Scroll progress indicator
+    // Scroll progress indicator - use requestAnimationFrame for smooth updates
+    let progressRaf = null;
     function updateScrollProgress() {
-        const windowHeight = window.innerHeight;
-        const documentHeight = document.documentElement.scrollHeight;
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const scrollPercent = (scrollTop / (documentHeight - windowHeight)) * 100;
-        const progressBar = document.querySelector('.scroll-progress');
-        if (progressBar) {
-            progressBar.style.width = scrollPercent + '%';
-        }
+        if (progressRaf) return;
+        progressRaf = requestAnimationFrame(() => {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollPercent = (scrollTop / (documentHeight - windowHeight)) * 100;
+            const progressBar = document.querySelector('.scroll-progress');
+            if (progressBar) {
+                progressBar.style.width = scrollPercent + '%';
+            }
+            progressRaf = null;
+        });
     }
 
-    window.addEventListener('scroll', updateScrollProgress);
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
     updateScrollProgress();
 
     // Header scroll effect
@@ -599,6 +604,7 @@ function initAll() {
     let scrollTimeout;
     let isProgrammaticScroll = false;
     let programmaticScrollTimeout = null;
+    let lastScrollTop = window.pageYOffset || window.scrollY;
     
     // Mark when programmatic scroll happens (from clicking nav links)
     const originalScrollTo = window.scrollTo;
@@ -614,13 +620,19 @@ function initAll() {
     };
     
     window.addEventListener('scroll', () => {
+        const currentScrollTop = window.pageYOffset || window.scrollY;
+        const scrollDelta = Math.abs(currentScrollTop - lastScrollTop);
+        lastScrollTop = currentScrollTop;
+        
+        // If scroll position changed significantly, it's likely manual scrolling
+        // Programmatic scrolling is usually smooth and predictable
+        const isManual = scrollDelta > 5 || !isProgrammaticScroll;
+        
         clearTimeout(scrollTimeout);
-        // Always update on scroll - if it's manual scroll, force update bypasses click flags
-        // If it's programmatic scroll, click flags will still prevent updates during smooth scroll
+        // Always update on scroll - force update on manual scroll to bypass click flags
         scrollTimeout = setTimeout(() => {
-            // Force update on manual scroll (not programmatic)
-            updateActiveNavLink(!isProgrammaticScroll);
-        }, 50);
+            updateActiveNavLink(isManual);
+        }, 30);
     }, { passive: true });
     
     // Update immediately on page load
