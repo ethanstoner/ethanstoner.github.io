@@ -1191,12 +1191,10 @@ html {
 .project-icon {
     height: 16px;
     width: auto;
-    max-width: 16px;
     flex-shrink: 0;
     opacity: 0.8;
     filter: invert(1) brightness(0.9);
     object-fit: contain;
-    display: block;
 }
 
 .project-description {
