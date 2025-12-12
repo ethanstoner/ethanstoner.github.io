@@ -471,7 +471,7 @@ function initAll() {
     }
 
     // Update active nav link on scroll
-    const sections = document.querySelectorAll('.section[id], .hero-section[id]');
+    const sections = document.querySelectorAll('section[id], .section[id], .hero-section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
     let lastClickedLink = null; // Track last clicked link
 
@@ -503,41 +503,48 @@ function initAll() {
         let current = '';
         
         // Get all sections with their absolute positions
-        const sectionsArray = Array.from(sections).map(section => {
-            const rect = section.getBoundingClientRect();
-            const absoluteTop = rect.top + scrollPosition;
-            return {
-                element: section,
-                id: section.getAttribute('id'),
-                top: absoluteTop,
-                bottom: absoluteTop + rect.height
-            };
-        });
+        const sectionsArray = Array.from(sections)
+            .filter(section => section.getAttribute('id')) // Only sections with IDs
+            .map(section => {
+                const rect = section.getBoundingClientRect();
+                const absoluteTop = rect.top + scrollPosition;
+                return {
+                    element: section,
+                    id: section.getAttribute('id'),
+                    top: absoluteTop,
+                    bottom: absoluteTop + rect.height
+                };
+            });
         
         // If at top (within first 300px), highlight home link
         if (scrollPosition < 300) {
             current = 'home';
         } else {
             // Find which section we're currently in
-            // Check if scroll position is within any section's bounds (with offset for header)
-            const scrollWithOffset = scrollPosition + headerHeight + 100;
+            // Use a threshold that accounts for header and some padding
+            const threshold = headerHeight + 150;
             
             for (const section of sectionsArray) {
-                if (scrollWithOffset >= section.top && scrollWithOffset <= section.bottom) {
-                    current = section.id;
-                    break;
+                // Check if scroll position is past the section start (with threshold)
+                if (scrollPosition >= section.top - threshold) {
+                    // If we haven't passed the next section, we're in this one
+                    const nextSection = sectionsArray.find(s => s.top > section.top);
+                    if (!nextSection || scrollPosition < nextSection.top - threshold) {
+                        current = section.id;
+                        break;
+                    }
                 }
             }
             
-            // If no section matched, find the closest one
+            // If no section matched, find the closest one we've passed
             if (!current) {
                 let closestSection = '';
                 let closestDistance = Infinity;
                 
                 sectionsArray.forEach(section => {
-                    // Check if we're past the section start
-                    if (scrollPosition >= section.top - headerHeight - 200) {
-                        const distance = Math.abs(scrollPosition - (section.top - headerHeight));
+                    // Only consider sections we've scrolled past
+                    if (scrollPosition >= section.top - threshold) {
+                        const distance = scrollPosition - (section.top - threshold);
                         if (distance < closestDistance) {
                             closestDistance = distance;
                             closestSection = section.id;
