@@ -580,7 +580,7 @@ html {
     top: 20px;
     right: -20px;
     animation: float-2 3s ease-in-out infinite;
-    animation-delay: 0.5s !important; /* Staggered delay */
+    animation-delay: 0.1s !important; /* Minimal stagger for variety */
     animation-fill-mode: both;
     /* Force animation to start immediately on page load */
     animation-play-state: running !important;
@@ -590,7 +590,7 @@ html {
     bottom: 20px;
     left: -20px;
     animation: float-3 3s ease-in-out infinite;
-    animation-delay: 1s !important; /* Staggered delay */
+    animation-delay: 0.2s !important; /* Minimal stagger for variety */
     animation-fill-mode: both;
     /* Force animation to start immediately on page load */
     animation-play-state: running !important;
@@ -615,7 +615,7 @@ html {
     left: 50%;
     margin-left: -160px;
     animation: float-1 3s ease-in-out infinite;
-    animation-delay: 0s !important; /* Force immediate start */
+    animation-delay: 0s !important; /* Start immediately */
     animation-fill-mode: both;
     transform: translateX(-50%); /* Initial positioning */
     /* Force animation to start immediately on page load */
@@ -627,7 +627,7 @@ html {
     right: 50%;
     margin-right: -160px;
     animation: float-4 3s ease-in-out infinite;
-    animation-delay: 1.5s !important; /* Staggered delay */
+    animation-delay: 0.3s !important; /* Minimal stagger for variety */
     animation-fill-mode: both;
     transform: translateX(50%); /* Initial positioning */
     /* Force animation to start immediately on page load */
@@ -638,7 +638,7 @@ html {
     top: 50%;
     left: -30px;
     animation: float-5 3s ease-in-out infinite;
-    animation-delay: 2s !important; /* Staggered delay */
+    animation-delay: 0.4s !important; /* Minimal stagger for variety */
     animation-fill-mode: both;
     transform: translateY(-50%); /* Initial positioning */
     /* Force animation to start immediately on page load */
@@ -1927,7 +1927,7 @@ html {
         height: 16px;
     }
     
-    /* Force all icons to animate on mobile - start immediately with minimal staggered delays */
+    /* Force all icons to animate on mobile - start immediately, prevent overlap */
     .icon-1 {
         top: -10px;
         left: 10px;
@@ -1936,25 +1936,27 @@ html {
         animation-delay: 0s !important; /* Start immediately */
         animation-fill-mode: both !important;
         animation-play-state: running !important;
-        /* No transform override - let animation handle it */
+        z-index: 1;
     }
     
     .icon-2 {
         top: -10px;
         right: 10px;
         animation: float-2 3s ease-in-out infinite !important;
-        animation-delay: 0.1s !important; /* Minimal stagger */
+        animation-delay: 0s !important; /* Start immediately */
         animation-fill-mode: both !important;
         animation-play-state: running !important;
+        z-index: 2;
     }
     
     .icon-3 {
         bottom: -10px;
         left: 10px;
         animation: float-3 3s ease-in-out infinite !important;
-        animation-delay: 0.2s !important; /* Minimal stagger */
+        animation-delay: 0s !important; /* Start immediately */
         animation-fill-mode: both !important;
         animation-play-state: running !important;
+        z-index: 3;
     }
     
     .icon-4 {
@@ -1962,20 +1964,20 @@ html {
         right: 10px;
         margin-right: 0 !important;
         animation: float-4-mobile 3s ease-in-out infinite !important;
-        animation-delay: 0.3s !important; /* Minimal stagger */
+        animation-delay: 0s !important; /* Start immediately */
         animation-fill-mode: both !important;
         animation-play-state: running !important;
-        /* No transform override - let animation handle it */
+        z-index: 4;
     }
     
     .icon-5 {
-        top: 10px;
+        top: 50%;
         left: -10px;
         animation: float-5-mobile 3s ease-in-out infinite !important;
-        animation-delay: 0.4s !important; /* Minimal stagger */
+        animation-delay: 0s !important; /* Start immediately */
         animation-fill-mode: both !important;
         animation-play-state: running !important;
-        /* No transform override - let animation handle it */
+        z-index: 5;
     }
 
     .section {

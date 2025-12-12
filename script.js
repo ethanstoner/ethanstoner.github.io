@@ -112,7 +112,7 @@ function smoothScrollToTop() {
 
 // Smooth scroll function - can be called immediately or on DOMContentLoaded
 function initSmoothScroll() {
-    // Smooth scroll for anchor links only (not mailto, http, https)
+    // Smooth scroll for anchor links only (not mailto, http, https, or email cards)
     const anchors = document.querySelectorAll('a[href^="#"]');
     
     anchors.forEach((anchor) => {
@@ -120,6 +120,11 @@ function initSmoothScroll() {
         const href = anchor.getAttribute('href');
         if (!href || href.startsWith('mailto:') || href.startsWith('http://') || href.startsWith('https://')) {
             return; // Let browser handle these normally
+        }
+        
+        // Skip email cards that have copy functionality
+        if (anchor.classList.contains('email-card') || anchor.id === 'email-card') {
+            return; // Don't handle smooth scroll for email cards
         }
         
         // Remove any existing listeners
@@ -818,7 +823,7 @@ function copyEmailFromContact(e) {
     
     // Don't copy if clicking the copy button itself
     if (e.target.classList.contains('copy-btn') || e.target.closest('.copy-btn')) {
-        return;
+        return false;
     }
     
     const email = "ethanstoner08@gmail.com";
@@ -836,6 +841,8 @@ function copyEmailFromContact(e) {
         fallbackCopyTextToClipboard(email, null);
         showEmailCopiedPopup();
     }
+    
+    return false; // Prevent any default behavior
 }
 
 // Show smooth popup notification
