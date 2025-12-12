@@ -80,10 +80,16 @@ function smoothScrollToTop() {
 
 // Smooth scroll function - can be called immediately or on DOMContentLoaded
 function initSmoothScroll() {
-    // Smooth scroll for anchor links
+    // Smooth scroll for anchor links only (not mailto, http, https)
     const anchors = document.querySelectorAll('a[href^="#"]');
     
     anchors.forEach((anchor) => {
+        // Skip mailto and external links
+        const href = anchor.getAttribute('href');
+        if (!href || href.startsWith('mailto:') || href.startsWith('http://') || href.startsWith('https://')) {
+            return; // Let browser handle these normally
+        }
+        
         // Remove any existing listeners
         const newAnchor = anchor.cloneNode(true);
         anchor.parentNode.replaceChild(newAnchor, anchor);
