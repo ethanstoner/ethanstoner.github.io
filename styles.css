@@ -606,52 +606,9 @@ html {
     }
 }
 
-/* Varied float animations with horizontal movement */
-@keyframes float-right {
-    0%, 100% {
-        transform: translateY(0) translateX(0);
-    }
-    50% {
-        transform: translateY(-15px) translateX(5px);
-    }
-}
+/* Removed float-right and float-left - using original float-1 through float-5 animations */
 
-@keyframes float-left {
-    0%, 100% {
-        transform: translateY(0) translateX(0);
-    }
-    50% {
-        transform: translateY(-15px) translateX(-5px);
-    }
-}
-
-/* Separate animations for icons with positioning transforms */
-@keyframes float-icon1 {
-    0%, 100% {
-        transform: translateX(calc(-50% + 0px)) translateY(0);
-    }
-    50% {
-        transform: translateX(calc(-50% - 3px)) translateY(-15px);
-    }
-}
-
-@keyframes float-icon4 {
-    0%, 100% {
-        transform: translateX(calc(50% + 0px)) translateY(0);
-    }
-    50% {
-        transform: translateX(calc(50% + 3px)) translateY(-15px);
-    }
-}
-
-@keyframes float-icon5 {
-    0%, 100% {
-        transform: translateX(0) translateY(calc(-50% + 0px));
-    }
-    50% {
-        transform: translateX(-5px) translateY(calc(-50% - 15px));
-    }
-}
+/* Removed unused float-icon animations - using float-1 through float-5 instead */
 
 .icon-1 {
     top: -10px;
