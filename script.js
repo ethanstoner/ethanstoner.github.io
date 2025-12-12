@@ -473,7 +473,6 @@ function initAll() {
     // Update active nav link on scroll
     const sections = document.querySelectorAll('.section[id], .hero-section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
-    let ignoreScrollUpdate = false; // Flag to prevent scroll updates right after click
     let lastClickedLink = null; // Track last clicked link
 
     function updateActiveNavLink() {
@@ -483,28 +482,25 @@ function initAll() {
             return;
         }
         
-        // Check if any link was recently clicked by user - if so, don't override
+        // Check if any link was recently clicked by user - only ignore if clicked very recently (within 1 second)
         let userClickedLink = null;
         navLinks.forEach(link => {
             if (link.dataset.userClicked === 'true') {
                 const clickTime = parseInt(link.dataset.clickTime || '0');
                 const timeSinceClick = Date.now() - clickTime;
-                // If clicked within last 4 seconds, keep it active
-                if (timeSinceClick < 4000) {
+                // Only prevent updates if clicked within last 1 second (for smooth scroll)
+                if (timeSinceClick < 1000) {
                     userClickedLink = link;
                 } else {
-                    // Clear old click flag
+                    // Clear old click flag after 1 second to allow manual scroll updates
                     link.dataset.userClicked = 'false';
                 }
             }
         });
         
-        // If user clicked a link recently, keep it active and exit
+        // If user clicked a link very recently (within 1s), keep it active and exit
+        // This allows manual scrolling to update after the smooth scroll completes
         if (userClickedLink) {
-            navLinks.forEach(link => {
-                if (link !== userClickedLink) link.classList.remove('active');
-            });
-            userClickedLink.classList.add('active');
             return;
         }
         
