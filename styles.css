@@ -565,8 +565,7 @@ html {
     pointer-events: auto;
     opacity: 1 !important;
     visibility: visible !important;
-    /* Don't set transform here - let individual .icon-* classes set positioning transforms */
-    /* Animation is handled by inner .float element */
+    /* Animation is handled by .floating-icon.icon-X classes below */
 }
 
 .floating-icon:hover {
