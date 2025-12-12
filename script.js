@@ -520,62 +520,57 @@ function initAll() {
         const headerHeight = document.querySelector('.header')?.offsetHeight || 80;
         let current = '';
         
-        // If at top (within first 150px), highlight home link
-        if (scrollPosition < 150) {
+        // If at top (within first 200px), highlight home link
+        if (scrollPosition < 200) {
             current = 'home';
         } else {
-            // Find which section is currently in view
-            // Use viewport-relative positions for accuracy
-            const threshold = headerHeight + 100;
-            const viewportTop = scrollPosition + threshold;
+            // Find which section is currently most visible in viewport
+            // Use a simpler approach: check which section's top is closest to but above viewport top
+            const viewportThreshold = headerHeight + 150;
+            const targetScroll = scrollPosition + viewportThreshold;
             
-            // Build array of sections with their absolute positions
-            const sectionsWithPos = [];
+            let bestSection = null;
+            let bestDistance = Infinity;
+            
+            // Check each section
             for (const section of sections) {
                 const id = section.getAttribute('id');
                 if (!id) continue;
                 
                 const rect = section.getBoundingClientRect();
-                // rect.top is viewport-relative, add scrollPosition for absolute
-                const absoluteTop = rect.top + scrollPosition;
-                sectionsWithPos.push({
-                    id: id,
-                    top: absoluteTop,
-                    bottom: absoluteTop + rect.height,
-                    viewportTop: rect.top
-                });
-            }
-            
-            // Sort by position (top to bottom)
-            sectionsWithPos.sort((a, b) => a.top - b.top);
-            
-            // Find the section whose top we've scrolled past
-            // Start from the bottom and work up to find the most recent section
-            let foundSection = null;
-            for (let i = sectionsWithPos.length - 1; i >= 0; i--) {
-                const section = sectionsWithPos[i];
-                // If section top is at or above our viewport threshold, we're in this section
-                if (section.top <= viewportTop) {
-                    foundSection = section.id;
-                    break;
-                }
-            }
-            
-            // If no section found (shouldn't happen), use closest
-            if (!foundSection && sectionsWithPos.length > 0) {
-                let closest = sectionsWithPos[0];
-                let minDistance = Math.abs(viewportTop - closest.top);
-                for (const section of sectionsWithPos) {
-                    const distance = Math.abs(viewportTop - section.top);
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        closest = section;
+                // Get absolute position
+                const sectionTop = rect.top + scrollPosition;
+                
+                // If we've scrolled past this section's top, consider it
+                if (sectionTop <= targetScroll) {
+                    // Calculate how far past we are
+                    const distance = targetScroll - sectionTop;
+                    // Prefer sections we're closer to (but have scrolled past)
+                    if (distance < bestDistance) {
+                        bestDistance = distance;
+                        bestSection = id;
                     }
                 }
-                foundSection = closest.id;
             }
             
-            current = foundSection || 'home';
+            // If no section found (we're between sections), find closest
+            if (!bestSection) {
+                for (const section of sections) {
+                    const id = section.getAttribute('id');
+                    if (!id) continue;
+                    
+                    const rect = section.getBoundingClientRect();
+                    const sectionTop = rect.top + scrollPosition;
+                    const distance = Math.abs(targetScroll - sectionTop);
+                    
+                    if (distance < bestDistance) {
+                        bestDistance = distance;
+                        bestSection = id;
+                    }
+                }
+            }
+            
+            current = bestSection || 'home';
         }
 
         // Only update if section changed
