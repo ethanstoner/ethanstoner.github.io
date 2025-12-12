@@ -576,126 +576,130 @@ html {
     height: 24px;
 }
 
+/* Ensure float element inherits sizing */
+.floating-icon .float svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Floating icon base styles - outer wrapper handles positioning */
+/* Floating icon base styles - outer wrapper handles positioning */
+.floating-icon {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.7);
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Inner float element - handles animation only */
+.floating-icon .float {
+    will-change: transform;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Icon positioning - outer wrapper only */
+.icon-1 {
+    top: -10px;
+    left: 50%;
+    margin-left: -160px;
+    transform: translateX(-50%); /* Positioning transform on outer */
+}
+
 .icon-2 {
     top: 20px;
     right: -20px;
-    animation: float-2 3s ease-in-out infinite;
-    animation-delay: 0.1s !important; /* Minimal stagger for variety */
-    animation-fill-mode: both;
-    /* Force animation to start immediately on page load */
-    animation-play-state: running !important;
 }
 
 .icon-3 {
     bottom: 20px;
     left: -20px;
-    animation: float-3 3s ease-in-out infinite;
-    animation-delay: 0.2s !important; /* Minimal stagger for variety */
-    animation-fill-mode: both;
-    /* Force animation to start immediately on page load */
-    animation-play-state: running !important;
-}
-
-/* Base float animation for icons without positioning transforms */
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-15px);
-    }
-}
-
-/* Removed float-right and float-left - using original float-1 through float-5 animations */
-
-/* Removed unused float-icon animations - using float-1 through float-5 instead */
-
-.icon-1 {
-    top: -10px;
-    left: 50%;
-    margin-left: -160px;
-    animation: float-1 3s ease-in-out infinite;
-    animation-delay: 0s !important; /* Start immediately */
-    animation-fill-mode: both;
-    transform: translateX(-50%); /* Initial positioning */
-    /* Force animation to start immediately on page load */
-    animation-play-state: running !important;
 }
 
 .icon-4 {
     bottom: -10px;
     right: 50%;
     margin-right: -160px;
-    animation: float-4 3s ease-in-out infinite;
-    animation-delay: 0.3s !important; /* Minimal stagger for variety */
-    animation-fill-mode: both;
-    transform: translateX(50%); /* Initial positioning */
-    /* Force animation to start immediately on page load */
-    animation-play-state: running !important;
+    transform: translateX(50%); /* Positioning transform on outer */
 }
 
 .icon-5 {
     top: 50%;
     left: -30px;
-    animation: float-5 3s ease-in-out infinite;
-    animation-delay: 0.4s !important; /* Minimal stagger for variety */
-    animation-fill-mode: both;
-    transform: translateY(-50%); /* Initial positioning */
-    /* Force animation to start immediately on page load */
-    animation-play-state: running !important;
+    transform: translateY(-50%); /* Positioning transform on outer */
 }
 
-/* Ensure animations start immediately on page load */
-.floating-icon {
-    animation-play-state: running !important;
-    will-change: transform;
-    /* Force animation to start immediately */
-    animation-iteration-count: infinite;
-    /* Ensure icons are visible and ready */
-    opacity: 1 !important;
-    visibility: visible !important;
+/* Animation on inner .float element - different durations + negative delays */
+.icon-1 .float {
+    animation: floatA 3.2s ease-in-out infinite;
+    animation-delay: -0.7s; /* Negative delay = phase offset */
 }
 
-/* Original smooth float animations with side-to-side movement */
-@keyframes float-1 {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(-15px); }
+.icon-2 .float {
+    animation: floatB 3.8s ease-in-out infinite;
+    animation-delay: -1.9s; /* Negative delay = phase offset */
 }
 
-@keyframes float-2 {
-    0%, 100% { transform: translateY(0) translateX(0); }
-    50% { transform: translateY(-15px) translateX(5px); }
+.icon-3 .float {
+    animation: floatC 3.4s ease-in-out infinite;
+    animation-delay: -2.4s; /* Negative delay = phase offset */
 }
 
-@keyframes float-3 {
-    0%, 100% { transform: translateY(0) translateX(0); }
-    50% { transform: translateY(-15px) translateX(-5px); }
+.icon-4 .float {
+    animation: floatD 4.1s ease-in-out infinite;
+    animation-delay: -0.3s; /* Negative delay = phase offset */
 }
 
-@keyframes float-4 {
-    0%, 100% { transform: translateX(50%) translateY(0); }
-    50% { transform: translateX(50%) translateY(-15px); }
+.icon-5 .float {
+    animation: floatE 3.6s ease-in-out infinite;
+    animation-delay: -1.2s; /* Negative delay = phase offset */
 }
 
-@keyframes float-5 {
-    0%, 100% { transform: translateX(0) translateY(-50%); }
-    50% { transform: translateX(-5px) translateY(calc(-50% - 15px)); }
+/* Keyframes - only animate local translate, no positioning transforms */
+@keyframes floatA {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(0, -14px); }
 }
 
-/* Mobile versions without positioning transforms */
-@keyframes float-1-mobile {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+@keyframes floatB {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(6px, -12px); }
 }
 
-@keyframes float-4-mobile {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+@keyframes floatC {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-6px, -12px); }
 }
 
-@keyframes float-5-mobile {
-    0%, 100% { transform: translateY(0) translateX(0); }
-    50% { transform: translateY(-15px) translateX(-5px); }
+@keyframes floatD {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(2px, -16px); }
+}
+
+@keyframes floatE {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-5px, -10px); }
+}
+
+/* Prefers reduced motion - disable animations */
+@media (prefers-reduced-motion: reduce) {
+    .floating-icon .float {
+        animation: none !important;
+    }
 }
 
 /*--------------- buttons --------------- */
@@ -1927,58 +1931,39 @@ html {
         height: 16px;
     }
     
-    /* Force all icons to animate on mobile - start immediately, prevent overlap */
+    /* Mobile positioning adjustments - keep negative delays for independent movement */
     .icon-1 {
         top: -10px;
         left: 10px;
         margin-left: 0 !important;
-        animation: float-1-mobile 3s ease-in-out infinite !important;
-        animation-delay: 0s !important; /* Start immediately */
-        animation-fill-mode: both !important;
-        animation-play-state: running !important;
-        z-index: 1;
+        transform: translateX(0) !important; /* Remove desktop centering on mobile */
     }
     
     .icon-2 {
         top: -10px;
         right: 10px;
-        animation: float-2 3s ease-in-out infinite !important;
-        animation-delay: 0s !important; /* Start immediately */
-        animation-fill-mode: both !important;
-        animation-play-state: running !important;
-        z-index: 2;
     }
     
     .icon-3 {
         bottom: -10px;
         left: 10px;
-        animation: float-3 3s ease-in-out infinite !important;
-        animation-delay: 0s !important; /* Start immediately */
-        animation-fill-mode: both !important;
-        animation-play-state: running !important;
-        z-index: 3;
     }
     
     .icon-4 {
         bottom: -10px;
         right: 10px;
         margin-right: 0 !important;
-        animation: float-4-mobile 3s ease-in-out infinite !important;
-        animation-delay: 0s !important; /* Start immediately */
-        animation-fill-mode: both !important;
-        animation-play-state: running !important;
-        z-index: 4;
+        transform: translateX(0) !important; /* Remove desktop centering on mobile */
     }
     
     .icon-5 {
-        top: 50%;
+        top: 10px;
         left: -10px;
-        animation: float-5-mobile 3s ease-in-out infinite !important;
-        animation-delay: 0s !important; /* Start immediately */
-        animation-fill-mode: both !important;
-        animation-play-state: running !important;
-        z-index: 5;
+        transform: translateY(0) !important; /* Remove desktop centering on mobile */
     }
+    
+    /* Keep negative delays on mobile - don't override to 0s */
+    /* This ensures icons don't move in sync on mobile */
 
     .section {
         padding: 100px 24px;

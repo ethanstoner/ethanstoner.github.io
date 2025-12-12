@@ -712,22 +712,8 @@ window.addEventListener('load', () => {
     // Re-initialize smooth scroll to catch any dynamically added links
     setTimeout(initSmoothScroll, 100);
     
-    // Force floating icons to start animating immediately on page load
-    // This prevents them from appearing frozen on desktop
-    const floatingIcons = document.querySelectorAll('.floating-icon');
-    floatingIcons.forEach((icon, index) => {
-        // Force animation restart by removing and re-adding animation
-        const style = window.getComputedStyle(icon);
-        const animationName = style.animationName;
-        if (animationName && animationName !== 'none') {
-            // Trigger reflow to restart animation
-            icon.style.animation = 'none';
-            void icon.offsetHeight; // Force reflow
-            icon.style.animation = '';
-            // Ensure animation is playing
-            icon.style.animationPlayState = 'running';
-        }
-    });
+    // Animation restart code removed - using CSS-only solution with negative delays
+    // Negative delays + animation-fill-mode: both ensure immediate start
 });
 
 // Email copy functionality
