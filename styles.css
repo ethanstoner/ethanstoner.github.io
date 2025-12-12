@@ -1017,6 +1017,13 @@ html {
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
+    font-size: 0; /* Remove whitespace between inline elements */
+}
+
+.project-badges .project-badge {
+    font-size: 11px; /* Restore font size */
+    margin: 0;
+    display: inline-flex;
 }
 
 .project-header .project-badge {
