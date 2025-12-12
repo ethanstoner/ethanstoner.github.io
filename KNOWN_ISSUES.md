@@ -5,13 +5,19 @@ This document tracks known issues and their status.
 ## Current Issues
 
 ### 1. Floating Icons Animation on Page Load
-**Status:** Fixed (pending verification)
-**Description:** Floating icons around the avatar appear frozen for a brief moment when the page first loads.
-**Root Cause:** Animation conflicts with positioning transforms, causing initial frame to not render properly.
+**Status:** Partially Fixed (known issue)
+**Description:** Floating icons around the avatar appear frozen for a brief moment when the page first loads. Some icons may not animate immediately due to animation delays (0s, 0.5s, 1s, 1.5s, 2s).
+**Root Cause:** 
+- Animation conflicts with positioning transforms
+- Animation delays cause some icons to start animating later
+- Mobile positioning overrides may conflict with animations
 **Fix Applied:** 
 - Separated animations for icons with positioning transforms (icon-1, icon-4, icon-5)
 - Added `animation-fill-mode: both` to ensure icons start in correct position
 - Added `will-change: transform` for better performance
+- Override transforms on mobile with `!important` to ensure animations work
+- Force animation playback state to `running`
+**Known Limitation:** Icons with animation delays (icon-2, icon-3, icon-4, icon-5) will appear static until their delay completes. This is intentional for staggered animation effect.
 **Test:** `tests/advanced-mobile-qa.spec.js` - "icons should not be frozen on page refresh"
 
 ### 2. Hero Title Wrapping on Desktop
