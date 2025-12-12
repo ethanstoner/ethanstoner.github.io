@@ -618,6 +618,8 @@ html {
     animation-iteration-count: infinite;
     animation-fill-mode: both;
     animation-play-state: running !important;
+    /* Ensure transform is not overridden */
+    transform-origin: center center;
 }
 
 /* Specific selectors to ensure animations are applied */
