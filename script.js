@@ -185,12 +185,24 @@ function initSmoothScroll() {
             
             // Handle home link - scroll to top
             if (!href || href === '#' || href === '' || href === '#home') {
-                // Smooth scroll to top
-                smoothScrollToTop();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
+                // Detect mobile for optimized scrolling
+                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+                
+                if (isMobile) {
+                    // On mobile, use native smooth scroll only
+                    document.documentElement.style.scrollBehavior = 'smooth';
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    // Desktop: use polyfill for better control
+                    smoothScrollToTop();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
                 
                 // Update URL without hash
                 if (history.pushState) {
