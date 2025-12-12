@@ -1117,7 +1117,17 @@ html {
     align-items: flex-start;
     margin-bottom: 24px;
     gap: 16px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+}
+
+.project-header .project-title {
+    flex: 0 1 auto;
+    min-width: 0;
+}
+
+.project-header .project-badges {
+    flex: 0 0 auto;
+    flex-shrink: 0;
 }
 
 .project-badges {
