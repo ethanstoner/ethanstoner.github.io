@@ -617,7 +617,7 @@ html {
     animation: float-1 3s ease-in-out infinite;
     animation-delay: 0s;
     animation-fill-mode: both;
-    transform: translateX(-50%);
+    /* Don't set transform here - let animation handle it */
     /* Force animation to start immediately on page load */
     animation-play-state: running !important;
 }
@@ -629,7 +629,7 @@ html {
     animation: float-4 3s ease-in-out infinite;
     animation-delay: 1.5s;
     animation-fill-mode: both;
-    transform: translateX(50%);
+    /* Don't set transform here - let animation handle it */
     /* Force animation to start immediately on page load */
     animation-play-state: running !important;
 }
@@ -640,7 +640,7 @@ html {
     animation: float-5 3s ease-in-out infinite;
     animation-delay: 2s;
     animation-fill-mode: both;
-    transform: translateY(-50%);
+    /* Don't set transform here - let animation handle it */
     /* Force animation to start immediately on page load */
     animation-play-state: running !important;
 }
@@ -680,6 +680,22 @@ html {
 @keyframes float-5 {
     0%, 100% { transform: translateX(0) translateY(-50%); }
     50% { transform: translateX(-5px) translateY(calc(-50% - 15px)); }
+}
+
+/* Mobile versions without positioning transforms */
+@keyframes float-1-mobile {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes float-4-mobile {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes float-5-mobile {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-15px) translateX(-5px); }
 }
 
 /*--------------- buttons --------------- */
@@ -1911,23 +1927,23 @@ html {
         height: 16px;
     }
     
-    /* Force all icons to animate on mobile - use original animations with staggered delays */
+    /* Force all icons to animate on mobile - start immediately with minimal staggered delays */
     .icon-1 {
         top: -10px;
         left: 10px;
         margin-left: 0 !important;
-        animation: float-1 3s ease-in-out infinite !important;
-        animation-delay: 0s !important;
+        animation: float-1-mobile 3s ease-in-out infinite !important;
+        animation-delay: 0s !important; /* Start immediately */
         animation-fill-mode: both !important;
         animation-play-state: running !important;
-        transform: translateX(0) !important; /* Override desktop transform */
+        /* No transform override - let animation handle it */
     }
     
     .icon-2 {
         top: -10px;
         right: 10px;
         animation: float-2 3s ease-in-out infinite !important;
-        animation-delay: 0.5s !important;
+        animation-delay: 0.1s !important; /* Minimal stagger */
         animation-fill-mode: both !important;
         animation-play-state: running !important;
     }
@@ -1936,7 +1952,7 @@ html {
         bottom: -10px;
         left: 10px;
         animation: float-3 3s ease-in-out infinite !important;
-        animation-delay: 1s !important;
+        animation-delay: 0.2s !important; /* Minimal stagger */
         animation-fill-mode: both !important;
         animation-play-state: running !important;
     }
@@ -1945,21 +1961,21 @@ html {
         bottom: -10px;
         right: 10px;
         margin-right: 0 !important;
-        animation: float-4 3s ease-in-out infinite !important;
-        animation-delay: 1.5s !important;
+        animation: float-4-mobile 3s ease-in-out infinite !important;
+        animation-delay: 0.3s !important; /* Minimal stagger */
         animation-fill-mode: both !important;
         animation-play-state: running !important;
-        transform: translateX(0) !important; /* Override desktop transform */
+        /* No transform override - let animation handle it */
     }
     
     .icon-5 {
         top: 10px;
         left: -10px;
-        animation: float-5 3s ease-in-out infinite !important;
-        animation-delay: 2s !important;
+        animation: float-5-mobile 3s ease-in-out infinite !important;
+        animation-delay: 0.4s !important; /* Minimal stagger */
         animation-fill-mode: both !important;
         animation-play-state: running !important;
-        transform: translateY(0) !important; /* Override desktop transform */
+        /* No transform override - let animation handle it */
     }
 
     .section {
