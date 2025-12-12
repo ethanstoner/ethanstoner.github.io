@@ -12,7 +12,7 @@ test.describe('Icon Animation Final QA', () => {
         await page.waitForLoadState('networkidle');
         
         // Check immediately (no wait)
-        const icons = await page.locator('.floating-icon .float').all();
+        const icons = await page.locator('.floating-icon').all();
         expect(icons.length).toBe(5);
         
         // Get initial transform values immediately
@@ -56,7 +56,7 @@ test.describe('Icon Animation Final QA', () => {
         // Wait for animations to progress
         await page.waitForTimeout(1000);
         
-        const icons = await page.locator('.floating-icon .float').all();
+        const icons = await page.locator('.floating-icon').all();
         expect(icons.length).toBe(5);
         
         // Get transform values for all icons
@@ -90,7 +90,7 @@ test.describe('Icon Animation Final QA', () => {
         await page.waitForLoadState('networkidle');
         
         // Check immediately (no wait)
-        const icons = await page.locator('.floating-icon .float').all();
+        const icons = await page.locator('.floating-icon').all();
         expect(icons.length).toBe(5);
         
         // Get initial transform values immediately
@@ -134,7 +134,7 @@ test.describe('Icon Animation Final QA', () => {
         // Wait for animations to progress
         await page.waitForTimeout(1000);
         
-        const icons = await page.locator('.floating-icon .float').all();
+        const icons = await page.locator('.floating-icon').all();
         expect(icons.length).toBe(5);
         
         // Get transform values multiple times to catch different phases
