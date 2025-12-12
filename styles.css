@@ -331,6 +331,7 @@ html {
     font-size: 56px;
     margin: 0;
     color: #fff;
+    white-space: nowrap;
 }
 
 .hero-name {
@@ -1728,6 +1729,7 @@ html {
         line-height: 1.2;
         letter-spacing: -1.5px;
         text-align: center;
+        white-space: normal; /* Allow wrapping on mobile if needed */
     }
 
     .hero-subtitle {
@@ -1929,6 +1931,7 @@ html {
     .hero-title {
         font-size: 28px;
         letter-spacing: -1.5px;
+        white-space: normal; /* Allow wrapping on very small screens */
     }
     
     .line {
