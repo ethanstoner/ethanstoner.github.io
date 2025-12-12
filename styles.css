@@ -326,8 +326,9 @@ html {
     align-items: flex-start;
     justify-content: center;
     min-width: 0; /* Allow flex item to shrink */
-    width: 100%;
+    width: auto; /* Don't force 100% width */
     max-width: none;
+    overflow: visible;
 }
 
 .hero-title {
@@ -337,14 +338,15 @@ html {
     font-size: 56px;
     margin: 0;
     color: #fff;
-    white-space: nowrap;
-    width: fit-content;
-    min-width: fit-content;
-    max-width: none;
+    white-space: nowrap !important;
+    width: auto !important;
+    min-width: auto !important;
+    max-width: none !important;
     overflow: visible;
     flex-shrink: 0;
     word-break: keep-all;
     overflow-wrap: normal;
+    display: inline-block; /* Prevent flex/grid constraints */
 }
 
 .hero-name {
