@@ -100,6 +100,16 @@ function initSmoothScroll() {
             
             const href = this.getAttribute('href');
             
+            // Close mobile menu if open
+            const mainNav = document.getElementById('main-nav');
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            if (mainNav && mainNav.classList.contains('active')) {
+                mainNav.classList.remove('active');
+                if (mobileMenuToggle) {
+                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                }
+            }
+            
             // CRITICAL: Update active nav IMMEDIATELY and PERSISTENTLY
             // Use a single synchronous operation to avoid race conditions
             const allNavLinks = document.querySelectorAll('.nav-link');
