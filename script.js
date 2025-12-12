@@ -477,11 +477,6 @@ function initAll() {
 
     function updateActiveNavLink() {
         // Always update on scroll - remove the ignoreScrollUpdate check for manual scrolling
-        // Only ignore if we're in the middle of a programmatic scroll
-        if (ignoreScrollUpdate && isProgrammaticScroll) {
-            return;
-        }
-        
         // Check if any link was recently clicked by user - only ignore if clicked very recently (within 1 second)
         let userClickedLink = null;
         navLinks.forEach(link => {
