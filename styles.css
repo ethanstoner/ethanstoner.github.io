@@ -580,7 +580,7 @@ html {
     top: 20px;
     right: -20px;
     animation: float 3s ease-in-out infinite;
-    animation-delay: 0.5s;
+    animation-delay: 0s !important; /* Start immediately on desktop */
     animation-fill-mode: both;
     /* Force animation to start immediately on page load */
     animation-play-state: running !important;
@@ -590,7 +590,7 @@ html {
     bottom: 20px;
     left: -20px;
     animation: float 3s ease-in-out infinite;
-    animation-delay: 1s;
+    animation-delay: 0s !important; /* Start immediately on desktop */
     animation-fill-mode: both;
     /* Force animation to start immediately on page load */
     animation-play-state: running !important;
@@ -644,6 +644,8 @@ html {
     transform: translateX(-50%);
     /* Force animation to start immediately on page load */
     animation-play-state: running !important;
+    /* Start animation immediately - no delay */
+    animation-delay: 0s !important;
 }
 
 .icon-4 {
@@ -651,7 +653,7 @@ html {
     right: 50%;
     margin-right: -160px;
     animation: float-icon4 3s ease-in-out infinite;
-    animation-delay: 1.5s;
+    animation-delay: 0s !important; /* Start immediately on desktop */
     animation-fill-mode: both;
     transform: translateX(50%);
     /* Force animation to start immediately on page load */
@@ -662,7 +664,7 @@ html {
     top: 50%;
     left: -30px;
     animation: float-icon5 3s ease-in-out infinite;
-    animation-delay: 2s;
+    animation-delay: 0s !important; /* Start immediately on desktop */
     animation-fill-mode: both;
     transform: translateY(-50%);
     /* Force animation to start immediately on page load */
@@ -1484,14 +1486,15 @@ html {
 
 /* Email card specific styles */
 .email-card {
-    justify-content: space-between;
+    justify-content: center;
     padding-right: 12px;
+    position: relative;
 }
 
 .email-text {
     flex: 1;
-    text-align: left;
-    margin-left: 8px;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .copy-btn {
@@ -1536,6 +1539,43 @@ html {
     outline-offset: 2px;
     opacity: 1;
     pointer-events: auto;
+}
+
+/* Email copied popup */
+#email-copied-popup {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(76, 175, 80, 0.95);
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    box-shadow: 0 8px 32px rgba(76, 175, 80, 0.3);
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#email-copied-popup.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+    #email-copied-popup {
+        bottom: 20px;
+        padding: 14px 24px;
+        font-size: 13px;
+    }
 }
 
 /* Mobile: always show copy button */

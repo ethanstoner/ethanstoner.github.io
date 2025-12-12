@@ -772,14 +772,19 @@ function fallbackCopyTextToClipboard(text, button) {
 }
 
 function showCopyFeedback(button) {
-    const original = button.textContent;
-    button.textContent = "Copied!";
-    button.style.background = "rgba(255, 255, 255, 0.3)";
-    button.style.borderColor = "rgba(255, 255, 255, 0.6)";
-    
-    setTimeout(() => {
-        button.textContent = original;
-        button.style.background = "";
-        button.style.borderColor = "";
-    }, 1200);
+    if (button) {
+        const original = button.textContent;
+        button.textContent = "Copied!";
+        button.style.background = "rgba(255, 255, 255, 0.3)";
+        button.style.borderColor = "rgba(255, 255, 255, 0.6)";
+        
+        setTimeout(() => {
+            button.textContent = original;
+            button.style.background = "";
+            button.style.borderColor = "";
+        }, 1200);
+    } else {
+        // If no button, show popup instead
+        showEmailCopiedPopup();
+    }
 }
