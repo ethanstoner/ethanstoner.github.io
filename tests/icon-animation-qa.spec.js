@@ -97,30 +97,48 @@ test.describe('Icon Animation QA - Desktop and Mobile', () => {
         expect(uniqueDelays.length).toBeGreaterThan(1);
         
         // Wait for animations to progress (enough time for delays to create differences)
-        await page.waitForTimeout(2000);
+        // Wait at least 3 seconds to see full animation cycle with different delays
+        await page.waitForTimeout(3000);
         
-        // Get translateY values for all icons
-        const translateYValues = [];
-        for (const icon of icons) {
-            const translateY = await icon.evaluate((el) => {
-                const style = window.getComputedStyle(el);
-                const transform = style.transform;
-                if (transform === 'none' || !transform.includes('translateY')) {
-                    return 0;
-                }
-                const match = transform.match(/translateY\(([^)]+)\)/);
-                return match ? parseFloat(match[1]) : 0;
-            });
-            translateYValues.push(translateY);
+        // Check multiple times to catch icons at different positions
+        let foundDifferentPositions = false;
+        for (let check = 0; check < 3; check++) {
+            await page.waitForTimeout(500);
+            
+            // Get translateY values for all icons
+            const translateYValues = [];
+            for (const icon of icons) {
+                const translateY = await icon.evaluate((el) => {
+                    const style = window.getComputedStyle(el);
+                    const transform = style.transform;
+                    if (transform === 'none') {
+                        return 0;
+                    }
+                    // Handle matrix format: matrix(1, 0, 0, 1, 0, -15) where last value is translateY
+                    if (transform.startsWith('matrix')) {
+                        const match = transform.match(/matrix\([^,]+,\s*[^,]+,\s*[^,]+,\s*[^,]+,\s*[^,]+,\s*([^)]+)\)/);
+                        return match ? parseFloat(match[1]) : 0;
+                    }
+                    // Handle translateY format
+                    const match = transform.match(/translateY\(([^)]+)\)/);
+                    return match ? parseFloat(match[1]) : 0;
+                });
+                translateYValues.push(translateY);
+            }
+            
+            // Round to 2 decimal places to account for animation timing
+            const roundedValues = translateYValues.map(v => Math.round(v * 100) / 100);
+            const uniqueValues = [...new Set(roundedValues)];
+            
+            // If we find different positions, we're good
+            if (uniqueValues.length > 1) {
+                foundDifferentPositions = true;
+                break;
+            }
         }
         
-        // With staggered delays, icons should be at different positions
-        // Round to 1 decimal place to account for animation timing
-        const roundedValues = translateYValues.map(v => Math.round(v * 10) / 10);
-        const uniqueValues = [...new Set(roundedValues)];
-        
         // Icons should not all be at the same position (not moving as one mass)
-        // If all delays are different, at least some icons should be at different positions
-        expect(uniqueValues.length).toBeGreaterThan(1);
+        // With staggered delays, they should be at different positions in their animation cycle
+        expect(foundDifferentPositions).toBe(true);
     });
 });
