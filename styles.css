@@ -546,6 +546,7 @@ html {
     box-shadow: 0 30px 80px rgba(255, 255, 255, 0.1);
 }
 
+/* Floating icon base styles - outer wrapper handles positioning */
 .floating-icon {
     position: absolute;
     width: 64px;
@@ -558,10 +559,14 @@ html {
     justify-content: center;
     color: rgba(255, 255, 255, 0.7);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     z-index: 5;
     pointer-events: auto;
+    opacity: 1 !important;
+    visibility: visible !important;
+    /* Don't animate the outer wrapper - only the inner .float */
+    /* Positioning transforms are set on individual .icon-* classes */
 }
 
 .floating-icon:hover {
@@ -583,24 +588,6 @@ html {
     height: 24px;
 }
 
-/* Floating icon base styles - outer wrapper handles positioning */
-.floating-icon {
-    position: absolute;
-    width: 64px;
-    height: 64px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255, 255, 255, 0.7);
-    opacity: 1 !important;
-    visibility: visible !important;
-    /* Don't animate the outer wrapper - only the inner .float */
-    transform: none !important;
-}
-
 /* Inner float element - handles animation only */
 .floating-icon .float {
     will-change: transform;
@@ -615,34 +602,37 @@ html {
 }
 
 /* Icon positioning - outer wrapper only */
+/* Note: Positioning transforms on outer wrapper, animation on inner .float */
 .icon-1 {
     top: -10px;
     left: 50%;
     margin-left: -160px;
-    transform: translateX(-50%); /* Positioning transform on outer */
+    transform: translateX(-50%); /* Positioning transform on outer - don't animate this */
 }
 
 .icon-2 {
     top: 20px;
     right: -20px;
+    /* No positioning transform needed */
 }
 
 .icon-3 {
     bottom: 20px;
     left: -20px;
+    /* No positioning transform needed */
 }
 
 .icon-4 {
     bottom: -10px;
     right: 50%;
     margin-right: -160px;
-    transform: translateX(50%); /* Positioning transform on outer */
+    transform: translateX(50%); /* Positioning transform on outer - don't animate this */
 }
 
 .icon-5 {
     top: 50%;
     left: -30px;
-    transform: translateY(-50%); /* Positioning transform on outer */
+    transform: translateY(-50%); /* Positioning transform on outer - don't animate this */
 }
 
 /* Animation on inner .float element - different durations + negative delays */
