@@ -621,12 +621,15 @@ function initAll() {
         
         // If scroll position changed significantly, it's likely manual scrolling
         // Programmatic scrolling is usually smooth and predictable
+        // Also, if programmatic scroll flag has been cleared, treat as manual
         const isManual = scrollDelta > 5 || !isProgrammaticScroll;
         
         clearTimeout(scrollTimeout);
         // Always update on scroll - force update on manual scroll to bypass click flags
+        // Use shorter timeout for more responsive updates
         scrollTimeout = setTimeout(() => {
-            updateActiveNavLink(isManual);
+            // Always force update - manual scrolling should always work
+            updateActiveNavLink(true);
         }, 30);
     }, { passive: true });
     
