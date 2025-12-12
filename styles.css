@@ -567,7 +567,8 @@ html {
 .floating-icon:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1) translateY(-4px);
+    /* Only scale on hover, don't transform (animation handles movement) */
+    transform: scale(1.1) !important;
     box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
 }
 
@@ -583,7 +584,6 @@ html {
 }
 
 /* Floating icon base styles - outer wrapper handles positioning */
-/* Floating icon base styles - outer wrapper handles positioning */
 .floating-icon {
     position: absolute;
     width: 64px;
@@ -597,6 +597,8 @@ html {
     color: rgba(255, 255, 255, 0.7);
     opacity: 1 !important;
     visibility: visible !important;
+    /* Don't animate the outer wrapper - only the inner .float */
+    transform: none !important;
 }
 
 /* Inner float element - handles animation only */
@@ -670,29 +672,30 @@ html {
 }
 
 /* Keyframes - only animate local translate, no positioning transforms */
+/* Increased movement for better visibility */
 @keyframes floatA {
     0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(0, -14px); }
+    50% { transform: translate(0, -20px); }
 }
 
 @keyframes floatB {
     0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(6px, -12px); }
+    50% { transform: translate(8px, -18px); }
 }
 
 @keyframes floatC {
     0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-6px, -12px); }
+    50% { transform: translate(-8px, -18px); }
 }
 
 @keyframes floatD {
     0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(2px, -16px); }
+    50% { transform: translate(4px, -22px); }
 }
 
 @keyframes floatE {
     0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-5px, -10px); }
+    50% { transform: translate(-7px, -15px); }
 }
 
 /* Prefers reduced motion - disable animations */
@@ -1914,21 +1917,21 @@ html {
         width: 100%;
     }
     
-    /* Ensure all icons animate on mobile */
+    /* Mobile icon sizing adjustments */
     .floating-icon {
-        opacity: 1 !important;
-        visibility: visible !important;
-        display: flex !important;
-        z-index: 5;
         width: 40px;
         height: 40px;
-        animation-play-state: running !important;
-        will-change: transform !important;
     }
     
     .floating-icon svg {
         width: 16px;
         height: 16px;
+    }
+    
+    /* Ensure .float animations work on mobile - don't override delays */
+    .floating-icon .float {
+        animation-play-state: running !important;
+        will-change: transform !important;
     }
     
     /* Mobile positioning adjustments - keep negative delays for independent movement */
