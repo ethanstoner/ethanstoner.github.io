@@ -477,29 +477,32 @@ function initAll() {
     let lastClickedLink = null; // Track last clicked link
     let activeSection = 'home'; // Track current active section
 
-    function updateActiveNavLink() {
-        // Check if any link was clicked VERY recently (within 200ms) - only skip during smooth scroll animation
-        let veryRecentClick = false;
-        const now = Date.now();
-        navLinks.forEach(link => {
-            if (link.dataset.userClicked === 'true') {
-                const clickTime = parseInt(link.dataset.clickTime || '0');
-                const timeSinceClick = now - clickTime;
-                // Only prevent updates during smooth scroll (first 200ms)
-                if (timeSinceClick < 200) {
-                    veryRecentClick = true;
-                } else {
-                    // Clear old click flag immediately after smooth scroll completes
-                    link.dataset.userClicked = 'false';
-                    delete link.dataset.clickTime;
+    function updateActiveNavLink(forceUpdate = false) {
+        // Only check click flags if this is NOT a forced update (manual scroll)
+        // Click flags should only prevent updates during smooth scroll animation
+        if (!forceUpdate) {
+            let veryRecentClick = false;
+            const now = Date.now();
+            navLinks.forEach(link => {
+                if (link.dataset.userClicked === 'true') {
+                    const clickTime = parseInt(link.dataset.clickTime || '0');
+                    const timeSinceClick = now - clickTime;
+                    // Only prevent updates during smooth scroll (first 300ms)
+                    if (timeSinceClick < 300) {
+                        veryRecentClick = true;
+                    } else {
+                        // Clear old click flag immediately after smooth scroll completes
+                        link.dataset.userClicked = 'false';
+                        delete link.dataset.clickTime;
+                    }
                 }
+            });
+            
+            // Only skip if smooth scroll is actively happening (very recent click)
+            // Manual scrolling will force update regardless
+            if (veryRecentClick) {
+                return;
             }
-        });
-        
-        // Only skip if smooth scroll is actively happening (very recent click)
-        // After 200ms, manual scrolling should always update the active state
-        if (veryRecentClick) {
-            return;
         }
         
         const scrollPosition = window.pageYOffset || window.scrollY;
@@ -588,10 +591,24 @@ function initAll() {
 
     // Throttle scroll events for better performance - update more frequently for manual scrolling
     let scrollTimeout;
+    let isManualScroll = false;
+    let lastScrollTime = Date.now();
+    
     window.addEventListener('scroll', () => {
+        const now = Date.now();
+        const timeSinceLastScroll = now - lastScrollTime;
+        lastScrollTime = now;
+        
+        // Detect manual scrolling (rapid scroll events) vs programmatic scrolling
+        // Manual scrolling has rapid, frequent events
+        isManualScroll = timeSinceLastScroll < 100;
+        
         clearTimeout(scrollTimeout);
         // Use shorter timeout for more responsive updates during manual scrolling
-        scrollTimeout = setTimeout(updateActiveNavLink, 50);
+        // Force update on manual scroll to bypass click flags
+        scrollTimeout = setTimeout(() => {
+            updateActiveNavLink(isManualScroll);
+        }, 50);
     }, { passive: true });
     
     // Update immediately on page load
