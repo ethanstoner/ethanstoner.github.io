@@ -1925,26 +1925,6 @@ html {
         animation-delay: 0s !important;
     }
     
-    /* Mobile: override inline durations with slower, independent durations */
-    .icon-1 {
-        animation-duration: 5s !important;
-    }
-    
-    .icon-2 {
-        animation-duration: 5.5s !important;
-    }
-    
-    .icon-3 {
-        animation-duration: 6s !important;
-    }
-    
-    .icon-4 {
-        animation-duration: 6.5s !important;
-    }
-    
-    .icon-5 {
-        animation-duration: 7s !important;
-    }
     
     .floating-icon svg {
         width: 16px;
