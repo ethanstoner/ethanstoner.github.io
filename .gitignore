@@ -8,6 +8,10 @@ tests/
 test-results/
 qa-reports/
 playwright.config.js
+playwright-report/
+test-*.html
+*-debug.html
+animation-debug.html
 
 # Development files
 .metagross/
