@@ -509,44 +509,49 @@ function initAll() {
         } else {
             // Find which section is currently in view
             // Use getBoundingClientRect for accurate viewport positions
-            const viewportMiddle = scrollPosition + headerHeight + 200;
+            const viewportTop = scrollPosition + headerHeight + 100;
             
-            // Check each section
+            // Check each section - find the one whose top is closest to but above viewport top
+            let bestSection = null;
+            let bestDistance = Infinity;
+            
             for (const section of sections) {
                 const id = section.getAttribute('id');
                 if (!id) continue;
                 
                 const rect = section.getBoundingClientRect();
                 const sectionTop = rect.top + scrollPosition;
-                const sectionBottom = sectionTop + rect.height;
                 
-                // Check if viewport middle is within this section
-                if (viewportMiddle >= sectionTop && viewportMiddle <= sectionBottom) {
-                    current = id;
-                    break;
+                // If section top is above or at viewport top, consider it
+                if (sectionTop <= viewportTop) {
+                    const distance = viewportTop - sectionTop;
+                    // Prefer sections that are closer to viewport top
+                    if (distance < bestDistance) {
+                        bestDistance = distance;
+                        bestSection = id;
+                    }
                 }
             }
             
-            // If no section matched, find the closest one
-            if (!current) {
-                let closestId = '';
-                let closestDistance = Infinity;
-                
+            // If we found a section, use it; otherwise find closest
+            if (bestSection) {
+                current = bestSection;
+            } else {
+                // Fallback: find closest section
                 for (const section of sections) {
                     const id = section.getAttribute('id');
                     if (!id) continue;
                     
                     const rect = section.getBoundingClientRect();
                     const sectionTop = rect.top + scrollPosition;
-                    const distance = Math.abs(scrollPosition + headerHeight - sectionTop);
+                    const distance = Math.abs(viewportTop - sectionTop);
                     
-                    if (distance < closestDistance) {
-                        closestDistance = distance;
-                        closestId = id;
+                    if (distance < bestDistance) {
+                        bestDistance = distance;
+                        bestSection = id;
                     }
                 }
-                
-                current = closestId || 'home';
+                current = bestSection || 'home';
             }
         }
 
