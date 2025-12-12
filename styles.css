@@ -582,31 +582,11 @@ html {
     height: 24px;
 }
 
-/* Ensure float element inherits sizing */
-.floating-icon .float svg {
-    width: 24px;
-    height: 24px;
-}
-
-/* Inner float element - handles animation only */
-.floating-icon .float {
-    will-change: transform;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-fill-mode: both;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-}
-
-/* Icon positioning - outer wrapper only */
+/* Icon positioning - base positions */
 .icon-1 {
     top: -10px;
     left: 50%;
     margin-left: -160px;
-    transform: translateX(-50%); /* Positioning transform on outer */
 }
 
 .icon-2 {
@@ -623,70 +603,76 @@ html {
     bottom: -10px;
     right: 50%;
     margin-right: -160px;
-    transform: translateX(50%); /* Positioning transform on outer */
 }
 
 .icon-5 {
     top: 50%;
     left: -30px;
-    transform: translateY(-50%); /* Positioning transform on outer */
 }
 
-/* Animation on inner .float element - different durations + negative delays */
-.icon-1 .float {
-    animation: floatA 3.2s ease-in-out infinite;
+/* Animation on .floating-icon itself - different durations + negative delays */
+/* This makes the entire bubble move, not just the icon inside */
+.floating-icon {
+    will-change: transform;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.icon-1 {
+    animation: floatIcon1 3.2s ease-in-out infinite;
     animation-delay: -0.7s; /* Negative delay = phase offset */
 }
 
-.icon-2 .float {
-    animation: floatB 3.8s ease-in-out infinite;
+.icon-2 {
+    animation: floatIcon2 3.8s ease-in-out infinite;
     animation-delay: -1.9s; /* Negative delay = phase offset */
 }
 
-.icon-3 .float {
-    animation: floatC 3.4s ease-in-out infinite;
+.icon-3 {
+    animation: floatIcon3 3.4s ease-in-out infinite;
     animation-delay: -2.4s; /* Negative delay = phase offset */
 }
 
-.icon-4 .float {
-    animation: floatD 4.1s ease-in-out infinite;
+.icon-4 {
+    animation: floatIcon4 4.1s ease-in-out infinite;
     animation-delay: -0.3s; /* Negative delay = phase offset */
 }
 
-.icon-5 .float {
-    animation: floatE 3.6s ease-in-out infinite;
+.icon-5 {
+    animation: floatIcon5 3.6s ease-in-out infinite;
     animation-delay: -1.2s; /* Negative delay = phase offset */
 }
 
-/* Keyframes - only animate local translate, no positioning transforms */
-@keyframes floatA {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(0, -20px); }
+/* Keyframes - include positioning transforms where needed */
+@keyframes floatIcon1 {
+    0%, 100% { transform: translateX(-50%) translate(0, 0); }
+    50% { transform: translateX(-50%) translate(0, -20px); }
 }
 
-@keyframes floatB {
+@keyframes floatIcon2 {
     0%, 100% { transform: translate(0, 0); }
     50% { transform: translate(8px, -18px); }
 }
 
-@keyframes floatC {
+@keyframes floatIcon3 {
     0%, 100% { transform: translate(0, 0); }
     50% { transform: translate(-8px, -18px); }
 }
 
-@keyframes floatD {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(4px, -22px); }
+@keyframes floatIcon4 {
+    0%, 100% { transform: translateX(50%) translate(0, 0); }
+    50% { transform: translateX(50%) translate(4px, -22px); }
 }
 
-@keyframes floatE {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-7px, -15px); }
+@keyframes floatIcon5 {
+    0%, 100% { transform: translateY(-50%) translate(0, 0); }
+    50% { transform: translateY(-50%) translate(-7px, -15px); }
 }
 
 /* Prefers reduced motion - disable animations */
 @media (prefers-reduced-motion: reduce) {
-    .floating-icon .float {
+    .floating-icon {
         animation: none !important;
     }
 }
@@ -1901,12 +1887,11 @@ html {
         width: 100%;
     }
     
-    /* Mobile positioning adjustments - keep negative delays for independent movement */
+    /* Mobile positioning adjustments */
     .icon-1 {
         top: -10px;
         left: 10px;
         margin-left: 0 !important;
-        transform: translateX(0) !important; /* Remove desktop centering on mobile */
     }
     
     .icon-2 {
@@ -1923,17 +1908,43 @@ html {
         bottom: -10px;
         right: 10px;
         margin-right: 0 !important;
-        transform: translateX(0) !important; /* Remove desktop centering on mobile */
     }
     
     .icon-5 {
         top: 10px;
         left: -10px;
-        transform: translateY(0) !important; /* Remove desktop centering on mobile */
     }
     
-    /* Keep negative delays on mobile - don't override to 0s */
-    /* This ensures icons don't move in sync on mobile */
+    /* Mobile keyframes - remove positioning transforms */
+    .icon-1 {
+        animation: floatIcon1Mobile 3.2s ease-in-out infinite;
+        animation-delay: -0.7s; /* Keep negative delay */
+    }
+    
+    .icon-4 {
+        animation: floatIcon4Mobile 4.1s ease-in-out infinite;
+        animation-delay: -0.3s; /* Keep negative delay */
+    }
+    
+    .icon-5 {
+        animation: floatIcon5Mobile 3.6s ease-in-out infinite;
+        animation-delay: -1.2s; /* Keep negative delay */
+    }
+    
+    @keyframes floatIcon1Mobile {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(0, -20px); }
+    }
+    
+    @keyframes floatIcon4Mobile {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(4px, -22px); }
+    }
+    
+    @keyframes floatIcon5Mobile {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(-7px, -15px); }
+    }
 
     .section {
         padding: 100px 24px;
