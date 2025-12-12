@@ -707,13 +707,23 @@ if (document.readyState === 'loading') {
     initAll();
 }
 
-// Also ensure smooth scroll works on page load
+    // Also ensure smooth scroll works on page load
 window.addEventListener('load', () => {
     // Re-initialize smooth scroll to catch any dynamically added links
     setTimeout(initSmoothScroll, 100);
     
-    // Animation restart code removed - using CSS-only solution with negative delays
-    // Negative delays + animation-fill-mode: both ensure immediate start
+    // Force animations to start immediately on desktop and mobile
+    const floatingIcons = document.querySelectorAll('.floating-icon');
+    floatingIcons.forEach((icon, index) => {
+        // Force animation to restart if needed
+        icon.style.animationPlayState = 'running';
+        
+        // Ensure will-change is set for better performance
+        icon.style.willChange = 'transform';
+        
+        // Force a reflow to ensure animations start
+        void icon.offsetWidth;
+    });
 });
 
 // Email copy functionality
