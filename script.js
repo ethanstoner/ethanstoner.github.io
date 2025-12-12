@@ -222,51 +222,65 @@ function initSmoothScroll() {
             const targetTop = target.offsetTop;
             const desiredPosition = Math.max(0, targetTop - headerOffset);
             
-            // Smooth scroll - use native first, then polyfill
-            const startPosition = window.pageYOffset;
-            const distance = desiredPosition - startPosition;
-            const duration = 800;
-            let start = null;
-            let animationId = null;
+            // Detect mobile device for optimized scrolling
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
             
-            // Use native smooth scroll
-            window.scrollTo({
-                top: desiredPosition,
-                behavior: 'smooth'
-            });
-            
-            // Also use polyfill as backup for better compatibility
-            function scrollStep(timestamp) {
-                if (!start) start = timestamp;
-                const progress = timestamp - start;
-                const percentage = Math.min(progress / duration, 1);
+            // On mobile, use native smooth scroll only (faster, smoother)
+            if (isMobile) {
+                // Use native smooth scroll with shorter duration via CSS
+                window.scrollTo({
+                    top: desiredPosition,
+                    behavior: 'smooth'
+                });
                 
-                // Easing function (ease-in-out)
-                const ease = percentage < 0.5
-                    ? 2 * percentage * percentage
-                    : 1 - Math.pow(-2 * percentage + 2, 2) / 2;
+                // Verify active state after scroll completes
+                setTimeout(() => {
+                    if (lastClickedLink === this && this.dataset.userClicked === 'true') {
+                        const allNavLinks = document.querySelectorAll('.nav-link');
+                        allNavLinks.forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                }, 300);
+            } else {
+                // Desktop: use optimized polyfill for better control
+                const startPosition = window.pageYOffset;
+                const distance = desiredPosition - startPosition;
+                const duration = Math.min(600, Math.abs(distance) * 0.5); // Adaptive duration
+                let start = null;
+                let animationId = null;
                 
-                const currentPos = startPosition + distance * ease;
-                window.scrollTo(0, currentPos);
-                
-                if (progress < duration) {
-                    animationId = window.requestAnimationFrame(scrollStep);
-                } else {
-                    // Ensure we end at exact position
-                    window.scrollTo(0, desiredPosition);
-                    // Verify active state after scroll completes
-                    setTimeout(() => {
-                        if (lastClickedLink === this && this.dataset.userClicked === 'true') {
-                            const allNavLinks = document.querySelectorAll('.nav-link');
-                            allNavLinks.forEach(l => l.classList.remove('active'));
-                            this.classList.add('active');
-                        }
-                    }, 100);
+                function scrollStep(timestamp) {
+                    if (!start) start = timestamp;
+                    const progress = timestamp - start;
+                    const percentage = Math.min(progress / duration, 1);
+                    
+                    // Easing function (ease-in-out)
+                    const ease = percentage < 0.5
+                        ? 2 * percentage * percentage
+                        : 1 - Math.pow(-2 * percentage + 2, 2) / 2;
+                    
+                    const currentPos = startPosition + distance * ease;
+                    window.scrollTo(0, currentPos);
+                    
+                    if (progress < duration) {
+                        animationId = window.requestAnimationFrame(scrollStep);
+                    } else {
+                        // Ensure we end at exact position
+                        window.scrollTo(0, desiredPosition);
+                        // Verify active state after scroll completes
+                        setTimeout(() => {
+                            if (lastClickedLink === this && this.dataset.userClicked === 'true') {
+                                const allNavLinks = document.querySelectorAll('.nav-link');
+                                allNavLinks.forEach(l => l.classList.remove('active'));
+                                this.classList.add('active');
+                            }
+                        }, 100);
+                    }
                 }
+                
+                // Start polyfill animation
+                animationId = window.requestAnimationFrame(scrollStep);
             }
-            
-            // Start polyfill animation
-            animationId = window.requestAnimationFrame(scrollStep);
             
             // Update URL without hash
             if (history.pushState) {

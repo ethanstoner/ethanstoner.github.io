@@ -25,6 +25,17 @@ html {
     scroll-behavior: smooth !important;
 }
 
+/* Optimize smooth scroll performance on mobile */
+@media (max-width: 768px) {
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    * {
+        scroll-behavior: smooth;
+    }
+}
+
 * {
     scroll-behavior: smooth !important;
 }
@@ -501,6 +512,9 @@ html {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 10;
     display: block;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    will-change: transform;
 }
 
 .avatar-container:hover .avatar {
@@ -1758,6 +1772,8 @@ html {
         font-size: 50px;
         border-width: 6px;
         object-fit: cover;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
     }
 
     .hero-image {
