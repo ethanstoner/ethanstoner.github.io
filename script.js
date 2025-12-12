@@ -474,16 +474,17 @@ function initAll() {
     const sections = document.querySelectorAll('section[id], .section[id], .hero-section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
     let lastClickedLink = null; // Track last clicked link
+    let activeSection = 'home'; // Track current active section
 
     function updateActiveNavLink() {
-        // Check if any link was clicked VERY recently (within 500ms) - only skip during smooth scroll animation
+        // Check if any link was clicked VERY recently (within 300ms) - only skip during smooth scroll animation
         let veryRecentClick = false;
         navLinks.forEach(link => {
             if (link.dataset.userClicked === 'true') {
                 const clickTime = parseInt(link.dataset.clickTime || '0');
                 const timeSinceClick = Date.now() - clickTime;
-                // Only prevent updates during smooth scroll (first 500ms)
-                if (timeSinceClick < 500) {
+                // Only prevent updates during smooth scroll (first 300ms)
+                if (timeSinceClick < 300) {
                     veryRecentClick = true;
                 } else {
                     // Clear old click flag after smooth scroll completes to allow manual scroll updates
@@ -493,7 +494,7 @@ function initAll() {
         });
         
         // Only skip if smooth scroll is actively happening (very recent click)
-        // After 500ms, manual scrolling should always update the active state
+        // After 300ms, manual scrolling should always update the active state
         if (veryRecentClick) {
             return;
         }
@@ -502,76 +503,67 @@ function initAll() {
         const headerHeight = document.querySelector('.header')?.offsetHeight || 80;
         let current = '';
         
-        // Get all sections with their absolute positions
-        const sectionsArray = Array.from(sections)
-            .filter(section => {
-                const id = section.getAttribute('id');
-                return id && id !== ''; // Only sections with valid IDs
-            })
-            .map(section => {
-                const rect = section.getBoundingClientRect();
-                const absoluteTop = rect.top + scrollPosition;
-                return {
-                    element: section,
-                    id: section.getAttribute('id'),
-                    top: absoluteTop,
-                    bottom: absoluteTop + rect.height
-                };
-            })
-            .sort((a, b) => a.top - b.top); // Sort by position
-        
-        // If at top (within first 250px), highlight home link
-        if (scrollPosition < 250) {
+        // If at top (within first 200px), highlight home link
+        if (scrollPosition < 200) {
             current = 'home';
         } else {
-            // Find the section we're currently in
-            // Check each section to see if scroll position is within its bounds
-            const scrollWithHeader = scrollPosition + headerHeight + 100;
+            // Find which section is currently in view
+            // Use getBoundingClientRect for accurate viewport positions
+            const viewportMiddle = scrollPosition + headerHeight + 200;
             
-            for (let i = 0; i < sectionsArray.length; i++) {
-                const section = sectionsArray[i];
-                const nextSection = sectionsArray[i + 1];
+            // Check each section
+            for (const section of sections) {
+                const id = section.getAttribute('id');
+                if (!id) continue;
                 
-                // Check if we're in this section
-                if (scrollWithHeader >= section.top && (!nextSection || scrollWithHeader < nextSection.top)) {
-                    current = section.id;
+                const rect = section.getBoundingClientRect();
+                const sectionTop = rect.top + scrollPosition;
+                const sectionBottom = sectionTop + rect.height;
+                
+                // Check if viewport middle is within this section
+                if (viewportMiddle >= sectionTop && viewportMiddle <= sectionBottom) {
+                    current = id;
                     break;
                 }
             }
             
-            // If no exact match, find the section we've scrolled past most recently
+            // If no section matched, find the closest one
             if (!current) {
-                for (let i = sectionsArray.length - 1; i >= 0; i--) {
-                    const section = sectionsArray[i];
-                    if (scrollPosition >= section.top - headerHeight - 100) {
-                        current = section.id;
-                        break;
+                let closestId = '';
+                let closestDistance = Infinity;
+                
+                for (const section of sections) {
+                    const id = section.getAttribute('id');
+                    if (!id) continue;
+                    
+                    const rect = section.getBoundingClientRect();
+                    const sectionTop = rect.top + scrollPosition;
+                    const distance = Math.abs(scrollPosition + headerHeight - sectionTop);
+                    
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestId = id;
                     }
                 }
+                
+                current = closestId || 'home';
             }
         }
+
+        // Only update if section changed
+        if (current === activeSection) {
+            return;
+        }
+        activeSection = current;
 
         // Update all nav links
         navLinks.forEach(link => {
             const href = link.getAttribute('href');
             
-            // Skip if this link was user-clicked very recently
-            if (link.dataset.userClicked === 'true') {
-                const clickTime = parseInt(link.dataset.clickTime || '0');
-                const timeSinceClick = Date.now() - clickTime;
-                // Only keep active if clicked within last 500ms
-                if (timeSinceClick < 500) {
-                    return; // Keep this link active during smooth scroll
-                } else {
-                    // Clear flag after smooth scroll completes
-                    link.dataset.userClicked = 'false';
-                }
-            }
-            
-            // Remove active from all links first
+            // Remove active from all links
             link.classList.remove('active');
             
-            // Then add active to the matching link
+            // Add active to matching link
             if (current === 'home' && (href === '#' || href === '#home')) {
                 link.classList.add('active');
             } else if (current && current !== 'home' && href === `#${current}`) {
@@ -585,7 +577,7 @@ function initAll() {
     window.addEventListener('scroll', () => {
         clearTimeout(scrollTimeout);
         // Use shorter timeout for more responsive updates during manual scrolling
-        scrollTimeout = setTimeout(updateActiveNavLink, 100);
+        scrollTimeout = setTimeout(updateActiveNavLink, 50);
     }, { passive: true });
     
     // Update immediately on page load
@@ -593,19 +585,6 @@ function initAll() {
     
     // Also update after a short delay to catch any layout changes
     setTimeout(updateActiveNavLink, 500);
-    
-    // Clear user-clicked flags after 4 seconds to allow scroll-based updates again
-    setInterval(() => {
-        navLinks.forEach(link => {
-            if (link.dataset.userClicked === 'true') {
-                // Only clear if scroll has settled
-                const timeSinceClick = Date.now() - (link.dataset.clickTime || 0);
-                if (timeSinceClick > 4000) {
-                    link.dataset.userClicked = 'false';
-                }
-            }
-        });
-    }, 1000);
 
     // Intersection Observer for fade-in animations with stagger
     const observerOptions = {
