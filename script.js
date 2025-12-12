@@ -476,53 +476,55 @@ function initAll() {
     let lastClickedLink = null; // Track last clicked link
 
     function updateActiveNavLink() {
-        // Always update on scroll - remove the ignoreScrollUpdate check for manual scrolling
-        // Check if any link was recently clicked by user - only ignore if clicked very recently (within 1 second)
-        let userClickedLink = null;
+        // Check if any link was clicked VERY recently (within 500ms) - only skip during smooth scroll animation
+        let veryRecentClick = false;
         navLinks.forEach(link => {
             if (link.dataset.userClicked === 'true') {
                 const clickTime = parseInt(link.dataset.clickTime || '0');
                 const timeSinceClick = Date.now() - clickTime;
-                // Only prevent updates if clicked within last 1 second (for smooth scroll)
-                if (timeSinceClick < 1000) {
-                    userClickedLink = link;
+                // Only prevent updates during smooth scroll (first 500ms)
+                if (timeSinceClick < 500) {
+                    veryRecentClick = true;
                 } else {
-                    // Clear old click flag after 1 second to allow manual scroll updates
+                    // Clear old click flag after smooth scroll completes to allow manual scroll updates
                     link.dataset.userClicked = 'false';
                 }
             }
         });
         
-        // If user clicked a link very recently (within 1s), keep it active and exit
-        // This allows manual scrolling to update after the smooth scroll completes
-        if (userClickedLink) {
+        // Only skip if smooth scroll is actively happening (very recent click)
+        // After 500ms, manual scrolling should always update the active state
+        if (veryRecentClick) {
             return;
         }
         
-        const scrollPosition = window.pageYOffset;
+        const scrollPosition = window.pageYOffset || window.scrollY;
         const headerHeight = document.querySelector('.header')?.offsetHeight || 80;
         let current = '';
         
-        // If at top (within first 400px), highlight home link
-        if (scrollPosition < 400) {
+        // Get all sections with their absolute positions
+        const sectionsArray = Array.from(sections).map(section => {
+            const rect = section.getBoundingClientRect();
+            const absoluteTop = rect.top + scrollPosition;
+            return {
+                element: section,
+                id: section.getAttribute('id'),
+                top: absoluteTop,
+                bottom: absoluteTop + rect.height
+            };
+        });
+        
+        // If at top (within first 300px), highlight home link
+        if (scrollPosition < 300) {
             current = 'home';
         } else {
             // Find which section we're currently in
-            const sectionsArray = Array.from(sections);
+            // Check if scroll position is within any section's bounds (with offset for header)
+            const scrollWithOffset = scrollPosition + headerHeight + 100;
             
-            // Check each section to see if we're in it
             for (const section of sectionsArray) {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                const sectionId = section.getAttribute('id');
-                
-                // Calculate if we're in this section
-                const sectionStart = sectionTop - headerHeight - 150;
-                const sectionEnd = sectionTop + sectionHeight - headerHeight - 150;
-                
-                // If scroll position is within this section's range
-                if (scrollPosition >= sectionStart && scrollPosition <= sectionEnd) {
-                    current = sectionId;
+                if (scrollWithOffset >= section.top && scrollWithOffset <= section.bottom) {
+                    current = section.id;
                     break;
                 }
             }
@@ -533,17 +535,19 @@ function initAll() {
                 let closestDistance = Infinity;
                 
                 sectionsArray.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionId = section.getAttribute('id');
-                    const distance = Math.abs(scrollPosition - (sectionTop - headerHeight));
-                    
-                    if (distance < closestDistance) {
-                        closestDistance = distance;
-                        closestSection = sectionId;
+                    // Check if we're past the section start
+                    if (scrollPosition >= section.top - headerHeight - 200) {
+                        const distance = Math.abs(scrollPosition - (section.top - headerHeight));
+                        if (distance < closestDistance) {
+                            closestDistance = distance;
+                            closestSection = section.id;
+                        }
                     }
                 });
                 
-                current = closestSection;
+                if (closestSection) {
+                    current = closestSection;
+                }
             }
         }
 
