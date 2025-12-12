@@ -572,9 +572,9 @@ html {
 .floating-icon:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.3);
-    /* Only scale on hover, don't transform (animation handles movement) */
-    transform: scale(1.1) !important;
+    /* Scale on hover but preserve animation transform */
     box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+    /* Don't override transform - let animation handle it */
 }
 
 .floating-icon svg {
