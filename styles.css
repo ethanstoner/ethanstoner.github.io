@@ -582,6 +582,8 @@ html {
     animation: float 3s ease-in-out infinite;
     animation-delay: 0.5s;
     animation-fill-mode: both;
+    /* Force animation to start immediately on page load */
+    animation-play-state: running !important;
 }
 
 .icon-3 {
@@ -590,6 +592,8 @@ html {
     animation: float 3s ease-in-out infinite;
     animation-delay: 1s;
     animation-fill-mode: both;
+    /* Force animation to start immediately on page load */
+    animation-play-state: running !important;
 }
 
 /* Base float animation for icons without positioning transforms */
@@ -638,6 +642,8 @@ html {
     animation-delay: 0s;
     animation-fill-mode: both;
     transform: translateX(-50%);
+    /* Force animation to start immediately on page load */
+    animation-play-state: running !important;
 }
 
 .icon-4 {
@@ -648,6 +654,8 @@ html {
     animation-delay: 1.5s;
     animation-fill-mode: both;
     transform: translateX(50%);
+    /* Force animation to start immediately on page load */
+    animation-play-state: running !important;
 }
 
 .icon-5 {
@@ -657,6 +665,8 @@ html {
     animation-delay: 2s;
     animation-fill-mode: both;
     transform: translateY(-50%);
+    /* Force animation to start immediately on page load */
+    animation-play-state: running !important;
 }
 
 /* Ensure animations start immediately on page load */
@@ -1886,45 +1896,52 @@ html {
         height: 16px;
     }
     
-    /* Force all icons to animate on mobile - use simple float animation */
-    .icon-1,
-    .icon-2,
-    .icon-3,
-    .icon-4,
-    .icon-5 {
-        animation: float 3s ease-in-out infinite !important;
-        animation-delay: 0s !important;
-        animation-fill-mode: both !important;
-        animation-play-state: running !important;
-        /* Don't override transform - let animation control it */
-    }
-    
-    /* Specific positioning for mobile icons */
+    /* Force all icons to animate on mobile - use staggered delays for natural movement */
     .icon-1 {
         top: -10px;
         left: 10px;
         margin-left: 0 !important;
+        animation: float 3s ease-in-out infinite !important;
+        animation-delay: 0s !important;
+        animation-fill-mode: both !important;
+        animation-play-state: running !important;
     }
     
     .icon-2 {
         top: -10px;
         right: 10px;
+        animation: float 3s ease-in-out infinite !important;
+        animation-delay: 0.6s !important; /* Staggered delay */
+        animation-fill-mode: both !important;
+        animation-play-state: running !important;
     }
     
     .icon-3 {
         bottom: -10px;
         left: 10px;
+        animation: float 3s ease-in-out infinite !important;
+        animation-delay: 1.2s !important; /* Staggered delay */
+        animation-fill-mode: both !important;
+        animation-play-state: running !important;
     }
     
     .icon-4 {
         bottom: -10px;
         right: 10px;
         margin-right: 0 !important;
+        animation: float 3s ease-in-out infinite !important;
+        animation-delay: 1.8s !important; /* Staggered delay */
+        animation-fill-mode: both !important;
+        animation-play-state: running !important;
     }
     
     .icon-5 {
         top: 10px;
         left: -10px;
+        animation: float 3s ease-in-out infinite !important;
+        animation-delay: 2.4s !important; /* Staggered delay */
+        animation-fill-mode: both !important;
+        animation-play-state: running !important;
     }
 
     .section {
