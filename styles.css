@@ -27,9 +27,17 @@ html {
 
 /* Optimize smooth scroll performance on mobile */
 @media (max-width: 768px) {
-    html {
+html {
+    scroll-behavior: smooth;
+}
+
+/* Ensure smooth scroll on mobile */
+@media (max-width: 768px) {
+    html, body {
         scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     }
+}
     
     * {
         scroll-behavior: smooth;
@@ -1878,57 +1886,45 @@ html {
         height: 16px;
     }
     
-    /* Force all icons to animate on mobile - remove delays for immediate start */
-    .icon-1 {
-        top: -10px;
-        left: 10px;
-        margin-left: 0 !important;
+    /* Force all icons to animate on mobile - use simple float animation */
+    .icon-1,
+    .icon-2,
+    .icon-3,
+    .icon-4,
+    .icon-5 {
         animation: float 3s ease-in-out infinite !important;
         animation-delay: 0s !important;
         animation-fill-mode: both !important;
         animation-play-state: running !important;
-        transform: translateY(0) !important;
+        /* Don't override transform - let animation control it */
+    }
+    
+    /* Specific positioning for mobile icons */
+    .icon-1 {
+        top: -10px;
+        left: 10px;
+        margin-left: 0 !important;
     }
     
     .icon-2 {
         top: -10px;
         right: 10px;
-        animation: float 3s ease-in-out infinite !important;
-        animation-delay: 0s !important; /* Start immediately on mobile */
-        animation-fill-mode: both !important;
-        animation-play-state: running !important;
-        transform: translateY(0) !important;
     }
     
     .icon-3 {
         bottom: -10px;
         left: 10px;
-        animation: float 3s ease-in-out infinite !important;
-        animation-delay: 0s !important; /* Start immediately on mobile */
-        animation-fill-mode: both !important;
-        animation-play-state: running !important;
-        transform: translateY(0) !important;
     }
     
     .icon-4 {
         bottom: -10px;
         right: 10px;
         margin-right: 0 !important;
-        animation: float 3s ease-in-out infinite !important;
-        animation-delay: 0s !important; /* Start immediately on mobile */
-        animation-fill-mode: both !important;
-        animation-play-state: running !important;
-        transform: translateY(0) !important;
     }
     
     .icon-5 {
         top: 10px;
         left: -10px;
-        animation: float 3s ease-in-out infinite !important;
-        animation-delay: 0s !important; /* Start immediately on mobile */
-        animation-fill-mode: both !important;
-        animation-play-state: running !important;
-        transform: translateY(0) !important;
     }
 
     .section {

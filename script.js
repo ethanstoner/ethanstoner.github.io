@@ -44,11 +44,22 @@ function smoothScrollToTop() {
     
     if (isMobile) {
         // Mobile: use native smooth scroll only (no jittery polyfill)
+        // Cancel any ongoing scroll animations first
+        if (window.scrollAnimationId) {
+            cancelAnimationFrame(window.scrollAnimationId);
+            window.scrollAnimationId = null;
+        }
+        
+        // Force smooth scroll behavior
         document.documentElement.style.scrollBehavior = 'smooth';
+        document.body.style.scrollBehavior = 'smooth';
+        
+        // Use native smooth scroll - ensure no interference
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
+        
         // Update active nav after scroll completes
         setTimeout(() => {
             const navLinks = document.querySelectorAll('.nav-link');
@@ -260,19 +271,21 @@ function initSmoothScroll() {
             
             // On mobile, use native smooth scroll only (faster, smoother)
             if (isMobile) {
+                // Cancel any ongoing scroll animations
+                if (window.scrollAnimationId) {
+                    cancelAnimationFrame(window.scrollAnimationId);
+                    window.scrollAnimationId = null;
+                }
+                
                 // Force smooth scroll on mobile - ensure CSS supports it
                 document.documentElement.style.scrollBehavior = 'smooth';
+                document.body.style.scrollBehavior = 'smooth';
                 
-                // Use native smooth scroll
-                try {
-                    window.scrollTo({
-                        top: desiredPosition,
-                        behavior: 'smooth'
-                    });
-                } catch (e) {
-                    // Fallback if smooth scroll fails
-                    window.scrollTo(0, desiredPosition);
-                }
+                // Use native smooth scroll - ensure no interference
+                window.scrollTo({
+                    top: desiredPosition,
+                    behavior: 'smooth'
+                });
                 
                 // Verify active state after scroll completes
                 setTimeout(() => {
