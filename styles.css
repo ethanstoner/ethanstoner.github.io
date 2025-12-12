@@ -579,8 +579,8 @@ html {
 .icon-2 {
     top: 20px;
     right: -20px;
-    animation: float-right 3s ease-in-out infinite;
-    animation-delay: 0.3s; /* Staggered delay for varied movement */
+    animation: float-2 3s ease-in-out infinite;
+    animation-delay: 0.5s;
     animation-fill-mode: both;
     /* Force animation to start immediately on page load */
     animation-play-state: running !important;
@@ -589,8 +589,8 @@ html {
 .icon-3 {
     bottom: 20px;
     left: -20px;
-    animation: float-left 3s ease-in-out infinite;
-    animation-delay: 0.6s; /* Staggered delay for varied movement */
+    animation: float-3 3s ease-in-out infinite;
+    animation-delay: 1s;
     animation-fill-mode: both;
     /* Force animation to start immediately on page load */
     animation-play-state: running !important;
@@ -657,8 +657,8 @@ html {
     top: -10px;
     left: 50%;
     margin-left: -160px;
-    animation: float-icon1 3s ease-in-out infinite;
-    animation-delay: 0s; /* Start immediately but with varied pattern */
+    animation: float-1 3s ease-in-out infinite;
+    animation-delay: 0s;
     animation-fill-mode: both;
     transform: translateX(-50%);
     /* Force animation to start immediately on page load */
@@ -669,8 +669,8 @@ html {
     bottom: -10px;
     right: 50%;
     margin-right: -160px;
-    animation: float-icon4 3s ease-in-out infinite;
-    animation-delay: 0.9s; /* Staggered delay for varied movement */
+    animation: float-4 3s ease-in-out infinite;
+    animation-delay: 1.5s;
     animation-fill-mode: both;
     transform: translateX(50%);
     /* Force animation to start immediately on page load */
@@ -680,8 +680,8 @@ html {
 .icon-5 {
     top: 50%;
     left: -30px;
-    animation: float-icon5 3s ease-in-out infinite;
-    animation-delay: 1.2s; /* Staggered delay for varied movement */
+    animation: float-5 3s ease-in-out infinite;
+    animation-delay: 2s;
     animation-fill-mode: both;
     transform: translateY(-50%);
     /* Force animation to start immediately on page load */
@@ -699,9 +699,10 @@ html {
     visibility: visible !important;
 }
 
+/* Original smooth float animations with side-to-side movement */
 @keyframes float-1 {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-15px); }
 }
 
 @keyframes float-2 {
@@ -715,13 +716,13 @@ html {
 }
 
 @keyframes float-4 {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+    0%, 100% { transform: translateX(50%) translateY(0); }
+    50% { transform: translateX(50%) translateY(-15px); }
 }
 
 @keyframes float-5 {
-    0%, 100% { transform: translateY(0) translateX(0); }
-    50% { transform: translateY(-15px) translateX(-5px); }
+    0%, 100% { transform: translateX(0) translateY(-50%); }
+    50% { transform: translateX(-5px) translateY(calc(-50% - 15px)); }
 }
 
 /*--------------- buttons --------------- */
@@ -1953,22 +1954,23 @@ html {
         height: 16px;
     }
     
-    /* Force all icons to animate on mobile - use staggered delays for natural movement */
+    /* Force all icons to animate on mobile - use original animations with staggered delays */
     .icon-1 {
         top: -10px;
         left: 10px;
         margin-left: 0 !important;
-        animation: float 3s ease-in-out infinite !important;
+        animation: float-1 3s ease-in-out infinite !important;
         animation-delay: 0s !important;
         animation-fill-mode: both !important;
         animation-play-state: running !important;
+        transform: translateX(0) !important; /* Override desktop transform */
     }
     
     .icon-2 {
         top: -10px;
         right: 10px;
-        animation: float 3s ease-in-out infinite !important;
-        animation-delay: 0.6s !important; /* Staggered delay */
+        animation: float-2 3s ease-in-out infinite !important;
+        animation-delay: 0.5s !important;
         animation-fill-mode: both !important;
         animation-play-state: running !important;
     }
@@ -1976,8 +1978,8 @@ html {
     .icon-3 {
         bottom: -10px;
         left: 10px;
-        animation: float 3s ease-in-out infinite !important;
-        animation-delay: 1.2s !important; /* Staggered delay */
+        animation: float-3 3s ease-in-out infinite !important;
+        animation-delay: 1s !important;
         animation-fill-mode: both !important;
         animation-play-state: running !important;
     }
@@ -1986,19 +1988,21 @@ html {
         bottom: -10px;
         right: 10px;
         margin-right: 0 !important;
-        animation: float 3s ease-in-out infinite !important;
-        animation-delay: 1.8s !important; /* Staggered delay */
+        animation: float-4 3s ease-in-out infinite !important;
+        animation-delay: 1.5s !important;
         animation-fill-mode: both !important;
         animation-play-state: running !important;
+        transform: translateX(0) !important; /* Override desktop transform */
     }
     
     .icon-5 {
         top: 10px;
         left: -10px;
-        animation: float 3s ease-in-out infinite !important;
-        animation-delay: 2.4s !important; /* Staggered delay */
+        animation: float-5 3s ease-in-out infinite !important;
+        animation-delay: 2s !important;
         animation-fill-mode: both !important;
         animation-play-state: running !important;
+        transform: translateY(0) !important; /* Override desktop transform */
     }
 
     .section {

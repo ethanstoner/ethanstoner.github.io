@@ -811,6 +811,33 @@ function copyEmailFromHero(e) {
     }
 }
 
+// Copy email from contact section with popup
+function copyEmailFromContact(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Don't copy if clicking the copy button itself
+    if (e.target.classList.contains('copy-btn') || e.target.closest('.copy-btn')) {
+        return;
+    }
+    
+    const email = "ethanstoner08@gmail.com";
+    
+    // Use modern clipboard API with fallback
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(() => {
+            showEmailCopiedPopup();
+        }).catch(err => {
+            console.warn('Failed to copy:', err);
+            fallbackCopyTextToClipboard(email, null);
+            showEmailCopiedPopup();
+        });
+    } else {
+        fallbackCopyTextToClipboard(email, null);
+        showEmailCopiedPopup();
+    }
+}
+
 // Show smooth popup notification
 function showEmailCopiedPopup() {
     // Remove existing popup if any
