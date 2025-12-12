@@ -316,6 +316,7 @@ html {
     width: 100%;
     min-height: 600px;
     min-width: 0; /* Allow grid items to shrink */
+    overflow: visible; /* Allow title to extend if needed */
 }
 
 .hero-text {
@@ -342,6 +343,8 @@ html {
     max-width: none;
     overflow: visible;
     flex-shrink: 0;
+    word-break: keep-all;
+    overflow-wrap: normal;
 }
 
 .hero-name {
