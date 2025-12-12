@@ -617,31 +617,33 @@ html {
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
     animation-fill-mode: both;
+    animation-play-state: running !important;
 }
 
-.icon-1 {
-    animation: floatIcon1 3.2s ease-in-out infinite;
-    animation-delay: -0.7s; /* Negative delay = phase offset */
+/* Specific selectors to ensure animations are applied */
+.floating-icon.icon-1 {
+    animation: floatIcon1 3.2s ease-in-out infinite !important;
+    animation-delay: -0.7s !important; /* Negative delay = phase offset */
 }
 
-.icon-2 {
-    animation: floatIcon2 3.8s ease-in-out infinite;
-    animation-delay: -1.9s; /* Negative delay = phase offset */
+.floating-icon.icon-2 {
+    animation: floatIcon2 3.8s ease-in-out infinite !important;
+    animation-delay: -1.9s !important; /* Negative delay = phase offset */
 }
 
-.icon-3 {
-    animation: floatIcon3 3.4s ease-in-out infinite;
-    animation-delay: -2.4s; /* Negative delay = phase offset */
+.floating-icon.icon-3 {
+    animation: floatIcon3 3.4s ease-in-out infinite !important;
+    animation-delay: -2.4s !important; /* Negative delay = phase offset */
 }
 
-.icon-4 {
-    animation: floatIcon4 4.1s ease-in-out infinite;
-    animation-delay: -0.3s; /* Negative delay = phase offset */
+.floating-icon.icon-4 {
+    animation: floatIcon4 4.1s ease-in-out infinite !important;
+    animation-delay: -0.3s !important; /* Negative delay = phase offset */
 }
 
-.icon-5 {
-    animation: floatIcon5 3.6s ease-in-out infinite;
-    animation-delay: -1.2s; /* Negative delay = phase offset */
+.floating-icon.icon-5 {
+    animation: floatIcon5 3.6s ease-in-out infinite !important;
+    animation-delay: -1.2s !important; /* Negative delay = phase offset */
 }
 
 /* Keyframes - include positioning transforms where needed */
@@ -1916,19 +1918,34 @@ html {
     }
     
     /* Mobile keyframes - remove positioning transforms */
-    .icon-1 {
-        animation: floatIcon1Mobile 3.2s ease-in-out infinite;
-        animation-delay: -0.7s; /* Keep negative delay */
+    .floating-icon.icon-1 {
+        animation: floatIcon1Mobile 3.2s ease-in-out infinite !important;
+        animation-delay: -0.7s !important; /* Keep negative delay */
+        animation-play-state: running !important;
     }
     
-    .icon-4 {
-        animation: floatIcon4Mobile 4.1s ease-in-out infinite;
-        animation-delay: -0.3s; /* Keep negative delay */
+    .floating-icon.icon-2 {
+        animation: floatIcon2 3.8s ease-in-out infinite !important;
+        animation-delay: -1.9s !important;
+        animation-play-state: running !important;
     }
     
-    .icon-5 {
-        animation: floatIcon5Mobile 3.6s ease-in-out infinite;
-        animation-delay: -1.2s; /* Keep negative delay */
+    .floating-icon.icon-3 {
+        animation: floatIcon3 3.4s ease-in-out infinite !important;
+        animation-delay: -2.4s !important;
+        animation-play-state: running !important;
+    }
+    
+    .floating-icon.icon-4 {
+        animation: floatIcon4Mobile 4.1s ease-in-out infinite !important;
+        animation-delay: -0.3s !important; /* Keep negative delay */
+        animation-play-state: running !important;
+    }
+    
+    .floating-icon.icon-5 {
+        animation: floatIcon5Mobile 3.6s ease-in-out infinite !important;
+        animation-delay: -1.2s !important; /* Keep negative delay */
+        animation-play-state: running !important;
     }
     
     @keyframes floatIcon1Mobile {
