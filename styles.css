@@ -647,29 +647,30 @@ html {
 }
 
 /* Keyframes - include positioning transforms where needed */
+/* Increased movement for better visibility */
 @keyframes floatIcon1 {
     0%, 100% { transform: translateX(-50%) translate(0, 0); }
-    50% { transform: translateX(-50%) translate(0, -20px); }
+    50% { transform: translateX(-50%) translate(0, -30px); }
 }
 
 @keyframes floatIcon2 {
     0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(8px, -18px); }
+    50% { transform: translate(12px, -25px); }
 }
 
 @keyframes floatIcon3 {
     0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-8px, -18px); }
+    50% { transform: translate(-12px, -25px); }
 }
 
 @keyframes floatIcon4 {
     0%, 100% { transform: translateX(50%) translate(0, 0); }
-    50% { transform: translateX(50%) translate(4px, -22px); }
+    50% { transform: translateX(50%) translate(8px, -30px); }
 }
 
 @keyframes floatIcon5 {
     0%, 100% { transform: translateY(-50%) translate(0, 0); }
-    50% { transform: translateY(-50%) translate(-7px, -15px); }
+    50% { transform: translateY(-50%) translate(-10px, -22px); }
 }
 
 /* Prefers reduced motion - disable animations */
@@ -1950,17 +1951,17 @@ html {
     
     @keyframes floatIcon1Mobile {
         0%, 100% { transform: translate(0, 0); }
-        50% { transform: translate(0, -20px); }
+        50% { transform: translate(0, -30px); }
     }
     
     @keyframes floatIcon4Mobile {
         0%, 100% { transform: translate(0, 0); }
-        50% { transform: translate(4px, -22px); }
+        50% { transform: translate(8px, -30px); }
     }
     
     @keyframes floatIcon5Mobile {
         0%, 100% { transform: translate(0, 0); }
-        50% { transform: translate(-7px, -15px); }
+        50% { transform: translate(-10px, -22px); }
     }
 
     .section {
