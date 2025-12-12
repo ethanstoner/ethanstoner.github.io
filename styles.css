@@ -611,35 +611,22 @@ html {
 }
 
 /* Animation applied directly to .floating-icon (like datpham.dev) */
-/* Using same duration (3s) with different delays for independent movement */
+/* Inline styles handle delay and duration, CSS handles animation name */
 .floating-icon {
-    animation: floatAnimation 3s ease-in-out infinite;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
     will-change: transform;
-}
-
-/* Keyframes with side-to-side and up-down movement */
-/* Positioning transforms are included in keyframes for icons that need them */
-@keyframes floatAnimation {
-    0%, 100% { 
-        transform: translate(0, 0);
-    }
-    25% {
-        transform: translate(6px, -12px);
-    }
-    50% {
-        transform: translate(-6px, -20px);
-    }
-    75% {
-        transform: translate(4px, -10px);
-    }
+    /* Animation name and timing set per icon below */
 }
 
 /* Individual icon keyframes with positioning + animation combined */
 /* Icon 1: needs translateX(-50%) for centering */
+/* Inline style sets: animation-delay: 0s; animation-duration: 3s; */
+/* CSS sets animation-name only, inline styles handle delay/duration */
 .icon-1 {
-    animation: floatIcon1 3s ease-in-out infinite;
+    animation-name: floatIcon1;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
 }
 
 @keyframes floatIcon1 {
@@ -658,8 +645,11 @@ html {
 }
 
 /* Icon 2: no positioning transform needed */
+/* Inline style sets: animation-delay: 0.5s; animation-duration: 3s; */
 .icon-2 {
-    animation: floatIcon2 3s ease-in-out infinite;
+    animation-name: floatIcon2;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
 }
 
 @keyframes floatIcon2 {
@@ -678,8 +668,11 @@ html {
 }
 
 /* Icon 3: no positioning transform needed */
+/* Inline style sets: animation-delay: 1s; animation-duration: 3s; */
 .icon-3 {
-    animation: floatIcon3 3s ease-in-out infinite;
+    animation-name: floatIcon3;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
 }
 
 @keyframes floatIcon3 {
@@ -698,8 +691,11 @@ html {
 }
 
 /* Icon 4: needs translateX(50%) for centering */
+/* Inline style sets: animation-delay: 1.5s; animation-duration: 3s; */
 .icon-4 {
-    animation: floatIcon4 3s ease-in-out infinite;
+    animation-name: floatIcon4;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
 }
 
 @keyframes floatIcon4 {
@@ -718,8 +714,11 @@ html {
 }
 
 /* Icon 5: needs translateY(-50%) for centering */
+/* Inline style sets: animation-delay: 2s; animation-duration: 3s; */
 .icon-5 {
-    animation: floatIcon5 3s ease-in-out infinite;
+    animation-name: floatIcon5;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
 }
 
 @keyframes floatIcon5 {
@@ -1986,8 +1985,11 @@ html {
     
     /* Mobile keyframes - remove positioning transforms, keep only animation */
     /* Icon 1 mobile: no translateX(-50%) needed */
+    /* Inline style sets: animation-delay: 0s; animation-duration: 3s; */
     .icon-1 {
-        animation: floatIcon1Mobile 3s ease-in-out infinite;
+        animation-name: floatIcon1Mobile;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
     }
     
     @keyframes floatIcon1Mobile {
@@ -2006,8 +2008,11 @@ html {
     }
     
     /* Icon 4 mobile: no translateX(50%) needed */
+    /* Inline style sets: animation-delay: 1.5s; animation-duration: 3s; */
     .icon-4 {
-        animation: floatIcon4Mobile 3s ease-in-out infinite;
+        animation-name: floatIcon4Mobile;
+        animation-duration: 3s;
+        animation-delay: 1.5s;
     }
     
     @keyframes floatIcon4Mobile {
@@ -2026,8 +2031,25 @@ html {
     }
     
     /* Icon 5 mobile: no translateY(-50%) needed */
+    /* Inline style sets: animation-delay: 2s; animation-duration: 3s; */
     .icon-5 {
-        animation: floatIcon5Mobile 3s ease-in-out infinite;
+        animation-name: floatIcon5Mobile;
+        animation-duration: 3s;
+        animation-delay: 2s;
+    }
+    
+    /* Icon 2 and 3 mobile: use same animations as desktop */
+    /* Inline styles handle delays: 0.5s and 1s */
+    .icon-2 {
+        animation-name: floatIcon2;
+        animation-duration: 3s;
+        animation-delay: 0.5s;
+    }
+    
+    .icon-3 {
+        animation-name: floatIcon3;
+        animation-duration: 3s;
+        animation-delay: 1s;
     }
     
     @keyframes floatIcon5Mobile {
