@@ -228,11 +228,22 @@ test.describe('Button Functionality Tests', () => {
       
       console.log(`Testing ${btn.name} - Initial scroll: ${initialScroll}`);
       
-      // Click and wait
+      // Click and wait for scroll to complete
       await button.click();
-      await page.waitForTimeout(2500); // Longer wait
       
-      const finalScroll = await page.evaluate(() => window.pageYOffset || window.scrollY);
+      // Wait for scroll to complete with multiple checks
+      let finalScroll = await page.evaluate(() => window.pageYOffset || window.scrollY);
+      let attempts = 0;
+      while (attempts < 10) {
+        await page.waitForTimeout(300);
+        const newScroll = await page.evaluate(() => window.pageYOffset || window.scrollY);
+        if (Math.abs(newScroll - finalScroll) < 5) {
+          break; // Scroll has stabilized
+        }
+        finalScroll = newScroll;
+        attempts++;
+      }
+      
       const scrollDiff = Math.abs(finalScroll - initialScroll);
       
       console.log(`${btn.name} - Final scroll: ${finalScroll}, Difference: ${scrollDiff}`);

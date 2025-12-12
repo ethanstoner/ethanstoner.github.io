@@ -25,7 +25,7 @@ test.describe('Portfolio Website', () => {
     await expect(heroTitle).toContainText('I am a developer');
     
     // Check hero subtitle
-    await expect(page.locator('.hero-subtitle')).toContainText('Building automation tools');
+    await expect(page.locator('.hero-subtitle')).toContainText('Building educational tools');
     
     // Check CTA buttons
     await expect(page.locator('a.btn-primary')).toContainText('view projects');

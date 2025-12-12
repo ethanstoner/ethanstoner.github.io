@@ -1,45 +1,43 @@
-// Sound effects (using Web Audio API for subtle UI sounds)
+// Sound effects (using audio file for click sound)
 class SoundManager {
     constructor() {
-        this.audioContext = null;
         this.enabled = true;
+        this.clickSound = null;
         this.init();
     }
 
     init() {
         try {
-            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            // Load the click sound file
+            this.clickSound = new Audio('click-sound.mp3');
+            this.clickSound.volume = 0.5; // Set volume to 50%
+            this.clickSound.preload = 'auto';
+            
+            // Handle loading errors
+            this.clickSound.addEventListener('error', (e) => {
+                console.warn('Click sound failed to load:', e);
+                this.enabled = false;
+            });
         } catch (e) {
+            console.warn('SoundManager initialization failed:', e);
             this.enabled = false;
         }
     }
 
-    playTone(frequency, duration, type = 'sine', volume = 0.08) {
-        if (!this.enabled || !this.audioContext) return;
+    playClick() {
+        if (!this.enabled || !this.clickSound) return;
         if (typeof window !== 'undefined' && window.__PLAYWRIGHT_TEST__) return;
 
-        const oscillator = this.audioContext.createOscillator();
-        const gainNode = this.audioContext.createGain();
-
-        oscillator.connect(gainNode);
-        gainNode.connect(this.audioContext.destination);
-
-        oscillator.frequency.value = frequency;
-        oscillator.type = type;
-
-        gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
-        gainNode.gain.linearRampToValueAtTime(volume, this.audioContext.currentTime + 0.01);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + duration);
-
-        oscillator.start(this.audioContext.currentTime);
-        oscillator.stop(this.audioContext.currentTime + duration);
-    }
-
-    playClick() {
-        // Satisfying keyboard-like thocky click sound
-        // Quick, sharp, low-frequency thock - like a mechanical keyboard
-        this.playTone(100, 0.03, 'sine', 0.25);
-        setTimeout(() => this.playTone(60, 0.02, 'sine', 0.15), 10);
+        try {
+            // Reset to beginning and play
+            this.clickSound.currentTime = 0;
+            this.clickSound.play().catch(err => {
+                // Ignore play errors (e.g., user hasn't interacted with page yet)
+                console.warn('Click sound play failed:', err);
+            });
+        } catch (e) {
+            console.warn('Click sound error:', e);
+        }
     }
 
     playHover() {
@@ -48,8 +46,8 @@ class SoundManager {
     }
 
     playSuccess() {
-        this.playTone(600, 0.1, 'sine', 0.1);
-        setTimeout(() => this.playTone(800, 0.15, 'sine', 0.1), 100);
+        // Can reuse click sound for success if needed
+        this.playClick();
     }
 }
 
@@ -60,13 +58,91 @@ if (typeof window !== 'undefined') {
     window.soundManager = soundManager;
 }
 
+// Smooth scroll polyfill for older browsers
+function smoothScrollTo(targetPosition) {
+    const startPosition = window.pageYOffset || document.documentElement.scrollTop;
+    const distance = targetPosition - startPosition;
+    const duration = 500; // 500ms scroll duration
+    let start = null;
+
+    function step(timestamp) {
+        if (!start) start = timestamp;
+        const progress = timestamp - start;
+        const percentage = Math.min(progress / duration, 1);
+        
+        // Easing function (ease-in-out)
+        const ease = percentage < 0.5
+            ? 2 * percentage * percentage
+            : 1 - Math.pow(-2 * percentage + 2, 2) / 2;
+        
+        window.scrollTo(0, startPosition + distance * ease);
+        
+        if (progress < duration) {
+            window.requestAnimationFrame(step);
+        }
+    }
+    
+    window.requestAnimationFrame(step);
+}
+
+// Enhanced smooth scroll function
+function smoothScrollToTop() {
+    const startPosition = window.pageYOffset;
+    if (startPosition === 0) {
+        // Already at top, just update active state
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(l => l.classList.remove('active'));
+        const homeLink = document.querySelector('a[href="#"]');
+        if (homeLink) homeLink.classList.add('active');
+        return;
+    }
+    
+    const distance = -startPosition;
+    const duration = 800;
+    let start = null;
+    let animationId = null;
+    
+    function scrollStep(timestamp) {
+        if (!start) start = timestamp;
+        const progress = timestamp - start;
+        const percentage = Math.min(progress / duration, 1);
+        
+        // Easing function (ease-in-out)
+        const ease = percentage < 0.5
+            ? 2 * percentage * percentage
+            : 1 - Math.pow(-2 * percentage + 2, 2) / 2;
+        
+        const currentPosition = startPosition + distance * ease;
+        window.scrollTo(0, currentPosition);
+        
+        if (progress < duration) {
+            animationId = window.requestAnimationFrame(scrollStep);
+        } else {
+            window.scrollTo(0, 0);
+            // Update active nav after scroll completes
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(l => l.classList.remove('active'));
+            const homeLink = document.querySelector('a[href="#"]');
+            if (homeLink) homeLink.classList.add('active');
+        }
+    }
+    
+    animationId = window.requestAnimationFrame(scrollStep);
+    
+    // Store animation ID for potential cancellation
+    if (window.homeScrollAnimation) {
+        window.cancelAnimationFrame(window.homeScrollAnimation);
+    }
+    window.homeScrollAnimation = animationId;
+}
+
 // Smooth scroll function - can be called immediately or on DOMContentLoaded
 function initSmoothScroll() {
     // Smooth scroll for anchor links
     const anchors = document.querySelectorAll('a[href^="#"]');
     
     anchors.forEach((anchor) => {
-        // Remove any existing listeners by cloning the node
+        // Remove any existing listeners
         const newAnchor = anchor.cloneNode(true);
         anchor.parentNode.replaceChild(newAnchor, anchor);
         
@@ -76,7 +152,100 @@ function initSmoothScroll() {
             
             const href = this.getAttribute('href');
             
-            if (!href || href === '#' || href === '') {
+            // Play click sound
+            try {
+                soundManager.playClick();
+            } catch (err) {
+                // Ignore sound errors
+            }
+            
+            // CRITICAL: Update active nav IMMEDIATELY and PERSISTENTLY
+            // Use a single synchronous operation to avoid race conditions
+            const allNavLinks = document.querySelectorAll('.nav-link');
+            
+            // Find the corresponding nav link if this is a hero CTA button
+            let navLinkToActivate = null;
+            if (this.classList.contains('btn-primary') || this.classList.contains('btn-secondary')) {
+                // This is a hero CTA button - find the matching nav link
+                const targetHref = this.getAttribute('href');
+                navLinkToActivate = document.querySelector(`.nav-link[href="${targetHref}"]`);
+            } else {
+                // This is a nav link itself
+                navLinkToActivate = this;
+            }
+            
+            const clickedLink = navLinkToActivate || this;
+            
+            // Clear all active states and user-clicked flags
+            allNavLinks.forEach(l => {
+                l.classList.remove('active');
+                l.dataset.userClicked = 'false';
+            });
+            
+            // Only update nav link if we found one (skip if clicking nav link directly)
+            if (navLinkToActivate) {
+                // Immediately set this link as active - MUST be synchronous
+                clickedLink.classList.add('active');
+                clickedLink.dataset.userClicked = 'true';
+                clickedLink.dataset.clickTime = Date.now().toString();
+                lastClickedLink = clickedLink;
+            }
+            
+            // Only verify if we have a nav link to activate
+            if (navLinkToActivate) {
+                // Verify in next frame to ensure it stuck
+                requestAnimationFrame(() => {
+                    // Ensure only this link is active
+                    allNavLinks.forEach(l => {
+                        if (l !== clickedLink) {
+                            l.classList.remove('active');
+                        }
+                    });
+                    clickedLink.classList.add('active');
+                });
+                
+                // Also verify after a short delay
+                setTimeout(() => {
+                    // Final check - ensure clicked link is active
+                    allNavLinks.forEach(l => {
+                        if (l !== clickedLink && l.classList.contains('active')) {
+                            l.classList.remove('active');
+                        }
+                    });
+                    if (!clickedLink.classList.contains('active')) {
+                        clickedLink.classList.add('active');
+                    }
+                }, 50);
+                
+                // Prevent scroll handler from overriding for 3.5 seconds
+                ignoreScrollUpdate = true;
+                setTimeout(() => {
+                    // Only re-enable if this is still the last clicked link
+                    if (lastClickedLink === clickedLink) {
+                        ignoreScrollUpdate = false;
+                        // Final verification
+                        allNavLinks.forEach(l => {
+                            if (l !== clickedLink) l.classList.remove('active');
+                        });
+                        clickedLink.classList.add('active');
+                    }
+                }, 3500);
+            }
+            
+            // Handle home link - scroll to top
+            if (!href || href === '#' || href === '' || href === '#home') {
+                // Smooth scroll to top
+                smoothScrollToTop();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                
+                // Update URL without hash
+                if (history.pushState) {
+                    history.pushState(null, null, window.location.pathname + window.location.search);
+                }
+                
                 return false;
             }
             
@@ -85,49 +254,135 @@ function initSmoothScroll() {
                 return false;
             }
             
-            // Play click sound
-            try {
-                soundManager.playClick();
-            } catch (err) {
-                // Ignore sound errors
+            // If navigating to contact section, show it immediately
+            if (href === '#contact') {
+                const contactCard = document.querySelector('.contact-card');
+                if (contactCard) {
+                    contactCard.style.opacity = '1';
+                    contactCard.style.transform = 'translateY(0)';
+                }
             }
             
-            const headerOffset = 80;
+            // Get header height dynamically
+            const header = document.querySelector('.header');
+            const headerOffset = header ? header.offsetHeight : 80;
             
             // Calculate target position
             const targetTop = target.offsetTop;
             const desiredPosition = Math.max(0, targetTop - headerOffset);
             
-            // Force scroll using multiple methods to ensure it works
-            // Method 1: Direct scroll
-            window.scrollTo(0, desiredPosition);
-            document.documentElement.scrollTop = desiredPosition;
-            if (document.body) {
-                document.body.scrollTop = desiredPosition;
+            // Smooth scroll - use native first, then polyfill
+            const startPosition = window.pageYOffset;
+            const distance = desiredPosition - startPosition;
+            const duration = 800;
+            let start = null;
+            let animationId = null;
+            
+            // Use native smooth scroll
+            window.scrollTo({
+                top: desiredPosition,
+                behavior: 'smooth'
+            });
+            
+            // Also use polyfill as backup for better compatibility
+            function scrollStep(timestamp) {
+                if (!start) start = timestamp;
+                const progress = timestamp - start;
+                const percentage = Math.min(progress / duration, 1);
+                
+                // Easing function (ease-in-out)
+                const ease = percentage < 0.5
+                    ? 2 * percentage * percentage
+                    : 1 - Math.pow(-2 * percentage + 2, 2) / 2;
+                
+                const currentPos = startPosition + distance * ease;
+                window.scrollTo(0, currentPos);
+                
+                if (progress < duration) {
+                    animationId = window.requestAnimationFrame(scrollStep);
+                } else {
+                    // Ensure we end at exact position
+                    window.scrollTo(0, desiredPosition);
+                    // Verify active state after scroll completes
+                    setTimeout(() => {
+                        if (lastClickedLink === this && this.dataset.userClicked === 'true') {
+                            const allNavLinks = document.querySelectorAll('.nav-link');
+                            allNavLinks.forEach(l => l.classList.remove('active'));
+                            this.classList.add('active');
+                        }
+                    }, 100);
+                }
             }
             
-            // Method 2: Use scrollIntoView then adjust
-            target.scrollIntoView({ behavior: 'instant', block: 'start' });
+            // Start polyfill animation
+            animationId = window.requestAnimationFrame(scrollStep);
             
-            // Method 3: Force again after a micro-delay
-            setTimeout(() => {
-                window.scrollTo(0, desiredPosition);
-                document.documentElement.scrollTop = desiredPosition;
-            }, 1);
-            
-            // Method 4: One more time to be absolutely sure
-            requestAnimationFrame(() => {
-                window.scrollTo(0, desiredPosition);
-                document.documentElement.scrollTop = desiredPosition;
-            });
+            // Update URL without hash
+            if (history.pushState) {
+                history.pushState(null, null, window.location.pathname + window.location.search);
+            }
             
             return false;
         });
     });
 }
 
+// Remove hash from URL on page load (especially #hero or any hash)
+function removeHashFromURL() {
+    // If there's a hash in the URL, handle it
+    if (window.location.hash) {
+        const hash = window.location.hash;
+        
+        // If it's #hero or empty, just remove it and scroll to top
+        if (hash === '#hero' || hash === '#') {
+            // Scroll to top smoothly
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            
+            // Remove hash from URL
+            if (history.pushState) {
+                history.pushState(null, null, window.location.pathname + window.location.search);
+            } else {
+                window.location.hash = '';
+            }
+        } else {
+            // For other hashes, scroll to the section smoothly, then remove hash
+            const target = document.querySelector(hash);
+            if (target) {
+                const header = document.querySelector('.header');
+                const headerOffset = header ? header.offsetHeight : 80;
+                const targetTop = target.offsetTop;
+                const desiredPosition = Math.max(0, targetTop - headerOffset);
+                
+                // Scroll smoothly to the section
+                window.scrollTo({
+                    top: desiredPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Remove hash from URL after scrolling starts
+                setTimeout(() => {
+                    if (history.pushState) {
+                        history.pushState(null, null, window.location.pathname + window.location.search);
+                    }
+                }, 100);
+            } else {
+                // Target not found, just remove hash
+                if (history.pushState) {
+                    history.pushState(null, null, window.location.pathname + window.location.search);
+                }
+            }
+        }
+    }
+}
+
 // Initialize smooth scroll when DOM is ready
 function initAll() {
+    // Remove hash from URL first
+    removeHashFromURL();
+    
     initSmoothScroll();
 
     // Scroll progress indicator
@@ -161,29 +416,141 @@ function initAll() {
     }
 
     // Update active nav link on scroll
-    const sections = document.querySelectorAll('.section, .hero-section');
+    const sections = document.querySelectorAll('.section[id], .hero-section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
+    let ignoreScrollUpdate = false; // Flag to prevent scroll updates right after click
+    let lastClickedLink = null; // Track last clicked link
 
     function updateActiveNavLink() {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.pageYOffset >= sectionTop - 100) {
-                current = section.getAttribute('id');
+        // Don't update if we just clicked a link (wait for scroll to settle)
+        if (ignoreScrollUpdate) {
+            return;
+        }
+        
+        // Check if any link was recently clicked by user - if so, don't override
+        let userClickedLink = null;
+        navLinks.forEach(link => {
+            if (link.dataset.userClicked === 'true') {
+                const clickTime = parseInt(link.dataset.clickTime || '0');
+                const timeSinceClick = Date.now() - clickTime;
+                // If clicked within last 4 seconds, keep it active
+                if (timeSinceClick < 4000) {
+                    userClickedLink = link;
+                } else {
+                    // Clear old click flag
+                    link.dataset.userClicked = 'false';
+                }
             }
         });
+        
+        // If user clicked a link recently, keep it active and exit
+        if (userClickedLink) {
+            navLinks.forEach(link => {
+                if (link !== userClickedLink) link.classList.remove('active');
+            });
+            userClickedLink.classList.add('active');
+            return;
+        }
+        
+        const scrollPosition = window.pageYOffset;
+        const headerHeight = document.querySelector('.header')?.offsetHeight || 80;
+        let current = '';
+        
+        // If at top (within first 400px), highlight home link
+        if (scrollPosition < 400) {
+            current = 'home';
+        } else {
+            // Find which section we're currently in
+            const sectionsArray = Array.from(sections);
+            
+            // Check each section to see if we're in it
+            for (const section of sectionsArray) {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const sectionId = section.getAttribute('id');
+                
+                // Calculate if we're in this section
+                const sectionStart = sectionTop - headerHeight - 150;
+                const sectionEnd = sectionTop + sectionHeight - headerHeight - 150;
+                
+                // If scroll position is within this section's range
+                if (scrollPosition >= sectionStart && scrollPosition <= sectionEnd) {
+                    current = sectionId;
+                    break;
+                }
+            }
+            
+            // If no section matched, find the closest one
+            if (!current) {
+                let closestSection = '';
+                let closestDistance = Infinity;
+                
+                sectionsArray.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionId = section.getAttribute('id');
+                    const distance = Math.abs(scrollPosition - (sectionTop - headerHeight));
+                    
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestSection = sectionId;
+                    }
+                });
+                
+                current = closestSection;
+            }
+        }
 
+        // Update all nav links - but don't override user-clicked links
         navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
+            // Only remove active if this link wasn't user-clicked
+            if (link.dataset.userClicked !== 'true') {
+                link.classList.remove('active');
+            }
+        });
+        
+        // Then add active to the correct one (if not user-clicked)
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            
+            // Skip if this link was user-clicked
+            if (link.dataset.userClicked === 'true') {
+                return;
+            }
+            
+            // Handle home link
+            if ((href === '#' || href === '#home') && current === 'home') {
+                link.classList.add('active');
+            } else if (href === `#${current}` && current && current !== 'home') {
                 link.classList.add('active');
             }
         });
     }
 
-    window.addEventListener('scroll', updateActiveNavLink);
+    // Throttle scroll events for better performance
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(updateActiveNavLink, 200);
+    }, { passive: true });
+    
+    // Update immediately on page load
     updateActiveNavLink();
+    
+    // Also update after a short delay to catch any layout changes
+    setTimeout(updateActiveNavLink, 500);
+    
+    // Clear user-clicked flags after 4 seconds to allow scroll-based updates again
+    setInterval(() => {
+        navLinks.forEach(link => {
+            if (link.dataset.userClicked === 'true') {
+                // Only clear if scroll has settled
+                const timeSinceClick = Date.now() - (link.dataset.clickTime || 0);
+                if (timeSinceClick > 4000) {
+                    link.dataset.userClicked = 'false';
+                }
+            }
+        });
+    }, 1000);
 
     // Intersection Observer for fade-in animations with stagger
     const observerOptions = {
@@ -194,10 +561,17 @@ function initAll() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                setTimeout(() => {
+                // Contact cards appear immediately (no delay)
+                if (entry.target.classList.contains('contact-card')) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
-                }, index * 100);
+                } else {
+                    // Other cards have minimal stagger
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 50);
+                }
                 observer.unobserve(entry.target);
             }
         });
@@ -207,15 +581,79 @@ function initAll() {
     document.querySelectorAll('.project-card, .tech-category, .content-card, .contact-card').forEach((el, index) => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
-        el.style.transition = `opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)`;
-        el.style.transitionDelay = `${index * 0.05}s`;
+        
+        // Contact cards have faster transition
+        if (el.classList.contains('contact-card')) {
+            el.style.transition = `opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)`;
+            el.style.transitionDelay = '0s';
+        } else {
+            el.style.transition = `opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)`;
+            el.style.transitionDelay = `${index * 0.05}s`;
+        }
         observer.observe(el);
     });
+    
+    // Immediately show contact section when navigated to via anchor
+    function showContactSectionImmediately() {
+        const contactCard = document.querySelector('.contact-card');
+        const contactSection = document.querySelector('#contact');
+        if (contactCard && contactSection) {
+            // Check if we're at or near the contact section
+            const rect = contactSection.getBoundingClientRect();
+            const headerHeight = document.querySelector('.header')?.offsetHeight || 80;
+            const isVisible = rect.top <= headerHeight + 200 && rect.bottom >= 0;
+            
+            if (isVisible && contactCard.style.opacity === '0') {
+                contactCard.style.opacity = '1';
+                contactCard.style.transform = 'translateY(0)';
+                // Stop observing since we've manually shown it
+                observer.unobserve(contactCard);
+            }
+        }
+    }
+    
+    // Check immediately and on scroll
+    showContactSectionImmediately();
+    window.addEventListener('scroll', () => {
+        showContactSectionImmediately();
+    }, { passive: true });
 
     // Hover sounds disabled - removed per user request
 
-    // Click sounds are handled in the smooth scroll function above
+    // Add click sounds to all buttons and links
+    document.querySelectorAll('a, button, .btn-primary, .btn-secondary, .project-link, .contact-link').forEach(element => {
+        element.addEventListener('click', function(e) {
+            // Don't play sound if it's already handled by smooth scroll
+            if (this.getAttribute('href') && this.getAttribute('href').startsWith('#')) {
+                return; // Already handled by smooth scroll
+            }
+            
+            try {
+                soundManager.playClick();
+            } catch (err) {
+                // Ignore sound errors
+            }
+        });
+    });
 }
+
+// Prevent default hash jump behavior
+function preventHashJump() {
+    // If there's a hash, scroll to top first to prevent jump
+    if (window.location.hash) {
+        // Temporarily remove scroll-behavior to prevent jump
+        document.documentElement.style.scrollBehavior = 'auto';
+        window.scrollTo(0, 0);
+        
+        // Restore smooth scroll after a brief moment
+        setTimeout(() => {
+            document.documentElement.style.scrollBehavior = 'smooth';
+        }, 10);
+    }
+}
+
+// Run immediately to prevent hash jump
+preventHashJump();
 
 // Initialize when DOM is ready
 if (document.readyState === 'loading') {
@@ -223,4 +661,69 @@ if (document.readyState === 'loading') {
 } else {
     // DOM is already loaded, run immediately
     initAll();
+}
+
+// Also ensure smooth scroll works on page load
+window.addEventListener('load', () => {
+    // Re-initialize smooth scroll to catch any dynamically added links
+    setTimeout(initSmoothScroll, 100);
+});
+
+// Email copy functionality
+function copyEmail(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const email = "ethanstoner08@gmail.com";
+    
+    // Use modern clipboard API with fallback
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(() => {
+            showCopyFeedback(e.currentTarget);
+        }).catch(err => {
+            console.warn('Failed to copy:', err);
+            // Fallback to older method
+            fallbackCopyTextToClipboard(email, e.currentTarget);
+        });
+    } else {
+        // Fallback for older browsers
+        fallbackCopyTextToClipboard(email, e.currentTarget);
+    }
+}
+
+function fallbackCopyTextToClipboard(text, button) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
+    textArea.style.top = "-999999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+            showCopyFeedback(button);
+        } else {
+            console.warn('Fallback copy failed');
+        }
+    } catch (err) {
+        console.warn('Fallback copy error:', err);
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+function showCopyFeedback(button) {
+    const original = button.textContent;
+    button.textContent = "Copied!";
+    button.style.background = "rgba(255, 255, 255, 0.3)";
+    button.style.borderColor = "rgba(255, 255, 255, 0.6)";
+    
+    setTimeout(() => {
+        button.textContent = original;
+        button.style.background = "";
+        button.style.borderColor = "";
+    }, 1200);
 }

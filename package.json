@@ -6,10 +6,12 @@
   "scripts": {
     "start": "npx serve . -p 3001",
     "test": "playwright test",
+    "test:e2e": "playwright test",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
-    "test:report": "playwright show-report"
+    "test:report": "playwright show-report",
+    "test:logos": "playwright test tests/logo-validation.spec.js"
   },
   "keywords": ["portfolio", "ethanstoner", "qa", "playwright"],
   "author": "Ethan Stoner",
