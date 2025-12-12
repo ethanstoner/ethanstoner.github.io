@@ -624,10 +624,7 @@ html {
 /* Inline style sets: animation-delay: 0s; animation-duration: 3s; */
 /* CSS sets animation-name only, inline styles handle delay/duration */
 .icon-1 {
-    animation-name: floatIcon1;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-fill-mode: both;
+    animation: floatIcon1 4s ease-in-out 0s infinite both;
 }
 
 @keyframes floatIcon1 {
@@ -648,10 +645,7 @@ html {
 /* Icon 2: no positioning transform needed */
 /* Inline style sets: animation-delay: 0.5s; animation-duration: 3s; */
 .icon-2 {
-    animation-name: floatIcon2;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-fill-mode: both;
+    animation: floatIcon2 4.5s ease-in-out 0.2s infinite both;
 }
 
 @keyframes floatIcon2 {
@@ -672,10 +666,7 @@ html {
 /* Icon 3: no positioning transform needed */
 /* Inline style sets: animation-delay: 1s; animation-duration: 3s; */
 .icon-3 {
-    animation-name: floatIcon3;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-fill-mode: both;
+    animation: floatIcon3 5s ease-in-out 0.4s infinite both;
 }
 
 @keyframes floatIcon3 {
@@ -696,10 +687,7 @@ html {
 /* Icon 4: needs translateX(50%) for centering */
 /* Inline style sets: animation-delay: 1.5s; animation-duration: 3s; */
 .icon-4 {
-    animation-name: floatIcon4;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-fill-mode: both;
+    animation: floatIcon4 5.5s ease-in-out 0.6s infinite both;
 }
 
 @keyframes floatIcon4 {
@@ -720,10 +708,7 @@ html {
 /* Icon 5: needs translateY(-50%) for centering */
 /* Inline style sets: animation-delay: 2s; animation-duration: 3s; */
 .icon-5 {
-    animation-name: floatIcon5;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-fill-mode: both;
+    animation: floatIcon5 6s ease-in-out 0.8s infinite both;
 }
 
 @keyframes floatIcon5 {
@@ -2014,11 +1999,7 @@ html {
     /* Mobile keyframes - all start immediately, different durations for independence */
     /* Icon 1 mobile: no translateX(-50%) needed, starts immediately */
     .icon-1 {
-        animation-name: floatIcon1Mobile;
-        animation-timing-function: ease-in-out;
-        animation-iteration-count: infinite;
-        animation-delay: 0s !important;
-        animation-fill-mode: both;
+        animation: floatIcon1Mobile 5s ease-in-out 0s infinite both !important;
     }
     
     @keyframes floatIcon1Mobile {
@@ -2038,11 +2019,7 @@ html {
     
     /* Icon 2 mobile: starts immediately */
     .icon-2 {
-        animation-name: floatIcon2Mobile;
-        animation-timing-function: ease-in-out;
-        animation-iteration-count: infinite;
-        animation-delay: 0s !important;
-        animation-fill-mode: both;
+        animation: floatIcon2Mobile 5.5s ease-in-out 0s infinite both !important;
     }
     
     @keyframes floatIcon2Mobile {
@@ -2062,11 +2039,7 @@ html {
     
     /* Icon 3 mobile: starts immediately */
     .icon-3 {
-        animation-name: floatIcon3Mobile;
-        animation-timing-function: ease-in-out;
-        animation-iteration-count: infinite;
-        animation-delay: 0s !important;
-        animation-fill-mode: both;
+        animation: floatIcon3Mobile 6s ease-in-out 0s infinite both !important;
     }
     
     @keyframes floatIcon3Mobile {
@@ -2086,11 +2059,7 @@ html {
     
     /* Icon 4 mobile: no translateX(50%) needed, starts immediately */
     .icon-4 {
-        animation-name: floatIcon4Mobile;
-        animation-timing-function: ease-in-out;
-        animation-iteration-count: infinite;
-        animation-delay: 0s !important;
-        animation-fill-mode: both;
+        animation: floatIcon4Mobile 6.5s ease-in-out 0s infinite both !important;
     }
     
     @keyframes floatIcon4Mobile {
@@ -2110,11 +2079,7 @@ html {
     
     /* Icon 5 mobile: needs translateY(-50%) for centering, starts immediately */
     .icon-5 {
-        animation-name: floatIcon5Mobile;
-        animation-timing-function: ease-in-out;
-        animation-iteration-count: infinite;
-        animation-delay: 0s !important;
-        animation-fill-mode: both;
+        animation: floatIcon5Mobile 7s ease-in-out 0s infinite both !important;
     }
     
     @keyframes floatIcon5Mobile {
