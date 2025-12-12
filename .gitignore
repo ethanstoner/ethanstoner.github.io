@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Testing
+tests/
+test-results/
+qa-reports/
+playwright.config.js
+
+# Development files
+.metagross/
+docs/
+scripts/
+tasks/
+*.md
+!README.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

@@ -610,14 +610,13 @@ html {
     left: -30px;
 }
 
-/* Animation applied directly to .floating-icon (like datpham.dev) */
-/* Inline styles handle delay and duration, CSS handles animation name */
+/* Animation applied directly to .floating-icon */
 .floating-icon {
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
     will-change: transform;
     animation-play-state: running;
-    /* Animation name and timing set per icon below */
+    animation-fill-mode: both;
 }
 
 /* Individual icon keyframes with positioning + animation combined */
@@ -628,6 +627,7 @@ html {
     animation-name: floatIcon1;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
+    animation-fill-mode: both;
 }
 
 @keyframes floatIcon1 {
@@ -651,6 +651,7 @@ html {
     animation-name: floatIcon2;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
+    animation-fill-mode: both;
 }
 
 @keyframes floatIcon2 {
@@ -674,6 +675,7 @@ html {
     animation-name: floatIcon3;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
+    animation-fill-mode: both;
 }
 
 @keyframes floatIcon3 {
@@ -697,6 +699,7 @@ html {
     animation-name: floatIcon4;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
+    animation-fill-mode: both;
 }
 
 @keyframes floatIcon4 {
@@ -720,6 +723,7 @@ html {
     animation-name: floatIcon5;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
+    animation-fill-mode: both;
 }
 
 @keyframes floatIcon5 {
@@ -2004,7 +2008,7 @@ html {
     .icon-5 {
         top: 50%;
         left: -5px;
-        transform: translateY(-50%);
+        /* transform handled by animation */
     }
     
     /* Mobile keyframes - all start immediately, different durations for independence */
@@ -2014,6 +2018,7 @@ html {
         animation-timing-function: ease-in-out;
         animation-iteration-count: infinite;
         animation-delay: 0s !important;
+        animation-fill-mode: both;
     }
     
     @keyframes floatIcon1Mobile {
@@ -2037,6 +2042,7 @@ html {
         animation-timing-function: ease-in-out;
         animation-iteration-count: infinite;
         animation-delay: 0s !important;
+        animation-fill-mode: both;
     }
     
     @keyframes floatIcon2Mobile {
@@ -2060,6 +2066,7 @@ html {
         animation-timing-function: ease-in-out;
         animation-iteration-count: infinite;
         animation-delay: 0s !important;
+        animation-fill-mode: both;
     }
     
     @keyframes floatIcon3Mobile {
@@ -2083,6 +2090,7 @@ html {
         animation-timing-function: ease-in-out;
         animation-iteration-count: infinite;
         animation-delay: 0s !important;
+        animation-fill-mode: both;
     }
     
     @keyframes floatIcon4Mobile {
@@ -2106,6 +2114,7 @@ html {
         animation-timing-function: ease-in-out;
         animation-iteration-count: infinite;
         animation-delay: 0s !important;
+        animation-fill-mode: both;
     }
     
     @keyframes floatIcon5Mobile {
@@ -2113,13 +2122,13 @@ html {
             transform: translateY(-50%) translate(0, 0);
         }
         25% {
-            transform: translateY(-50%) translate(-8px, -10px);
+            transform: translateY(-50%) translate(-6px, -8px);
         }
         50% {
-            transform: translateY(-50%) translate(6px, -16px);
+            transform: translateY(-50%) translate(5px, -12px);
         }
         75% {
-            transform: translateY(-50%) translate(-4px, -8px);
+            transform: translateY(-50%) translate(-3px, -6px);
         }
     }
 

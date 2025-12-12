@@ -714,15 +714,27 @@ window.addEventListener('load', () => {
     
     // Force animations to start immediately on desktop and mobile
     const floatingIcons = document.querySelectorAll('.floating-icon');
-    floatingIcons.forEach((icon, index) => {
-        // Force animation to restart if needed
-        icon.style.animationPlayState = 'running';
+    floatingIcons.forEach((icon) => {
+        // Get computed animation name
+        const computedStyle = window.getComputedStyle(icon);
+        const animationName = computedStyle.animationName;
+        
+        // If animation is not running, force it to start
+        if (animationName && animationName !== 'none') {
+            // Force restart by removing and re-adding animation
+            const currentAnimation = icon.style.animation;
+            icon.style.animation = 'none';
+            
+            // Force reflow
+            void icon.offsetWidth;
+            
+            // Restore animation
+            icon.style.animation = '';
+            icon.style.animationPlayState = 'running';
+        }
         
         // Ensure will-change is set for better performance
         icon.style.willChange = 'transform';
-        
-        // Force a reflow to ensure animations start
-        void icon.offsetWidth;
     });
 });
 
