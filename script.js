@@ -532,47 +532,55 @@ function initAll() {
         if (scrollPosition < 200) {
             current = 'home';
         } else {
-            // Find which section is currently most visible in viewport
-            // Use a simpler approach: check which section's top is closest to but above viewport top
-            const viewportThreshold = headerHeight + 150;
-            const targetScroll = scrollPosition + viewportThreshold;
+            // Find which section is currently in view
+            // Use IntersectionObserver-like logic: find section whose top is visible in viewport
+            const viewportTop = scrollPosition;
+            const viewportBottom = scrollPosition + window.innerHeight;
+            const threshold = headerHeight + 100; // Account for fixed header
             
             let bestSection = null;
-            let bestDistance = Infinity;
+            let bestScore = -Infinity;
             
             // Check each section
             for (const section of sections) {
                 const id = section.getAttribute('id');
-                if (!id || !section.offsetParent) continue; // Skip if not visible
+                if (!id) continue;
                 
                 const rect = section.getBoundingClientRect();
-                // Get absolute position
                 const sectionTop = rect.top + scrollPosition;
+                const sectionBottom = sectionTop + rect.height;
                 
-                // If we've scrolled past this section's top, consider it
-                if (sectionTop <= targetScroll) {
-                    // Calculate how far past we are
-                    const distance = targetScroll - sectionTop;
-                    // Prefer sections we're closer to (but have scrolled past)
-                    if (distance < bestDistance) {
-                        bestDistance = distance;
+                // Calculate how much of the section is visible
+                const visibleTop = Math.max(viewportTop + threshold, sectionTop);
+                const visibleBottom = Math.min(viewportBottom, sectionBottom);
+                const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+                
+                // Score based on visibility and position
+                // Prefer sections that are visible and close to the top of viewport
+                if (visibleHeight > 0) {
+                    const distanceFromTop = Math.abs((sectionTop - threshold) - viewportTop);
+                    const score = visibleHeight - (distanceFromTop * 0.1);
+                    
+                    if (score > bestScore) {
+                        bestScore = score;
                         bestSection = id;
                     }
                 }
             }
             
-            // If no section found (we're between sections), find closest
+            // Fallback: if no visible section, find closest one
             if (!bestSection) {
+                let closestDistance = Infinity;
                 for (const section of sections) {
                     const id = section.getAttribute('id');
                     if (!id) continue;
                     
                     const rect = section.getBoundingClientRect();
                     const sectionTop = rect.top + scrollPosition;
-                    const distance = Math.abs(targetScroll - sectionTop);
+                    const distance = Math.abs((sectionTop - threshold) - viewportTop);
                     
-                    if (distance < bestDistance) {
-                        bestDistance = distance;
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
                         bestSection = id;
                     }
                 }
@@ -581,17 +589,14 @@ function initAll() {
             current = bestSection || 'home';
         }
 
-        // Only update if section changed
-        if (current === activeSection) {
-            return;
-        }
+        // Always update nav links (don't check if section changed - might miss updates)
         activeSection = current;
 
         // Update all nav links
         navLinks.forEach(link => {
             const href = link.getAttribute('href');
             
-            // Remove active from all links
+            // Remove active from all links first
             link.classList.remove('active');
             
             // Add active to matching link
