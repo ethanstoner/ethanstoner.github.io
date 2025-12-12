@@ -504,7 +504,10 @@ function initAll() {
         
         // Get all sections with their absolute positions
         const sectionsArray = Array.from(sections)
-            .filter(section => section.getAttribute('id')) // Only sections with IDs
+            .filter(section => {
+                const id = section.getAttribute('id');
+                return id && id !== ''; // Only sections with valid IDs
+            })
             .map(section => {
                 const rect = section.getBoundingClientRect();
                 const absoluteTop = rect.top + scrollPosition;
@@ -514,46 +517,36 @@ function initAll() {
                     top: absoluteTop,
                     bottom: absoluteTop + rect.height
                 };
-            });
+            })
+            .sort((a, b) => a.top - b.top); // Sort by position
         
-        // If at top (within first 300px), highlight home link
-        if (scrollPosition < 300) {
+        // If at top (within first 250px), highlight home link
+        if (scrollPosition < 250) {
             current = 'home';
         } else {
-            // Find which section we're currently in
-            // Use a threshold that accounts for header and some padding
-            const threshold = headerHeight + 150;
+            // Find the section we're currently in
+            // Check each section to see if scroll position is within its bounds
+            const scrollWithHeader = scrollPosition + headerHeight + 100;
             
-            for (const section of sectionsArray) {
-                // Check if scroll position is past the section start (with threshold)
-                if (scrollPosition >= section.top - threshold) {
-                    // If we haven't passed the next section, we're in this one
-                    const nextSection = sectionsArray.find(s => s.top > section.top);
-                    if (!nextSection || scrollPosition < nextSection.top - threshold) {
-                        current = section.id;
-                        break;
-                    }
+            for (let i = 0; i < sectionsArray.length; i++) {
+                const section = sectionsArray[i];
+                const nextSection = sectionsArray[i + 1];
+                
+                // Check if we're in this section
+                if (scrollWithHeader >= section.top && (!nextSection || scrollWithHeader < nextSection.top)) {
+                    current = section.id;
+                    break;
                 }
             }
             
-            // If no section matched, find the closest one we've passed
+            // If no exact match, find the section we've scrolled past most recently
             if (!current) {
-                let closestSection = '';
-                let closestDistance = Infinity;
-                
-                sectionsArray.forEach(section => {
-                    // Only consider sections we've scrolled past
-                    if (scrollPosition >= section.top - threshold) {
-                        const distance = scrollPosition - (section.top - threshold);
-                        if (distance < closestDistance) {
-                            closestDistance = distance;
-                            closestSection = section.id;
-                        }
+                for (let i = sectionsArray.length - 1; i >= 0; i--) {
+                    const section = sectionsArray[i];
+                    if (scrollPosition >= section.top - headerHeight - 100) {
+                        current = section.id;
+                        break;
                     }
-                });
-                
-                if (closestSection) {
-                    current = closestSection;
                 }
             }
         }
