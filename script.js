@@ -319,6 +319,35 @@ function initAll() {
     removeHashFromURL();
     
     initSmoothScroll();
+    
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mainNav = document.getElementById('main-nav');
+    
+    if (mobileMenuToggle && mainNav) {
+        mobileMenuToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            const isOpen = mainNav.classList.contains('active');
+            mobileMenuToggle.setAttribute('aria-expanded', isOpen);
+        });
+        
+        // Close menu when clicking on a nav link
+        const navLinks = mainNav.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mainNav.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mainNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                mainNav.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
 
     // Scroll progress indicator
     function updateScrollProgress() {

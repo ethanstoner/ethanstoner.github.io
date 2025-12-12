@@ -117,6 +117,31 @@ html {
     opacity: 0.7;
 }
 
+.mobile-menu-toggle {
+    display: none;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 101;
+}
+
+.mobile-menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.mobile-menu-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
 .nav {
     display: flex;
     list-style: none;
@@ -1567,7 +1592,53 @@ html {
         font-size: 16px;
     }
 
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
     .nav {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(15, 15, 15, 0.98);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px 0;
+        gap: 0;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 99;
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+    }
+
+    .nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-link {
+        display: flex;
+        padding: 16px 24px;
+        line-height: 1.5;
+        min-height: auto;
+        width: 100%;
+        justify-content: flex-start;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-link:last-child {
+        border-bottom: none;
+    }
+
+    .nav-link::after {
         display: none;
     }
 
@@ -1593,6 +1664,12 @@ html {
         width: 240px;
         height: 240px;
         overflow: visible;
+        margin: 0 auto;
+    }
+
+    .hero-image {
+        overflow: visible;
+        padding: 20px 0;
     }
     
     .floating-icon {
@@ -1656,6 +1733,8 @@ html {
     .avatar-container {
         width: 200px;
         height: 200px;
+        margin: 0 auto;
+        overflow: visible;
     }
     
     .avatar {
@@ -1663,6 +1742,13 @@ html {
         height: 160px;
         font-size: 50px;
         border-width: 6px;
+        object-fit: cover;
+    }
+
+    .hero-image {
+        overflow: visible;
+        padding: 20px 0;
+        width: 100%;
     }
     
     .floating-icon {
