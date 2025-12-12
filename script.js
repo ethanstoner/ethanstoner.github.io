@@ -325,7 +325,9 @@ function initAll() {
     const mainNav = document.getElementById('main-nav');
     
     if (mobileMenuToggle && mainNav) {
-        mobileMenuToggle.addEventListener('click', function() {
+        mobileMenuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             mainNav.classList.toggle('active');
             const isOpen = mainNav.classList.contains('active');
             mobileMenuToggle.setAttribute('aria-expanded', isOpen);
@@ -342,7 +344,9 @@ function initAll() {
         
         // Close menu when clicking outside
         document.addEventListener('click', function(e) {
-            if (!mainNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            if (mainNav.classList.contains('active') && 
+                !mainNav.contains(e.target) && 
+                !mobileMenuToggle.contains(e.target)) {
                 mainNav.classList.remove('active');
                 mobileMenuToggle.setAttribute('aria-expanded', 'false');
             }

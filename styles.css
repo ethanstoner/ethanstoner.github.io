@@ -1527,6 +1527,14 @@ html {
         padding: 0 48px;
     }
     
+    .nav {
+        display: flex;
+    }
+    
+    .mobile-menu-toggle {
+        display: none;
+    }
+    
     .section {
         padding: 140px 48px;
     }
@@ -1582,6 +1590,11 @@ html {
     .header {
         padding: 0 24px;
         height: 60px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
     }
 
     .logo {
@@ -1594,6 +1607,8 @@ html {
 
     .mobile-menu-toggle {
         display: flex;
+        z-index: 101;
+        position: relative;
     }
 
     .nav {
@@ -1648,7 +1663,7 @@ html {
     }
 
     .hero-section {
-        padding-top: 80px;
+        padding-top: 100px;
         padding-bottom: 80px;
         min-height: auto;
         overflow-x: hidden;
@@ -1882,11 +1897,12 @@ html {
 @media (max-width: 480px) {
     .header {
         padding: 0 16px;
+        height: 60px;
     }
     
     .hero-section {
         padding: 0 16px;
-        padding-top: 60px;
+        padding-top: 100px;
         padding-bottom: 80px;
     }
     
