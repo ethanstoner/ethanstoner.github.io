@@ -580,7 +580,7 @@ html {
     top: 20px;
     right: -20px;
     animation: float-2 3s ease-in-out infinite;
-    animation-delay: 0.5s;
+    animation-delay: 0.5s !important; /* Staggered delay */
     animation-fill-mode: both;
     /* Force animation to start immediately on page load */
     animation-play-state: running !important;
@@ -590,7 +590,7 @@ html {
     bottom: 20px;
     left: -20px;
     animation: float-3 3s ease-in-out infinite;
-    animation-delay: 1s;
+    animation-delay: 1s !important; /* Staggered delay */
     animation-fill-mode: both;
     /* Force animation to start immediately on page load */
     animation-play-state: running !important;
@@ -615,9 +615,9 @@ html {
     left: 50%;
     margin-left: -160px;
     animation: float-1 3s ease-in-out infinite;
-    animation-delay: 0s;
+    animation-delay: 0s !important; /* Force immediate start */
     animation-fill-mode: both;
-    /* Don't set transform here - let animation handle it */
+    transform: translateX(-50%); /* Initial positioning */
     /* Force animation to start immediately on page load */
     animation-play-state: running !important;
 }
@@ -627,9 +627,9 @@ html {
     right: 50%;
     margin-right: -160px;
     animation: float-4 3s ease-in-out infinite;
-    animation-delay: 1.5s;
+    animation-delay: 1.5s !important; /* Staggered delay */
     animation-fill-mode: both;
-    /* Don't set transform here - let animation handle it */
+    transform: translateX(50%); /* Initial positioning */
     /* Force animation to start immediately on page load */
     animation-play-state: running !important;
 }
@@ -638,9 +638,9 @@ html {
     top: 50%;
     left: -30px;
     animation: float-5 3s ease-in-out infinite;
-    animation-delay: 2s;
+    animation-delay: 2s !important; /* Staggered delay */
     animation-fill-mode: both;
-    /* Don't set transform here - let animation handle it */
+    transform: translateY(-50%); /* Initial positioning */
     /* Force animation to start immediately on page load */
     animation-play-state: running !important;
 }
