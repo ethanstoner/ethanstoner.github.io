@@ -788,3 +788,55 @@ function showCopyFeedback(button) {
         showEmailCopiedPopup();
     }
 }
+
+// Copy email from hero section with nice popup
+function copyEmailFromHero(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const email = "ethanstoner08@gmail.com";
+    
+    // Use modern clipboard API with fallback
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(() => {
+            showEmailCopiedPopup();
+        }).catch(err => {
+            console.warn('Failed to copy:', err);
+            fallbackCopyTextToClipboard(email, null);
+            showEmailCopiedPopup();
+        });
+    } else {
+        fallbackCopyTextToClipboard(email, null);
+        showEmailCopiedPopup();
+    }
+}
+
+// Show smooth popup notification
+function showEmailCopiedPopup() {
+    // Remove existing popup if any
+    const existingPopup = document.getElementById('email-copied-popup');
+    if (existingPopup) {
+        existingPopup.remove();
+    }
+    
+    // Create popup element
+    const popup = document.createElement('div');
+    popup.id = 'email-copied-popup';
+    popup.textContent = 'Email copied to clipboard!';
+    document.body.appendChild(popup);
+    
+    // Trigger animation
+    setTimeout(() => {
+        popup.classList.add('show');
+    }, 10);
+    
+    // Remove after animation
+    setTimeout(() => {
+        popup.classList.remove('show');
+        setTimeout(() => {
+            if (popup.parentNode) {
+                popup.parentNode.removeChild(popup);
+            }
+        }, 300);
+    }, 2000);
+}
