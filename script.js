@@ -478,9 +478,16 @@ function initAll() {
     let activeSection = 'home'; // Track current active section
 
     function updateActiveNavLink(forceUpdate = false) {
-        // Only check click flags if this is NOT a forced update (manual scroll)
-        // Click flags should only prevent updates during smooth scroll animation
-        if (!forceUpdate) {
+        // If this is a forced update (manual scroll), always update regardless of click flags
+        if (forceUpdate) {
+            // Clear any stale click flags on manual scroll
+            navLinks.forEach(link => {
+                link.dataset.userClicked = 'false';
+                delete link.dataset.clickTime;
+            });
+        } else {
+            // Only check click flags if this is NOT a forced update
+            // Click flags should only prevent updates during smooth scroll animation
             let veryRecentClick = false;
             const now = Date.now();
             navLinks.forEach(link => {
@@ -499,7 +506,6 @@ function initAll() {
             });
             
             // Only skip if smooth scroll is actively happening (very recent click)
-            // Manual scrolling will force update regardless
             if (veryRecentClick) {
                 return;
             }
