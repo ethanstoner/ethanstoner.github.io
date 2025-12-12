@@ -342,10 +342,11 @@ function initAll() {
         // Close menu when clicking on a nav link
         const navLinks = mainNav.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', function(e) {
+                // Close menu immediately
                 mainNav.classList.remove('active');
                 mobileMenuToggle.setAttribute('aria-expanded', 'false');
-            });
+            }, { capture: true }); // Use capture phase to run before smooth scroll
         });
         
         // Close menu when clicking outside
