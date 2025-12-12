@@ -477,24 +477,26 @@ function initAll() {
     let activeSection = 'home'; // Track current active section
 
     function updateActiveNavLink() {
-        // Check if any link was clicked VERY recently (within 300ms) - only skip during smooth scroll animation
+        // Check if any link was clicked VERY recently (within 200ms) - only skip during smooth scroll animation
         let veryRecentClick = false;
+        const now = Date.now();
         navLinks.forEach(link => {
             if (link.dataset.userClicked === 'true') {
                 const clickTime = parseInt(link.dataset.clickTime || '0');
-                const timeSinceClick = Date.now() - clickTime;
-                // Only prevent updates during smooth scroll (first 300ms)
-                if (timeSinceClick < 300) {
+                const timeSinceClick = now - clickTime;
+                // Only prevent updates during smooth scroll (first 200ms)
+                if (timeSinceClick < 200) {
                     veryRecentClick = true;
                 } else {
-                    // Clear old click flag after smooth scroll completes to allow manual scroll updates
+                    // Clear old click flag immediately after smooth scroll completes
                     link.dataset.userClicked = 'false';
+                    delete link.dataset.clickTime;
                 }
             }
         });
         
         // Only skip if smooth scroll is actively happening (very recent click)
-        // After 300ms, manual scrolling should always update the active state
+        // After 200ms, manual scrolling should always update the active state
         if (veryRecentClick) {
             return;
         }
@@ -503,58 +505,62 @@ function initAll() {
         const headerHeight = document.querySelector('.header')?.offsetHeight || 80;
         let current = '';
         
-        // If at top (within first 200px), highlight home link
-        if (scrollPosition < 200) {
+        // If at top (within first 150px), highlight home link
+        if (scrollPosition < 150) {
             current = 'home';
         } else {
-            // Find which section is currently most visible in viewport
-            // Use a simpler approach: find section whose top is closest to but above viewport top
-            const viewportThreshold = headerHeight + 150;
-            const targetPosition = scrollPosition + viewportThreshold;
+            // Find which section is currently in view
+            // Use viewport-relative positions for accuracy
+            const threshold = headerHeight + 100;
+            const viewportTop = scrollPosition + threshold;
             
-            let bestMatch = null;
-            let closestDistance = Infinity;
-            
-            // Build array of sections with absolute positions
+            // Build array of sections with their absolute positions
             const sectionsWithPos = [];
             for (const section of sections) {
                 const id = section.getAttribute('id');
                 if (!id) continue;
                 
                 const rect = section.getBoundingClientRect();
+                // rect.top is viewport-relative, add scrollPosition for absolute
                 const absoluteTop = rect.top + scrollPosition;
                 sectionsWithPos.push({
                     id: id,
                     top: absoluteTop,
-                    bottom: absoluteTop + rect.height
+                    bottom: absoluteTop + rect.height,
+                    viewportTop: rect.top
                 });
             }
             
-            // Sort by position
+            // Sort by position (top to bottom)
             sectionsWithPos.sort((a, b) => a.top - b.top);
             
-            // Find the section we've scrolled past most recently
+            // Find the section whose top we've scrolled past
+            // Start from the bottom and work up to find the most recent section
+            let foundSection = null;
             for (let i = sectionsWithPos.length - 1; i >= 0; i--) {
                 const section = sectionsWithPos[i];
-                // If section top is at or above our target position, we're in this section
-                if (section.top <= targetPosition) {
-                    bestMatch = section.id;
+                // If section top is at or above our viewport threshold, we're in this section
+                if (section.top <= viewportTop) {
+                    foundSection = section.id;
                     break;
                 }
             }
             
-            // Fallback: if no section found, use closest one
-            if (!bestMatch) {
+            // If no section found (shouldn't happen), use closest
+            if (!foundSection && sectionsWithPos.length > 0) {
+                let closest = sectionsWithPos[0];
+                let minDistance = Math.abs(viewportTop - closest.top);
                 for (const section of sectionsWithPos) {
-                    const distance = Math.abs(targetPosition - section.top);
-                    if (distance < closestDistance) {
-                        closestDistance = distance;
-                        bestMatch = section.id;
+                    const distance = Math.abs(viewportTop - section.top);
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closest = section;
                     }
                 }
+                foundSection = closest.id;
             }
             
-            current = bestMatch || 'home';
+            current = foundSection || 'home';
         }
 
         // Only update if section changed
