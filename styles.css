@@ -2011,8 +2011,8 @@ html {
     /* Inline style sets: animation-delay: 1.5s; animation-duration: 3s; */
     .icon-4 {
         animation-name: floatIcon4Mobile;
-        animation-duration: 3s;
-        animation-delay: 1.5s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
     }
     
     @keyframes floatIcon4Mobile {
@@ -2034,22 +2034,22 @@ html {
     /* Inline style sets: animation-delay: 2s; animation-duration: 3s; */
     .icon-5 {
         animation-name: floatIcon5Mobile;
-        animation-duration: 3s;
-        animation-delay: 2s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
     }
     
     /* Icon 2 and 3 mobile: use same animations as desktop */
     /* Inline styles handle delays: 0.5s and 1s */
     .icon-2 {
         animation-name: floatIcon2;
-        animation-duration: 3s;
-        animation-delay: 0.5s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
     }
     
     .icon-3 {
         animation-name: floatIcon3;
-        animation-duration: 3s;
-        animation-delay: 1s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
     }
     
     @keyframes floatIcon5Mobile {
