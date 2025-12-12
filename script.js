@@ -591,23 +591,29 @@ function initAll() {
 
     // Throttle scroll events for better performance - update more frequently for manual scrolling
     let scrollTimeout;
-    let isManualScroll = false;
-    let lastScrollTime = Date.now();
+    let isProgrammaticScroll = false;
+    let programmaticScrollTimeout = null;
+    
+    // Mark when programmatic scroll happens (from clicking nav links)
+    const originalScrollTo = window.scrollTo;
+    window.scrollTo = function(...args) {
+        isProgrammaticScroll = true;
+        const result = originalScrollTo.apply(this, args);
+        // Clear flag after smooth scroll completes
+        if (programmaticScrollTimeout) clearTimeout(programmaticScrollTimeout);
+        programmaticScrollTimeout = setTimeout(() => {
+            isProgrammaticScroll = false;
+        }, 800);
+        return result;
+    };
     
     window.addEventListener('scroll', () => {
-        const now = Date.now();
-        const timeSinceLastScroll = now - lastScrollTime;
-        lastScrollTime = now;
-        
-        // Detect manual scrolling (rapid scroll events) vs programmatic scrolling
-        // Manual scrolling has rapid, frequent events
-        isManualScroll = timeSinceLastScroll < 100;
-        
         clearTimeout(scrollTimeout);
-        // Use shorter timeout for more responsive updates during manual scrolling
-        // Force update on manual scroll to bypass click flags
+        // Always update on scroll - if it's manual scroll, force update bypasses click flags
+        // If it's programmatic scroll, click flags will still prevent updates during smooth scroll
         scrollTimeout = setTimeout(() => {
-            updateActiveNavLink(isManualScroll);
+            // Force update on manual scroll (not programmatic)
+            updateActiveNavLink(!isProgrammaticScroll);
         }, 50);
     }, { passive: true });
     
