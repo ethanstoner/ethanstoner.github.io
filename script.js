@@ -205,16 +205,17 @@ function initSmoothScroll() {
                     }
                 }, 50);
                 
-                // Set click flag - will be cleared after 1 second to allow manual scroll updates
+                // Set click flag - will be cleared after smooth scroll completes
                 // This prevents override during smooth scroll but allows manual scrolling to work
                 clickedLink.dataset.userClicked = 'true';
                 clickedLink.dataset.clickTime = Date.now().toString();
                 setTimeout(() => {
-                    // Clear flag after smooth scroll completes (1 second)
+                    // Clear flag after smooth scroll completes (500ms)
                     if (lastClickedLink === clickedLink) {
                         clickedLink.dataset.userClicked = 'false';
+                        delete clickedLink.dataset.clickTime;
                     }
-                }, 1000);
+                }, 500);
             }
             
             // Handle home link - scroll to top
