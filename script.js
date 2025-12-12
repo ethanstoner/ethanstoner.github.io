@@ -551,27 +551,30 @@ function initAll() {
             }
         }
 
-        // Update all nav links - but don't override user-clicked links
-        navLinks.forEach(link => {
-            // Only remove active if this link wasn't user-clicked
-            if (link.dataset.userClicked !== 'true') {
-                link.classList.remove('active');
-            }
-        });
-        
-        // Then add active to the correct one (if not user-clicked)
+        // Update all nav links
         navLinks.forEach(link => {
             const href = link.getAttribute('href');
             
-            // Skip if this link was user-clicked
+            // Skip if this link was user-clicked very recently
             if (link.dataset.userClicked === 'true') {
-                return;
+                const clickTime = parseInt(link.dataset.clickTime || '0');
+                const timeSinceClick = Date.now() - clickTime;
+                // Only keep active if clicked within last 500ms
+                if (timeSinceClick < 500) {
+                    return; // Keep this link active during smooth scroll
+                } else {
+                    // Clear flag after smooth scroll completes
+                    link.dataset.userClicked = 'false';
+                }
             }
             
-            // Handle home link
-            if ((href === '#' || href === '#home') && current === 'home') {
+            // Remove active from all links first
+            link.classList.remove('active');
+            
+            // Then add active to the matching link
+            if (current === 'home' && (href === '#' || href === '#home')) {
                 link.classList.add('active');
-            } else if (href === `#${current}` && current && current !== 'home') {
+            } else if (current && current !== 'home' && href === `#${current}`) {
                 link.classList.add('active');
             }
         });
