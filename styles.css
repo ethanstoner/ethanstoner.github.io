@@ -2275,21 +2275,28 @@ html {
     color: #fff;
 }
 
+/* Hide scrollbar but keep functionality */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 0px;
+    display: none;
 }
 
 ::-webkit-scrollbar-track {
-    background: #0f0f0f;
+    display: none;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 0;
+    display: none;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2);
+/* Firefox */
+* {
+    scrollbar-width: none;
+}
+
+/* IE and Edge */
+* {
+    -ms-overflow-style: none;
 }
 
 /* Remove background animation */

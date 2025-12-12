@@ -205,19 +205,16 @@ function initSmoothScroll() {
                     }
                 }, 50);
                 
-                // Prevent scroll handler from overriding for 3.5 seconds
-                ignoreScrollUpdate = true;
+                // Set click flag - will be cleared after 1 second to allow manual scroll updates
+                // This prevents override during smooth scroll but allows manual scrolling to work
+                clickedLink.dataset.userClicked = 'true';
+                clickedLink.dataset.clickTime = Date.now().toString();
                 setTimeout(() => {
-                    // Only re-enable if this is still the last clicked link
+                    // Clear flag after smooth scroll completes (1 second)
                     if (lastClickedLink === clickedLink) {
-                        ignoreScrollUpdate = false;
-                        // Final verification
-                        allNavLinks.forEach(l => {
-                            if (l !== clickedLink) l.classList.remove('active');
-                        });
-                        clickedLink.classList.add('active');
+                        clickedLink.dataset.userClicked = 'false';
                     }
-                }, 3500);
+                }, 1000);
             }
             
             // Handle home link - scroll to top
@@ -480,8 +477,9 @@ function initAll() {
     let lastClickedLink = null; // Track last clicked link
 
     function updateActiveNavLink() {
-        // Don't update if we just clicked a link (wait for scroll to settle)
-        if (ignoreScrollUpdate) {
+        // Always update on scroll - remove the ignoreScrollUpdate check for manual scrolling
+        // Only ignore if we're in the middle of a programmatic scroll
+        if (ignoreScrollUpdate && isProgrammaticScroll) {
             return;
         }
         
@@ -584,11 +582,12 @@ function initAll() {
         });
     }
 
-    // Throttle scroll events for better performance
+    // Throttle scroll events for better performance - update more frequently for manual scrolling
     let scrollTimeout;
     window.addEventListener('scroll', () => {
         clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(updateActiveNavLink, 200);
+        // Use shorter timeout for more responsive updates during manual scrolling
+        scrollTimeout = setTimeout(updateActiveNavLink, 100);
     }, { passive: true });
     
     // Update immediately on page load
