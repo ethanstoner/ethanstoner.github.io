@@ -1009,6 +1009,16 @@ html {
     align-items: flex-start;
     margin-bottom: 24px;
     gap: 16px;
+    flex-wrap: wrap;
+}
+
+.project-header .project-badge {
+    margin-left: 0;
+    margin-right: 8px;
+}
+
+.project-header .project-badge:last-child {
+    margin-right: 0;
 }
 
 .project-title {
