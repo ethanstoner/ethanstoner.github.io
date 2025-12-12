@@ -227,15 +227,17 @@ function initSmoothScroll() {
             
             // On mobile, use native smooth scroll only (faster, smoother)
             if (isMobile) {
-                // Ensure smooth scroll behavior is supported
-                if ('scrollBehavior' in document.documentElement.style) {
-                    // Use native smooth scroll
+                // Force smooth scroll on mobile - ensure CSS supports it
+                document.documentElement.style.scrollBehavior = 'smooth';
+                
+                // Use native smooth scroll
+                try {
                     window.scrollTo({
                         top: desiredPosition,
                         behavior: 'smooth'
                     });
-                } else {
-                    // Fallback: simple scroll for older browsers
+                } catch (e) {
+                    // Fallback if smooth scroll fails
                     window.scrollTo(0, desiredPosition);
                 }
                 
@@ -246,7 +248,7 @@ function initSmoothScroll() {
                         allNavLinks.forEach(l => l.classList.remove('active'));
                         this.classList.add('active');
                     }
-                }, 500);
+                }, 600);
             } else {
                 // Desktop: use optimized polyfill for better control
                 const startPosition = window.pageYOffset;

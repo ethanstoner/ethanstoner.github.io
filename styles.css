@@ -314,6 +314,7 @@ html {
     align-items: center;
     width: 100%;
     min-height: 600px;
+    min-width: 0; /* Allow grid items to shrink */
 }
 
 .hero-text {
@@ -333,7 +334,8 @@ html {
     margin: 0;
     color: #fff;
     white-space: nowrap;
-    width: 100%;
+    width: fit-content;
+    max-width: 100%;
     overflow: visible;
 }
 
