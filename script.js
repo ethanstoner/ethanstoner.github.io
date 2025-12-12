@@ -470,7 +470,7 @@ function initAll() {
         });
     }
 
-    // Update active nav link on scroll
+    // Update active nav link on scroll using IntersectionObserver for reliability
     const sections = document.querySelectorAll('section[id], .section[id], .hero-section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
     let lastClickedLink = null; // Track last clicked link
@@ -507,42 +507,37 @@ function initAll() {
         if (scrollPosition < 200) {
             current = 'home';
         } else {
-            // Find which section is currently most visible
-            // Use getBoundingClientRect for accurate viewport positions
-            const viewportThreshold = headerHeight + 150;
+            // Find which section is currently in view using viewport-relative positions
+            const viewportTop = scrollPosition + headerHeight + 100;
             
-            // Build array of sections with their positions
-            const sectionsWithPos = [];
+            // Check each section to find the one we're currently viewing
+            let bestMatch = null;
+            let bestScore = -Infinity;
+            
             for (const section of sections) {
                 const id = section.getAttribute('id');
                 if (!id) continue;
                 
                 const rect = section.getBoundingClientRect();
-                sectionsWithPos.push({
-                    id: id,
-                    top: rect.top + scrollPosition,
-                    bottom: rect.top + scrollPosition + rect.height,
-                    viewportTop: rect.top,
-                    viewportBottom: rect.bottom
-                });
-            }
-            
-            // Sort by position
-            sectionsWithPos.sort((a, b) => a.top - b.top);
-            
-            // Find the section whose top is closest to but above the threshold
-            let selectedSection = null;
-            for (let i = sectionsWithPos.length - 1; i >= 0; i--) {
-                const section = sectionsWithPos[i];
-                // If section top is above our threshold, we've scrolled past it
-                if (section.top <= scrollPosition + viewportThreshold) {
-                    selectedSection = section.id;
-                    break;
+                // rect.top is relative to viewport, so we need absolute position
+                const sectionTop = rect.top + scrollPosition;
+                
+                // Calculate how much of this section is visible
+                const sectionVisibleTop = Math.max(0, rect.top);
+                const sectionVisibleBottom = Math.min(window.innerHeight, rect.bottom);
+                const visibleHeight = Math.max(0, sectionVisibleBottom - sectionVisibleTop);
+                
+                // Score: prefer sections that are visible and close to viewport top
+                if (sectionTop <= viewportTop && visibleHeight > 0) {
+                    const score = visibleHeight - Math.abs(rect.top - (headerHeight + 50));
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestMatch = id;
+                    }
                 }
             }
             
-            // If no section found, use the first one (shouldn't happen)
-            current = selectedSection || sectionsWithPos[0]?.id || 'home';
+            current = bestMatch || 'home';
         }
 
         // Only update if section changed
