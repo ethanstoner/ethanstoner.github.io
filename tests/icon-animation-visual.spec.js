@@ -7,7 +7,7 @@ test.describe('Icon Animation Visual QA', () => {
         await page.waitForLoadState('networkidle');
         await page.waitForTimeout(500);
         
-        const icons = await page.locator('.floating-icon .float').all();
+        const icons = await page.locator('.floating-icon').all();
         expect(icons.length).toBe(5);
         
         // Check each icon has animation applied
@@ -71,7 +71,7 @@ test.describe('Icon Animation Visual QA', () => {
         await page.waitForLoadState('networkidle');
         await page.waitForTimeout(500);
         
-        const icons = await page.locator('.floating-icon .float').all();
+        const icons = await page.locator('.floating-icon').all();
         expect(icons.length).toBe(5);
         
         // Check animation delays are different (not all 0s)
