@@ -39,8 +39,29 @@ function smoothScrollToTop() {
         return;
     }
     
+    // Detect mobile - use native scroll on mobile for smoother performance
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+    
+    if (isMobile) {
+        // Mobile: use native smooth scroll only (no jittery polyfill)
+        document.documentElement.style.scrollBehavior = 'smooth';
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        // Update active nav after scroll completes
+        setTimeout(() => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(l => l.classList.remove('active'));
+            const homeLink = document.querySelector('a[href="#"]');
+            if (homeLink) homeLink.classList.add('active');
+        }, 500);
+        return;
+    }
+    
+    // Desktop: use polyfill for better control
     const distance = -startPosition;
-    const duration = 800;
+    const duration = 600; // Shorter for smoother feel
     let start = null;
     let animationId = null;
     

@@ -4,20 +4,19 @@ This document tracks known issues and their status.
 
 ## Current Issues
 
-### 1. Floating Icons Animation on Page Load
-**Status:** Partially Fixed (known issue)
-**Description:** Floating icons around the avatar appear frozen for a brief moment when the page first loads. Some icons may not animate immediately due to animation delays (0s, 0.5s, 1s, 1.5s, 2s).
+### 1. Floating Icons Animation on Mobile
+**Status:** Fixed
+**Description:** Floating icons around the avatar were frozen on mobile devices.
 **Root Cause:** 
 - Animation conflicts with positioning transforms
-- Animation delays cause some icons to start animating later
-- Mobile positioning overrides may conflict with animations
+- Animation delays causing icons to appear frozen
+- Mobile positioning overrides conflicting with animations
 **Fix Applied:** 
-- Separated animations for icons with positioning transforms (icon-1, icon-4, icon-5)
-- Added `animation-fill-mode: both` to ensure icons start in correct position
-- Added `will-change: transform` for better performance
-- Override transforms on mobile with `!important` to ensure animations work
-- Force animation playback state to `running`
-**Known Limitation:** Icons with animation delays (icon-2, icon-3, icon-4, icon-5) will appear static until their delay completes. This is intentional for staggered animation effect.
+- Removed animation delays on mobile (all start at 0s)
+- Force animations with `!important` on all mobile icon rules
+- Set `transform: translateY(0) !important` to allow float animation to work
+- Added `animation-play-state: running !important` to ensure animations start
+- Override all positioning transforms on mobile
 **Test:** `tests/advanced-mobile-qa.spec.js` - "icons should not be frozen on page refresh"
 
 ### 2. Hero Title Wrapping on Desktop
@@ -43,14 +42,16 @@ This document tracks known issues and their status.
 **Test:** `tests/advanced-mobile-qa.spec.js` - "all floating icons should be visible on mobile"
 
 ### 4. Mobile Smooth Scroll Performance
-**Status:** Fixed (pending verification)
-**Description:** Smooth scrolling on mobile was glitchy and not as smooth as desktop.
-**Root Cause:** Conflicting polyfill and native scroll, causing performance issues.
+**Status:** Fixed
+**Description:** Smooth scrolling up on mobile was jittery/glitchy, while scrolling down worked fine.
+**Root Cause:** 
+- `smoothScrollToTop()` function was using polyfill on mobile, causing jitter
+- Upward scrolling used different code path than downward scrolling
 **Fix Applied:**
-- Use native smooth scroll only on mobile devices
-- Force `scrollBehavior: 'smooth'` via JavaScript
-- Added try/catch for error handling
-- Increased timeout for better reliability
+- Use native smooth scroll only on mobile for both up and down scrolling
+- Force `scrollBehavior: 'smooth'` via JavaScript before scrolling
+- Removed polyfill usage on mobile devices
+- Consistent scroll behavior for all directions on mobile
 **Test:** `tests/advanced-mobile-qa.spec.js` - "smooth scroll should work on mobile"
 
 ## Resolved Issues

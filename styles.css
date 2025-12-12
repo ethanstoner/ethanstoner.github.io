@@ -1878,7 +1878,7 @@ html {
         height: 16px;
     }
     
-    /* Force all icons to animate on mobile */
+    /* Force all icons to animate on mobile - remove delays for immediate start */
     .icon-1 {
         top: -10px;
         left: 10px;
@@ -1887,27 +1887,27 @@ html {
         animation-delay: 0s !important;
         animation-fill-mode: both !important;
         animation-play-state: running !important;
-        transform: none !important;
+        transform: translateY(0) !important;
     }
     
     .icon-2 {
         top: -10px;
         right: 10px;
         animation: float 3s ease-in-out infinite !important;
-        animation-delay: 0.5s !important;
+        animation-delay: 0s !important; /* Start immediately on mobile */
         animation-fill-mode: both !important;
         animation-play-state: running !important;
-        transform: none !important;
+        transform: translateY(0) !important;
     }
     
     .icon-3 {
         bottom: -10px;
         left: 10px;
         animation: float 3s ease-in-out infinite !important;
-        animation-delay: 1s !important;
+        animation-delay: 0s !important; /* Start immediately on mobile */
         animation-fill-mode: both !important;
         animation-play-state: running !important;
-        transform: none !important;
+        transform: translateY(0) !important;
     }
     
     .icon-4 {
@@ -1915,20 +1915,20 @@ html {
         right: 10px;
         margin-right: 0 !important;
         animation: float 3s ease-in-out infinite !important;
-        animation-delay: 1.5s !important;
+        animation-delay: 0s !important; /* Start immediately on mobile */
         animation-fill-mode: both !important;
         animation-play-state: running !important;
-        transform: none !important;
+        transform: translateY(0) !important;
     }
     
     .icon-5 {
         top: 10px;
         left: -10px;
         animation: float 3s ease-in-out infinite !important;
-        animation-delay: 2s !important;
+        animation-delay: 0s !important; /* Start immediately on mobile */
         animation-fill-mode: both !important;
         animation-play-state: running !important;
-        transform: none !important;
+        transform: translateY(0) !important;
     }
 
     .section {
