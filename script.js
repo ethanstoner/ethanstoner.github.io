@@ -1,62 +1,4 @@
-// Sound effects (using audio file for click sound)
-class SoundManager {
-    constructor() {
-        this.enabled = true;
-        this.clickSound = null;
-        this.init();
-    }
-
-    init() {
-        try {
-            // Load the click sound file
-            this.clickSound = new Audio('click-sound.mp3');
-            this.clickSound.volume = 0.5; // Set volume to 50%
-            this.clickSound.preload = 'auto';
-            
-            // Handle loading errors
-            this.clickSound.addEventListener('error', (e) => {
-                console.warn('Click sound failed to load:', e);
-                this.enabled = false;
-            });
-        } catch (e) {
-            console.warn('SoundManager initialization failed:', e);
-            this.enabled = false;
-        }
-    }
-
-    playClick() {
-        if (!this.enabled || !this.clickSound) return;
-        if (typeof window !== 'undefined' && window.__PLAYWRIGHT_TEST__) return;
-
-        try {
-            // Reset to beginning and play
-            this.clickSound.currentTime = 0;
-            this.clickSound.play().catch(err => {
-                // Ignore play errors (e.g., user hasn't interacted with page yet)
-                console.warn('Click sound play failed:', err);
-            });
-        } catch (e) {
-            console.warn('Click sound error:', e);
-        }
-    }
-
-    playHover() {
-        // Disabled - no hover sounds
-        return;
-    }
-
-    playSuccess() {
-        // Can reuse click sound for success if needed
-        this.playClick();
-    }
-}
-
-const soundManager = new SoundManager();
-
-// Expose soundManager to window for debugging
-if (typeof window !== 'undefined') {
-    window.soundManager = soundManager;
-}
+// Sound effects removed per user request
 
 // Smooth scroll polyfill for older browsers
 function smoothScrollTo(targetPosition) {
@@ -151,13 +93,6 @@ function initSmoothScroll() {
             e.stopPropagation();
             
             const href = this.getAttribute('href');
-            
-            // Play click sound
-            try {
-                soundManager.playClick();
-            } catch (err) {
-                // Ignore sound errors
-            }
             
             // CRITICAL: Update active nav IMMEDIATELY and PERSISTENTLY
             // Use a single synchronous operation to avoid race conditions
@@ -620,21 +555,7 @@ function initAll() {
 
     // Hover sounds disabled - removed per user request
 
-    // Add click sounds to all buttons and links
-    document.querySelectorAll('a, button, .btn-primary, .btn-secondary, .project-link, .contact-link').forEach(element => {
-        element.addEventListener('click', function(e) {
-            // Don't play sound if it's already handled by smooth scroll
-            if (this.getAttribute('href') && this.getAttribute('href').startsWith('#')) {
-                return; // Already handled by smooth scroll
-            }
-            
-            try {
-                soundManager.playClick();
-            } catch (err) {
-                // Ignore sound errors
-            }
-        });
-    });
+    // Click sounds removed per user request
 }
 
 // Prevent default hash jump behavior
