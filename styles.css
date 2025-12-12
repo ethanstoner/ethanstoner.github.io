@@ -925,7 +925,8 @@ html {
     gap: 32px;
 }
 
-.about-highlight {
+.about-highlight,
+.cloud-devops-section {
     background: rgba(255, 255, 255, 0.03);
     border-left: 3px solid rgba(255, 255, 255, 0.2);
     padding: 24px 32px;
@@ -937,6 +938,30 @@ html {
     margin: 0;
     color: rgba(255, 255, 255, 0.9);
     font-weight: 500;
+}
+
+.highlight-title {
+    margin: 0 0 16px 0;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+    font-size: 16px;
+    font-family: "Roboto Mono", monospace;
+}
+
+.highlight-list {
+    margin: 0;
+    padding-left: 20px;
+    list-style-type: disc;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.highlight-list li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.highlight-list li:last-child {
+    margin-bottom: 0;
 }
 
 .about-text {
