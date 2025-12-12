@@ -1012,13 +1012,15 @@ html {
     flex-wrap: wrap;
 }
 
-.project-header .project-badge {
-    margin-left: 0;
-    margin-right: 8px;
+.project-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
-.project-header .project-badge:last-child {
-    margin-right: 0;
+.project-header .project-badge {
+    margin: 0;
 }
 
 .project-title {
