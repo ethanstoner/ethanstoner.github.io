@@ -481,6 +481,14 @@ function initAll() {
     const navLinks = document.querySelectorAll('.nav-link');
     let lastClickedLink = null; // Track last clicked link
     let activeSection = 'home'; // Track current active section
+    
+    // Debug: verify sections are found
+    if (sections.length === 0) {
+        console.warn('No sections found for navigation!');
+    }
+    if (navLinks.length === 0) {
+        console.warn('No nav links found!');
+    }
 
     function updateActiveNavLink(forceUpdate = false) {
         // If this is a forced update (manual scroll), always update regardless of click flags
@@ -535,7 +543,7 @@ function initAll() {
             // Check each section
             for (const section of sections) {
                 const id = section.getAttribute('id');
-                if (!id) continue;
+                if (!id || !section.offsetParent) continue; // Skip if not visible
                 
                 const rect = section.getBoundingClientRect();
                 // Get absolute position
