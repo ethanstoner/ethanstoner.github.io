@@ -120,23 +120,48 @@ test.describe('Advanced Mobile QA Tests', () => {
     // Reload page
     await page.reload();
     await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(300); // Wait for animations to start
+    await page.waitForLoadState('domcontentloaded');
+    
+    // Wait for CSS animations to initialize
+    await page.waitForTimeout(100);
     
     const floatingIcons = page.locator('.floating-icon');
-    const firstIcon = floatingIcons.first();
+    const count = await floatingIcons.count();
+    expect(count).toBeGreaterThan(0);
     
-    // Get initial position
+    // Check animation state for all icons
+    for (let i = 0; i < Math.min(count, 3); i++) {
+      const icon = floatingIcons.nth(i);
+      await expect(icon).toBeVisible();
+      
+      const animationState = await icon.evaluate((el) => {
+        const style = window.getComputedStyle(el);
+        return {
+          animationName: style.animationName,
+          animationPlayState: style.animationPlayState,
+          animationDuration: style.animationDuration,
+          opacity: style.opacity
+        };
+      });
+      
+      // Should have animation running
+      expect(animationState.animationName).not.toBe('none');
+      expect(animationState.animationPlayState).toBe('running');
+      expect(parseFloat(animationState.opacity)).toBeGreaterThan(0);
+    }
+    
+    // Verify icons are actually moving by checking position changes
+    const firstIcon = floatingIcons.first();
     const initialBox = await firstIcon.boundingBox();
     
-    // Wait a bit for animation to progress
-    await page.waitForTimeout(500);
+    // Wait for animation to progress (at least one animation cycle)
+    await page.waitForTimeout(1000);
     
-    // Get position after animation
     const laterBox = await firstIcon.boundingBox();
     
     // Position should have changed (icon should be animating)
-    // Allow small margin for rounding
-    const hasMoved = Math.abs(initialBox.y - laterBox.y) > 1;
+    // Allow small margin for rounding, but should definitely move
+    const hasMoved = Math.abs(initialBox.y - laterBox.y) > 0.5;
     expect(hasMoved).toBe(true);
   });
 

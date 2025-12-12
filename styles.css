@@ -650,6 +650,11 @@ html {
 .floating-icon {
     animation-play-state: running !important;
     will-change: transform;
+    /* Force animation to start immediately */
+    animation-iteration-count: infinite;
+    /* Ensure icons are visible and ready */
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 @keyframes float-1 {
