@@ -5,19 +5,18 @@ This document tracks known issues and their status.
 ## Current Issues
 
 ### 1. Floating Icons Animation on Mobile
-**Status:** Fixed
-**Description:** Floating icons around the avatar were frozen on mobile devices.
+**Status:** ✅ Fixed
+**Description:** Floating icons around the avatar appeared but did not move/animate on mobile devices.
 **Root Cause:** 
-- Animation conflicts with positioning transforms
-- Animation delays causing icons to appear frozen
-- Mobile positioning overrides conflicting with animations
+- `transform: translateY(0) !important` was overriding the animation's transform property
+- Animation couldn't modify transform because of `!important` override
 **Fix Applied:** 
-- Removed animation delays on mobile (all start at 0s)
-- Force animations with `!important` on all mobile icon rules
-- Set `transform: translateY(0) !important` to allow float animation to work
+- Removed `transform: translateY(0) !important` from mobile icon rules
+- Let the `float` animation control the transform property naturally
+- Kept positioning (top, left, right, bottom) separate from transform
+- All icons now use the same `float` animation on mobile with no delays
 - Added `animation-play-state: running !important` to ensure animations start
-- Override all positioning transforms on mobile
-**Test:** `tests/advanced-mobile-qa.spec.js` - "icons should not be frozen on page refresh"
+**Test:** `tests/mobile-icons-scroll.spec.js` - "floating icons should animate on mobile", "floating icons should move (transform changes) during animation"
 
 ### 2. Hero Title Wrapping on Desktop
 **Status:** Fixed (pending verification)
@@ -42,17 +41,19 @@ This document tracks known issues and their status.
 **Test:** `tests/advanced-mobile-qa.spec.js` - "all floating icons should be visible on mobile"
 
 ### 4. Mobile Smooth Scroll Performance
-**Status:** Fixed
-**Description:** Smooth scrolling up on mobile was jittery/glitchy, while scrolling down worked fine.
+**Status:** ✅ Fixed
+**Description:** Smooth scrolling up on mobile was laggy/glitchy, while scrolling down worked fine.
 **Root Cause:** 
-- `smoothScrollToTop()` function was using polyfill on mobile, causing jitter
-- Upward scrolling used different code path than downward scrolling
+- Ongoing scroll animations not being cancelled before new scroll
+- Missing `scrollBehavior: 'smooth'` on body element
+- No iOS-specific smooth scrolling support
 **Fix Applied:**
-- Use native smooth scroll only on mobile for both up and down scrolling
-- Force `scrollBehavior: 'smooth'` via JavaScript before scrolling
-- Removed polyfill usage on mobile devices
-- Consistent scroll behavior for all directions on mobile
-**Test:** `tests/advanced-mobile-qa.spec.js` - "smooth scroll should work on mobile"
+- Cancel any ongoing scroll animations before starting new scroll
+- Set `scrollBehavior: 'smooth'` on both `html` and `body` elements
+- Added `-webkit-overflow-scrolling: touch` for iOS smooth scrolling
+- Use native `window.scrollTo({ behavior: 'smooth' })` exclusively on mobile
+- Consistent smooth scroll behavior for both up and down directions
+**Test:** `tests/mobile-icons-scroll.spec.js` - "smooth scroll up should work smoothly on mobile", "smooth scroll down should work smoothly on mobile"
 
 ## Resolved Issues
 
