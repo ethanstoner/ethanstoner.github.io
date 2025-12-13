@@ -2002,7 +2002,7 @@ html {
     /* Icons: 48px (24px radius). Need 86 + 24 = 110px minimum from center */
     /* Container center is at 100px from left edge */
     .icon-1 {
-        top: -10px;
+        top: 10px; /* Changed from -10px to 10px to prevent going off top of screen */
         left: 50%;
         margin-left: -115px !important; /* 115px from center = just outside 86px avatar + 24px icon = 110px minimum */
     }
@@ -2062,9 +2062,9 @@ html {
     
     @keyframes floatIcon1Mobile {
         0% { transform: translate(0, 0); }
-        25% { transform: translate(10px, -15px); }
-        50% { transform: translate(0, -22px); }
-        75% { transform: translate(-10px, -15px); }
+        25% { transform: translate(10px, 5px); } /* Changed from -15px to 5px to prevent going off top */
+        50% { transform: translate(0, 8px); } /* Changed from -22px to 8px to keep icon visible */
+        75% { transform: translate(-10px, 5px); } /* Changed from -15px to 5px */
         100% { transform: translate(0, 0); }
     }
     
