@@ -164,7 +164,8 @@
                     if (!section) return;
 
                     const rect = section.getBoundingClientRect();
-                    const distanceFromTop = Math.abs(rect.top - (headerHeight + 20));
+                    const currentHeaderHeight = header ? header.offsetHeight : 80;
+                    const distanceFromTop = Math.abs(rect.top - (currentHeaderHeight + 20));
 
                     // Prefer higher intersection ratio, or if tied, closer to top
                     if (ratio > bestRatio || (ratio === bestRatio && distanceFromTop < bestDistance)) {
@@ -183,10 +184,11 @@
                 let closestSection = null;
                 let closestDistance = Infinity;
 
+                const currentHeaderHeight = header ? header.offsetHeight : 80;
                 sections.forEach((section, sectionName) => {
                     const rect = section.getBoundingClientRect();
                     const sectionTop = rect.top + scrollY;
-                    const distance = Math.abs(scrollY + headerHeight - sectionTop);
+                    const distance = Math.abs(scrollY + currentHeaderHeight - sectionTop);
 
                     if (distance < closestDistance) {
                         closestDistance = distance;
@@ -205,56 +207,13 @@
             observer.observe(section);
         });
 
-        // Update rootMargin on resize - recreate observer with new margins
+        // Update on resize - just recalculate active state, observer will handle it
         let resizeTimeout;
-        let currentObserver = observer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
-                const newHeaderHeight = header ? header.offsetHeight : 80;
-                const newRootMargin = `-${newHeaderHeight + 20}px 0px -${window.innerHeight * 0.6}px 0px`;
-                // Recreate observer with new rootMargin
-                currentObserver.disconnect();
-                const newObserverOptions = {
-                    root: null,
-                    rootMargin: newRootMargin,
-                    threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0]
-                };
-                currentObserver = new IntersectionObserver((entries) => {
-                    if (isScrolling) return;
-                    entries.forEach(entry => {
-                        const sectionName = entry.target.getAttribute('data-section');
-                        if (!sectionName) return;
-                        if (entry.isIntersecting) {
-                            intersectingSections.set(sectionName, entry.intersectionRatio);
-                        } else {
-                            intersectingSections.delete(sectionName);
-                        }
-                    });
-                    // Use same logic as main observer
-                    if (intersectingSections.size > 0) {
-                        let bestSection = null;
-                        let bestRatio = -1;
-                        let bestDistance = Infinity;
-                        intersectingSections.forEach((ratio, sectionName) => {
-                            const section = sections.get(sectionName);
-                            if (!section) return;
-                            const rect = section.getBoundingClientRect();
-                            const distanceFromTop = Math.abs(rect.top - (newHeaderHeight + 20));
-                            if (ratio > bestRatio || (ratio === bestRatio && distanceFromTop < bestDistance)) {
-                                bestRatio = ratio;
-                                bestDistance = distanceFromTop;
-                                bestSection = sectionName;
-                            }
-                        });
-                        if (bestSection) {
-                            setActive(bestSection);
-                        }
-                    }
-                }, newObserverOptions);
-                sections.forEach(section => {
-                    currentObserver.observe(section);
-                });
+                // Force a check of current active state after resize
+                updateActiveOnLoad();
             }, 100);
         }, { passive: true });
     }
