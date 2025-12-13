@@ -147,75 +147,39 @@ function initSmoothScroll() {
                 }
             }
             
-            // CRITICAL: Update active nav IMMEDIATELY and PERSISTENTLY
-            // Use a single synchronous operation to avoid race conditions
-            const allNavLinks = document.querySelectorAll('.nav-link');
-            
-            // Find the corresponding nav link if this is a hero CTA button
-            let navLinkToActivate = null;
-            if (this.classList.contains('btn-primary') || this.classList.contains('btn-secondary')) {
-                // This is a hero CTA button - find the matching nav link
-                const targetHref = this.getAttribute('href');
-                navLinkToActivate = document.querySelector(`.nav-link[href="${targetHref}"]`);
-            } else {
-                // This is a nav link itself
-                navLinkToActivate = this;
+            // Get section name from href
+            let sectionName = null;
+            if (href === '#' || href === '#home' || href === '') {
+                sectionName = 'home';
+            } else if (href.startsWith('#')) {
+                sectionName = href.substring(1);
             }
             
-            const clickedLink = navLinkToActivate || this;
-            
-            // Clear all active states and user-clicked flags
-            allNavLinks.forEach(l => {
-                l.classList.remove('active');
-                l.dataset.userClicked = 'false';
-            });
-            
-            // Only update nav link if we found one (skip if clicking nav link directly)
-            if (navLinkToActivate) {
-                // Immediately set this link as active - MUST be synchronous
-                clickedLink.classList.add('active');
-                clickedLink.dataset.userClicked = 'true';
-                clickedLink.dataset.clickTime = Date.now().toString();
-                lastClickedLink = clickedLink;
+            // Mark that we're programmatically scrolling
+            if (window.scrollspySetScrolling) {
+                window.scrollspySetScrolling(true);
             }
             
-            // Only verify if we have a nav link to activate
-            if (navLinkToActivate) {
-                // Verify in next frame to ensure it stuck
-                requestAnimationFrame(() => {
-                    // Ensure only this link is active
-                    allNavLinks.forEach(l => {
-                        if (l !== clickedLink) {
-                            l.classList.remove('active');
-                        }
-                    });
+            // Immediately update active state for clicked link
+            if (sectionName) {
+                const allNavLinks = document.querySelectorAll('.nav-link');
+                allNavLinks.forEach(l => l.classList.remove('active'));
+                const clickedLink = document.querySelector(`[data-nav-link="${sectionName}"]`);
+                if (clickedLink) {
                     clickedLink.classList.add('active');
-                });
-                
-                // Also verify after a short delay
-                setTimeout(() => {
-                    // Final check - ensure clicked link is active
-                    allNavLinks.forEach(l => {
-                        if (l !== clickedLink && l.classList.contains('active')) {
-                            l.classList.remove('active');
+                    // Update indicator bar immediately
+                    const indicator = document.querySelector('.nav-indicator');
+                    if (indicator && clickedLink) {
+                        const linkRect = clickedLink.getBoundingClientRect();
+                        const navRect = clickedLink.closest('.nav')?.getBoundingClientRect();
+                        if (navRect) {
+                            const left = linkRect.left - navRect.left;
+                            const width = linkRect.width;
+                            indicator.style.left = `${left}px`;
+                            indicator.style.width = `${width}px`;
                         }
-                    });
-                    if (!clickedLink.classList.contains('active')) {
-                        clickedLink.classList.add('active');
                     }
-                }, 50);
-                
-                // Set click flag - will be cleared after smooth scroll completes
-                // This prevents override during smooth scroll but allows manual scrolling to work
-                clickedLink.dataset.userClicked = 'true';
-                clickedLink.dataset.clickTime = Date.now().toString();
-                setTimeout(() => {
-                    // Clear flag after smooth scroll completes (500ms)
-                    if (lastClickedLink === clickedLink) {
-                        clickedLink.dataset.userClicked = 'false';
-                        delete clickedLink.dataset.clickTime;
-                    }
-                }, 500);
+                }
             }
             
             // Handle home link - scroll to top
@@ -476,180 +440,8 @@ function initAll() {
         });
     }
 
-    // Update active nav link on scroll using IntersectionObserver for reliability
-    const sections = document.querySelectorAll('section[id], .section[id], .hero-section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-    let lastClickedLink = null; // Track last clicked link
-    let activeSection = 'home'; // Track current active section
-    
-    // Debug: verify sections are found
-    if (sections.length === 0) {
-        console.warn('No sections found for navigation!');
-    }
-    if (navLinks.length === 0) {
-        console.warn('No nav links found!');
-    }
-
-    function updateActiveNavLink(forceUpdate = false) {
-        // If this is a forced update (manual scroll), always update regardless of click flags
-        if (forceUpdate) {
-            // Clear any stale click flags on manual scroll
-            navLinks.forEach(link => {
-                link.dataset.userClicked = 'false';
-                delete link.dataset.clickTime;
-            });
-        } else {
-            // Only check click flags if this is NOT a forced update
-            // Click flags should only prevent updates during smooth scroll animation
-            let veryRecentClick = false;
-            const now = Date.now();
-            navLinks.forEach(link => {
-                if (link.dataset.userClicked === 'true') {
-                    const clickTime = parseInt(link.dataset.clickTime || '0');
-                    const timeSinceClick = now - clickTime;
-                    // Only prevent updates during smooth scroll (first 300ms)
-                    if (timeSinceClick < 300) {
-                        veryRecentClick = true;
-                    } else {
-                        // Clear old click flag immediately after smooth scroll completes
-                        link.dataset.userClicked = 'false';
-                        delete link.dataset.clickTime;
-                    }
-                }
-            });
-            
-            // Only skip if smooth scroll is actively happening (very recent click)
-            if (veryRecentClick) {
-                return;
-            }
-        }
-        
-        const scrollPosition = window.pageYOffset || window.scrollY;
-        const headerHeight = document.querySelector('.header')?.offsetHeight || 80;
-        let current = '';
-        
-        // If at top (within first 200px), highlight home link
-        if (scrollPosition < 200) {
-            current = 'home';
-        } else {
-            // Find which section is currently in view
-            // Use IntersectionObserver-like logic: find section whose top is visible in viewport
-            const viewportTop = scrollPosition;
-            const viewportBottom = scrollPosition + window.innerHeight;
-            const threshold = headerHeight + 100; // Account for fixed header
-            
-            let bestSection = null;
-            let bestScore = -Infinity;
-            
-            // Check each section
-            for (const section of sections) {
-                const id = section.getAttribute('id');
-                if (!id) continue;
-                
-                const rect = section.getBoundingClientRect();
-                const sectionTop = rect.top + scrollPosition;
-                const sectionBottom = sectionTop + rect.height;
-                
-                // Calculate how much of the section is visible
-                const visibleTop = Math.max(viewportTop + threshold, sectionTop);
-                const visibleBottom = Math.min(viewportBottom, sectionBottom);
-                const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-                
-                // Score based on visibility and position
-                // Prefer sections that are visible and close to the top of viewport
-                if (visibleHeight > 0) {
-                    const distanceFromTop = Math.abs((sectionTop - threshold) - viewportTop);
-                    const score = visibleHeight - (distanceFromTop * 0.1);
-                    
-                    if (score > bestScore) {
-                        bestScore = score;
-                        bestSection = id;
-                    }
-                }
-            }
-            
-            // Fallback: if no visible section, find closest one
-            if (!bestSection) {
-                let closestDistance = Infinity;
-                for (const section of sections) {
-                    const id = section.getAttribute('id');
-                    if (!id) continue;
-                    
-                    const rect = section.getBoundingClientRect();
-                    const sectionTop = rect.top + scrollPosition;
-                    const distance = Math.abs((sectionTop - threshold) - viewportTop);
-                    
-                    if (distance < closestDistance) {
-                        closestDistance = distance;
-                        bestSection = id;
-                    }
-                }
-            }
-            
-            current = bestSection || 'home';
-        }
-
-        // Always update nav links (don't check if section changed - might miss updates)
-        activeSection = current;
-
-        // Update all nav links
-        navLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            
-            // Remove active from all links first
-            link.classList.remove('active');
-            
-            // Add active to matching link
-            if (current === 'home' && (href === '#' || href === '#home')) {
-                link.classList.add('active');
-            } else if (current && current !== 'home' && href === `#${current}`) {
-                link.classList.add('active');
-            }
-        });
-    }
-
-    // Throttle scroll events for better performance - update more frequently for manual scrolling
-    let scrollTimeout;
-    let isProgrammaticScroll = false;
-    let programmaticScrollTimeout = null;
-    let lastScrollTop = window.pageYOffset || window.scrollY;
-    
-    // Mark when programmatic scroll happens (from clicking nav links)
-    const originalScrollTo = window.scrollTo;
-    window.scrollTo = function(...args) {
-        isProgrammaticScroll = true;
-        const result = originalScrollTo.apply(this, args);
-        // Clear flag after smooth scroll completes
-        if (programmaticScrollTimeout) clearTimeout(programmaticScrollTimeout);
-        programmaticScrollTimeout = setTimeout(() => {
-            isProgrammaticScroll = false;
-        }, 800);
-        return result;
-    };
-    
-    window.addEventListener('scroll', () => {
-        const currentScrollTop = window.pageYOffset || window.scrollY;
-        const scrollDelta = Math.abs(currentScrollTop - lastScrollTop);
-        lastScrollTop = currentScrollTop;
-        
-        // Clear programmatic scroll flag if enough time has passed or scroll delta is large
-        if (isProgrammaticScroll && (scrollDelta > 10 || Date.now() - (programmaticScrollTimeout?._idleStart || 0) > 1000)) {
-            isProgrammaticScroll = false;
-        }
-        
-        clearTimeout(scrollTimeout);
-        // Always update on scroll - force update to bypass click flags
-        // This ensures manual scrolling always updates navigation
-        scrollTimeout = setTimeout(() => {
-            updateActiveNavLink(true);
-        }, 20);
-    }, { passive: true });
-    
-    // Update immediately on page load
-    updateActiveNavLink();
-    
-    // Also update after a short delay to catch any layout changes
-    setTimeout(updateActiveNavLink, 500);
+    // Scrollspy is now handled by scrollspy.js
+    // This section is kept for click handlers that need to work with scrollspy
 
     // Intersection Observer for fade-in animations with stagger
     const observerOptions = {
