@@ -68,6 +68,13 @@
         if (activeLink) {
             activeLink.classList.add('active');
             updateIndicatorBar(activeLink);
+        } else {
+            // Fallback: try to find link by href
+            const fallbackLink = document.querySelector(`[href="#${sectionName}"], [href="#"]`);
+            if (fallbackLink && fallbackLink.classList.contains('nav-link')) {
+                fallbackLink.classList.add('active');
+                updateIndicatorBar(fallbackLink);
+            }
         }
     }
 
