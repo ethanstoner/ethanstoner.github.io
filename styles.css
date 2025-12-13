@@ -582,31 +582,34 @@ html {
 }
 
 /* Icon positioning - base positions */
+/* Avatar is 280px diameter (140px radius), icons are 64px (32px radius) */
+/* Position icons at least 180px from center to avoid overlap (140 + 32 + 8px padding) */
 .icon-1 {
-    top: -10px;
+    top: -20px;
     left: 50%;
-    margin-left: -160px;
+    margin-left: -200px; /* Further out to avoid avatar */
 }
 
 .icon-2 {
     top: 20px;
-    right: -20px;
+    right: -40px; /* Further out */
 }
 
 .icon-3 {
     bottom: 20px;
-    left: -20px;
+    left: -40px; /* Further out */
 }
 
 .icon-4 {
-    bottom: -10px;
+    bottom: -20px;
     right: 50%;
-    margin-right: -160px;
+    margin-right: -200px; /* Further out to avoid avatar */
 }
 
 .icon-5 {
     top: 50%;
-    left: -30px;
+    left: -50px; /* Further out to avoid avatar */
+    transform: translateY(-50%);
 }
 
 /* Animation on .floating-icon itself - different durations + negative delays */
