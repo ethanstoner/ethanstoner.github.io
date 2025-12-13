@@ -1998,31 +1998,34 @@ html {
     /* Mobile: Avatar is 160px diameter (80px radius + 6px border = 86px), icons are 48px (24px radius) */
     /* Position icons at least 110px from center to avoid overlap (86 + 24 = 110px) */
     /* Avatar container is 200px, so center is at 100px */
+    /* Mobile: Avatar container: 200px, Avatar: 160px diameter (80px radius + 6px border = 86px effective radius) */
+    /* Icons: 48px (24px radius). Need 86 + 24 = 110px minimum from center */
+    /* Container center is at 100px from left edge */
     .icon-1 {
-        top: -20px;
+        top: -25px;
         left: 50%;
-        margin-left: -130px !important; /* 130px from center = well outside 86px avatar radius */
+        margin-left: -140px !important; /* 140px from center = well outside 86px avatar radius */
     }
     
     .icon-2 {
-        top: 15px;
-        right: -30px; /* Further out from avatar */
+        top: 10px;
+        right: -35px; /* Further out from avatar edge */
     }
     
     .icon-3 {
-        bottom: 15px;
-        left: -30px; /* Further out from avatar */
+        bottom: 10px;
+        left: -35px; /* Further out from avatar edge */
     }
     
     .icon-4 {
-        bottom: -20px;
+        bottom: -25px;
         right: 50%;
-        margin-right: -130px !important; /* 130px from center = well outside 86px avatar radius */
+        margin-right: -140px !important; /* 140px from center = well outside 86px avatar radius */
     }
     
     .icon-5 {
         top: 50%;
-        left: -35px; /* Further out from avatar */
+        left: -40px; /* 40px from left edge = 100 + 40 = 140px from center, well outside */
         transform: translateY(-50%);
     }
     
