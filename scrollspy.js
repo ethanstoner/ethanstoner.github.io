@@ -205,21 +205,58 @@
             observer.observe(section);
         });
 
-        // Update rootMargin on resize
+        // Update rootMargin on resize - recreate observer with new margins
         let resizeTimeout;
+        let currentObserver = observer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 const newHeaderHeight = header ? header.offsetHeight : 80;
                 const newRootMargin = `-${newHeaderHeight + 20}px 0px -${window.innerHeight * 0.6}px 0px`;
                 // Recreate observer with new rootMargin
-                observer.disconnect();
-                observerOptions.rootMargin = newRootMargin;
+                currentObserver.disconnect();
+                const newObserverOptions = {
+                    root: null,
+                    rootMargin: newRootMargin,
+                    threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0]
+                };
+                currentObserver = new IntersectionObserver((entries) => {
+                    if (isScrolling) return;
+                    entries.forEach(entry => {
+                        const sectionName = entry.target.getAttribute('data-section');
+                        if (!sectionName) return;
+                        if (entry.isIntersecting) {
+                            intersectingSections.set(sectionName, entry.intersectionRatio);
+                        } else {
+                            intersectingSections.delete(sectionName);
+                        }
+                    });
+                    // Use same logic as main observer
+                    if (intersectingSections.size > 0) {
+                        let bestSection = null;
+                        let bestRatio = -1;
+                        let bestDistance = Infinity;
+                        intersectingSections.forEach((ratio, sectionName) => {
+                            const section = sections.get(sectionName);
+                            if (!section) return;
+                            const rect = section.getBoundingClientRect();
+                            const distanceFromTop = Math.abs(rect.top - (newHeaderHeight + 20));
+                            if (ratio > bestRatio || (ratio === bestRatio && distanceFromTop < bestDistance)) {
+                                bestRatio = ratio;
+                                bestDistance = distanceFromTop;
+                                bestSection = sectionName;
+                            }
+                        });
+                        if (bestSection) {
+                            setActive(bestSection);
+                        }
+                    }
+                }, newObserverOptions);
                 sections.forEach(section => {
-                    observer.observe(section);
+                    currentObserver.observe(section);
                 });
             }, 100);
-        });
+        }, { passive: true });
     }
 
     /**
