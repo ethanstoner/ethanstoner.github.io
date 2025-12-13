@@ -561,7 +561,7 @@ html {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
-    z-index: 20; /* Higher than avatar (z-index: 10) to stay in front */
+    z-index: 5; /* Icons positioned outside avatar bounds, but visible if animation causes slight overlap */
     pointer-events: auto;
     opacity: 1 !important;
     visibility: visible !important;
@@ -1994,31 +1994,34 @@ html {
     }
     
     /* Mobile positioning adjustments - prevent overflow */
+    /* Mobile: Avatar is 160px diameter (80px radius), icons are 48px (24px radius) */
+    /* Position icons at least 110px from center to avoid overlap (80 + 24 + 6px padding) */
     .icon-1 {
-        top: 15px;
-        left: 15px;
-        margin-left: 0 !important;
+        top: -15px;
+        left: 50%;
+        margin-left: -120px !important; /* Position outside avatar circle */
     }
     
     .icon-2 {
         top: 20px;
-        right: 10px;
+        right: -25px; /* Further out */
     }
     
     .icon-3 {
         bottom: 20px;
-        left: 10px;
+        left: -25px; /* Further out */
     }
     
     .icon-4 {
-        bottom: 20px;
-        right: 10px;
-        margin-right: 0 !important;
+        bottom: -15px;
+        right: 50%;
+        margin-right: -120px !important; /* Position outside avatar circle */
     }
     
     .icon-5 {
-        top: 80px;
-        left: 10px;
+        top: 50%;
+        left: -30px; /* Further out to avoid avatar */
+        transform: translateY(-50%);
     }
     
     /* Mobile keyframes - smoother, slower, prevent overflow */
