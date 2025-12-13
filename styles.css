@@ -586,9 +586,9 @@ html {
 /* Position icons at least 180px from center to avoid overlap (148 + 32 = 180px) */
 /* Avatar container is 320px, so center is at 160px */
 .icon-1 {
-    top: -25px;
+    top: -15px;
     left: 50%;
-    margin-left: -200px; /* 200px from center = outside 148px avatar radius with safe margin */
+    margin-left: -185px; /* 185px from center = just outside 148px avatar + 32px icon = 180px minimum */
 }
 
 .icon-2 {
@@ -602,9 +602,9 @@ html {
 }
 
 .icon-4 {
-    bottom: -25px;
+    bottom: -15px;
     right: 50%;
-    margin-right: -200px; /* 200px from center = outside 148px avatar radius with safe margin */
+    margin-right: -185px; /* 185px from center = just outside 148px avatar + 32px icon = 180px minimum */
 }
 
 .icon-5 {
@@ -2002,9 +2002,9 @@ html {
     /* Icons: 48px (24px radius). Need 86 + 24 = 110px minimum from center */
     /* Container center is at 100px from left edge */
     .icon-1 {
-        top: -20px;
+        top: -10px;
         left: 50%;
-        margin-left: -120px !important; /* 120px from center = outside 86px avatar radius with safe margin */
+        margin-left: -115px !important; /* 115px from center = just outside 86px avatar + 24px icon = 110px minimum */
     }
     
     .icon-2 {
@@ -2018,9 +2018,9 @@ html {
     }
     
     .icon-4 {
-        bottom: -20px;
+        bottom: -10px;
         right: 50%;
-        margin-right: -120px !important; /* 120px from center = outside 86px avatar radius with safe margin */
+        margin-right: -115px !important; /* 115px from center = just outside 86px avatar + 24px icon = 110px minimum */
     }
     
     .icon-5 {
