@@ -167,17 +167,25 @@ function initSmoothScroll() {
                 const clickedLink = document.querySelector(`[data-nav-link="${sectionName}"]`);
                 if (clickedLink) {
                     clickedLink.classList.add('active');
-                    // Update indicator bar immediately
-                    const indicator = document.querySelector('.nav-indicator');
-                    if (indicator && clickedLink) {
-                        const linkRect = clickedLink.getBoundingClientRect();
-                        const navRect = clickedLink.closest('.nav')?.getBoundingClientRect();
-                        if (navRect) {
-                            const left = linkRect.left - navRect.left;
-                            const width = linkRect.width;
-                            indicator.style.left = `${left}px`;
-                            indicator.style.width = `${width}px`;
-                        }
+                    // Update indicator bar immediately using scrollspy function if available
+                    if (window.scrollspyUpdateIndicator) {
+                        window.scrollspyUpdateIndicator(clickedLink);
+                    } else {
+                        // Fallback: update indicator directly
+                        requestAnimationFrame(() => {
+                            const indicator = document.querySelector('.nav-indicator');
+                            if (indicator && clickedLink) {
+                                const linkRect = clickedLink.getBoundingClientRect();
+                                const nav = clickedLink.closest('.nav');
+                                if (nav) {
+                                    const navRect = nav.getBoundingClientRect();
+                                    const left = linkRect.left - navRect.left;
+                                    const width = linkRect.width;
+                                    indicator.style.left = `${left}px`;
+                                    indicator.style.width = `${width}px`;
+                                }
+                            }
+                        });
                     }
                 }
             }

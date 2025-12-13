@@ -88,19 +88,23 @@
             }
         }
 
-        // Get position and width of active link
-        const linkRect = activeLink.getBoundingClientRect();
-        const navRect = activeLink.closest('.nav')?.getBoundingClientRect();
-        
-        if (!navRect) return;
+        // Use requestAnimationFrame for smooth updates
+        requestAnimationFrame(() => {
+            // Get position and width of active link
+            const linkRect = activeLink.getBoundingClientRect();
+            const nav = activeLink.closest('.nav');
+            if (!nav) return;
+            
+            const navRect = nav.getBoundingClientRect();
+            
+            // Calculate position relative to nav
+            const left = linkRect.left - navRect.left;
+            const width = linkRect.width;
 
-        // Calculate position relative to nav
-        const left = linkRect.left - navRect.left;
-        const width = linkRect.width;
-
-        // Update indicator position and width
-        indicator.style.left = `${left}px`;
-        indicator.style.width = `${width}px`;
+            // Update indicator position and width
+            indicator.style.left = `${left}px`;
+            indicator.style.width = `${width}px`;
+        });
     }
 
     /**
@@ -330,8 +334,9 @@
         }
     }
 
-    // Expose setScrolling for use by click handlers
+    // Expose functions for use by click handlers
     window.scrollspySetScrolling = setScrolling;
+    window.scrollspyUpdateIndicator = updateIndicatorBar;
 
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
