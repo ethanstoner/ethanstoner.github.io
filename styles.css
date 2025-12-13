@@ -582,33 +582,34 @@ html {
 }
 
 /* Icon positioning - base positions */
-/* Avatar is 280px diameter (140px radius), icons are 64px (32px radius) */
-/* Position icons at least 180px from center to avoid overlap (140 + 32 + 8px padding) */
+/* Avatar is 280px diameter (140px radius + 8px border = 148px), icons are 64px (32px radius) */
+/* Position icons at least 180px from center to avoid overlap (148 + 32 = 180px) */
+/* Avatar container is 320px, so center is at 160px */
 .icon-1 {
-    top: -20px;
+    top: -30px;
     left: 50%;
-    margin-left: -200px; /* Further out to avoid avatar */
+    margin-left: -220px; /* 220px from center = well outside 148px avatar radius */
 }
 
 .icon-2 {
-    top: 20px;
-    right: -40px; /* Further out */
+    top: 10px;
+    right: -50px; /* Further out from avatar */
 }
 
 .icon-3 {
-    bottom: 20px;
-    left: -40px; /* Further out */
+    bottom: 10px;
+    left: -50px; /* Further out from avatar */
 }
 
 .icon-4 {
-    bottom: -20px;
+    bottom: -30px;
     right: 50%;
-    margin-right: -200px; /* Further out to avoid avatar */
+    margin-right: -220px; /* 220px from center = well outside 148px avatar radius */
 }
 
 .icon-5 {
     top: 50%;
-    left: -50px; /* Further out to avoid avatar */
+    left: -60px; /* Further out from avatar */
     transform: translateY(-50%);
 }
 
@@ -1994,40 +1995,41 @@ html {
     }
     
     /* Mobile positioning adjustments - prevent overflow */
-    /* Mobile: Avatar is 160px diameter (80px radius), icons are 48px (24px radius) */
-    /* Position icons at least 110px from center to avoid overlap (80 + 24 + 6px padding) */
+    /* Mobile: Avatar is 160px diameter (80px radius + 6px border = 86px), icons are 48px (24px radius) */
+    /* Position icons at least 110px from center to avoid overlap (86 + 24 = 110px) */
+    /* Avatar container is 200px, so center is at 100px */
     .icon-1 {
-        top: -15px;
+        top: -20px;
         left: 50%;
-        margin-left: -120px !important; /* Position outside avatar circle */
+        margin-left: -130px !important; /* 130px from center = well outside 86px avatar radius */
     }
     
     .icon-2 {
-        top: 20px;
-        right: -25px; /* Further out */
+        top: 15px;
+        right: -30px; /* Further out from avatar */
     }
     
     .icon-3 {
-        bottom: 20px;
-        left: -25px; /* Further out */
+        bottom: 15px;
+        left: -30px; /* Further out from avatar */
     }
     
     .icon-4 {
-        bottom: -15px;
+        bottom: -20px;
         right: 50%;
-        margin-right: -120px !important; /* Position outside avatar circle */
+        margin-right: -130px !important; /* 130px from center = well outside 86px avatar radius */
     }
     
     .icon-5 {
         top: 50%;
-        left: -30px; /* Further out to avoid avatar */
+        left: -35px; /* Further out from avatar */
         transform: translateY(-50%);
     }
     
-    /* Mobile keyframes - smoother, slower, prevent overflow */
+    /* Mobile keyframes - smoother, slower, prevent overflow, keep icons outside avatar */
     .floating-icon.icon-1 {
         animation: floatIcon1Mobile 6s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
-        animation-delay: -0.7s !important; /* Keep negative delay */
+        animation-delay: -0.7s !important;
         animation-play-state: running !important;
     }
     
@@ -2045,13 +2047,13 @@ html {
     
     .floating-icon.icon-4 {
         animation: floatIcon4Mobile 7s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
-        animation-delay: -0.3s !important; /* Keep negative delay */
+        animation-delay: -0.3s !important;
         animation-play-state: running !important;
     }
     
     .floating-icon.icon-5 {
         animation: floatIcon5Mobile 6.2s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
-        animation-delay: -1.2s !important; /* Keep negative delay */
+        animation-delay: -1.2s !important;
         animation-play-state: running !important;
     }
     
