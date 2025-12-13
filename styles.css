@@ -586,30 +586,30 @@ html {
 /* Position icons at least 180px from center to avoid overlap (148 + 32 = 180px) */
 /* Avatar container is 320px, so center is at 160px */
 .icon-1 {
-    top: -30px;
+    top: -35px;
     left: 50%;
-    margin-left: -220px; /* 220px from center = well outside 148px avatar radius */
+    margin-left: -230px; /* 230px from center = well outside 148px avatar radius */
 }
 
 .icon-2 {
-    top: 10px;
-    right: -50px; /* Further out from avatar */
+    top: 5px;
+    right: -55px; /* Further out from avatar edge */
 }
 
 .icon-3 {
-    bottom: 10px;
-    left: -50px; /* Further out from avatar */
+    bottom: 5px;
+    left: -55px; /* Further out from avatar edge */
 }
 
 .icon-4 {
-    bottom: -30px;
+    bottom: -35px;
     right: 50%;
-    margin-right: -220px; /* 220px from center = well outside 148px avatar radius */
+    margin-right: -230px; /* 230px from center = well outside 148px avatar radius */
 }
 
 .icon-5 {
     top: 50%;
-    left: -60px; /* Further out from avatar */
+    left: -70px; /* 70px from left edge = 160 + 70 = 230px from center, well outside 148px avatar radius */
     transform: translateY(-50%);
 }
 
