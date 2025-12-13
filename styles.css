@@ -1992,8 +1992,8 @@ html {
     
     /* Mobile positioning adjustments - prevent overflow */
     .icon-1 {
-        top: 20px;
-        left: 10px;
+        top: 15px;
+        left: 15px;
         margin-left: 0 !important;
     }
     
@@ -2014,8 +2014,8 @@ html {
     }
     
     .icon-5 {
-        top: 30px;
-        left: -10px;
+        top: 80px;
+        left: 10px;
     }
     
     /* Mobile keyframes - smoother, slower, prevent overflow */
