@@ -578,8 +578,12 @@ function copyEmail(e) {
     } else {
         // Fallback for older browsers
         fallbackCopyTextToClipboard(email, e && e.currentTarget ? e.currentTarget : null);
-        fallbackCopyTextToClipboard(email, e.currentTarget);
+        if (e && e.currentTarget) {
+            showCopyFeedback(e.currentTarget);
+        }
     }
+    
+    return false;
 }
 
 function fallbackCopyTextToClipboard(text, button) {
