@@ -557,22 +557,27 @@ window.addEventListener('load', () => {
 
 // Email copy functionality
 function copyEmail(e) {
-    e.preventDefault();
-    e.stopPropagation();
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
 
     const email = "ethanstoner08@gmail.com";
     
     // Use modern clipboard API with fallback
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(email).then(() => {
-            showCopyFeedback(e.currentTarget);
+            if (e && e.currentTarget) {
+                showCopyFeedback(e.currentTarget);
+            }
         }).catch(err => {
             console.warn('Failed to copy:', err);
             // Fallback to older method
-            fallbackCopyTextToClipboard(email, e.currentTarget);
+            fallbackCopyTextToClipboard(email, e && e.currentTarget ? e.currentTarget : null);
         });
     } else {
         // Fallback for older browsers
+        fallbackCopyTextToClipboard(email, e && e.currentTarget ? e.currentTarget : null);
         fallbackCopyTextToClipboard(email, e.currentTarget);
     }
 }
@@ -621,8 +626,10 @@ function showCopyFeedback(button) {
 
 // Copy email from hero section with nice popup
 function copyEmailFromHero(e) {
-    e.preventDefault();
-    e.stopPropagation();
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
     
     const email = "ethanstoner08@gmail.com";
     
@@ -639,15 +646,19 @@ function copyEmailFromHero(e) {
         fallbackCopyTextToClipboard(email, null);
         showEmailCopiedPopup();
     }
+    
+    return false;
 }
 
 // Copy email from contact section with popup
 function copyEmailFromContact(e) {
-    e.preventDefault();
-    e.stopPropagation();
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
     
     // Don't copy if clicking the copy button itself
-    if (e.target.classList.contains('copy-btn') || e.target.closest('.copy-btn')) {
+    if (e && (e.target.classList.contains('copy-btn') || e.target.closest('.copy-btn'))) {
         return false;
     }
     
