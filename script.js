@@ -122,9 +122,12 @@ function initSmoothScroll() {
             return; // Let browser handle these normally
         }
         
-        // Skip email cards that have copy functionality
-        if (anchor.classList.contains('email-card') || anchor.id === 'email-card') {
-            return; // Don't handle smooth scroll for email cards
+        // Skip email cards and email links that have copy functionality
+        if (anchor.classList.contains('email-card') || 
+            anchor.id === 'email-card' || 
+            anchor.id === 'hero-email-link' ||
+            (anchor.classList.contains('social-link') && anchor.id === 'hero-email-link')) {
+            return; // Don't handle smooth scroll for email links
         }
         
         // Remove any existing listeners
