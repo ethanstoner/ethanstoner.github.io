@@ -193,12 +193,12 @@ function initSmoothScroll() {
                 }
             }
             
-            // Handle home link - scroll to top
-            // Skip email links
-            if (anchor.id === 'hero-email-link' || anchor.id === 'email-card' || anchor.classList.contains('email-card')) {
+            // Skip email links - don't scroll
+            if (this.id === 'hero-email-link' || this.id === 'email-card' || this.classList.contains('email-card')) {
                 return;
             }
             
+            // Handle home link - scroll to top
             if (!href || href === '#' || href === '' || href === '#home') {
                 // Detect mobile for optimized scrolling
                 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
