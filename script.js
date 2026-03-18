@@ -461,42 +461,26 @@ function initAll() {
 
     // Intersection Observer for fade-in animations with stagger
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
+        threshold: 0.05,
+        rootMargin: '0px 0px -30px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                // Contact cards appear immediately (no delay)
-                if (entry.target.classList.contains('contact-card')) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                } else {
-                    // Other cards have minimal stagger
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, index * 50);
-                }
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Observe all cards and sections with stagger
+    // Observe all cards and sections
     document.querySelectorAll('.project-card, .tech-category, .content-card, .contact-card').forEach((el, index) => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        
-        // Contact cards have faster transition
-        if (el.classList.contains('contact-card')) {
-            el.style.transition = `opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)`;
-            el.style.transitionDelay = '0s';
-        } else {
-            el.style.transition = `opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)`;
-            el.style.transitionDelay = `${index * 0.05}s`;
-        }
+        el.style.transform = 'translateY(12px)';
+        el.style.transition = `opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)`;
+        el.style.transitionDelay = `${index * 0.02}s`;
         observer.observe(el);
     });
     
