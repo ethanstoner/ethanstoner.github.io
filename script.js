@@ -270,14 +270,6 @@ function initSmoothScroll() {
                     behavior: 'smooth'
                 });
                 
-                // Verify active state after scroll completes
-                setTimeout(() => {
-                    if (lastClickedLink === this && this.dataset.userClicked === 'true') {
-                        const allNavLinks = document.querySelectorAll('.nav-link');
-                        allNavLinks.forEach(l => l.classList.remove('active'));
-                        this.classList.add('active');
-                    }
-                }, 600);
             } else {
                 // Desktop: use optimized polyfill for better control
                 const startPosition = window.pageYOffset;
@@ -304,14 +296,6 @@ function initSmoothScroll() {
                     } else {
                         // Ensure we end at exact position
                         window.scrollTo(0, desiredPosition);
-                        // Verify active state after scroll completes
-                        setTimeout(() => {
-                            if (lastClickedLink === this && this.dataset.userClicked === 'true') {
-                                const allNavLinks = document.querySelectorAll('.nav-link');
-                                allNavLinks.forEach(l => l.classList.remove('active'));
-                                this.classList.add('active');
-                            }
-                        }, 100);
                     }
                 }
                 
