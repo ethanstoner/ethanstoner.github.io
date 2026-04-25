@@ -142,7 +142,7 @@
                                             <path d="m8 6-6 6 6 6"></path>
                                         </svg>
                                         <div class="stat-content">
-                                            <span class="stat-value">4</span>
+                                            <span class="stat-value">5</span>
                                             <span class="stat-label">Resume Projects</span>
                                         </div>
                                     </div>
@@ -285,6 +285,55 @@
                         <p class="section-subtitle">projects pulled directly from my current resume and hands-on work</p>
                     </div>
                     <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-header">
+                                <h3 class="project-title">CSUSM Campus Monitor</h3>
+                                <div class="project-badges">
+                                    <span class="project-badge">
+                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">
+                                        Python
+                                    </span>
+                                    <span class="project-badge">
+                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/fastapi.svg" alt="FastAPI" class="project-icon" loading="lazy" decoding="async">
+                                        FastAPI
+                                    </span>
+                                    <span class="project-badge">
+                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/opencv.svg" alt="OpenCV" class="project-icon" loading="lazy" decoding="async">
+                                        OpenCV
+                                    </span>
+                                </div>
+                            </div>
+                            <p class="project-description">
+                                <strong>Built:</strong> A real-time occupancy monitor for CSUSM campus locations that uses computer vision to detect people in live camera feeds and serve crowd data through a web dashboard.<br><br>
+                                <strong>Hands-On Work:</strong> Captured HLS video streams via ffmpeg, ran YOLOv8 person detection with custom false-positive filtering (rolling-window spatial tracker), built a FastAPI backend with SQLite time-series storage, and created an interactive dashboard with live video, heatmaps, and best-times recommendations. Added a dual detection backend supporting both local YOLO and Frigate NVR via MQTT.<br><br>
+                                <strong>Why It Matters:</strong> Solves a real campus problem — students can check crowd levels before walking to food spots. Demonstrates computer vision, full-stack development, systems integration, and data engineering. 31 tests with CI pipeline.
+                            </p>
+                            <div class="project-architecture">
+                                <p class="architecture-text"><strong>Architecture:</strong> HLS Streams -> ffmpeg -> YOLOv8 Detection -> StaticObjectFilter -> SQLite -> FastAPI -> Dashboard (hls.js + Chart.js)</p>
+                            </div>
+                            <div class="project-features">
+                                <span class="feature-tag tech-feature-tag">
+                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/eye.svg" alt="Computer Vision" class="feature-icon" loading="lazy" decoding="async">
+                                    Computer Vision
+                                </span>
+                                <span class="feature-tag tech-feature-tag">
+                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/activity.svg" alt="Real-Time" class="feature-icon" loading="lazy" decoding="async">
+                                    Real-Time Detection
+                                </span>
+                                <span class="feature-tag tech-feature-tag">
+                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/docker.svg" alt="Docker" class="feature-icon" loading="lazy" decoding="async">
+                                    Docker
+                                </span>
+                                <span class="feature-tag tech-feature-tag">
+                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/githubactions.svg" alt="CI/CD" class="feature-icon" loading="lazy" decoding="async">
+                                    CI/CD
+                                </span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/ethanstoner/csusm-monitor" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
+                            </div>
+                        </div>
+
                         <div class="project-card">
                             <div class="project-header">
                                 <h3 class="project-title">UGC 3D Model Generation Platform</h3>
@@ -618,8 +667,8 @@
                             <div class="project-header">
                                 <h3 class="project-title">HumanLike Typer</h3>
                                 <span class="project-badge">
-                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/lua.svg" alt="Lua" class="project-icon" loading="lazy" decoding="async">
-                                    Lua
+                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/csharp.svg" alt="C#" class="project-icon" loading="lazy" decoding="async">
+                                    C#
                                 </span>
                             </div>
                             <p class="project-description">
@@ -801,8 +850,16 @@
                             </div>
                         </div>
                         <div class="tech-category">
-                            <h3 class="tech-category-title">AI & GPU Workflows</h3>
+                            <h3 class="tech-category-title">AI & Computer Vision</h3>
                             <div class="tech-tags">
+                                <span class="tech-tag">
+                                    <img src="https://unpkg.com/lucide-static@latest/icons/eye.svg" alt="YOLOv8" class="tech-icon" loading="lazy" decoding="async">
+                                    YOLOv8
+                                </span>
+                                <span class="tech-tag">
+                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/opencv.svg" alt="OpenCV" class="tech-icon" loading="lazy" decoding="async">
+                                    OpenCV
+                                </span>
                                 <span class="tech-tag">
                                     <img src="https://unpkg.com/lucide-static@latest/icons/cpu.svg" alt="ComfyUI Pipelines" class="tech-icon" loading="lazy" decoding="async">
                                     ComfyUI Pipelines
@@ -810,10 +867,6 @@
                                 <span class="tech-tag">
                                     <img src="https://unpkg.com/lucide-static@latest/icons/brain.svg" alt="Local Model Inference" class="tech-icon" loading="lazy" decoding="async">
                                     Local Model Inference
-                                </span>
-                                <span class="tech-tag">
-                                    <img src="https://unpkg.com/lucide-static@latest/icons/box.svg" alt="Model I/O Processing" class="tech-icon" loading="lazy" decoding="async">
-                                    Model I/O Processing
                                 </span>
                                 <span class="tech-tag">
                                     <img src="https://unpkg.com/lucide-static@latest/icons/monitor.svg" alt="GPU Workload Management" class="tech-icon" loading="lazy" decoding="async">
@@ -849,6 +902,14 @@
                         <div class="tech-category">
                             <h3 class="tech-category-title">Web & Systems</h3>
                             <div class="tech-tags">
+                                <span class="tech-tag">
+                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/fastapi.svg" alt="FastAPI" class="tech-icon" loading="lazy" decoding="async">
+                                    FastAPI
+                                </span>
+                                <span class="tech-tag">
+                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/sqlite.svg" alt="SQLite" class="tech-icon" loading="lazy" decoding="async">
+                                    SQLite
+                                </span>
                                 <span class="tech-tag">
                                     <img src="https://unpkg.com/lucide-static@latest/icons/layout-template.svg" alt="Full-Stack Web Apps" class="tech-icon" loading="lazy" decoding="async">
                                     Full-Stack Web Apps
