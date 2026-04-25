@@ -2221,27 +2221,27 @@ html {
         padding: 0 16px;
         height: 60px;
     }
-    
+
     .hero-section {
         padding: 0 16px;
         padding-top: 100px;
         padding-bottom: 80px;
     }
-    
+
     .hero-content {
         padding: 0 8px;
     }
-    
+
     .hero-title {
         font-size: 28px;
         letter-spacing: -1.5px;
         white-space: normal; /* Allow wrapping on very small screens */
     }
-    
+
     .line {
         width: 7.5em;
     }
-    
+
     @keyframes typewriter {
         from {
             width: 0;
@@ -2250,55 +2250,92 @@ html {
             width: 7.5em;
         }
     }
-    
+
     .hero-subtitle {
         font-size: 15px;
         margin-top: 24px;
     }
-    
+
     .hero-description {
         font-size: 14px;
         margin-top: 20px;
     }
-    
+
     .section {
         padding: 80px 16px;
     }
-    
+
     .section-title {
-        font-size: 36px;
+        font-size: 30px;
         letter-spacing: -1px;
     }
-    
+
     .section-header {
         margin-bottom: 48px;
     }
-    
+
     .project-card {
         padding: 20px;
     }
-    
+
     .project-title {
-        font-size: 22px;
+        font-size: 20px;
     }
-    
+
+    .project-description {
+        font-size: 13px;
+    }
+
+    .project-features {
+        gap: 8px;
+    }
+
+    .feature-tag {
+        font-size: 10px;
+        padding: 5px 8px;
+        gap: 4px;
+    }
+
+    .feature-icon {
+        width: 12px;
+        height: 12px;
+        max-width: 12px;
+        max-height: 12px;
+    }
+
+    .project-badge {
+        font-size: 10px !important;
+        padding: 4px 10px;
+        height: 24px;
+    }
+
+    .project-links {
+        margin-top: 16px;
+    }
+
+    .project-link {
+        padding: 12px 24px;
+        font-size: 12px;
+        min-height: 44px;
+    }
+
     .about-text {
         font-size: 15px;
     }
-    
+
     .quote {
         padding-left: 16px;
         margin: 32px auto;
     }
-    
+
     .quote-text {
         font-size: 16px;
     }
-    
+
     .contact-text {
         font-size: 16px;
     }
-    
+
     .footer {
         padding: 50px 16px;
     }
