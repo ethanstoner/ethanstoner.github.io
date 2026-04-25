@@ -2139,10 +2139,20 @@ html {
         padding: 28px;
     }
     
+    .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .project-header .project-badges {
+        flex-shrink: 1;
+    }
+
     .project-title {
         font-size: 24px;
     }
-    
+
     .project-description {
         font-size: 14px;
     }
