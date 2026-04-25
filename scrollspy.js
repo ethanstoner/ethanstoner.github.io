@@ -149,13 +149,30 @@
         window.addEventListener('load', scheduleUpdate, { passive: true });
     }
 
+    let scrollTimer = null;
     function setScrolling(flag) {
         isScrolling = flag;
+        if (scrollTimer) {
+            clearTimeout(scrollTimer);
+            scrollTimer = null;
+        }
         if (flag) {
-            setTimeout(() => {
+            // Re-enable scroll-based updates after smooth scroll finishes
+            scrollTimer = setTimeout(() => {
                 isScrolling = false;
+                scrollTimer = null;
                 scheduleUpdate();
-            }, 1000);
+            }, 600);
+            // Also clear on any user-initiated wheel/touch (overrides the timer)
+            const clearOnInput = () => {
+                isScrolling = false;
+                if (scrollTimer) { clearTimeout(scrollTimer); scrollTimer = null; }
+                scheduleUpdate();
+                window.removeEventListener('wheel', clearOnInput);
+                window.removeEventListener('touchstart', clearOnInput);
+            };
+            window.addEventListener('wheel', clearOnInput, { once: true, passive: true });
+            window.addEventListener('touchstart', clearOnInput, { once: true, passive: true });
         } else {
             scheduleUpdate();
         }
