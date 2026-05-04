@@ -1159,11 +1159,11 @@ html {
     align-items: flex-start;
     margin-bottom: 24px;
     gap: 16px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 }
 
 .project-header .project-title {
-    flex: 0 1 auto;
+    flex: 1 1 auto;
     min-width: 0;
 }
 
