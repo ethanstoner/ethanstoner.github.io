@@ -147,6 +147,22 @@
         window.addEventListener('scroll', scheduleUpdate, { passive: true });
         window.addEventListener('resize', scheduleUpdate, { passive: true });
         window.addEventListener('load', scheduleUpdate, { passive: true });
+
+        // Any user-initiated wheel or touch always clears the isScrolling lock
+        window.addEventListener('wheel', () => {
+            if (isScrolling) {
+                isScrolling = false;
+                if (scrollTimer) { clearTimeout(scrollTimer); scrollTimer = null; }
+                scheduleUpdate();
+            }
+        }, { passive: true });
+        window.addEventListener('touchstart', () => {
+            if (isScrolling) {
+                isScrolling = false;
+                if (scrollTimer) { clearTimeout(scrollTimer); scrollTimer = null; }
+                scheduleUpdate();
+            }
+        }, { passive: true });
     }
 
     let scrollTimer = null;
@@ -163,16 +179,6 @@
                 scrollTimer = null;
                 scheduleUpdate();
             }, 600);
-            // Also clear on any user-initiated wheel/touch (overrides the timer)
-            const clearOnInput = () => {
-                isScrolling = false;
-                if (scrollTimer) { clearTimeout(scrollTimer); scrollTimer = null; }
-                scheduleUpdate();
-                window.removeEventListener('wheel', clearOnInput);
-                window.removeEventListener('touchstart', clearOnInput);
-            };
-            window.addEventListener('wheel', clearOnInput, { once: true, passive: true });
-            window.addEventListener('touchstart', clearOnInput, { once: true, passive: true });
         } else {
             scheduleUpdate();
         }
