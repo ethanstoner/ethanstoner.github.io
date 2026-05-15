@@ -2,20 +2,32 @@
  * Scrollspy implementation based on a viewport anchor line.
  * The active section is the last section whose top has crossed
  * a point below the fixed header.
+ *
+ * Nav links are resolved from the LIVE DOM at use-time (via the
+ * data-nav-link attribute) rather than cached, because script.js
+ * clone-replaces the nav anchors after this script runs to strip
+ * old listeners. Caching element references here would leave
+ * scrollspy updating detached, orphaned nodes.
  */
 
 (function() {
     'use strict';
 
     const sections = new Map();
-    const navLinks = new Map();
-    let currentActive = 'home';
+    let currentActive = null;
     let isScrolling = false;
     let rafId = null;
 
+    function getNavLink(name) {
+        return document.querySelector(`[data-nav-link="${name}"]`);
+    }
+
+    function getAllNavLinks() {
+        return document.querySelectorAll('[data-nav-link]');
+    }
+
     function initScrollspy() {
         sections.clear();
-        navLinks.clear();
 
         document.querySelectorAll('[data-section]').forEach((section) => {
             const sectionName = section.getAttribute('data-section');
@@ -24,14 +36,7 @@
             }
         });
 
-        document.querySelectorAll('[data-nav-link]').forEach((link) => {
-            const sectionName = link.getAttribute('data-nav-link');
-            if (sectionName) {
-                navLinks.set(sectionName, link);
-            }
-        });
-
-        if (sections.size === 0 || navLinks.size === 0) {
+        if (sections.size === 0 || getAllNavLinks().length === 0) {
             console.warn('Scrollspy: No sections or nav links found with data attributes');
             return;
         }
@@ -78,32 +83,52 @@
     }
 
     function setActive(sectionName) {
-        if (!sectionName || currentActive === sectionName) {
+        if (!sectionName) {
+            return;
+        }
+
+        const activeLink = getNavLink(sectionName);
+        if (!activeLink) {
+            return;
+        }
+
+        // Reconcile against the LIVE DOM, not just the cached value:
+        // another module (script.js click handler) may have changed the
+        // active link without telling us, and our nav references can be
+        // replaced out from under us. Only skip work if the DOM already
+        // shows exactly the right link active.
+        const currentlyActive = document.querySelectorAll('.nav-link.active');
+        const alreadyCorrect =
+            currentActive === sectionName &&
+            currentlyActive.length === 1 &&
+            currentlyActive[0] === activeLink;
+        if (alreadyCorrect) {
             return;
         }
 
         currentActive = sectionName;
 
-        navLinks.forEach((link) => {
+        getAllNavLinks().forEach((link) => {
             link.classList.remove('active');
         });
 
-        const activeLink = navLinks.get(sectionName);
-        if (activeLink) {
-            activeLink.classList.add('active');
-            updateIndicatorBar(activeLink);
-        }
+        activeLink.classList.add('active');
+        updateIndicatorBar(activeLink);
     }
 
     function updateIndicatorBar(activeLink) {
+        if (!activeLink) {
+            return;
+        }
+
         let indicator = document.querySelector('.nav-indicator');
         if (!indicator) {
-            indicator = document.createElement('div');
-            indicator.className = 'nav-indicator';
             const nav = document.getElementById('main-nav');
             if (!nav) {
                 return;
             }
+            indicator = document.createElement('div');
+            indicator.className = 'nav-indicator';
             nav.appendChild(indicator);
         }
 
@@ -173,12 +198,13 @@
             scrollTimer = null;
         }
         if (flag) {
-            // Re-enable scroll-based updates after smooth scroll finishes
+            // Re-enable scroll-based updates after smooth scroll finishes.
+            // Hard cap so the lock can never get stuck permanently.
             scrollTimer = setTimeout(() => {
                 isScrolling = false;
                 scrollTimer = null;
                 scheduleUpdate();
-            }, 600);
+            }, 700);
         } else {
             scheduleUpdate();
         }
@@ -192,4 +218,11 @@
     } else {
         initScrollspy();
     }
+
+    // Re-sync shortly after load: script.js clone-replaces the nav anchors
+    // and may set an active link on click without notifying scrollspy.
+    window.addEventListener('load', () => {
+        currentActive = null;
+        scheduleUpdate();
+    });
 })();

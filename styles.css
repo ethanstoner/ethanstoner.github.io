@@ -2374,3 +2374,25 @@ html {
 .background-animation {
     display: none;
 }
+
+/* "More projects on GitHub" link below the curated grid */
+.projects-more {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.projects-more-link {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    padding: 14px 28px;
+    opacity: 0.85;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.projects-more-link:hover {
+    opacity: 1;
+    transform: translateX(4px);
+}
