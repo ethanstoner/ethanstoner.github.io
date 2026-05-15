@@ -142,8 +142,8 @@
                                             <path d="m8 6-6 6 6 6"></path>
                                         </svg>
                                         <div class="stat-content">
-                                            <span class="stat-value">5</span>
-                                            <span class="stat-label">Resume Projects</span>
+                                            <span class="stat-value">15</span>
+                                            <span class="stat-label">Projects Shipped</span>
                                         </div>
                                     </div>
                                     <div class="stat-badge">
@@ -279,52 +279,109 @@
                 <div class="page-container">
                     <div class="section-header">
                         <h2 class="section-title">featured projects<span>.</span></h2>
-                        <p class="section-subtitle">projects pulled directly from my current resume and hands-on work</p>
+                        <p class="section-subtitle">flagship builds, shipped products, and hands-on systems work</p>
                     </div>
                     <div class="projects-grid">
+
+                        <div class="project-card">
+                            <div class="project-header">
+                                <h3 class="project-title">Qorlyt — Image-to-3D Generator</h3>
+                                <div class="project-badges">
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">Python</span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/fastapi.svg" alt="FastAPI" class="project-icon" loading="lazy" decoding="async">FastAPI</span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/socketdotio.svg" alt="WebSockets" class="project-icon" loading="lazy" decoding="async">WebSockets</span>
+                                </div>
+                            </div>
+                            <p class="project-description">
+                                <strong>Built:</strong> A live, self-hosted web product (<strong>qorlyt.com</strong>) that turns a single image into a textured <code>.glb</code> 3D model in about 80 seconds via a local ComfyUI + Hunyuan3D 2.1 GPU pipeline.<br><br>
+                                <strong>Hands-On Work:</strong> A persistent WebSocket to ComfyUI maps per-node progress back to each user in real time; an async job queue serializes GPU work with live queue position and ETA; every generation is stored with an in-browser 3D viewer. Shared-password auth, GPU health pings, persistent history.<br><br>
+                                <strong>Why It Matters:</strong> End-to-end ownership of a real deployed AI product — web delivery, local inference, real-time systems, and reliability engineering.
+                            </p>
+                            <div class="project-architecture">
+                                <p class="architecture-text"><strong>Architecture:</strong> Browser -> FastAPI + WebSocket -> Async Job Queue -> ComfyUI / Hunyuan3D 2.1 -> Local GPU -> GLB + in-browser viewer</p>
+                            </div>
+                            <div class="project-features">
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/cpu.svg" alt="GPU Inference" class="feature-icon" loading="lazy" decoding="async">GPU Inference</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/activity.svg" alt="Real-Time" class="feature-icon" loading="lazy" decoding="async">Real-Time Progress</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/box.svg" alt="3D" class="feature-icon" loading="lazy" decoding="async">3D Generation</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://qorlyt.com" target="_blank" rel="noopener noreferrer" class="project-link">Live Site</a>
+                                <a href="https://github.com/ethanstoner/3d-generator" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-header">
+                                <h3 class="project-title">Lyric Generator</h3>
+                                <div class="project-badges">
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">Python</span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/fastapi.svg" alt="FastAPI" class="project-icon" loading="lazy" decoding="async">FastAPI</span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/ffmpeg.svg" alt="ffmpeg" class="project-icon" loading="lazy" decoding="async">ffmpeg</span>
+                                </div>
+                            </div>
+                            <p class="project-description">
+                                <strong>Built:</strong> Paste a Spotify link, get a brat-style lyric video. A FastAPI pipeline: Spotify metadata -> local / yt-dlp audio -> Whisper word-level timing (LRCLIB fallback) -> Pillow frame rendering -> ffmpeg mux.<br><br>
+                                <strong>Hands-On Work:</strong> Async job queue, graceful failure handling on every external call, packaged with <code>pyproject.toml</code>, MIT-licensed, and tested in GitHub Actions CI on every push.<br><br>
+                                <strong>Why It Matters:</strong> A polished, CI-tested, packaged Python project — production discipline end to end.
+                            </p>
+                            <div class="project-architecture">
+                                <p class="architecture-text"><strong>Architecture:</strong> Spotify -> yt-dlp -> Whisper / LRCLIB -> Pillow -> ffmpeg -> MP4 (async job queue)</p>
+                            </div>
+                            <div class="project-features">
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/audio-lines.svg" alt="Whisper" class="feature-icon" loading="lazy" decoding="async">Whisper Timing</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/githubactions.svg" alt="CI/CD" class="feature-icon" loading="lazy" decoding="async">CI Tested</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/package.svg" alt="Packaged" class="feature-icon" loading="lazy" decoding="async">pyproject Packaged</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/ethanstoner/lyric-generator" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-header">
+                                <h3 class="project-title">yt2tiktok</h3>
+                                <div class="project-badges">
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">Python</span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/ffmpeg.svg" alt="ffmpeg" class="project-icon" loading="lazy" decoding="async">ffmpeg / NVENC</span>
+                                </div>
+                            </div>
+                            <p class="project-description">
+                                <strong>Built:</strong> A desktop app that turns any YouTube video into scheduled, captioned vertical TikTok clips.<br><br>
+                                <strong>Hands-On Work:</strong> Splits into 60-70s segments (silence-based or LLM cliffhanger cuts), burns in word-by-word karaoke captions (6 style presets), NVENC GPU encoding with CPU fallback, parallel encoding (2-4x faster), and hybrid transcription — YouTube captions with automatic local Whisper fill-in for censored words.<br><br>
+                                <strong>Why It Matters:</strong> Real media-processing engineering: GPU acceleration, concurrency, and a polished desktop UI.
+                            </p>
+                            <div class="project-features">
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/cpu.svg" alt="GPU Encoding" class="feature-icon" loading="lazy" decoding="async">NVENC Encoding</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/captions.svg" alt="Captions" class="feature-icon" loading="lazy" decoding="async">Karaoke Captions</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/zap.svg" alt="Parallel" class="feature-icon" loading="lazy" decoding="async">Parallel Encoding</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/ethanstoner/yt2tiktok" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
+                            </div>
+                        </div>
+
                         <div class="project-card">
                             <div class="project-header">
                                 <h3 class="project-title">CSUSM Campus Monitor</h3>
                                 <div class="project-badges">
-                                    <span class="project-badge">
-                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">
-                                        Python
-                                    </span>
-                                    <span class="project-badge">
-                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/fastapi.svg" alt="FastAPI" class="project-icon" loading="lazy" decoding="async">
-                                        FastAPI
-                                    </span>
-                                    <span class="project-badge">
-                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/opencv.svg" alt="OpenCV" class="project-icon" loading="lazy" decoding="async">
-                                        OpenCV
-                                    </span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">Python</span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/fastapi.svg" alt="FastAPI" class="project-icon" loading="lazy" decoding="async">FastAPI</span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/opencv.svg" alt="OpenCV" class="project-icon" loading="lazy" decoding="async">OpenCV</span>
                                 </div>
                             </div>
                             <p class="project-description">
                                 <strong>Built:</strong> A real-time occupancy monitor for CSUSM campus locations that uses computer vision to detect people in live camera feeds and serve crowd data through a web dashboard.<br><br>
-                                <strong>Hands-On Work:</strong> Captured HLS video streams via ffmpeg, ran YOLOv8 person detection with custom false-positive filtering (rolling-window spatial tracker), built a FastAPI backend with SQLite time-series storage, and created an interactive dashboard with live video, heatmaps, and best-times recommendations. Added a dual detection backend supporting both local YOLO and Frigate NVR via MQTT.<br><br>
-                                <strong>Why It Matters:</strong> Solves a real campus problem — students can check crowd levels before walking to food spots. Demonstrates computer vision, full-stack development, systems integration, and data engineering. 31 tests with CI pipeline.
+                                <strong>Hands-On Work:</strong> Captured HLS video streams via ffmpeg, ran YOLOv8 person detection with custom false-positive filtering (rolling-window spatial tracker), built a FastAPI backend with SQLite time-series storage, and created an interactive dashboard with live video, heatmaps, and best-times recommendations. Dual detection backend supporting both local YOLO and Frigate NVR via MQTT.<br><br>
+                                <strong>Why It Matters:</strong> Solves a real campus problem and demonstrates computer vision, full-stack development, systems integration, and data engineering. Test suite with CI pipeline.
                             </p>
                             <div class="project-architecture">
-                                <p class="architecture-text"><strong>Architecture:</strong> HLS Streams -> ffmpeg -> YOLOv8 Detection -> StaticObjectFilter -> SQLite -> FastAPI -> Dashboard (hls.js + Chart.js)</p>
+                                <p class="architecture-text"><strong>Architecture:</strong> HLS Streams -> ffmpeg -> YOLOv8 -> StaticObjectFilter -> SQLite -> FastAPI -> Dashboard (hls.js + Chart.js)</p>
                             </div>
                             <div class="project-features">
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/eye.svg" alt="Computer Vision" class="feature-icon" loading="lazy" decoding="async">
-                                    Computer Vision
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/activity.svg" alt="Real-Time" class="feature-icon" loading="lazy" decoding="async">
-                                    Real-Time Detection
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/docker.svg" alt="Docker" class="feature-icon" loading="lazy" decoding="async">
-                                    Docker
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/githubactions.svg" alt="CI/CD" class="feature-icon" loading="lazy" decoding="async">
-                                    CI/CD
-                                </span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/eye.svg" alt="Computer Vision" class="feature-icon" loading="lazy" decoding="async">Computer Vision</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/activity.svg" alt="Real-Time" class="feature-icon" loading="lazy" decoding="async">Real-Time Detection</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/githubactions.svg" alt="CI/CD" class="feature-icon" loading="lazy" decoding="async">CI/CD</span>
                             </div>
                             <div class="project-links">
                                 <a href="https://github.com/ethanstoner/csusm-monitor" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
@@ -333,149 +390,92 @@
 
                         <div class="project-card">
                             <div class="project-header">
-                                <h3 class="project-title">UGC 3D Model Generation Platform</h3>
+                                <h3 class="project-title">Senior TV</h3>
                                 <div class="project-badges">
-                                    <span class="project-badge">
-                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">
-                                        Python
-                                    </span>
-                                    <span class="project-badge">
-                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/docker.svg" alt="Docker" class="project-icon" loading="lazy" decoding="async">
-                                        Docker
-                                    </span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">Python</span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/linux.svg" alt="Linux" class="project-icon" loading="lazy" decoding="async">Linux</span>
                                 </div>
                             </div>
                             <p class="project-description">
-                                <strong>Built:</strong> A self-hosted full-stack platform that generates 3D models through local AI inference on personal GPU hardware.<br><br>
-                                <strong>Hands-On Work:</strong> Managed a two-machine workflow linking the website on one PC to GPU compute on my main computer, while diagnosing driver conflicts, model compatibility issues, and performance bottlenecks.<br><br>
-                                <strong>Why It Matters:</strong> This project shows end-to-end systems ownership across web delivery, local inference, and reliability engineering.
+                                <strong>Built:</strong> An open-source kiosk entertainment and care system for seniors with dementia/Alzheimer's — one mini PC, one TV, one <code>install.sh</code>.<br><br>
+                                <strong>Hands-On Work:</strong> 6-button remote, self-healing services, HDMI-CEC TV control, and fully remote-managed for caregivers. Built for two 95-year-olds who watch TV 8+ hours a day.<br><br>
+                                <strong>Why It Matters:</strong> Real human impact, accessibility-first design, and a self-healing self-hosted system.
                             </p>
-                            <div class="project-architecture">
-                                <p class="architecture-text"><strong>Architecture:</strong> Browser -> Full-Stack App -> ComfyUI Pipeline -> Local GPU Inference -> 3D Model Output</p>
-                            </div>
                             <div class="project-features">
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/cpu.svg" alt="GPU Inference" class="feature-icon" loading="lazy" decoding="async">
-                                    GPU Inference
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/docker.svg" alt="Self-Hosted" class="feature-icon" loading="lazy" decoding="async">
-                                    Self-Hosted
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/box.svg" alt="3D Models" class="feature-icon" loading="lazy" decoding="async">
-                                    3D Generation
-                                </span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/accessibility.svg" alt="Accessibility" class="feature-icon" loading="lazy" decoding="async">Accessibility</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/tv.svg" alt="HDMI-CEC" class="feature-icon" loading="lazy" decoding="async">HDMI-CEC</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/server.svg" alt="Self-Hosted" class="feature-icon" loading="lazy" decoding="async">Self-Healing</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://ugc.fluximetry.com" target="_blank" rel="noopener noreferrer" class="project-link">Live Demo</a>
+                                <a href="https://github.com/sandbreak80/senior-tv" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
                             </div>
                         </div>
 
                         <div class="project-card">
                             <div class="project-header">
-                                <h3 class="project-title">GSI Business Website</h3>
+                                <h3 class="project-title">Auto YouTube Pipeline</h3>
                                 <div class="project-badges">
-                                    <span class="project-badge">
-                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/javascript.svg" alt="JavaScript" class="project-icon" loading="lazy" decoding="async">
-                                        JavaScript
-                                    </span>
-                                    <span class="project-badge">
-                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/html5.svg" alt="HTML" class="project-icon" loading="lazy" decoding="async">
-                                        HTML/CSS
-                                    </span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">Python</span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/playwright.svg" alt="Playwright" class="project-icon" loading="lazy" decoding="async">Playwright</span>
                                 </div>
                             </div>
                             <p class="project-description">
-                                <strong>Built:</strong> A production business website hosted on a dedicated secondary PC.<br><br>
-                                <strong>Hands-On Work:</strong> Managed DNS configuration, domain setup, and ongoing system maintenance to keep the site available and updated.<br><br>
-                                <strong>Why It Matters:</strong> Shows practical ownership of deployment, uptime, and production support on real hardware.
+                                <strong>Built:</strong> A fully automated, zero-human-interaction YouTube content pipeline.<br><br>
+                                <strong>Hands-On Work:</strong> Records animated race videos via headless Playwright, encodes and mixes audio with FFmpeg, and uploads on a rate-ramped cron schedule via the YouTube API. 76 race types, parallel batch recording.<br><br>
+                                <strong>Why It Matters:</strong> End-to-end automation: browser control, media encoding, API integration, and scheduling with zero manual steps.
                             </p>
-                            <div class="project-architecture">
-                                <p class="architecture-text"><strong>Architecture:</strong> Browser -> Self-Hosted Server -> DNS and Domain Config -> Ongoing Maintenance</p>
-                            </div>
                             <div class="project-features">
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/server.svg" alt="Self-Hosted" class="feature-icon" loading="lazy" decoding="async">
-                                    Self-Hosted
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/layout.svg" alt="Responsive" class="feature-icon" loading="lazy" decoding="async">
-                                    Responsive Design
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/globe.svg" alt="DNS" class="feature-icon" loading="lazy" decoding="async">
-                                    DNS Management
-                                </span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/zap.svg" alt="Automation" class="feature-icon" loading="lazy" decoding="async">Automation</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/clock.svg" alt="Scheduling" class="feature-icon" loading="lazy" decoding="async">Cron Scheduling</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/youtube.svg" alt="YouTube API" class="feature-icon" loading="lazy" decoding="async">YouTube API</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://gsi.fluximetry.com" target="_blank" rel="noopener noreferrer" class="project-link">Live Demo</a>
+                                <a href="https://github.com/ethanstoner/auto-youtube-pipeline" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
                             </div>
                         </div>
 
                         <div class="project-card">
                             <div class="project-header">
-                                <h3 class="project-title">Freelance Web Development</h3>
+                                <h3 class="project-title">GSI Sand &amp; Gravel</h3>
                                 <div class="project-badges">
-                                    <span class="project-badge">
-                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/javascript.svg" alt="JavaScript" class="project-icon" loading="lazy" decoding="async">
-                                        JavaScript
-                                    </span>
-                                    <span class="project-badge">
-                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/github.svg" alt="GitHub Pages" class="project-icon" loading="lazy" decoding="async">
-                                        GitHub Pages
-                                    </span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/nextdotjs.svg" alt="Next.js" class="project-icon" loading="lazy" decoding="async">Next.js</span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/react.svg" alt="React" class="project-icon" loading="lazy" decoding="async">React</span>
                                 </div>
                             </div>
                             <p class="project-description">
-                                <strong>Built:</strong> Production websites for small business clients using GitHub Pages and managed hosting platforms.<br><br>
-                                <strong>Hands-On Work:</strong> Integrated REST APIs, managed client requirements, and iterated through structured deployment workflows.<br><br>
-                                <strong>Why It Matters:</strong> Demonstrates client communication, shipping discipline, and end-to-end delivery.
+                                <strong>Built:</strong> A production marketing website for GSI Sand &amp; Gravel, a Southern California sand &amp; gravel supplier serving the region for 30+ years.<br><br>
+                                <strong>Hands-On Work:</strong> Responsive Next.js site presenting the company's services, coverage area, and contact funnel. Managed deployment, DNS, and ongoing maintenance.<br><br>
+                                <strong>Why It Matters:</strong> Real paid client work — shipped and live for an actual business.
                             </p>
                             <div class="project-features">
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/users.svg" alt="Client Work" class="feature-icon" loading="lazy" decoding="async">
-                                    Client Work
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/curly-braces.svg" alt="REST APIs" class="feature-icon" loading="lazy" decoding="async">
-                                    REST APIs
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/github.svg" alt="Deployment" class="feature-icon" loading="lazy" decoding="async">
-                                    Managed Hosting
-                                </span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/users.svg" alt="Client Work" class="feature-icon" loading="lazy" decoding="async">Client Work</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/layout.svg" alt="Responsive" class="feature-icon" loading="lazy" decoding="async">Responsive Design</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/globe.svg" alt="DNS" class="feature-icon" loading="lazy" decoding="async">DNS &amp; Hosting</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://gsi.fluximetry.com" target="_blank" rel="noopener noreferrer" class="project-link">Live Site</a>
                             </div>
                         </div>
 
                         <div class="project-card">
                             <div class="project-header">
-                                <h3 class="project-title">AI-Generated 3D Digital Assets</h3>
+                                <h3 class="project-title">Hunyuan3D-2.1 Install Guide</h3>
                                 <div class="project-badges">
-                                    <span class="project-badge">
-                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">
-                                        Python
-                                    </span>
+                                    <span class="project-badge"><img src="https://unpkg.com/lucide-static@0.561.0/icons/star.svg" alt="Stars" class="project-icon" loading="lazy" decoding="async">9 Stars</span>
+                                    <span class="project-badge"><img src="https://unpkg.com/lucide-static@0.561.0/icons/book-open.svg" alt="Docs" class="project-icon" loading="lazy" decoding="async">Docs</span>
                                 </div>
                             </div>
                             <p class="project-description">
-                                <strong>Built:</strong> An end-to-end workflow for generating and selling custom 3D assets with ComfyUI pipelines and locally hosted AI models.<br><br>
-                                <strong>Hands-On Work:</strong> Tuned models, handled local inference, packaged assets, and delivered final outputs.<br><br>
-                                <strong>Why It Matters:</strong> Combines AI infrastructure work with execution, packaging, and delivery.
+                                <strong>Built:</strong> A comprehensive, step-by-step guide for installing Hunyuan3D-2.1 with ComfyUI on Windows.<br><br>
+                                <strong>Hands-On Work:</strong> Documented the full GPU setup, dependency resolution, and model installation from real troubleshooting.<br><br>
+                                <strong>Why It Matters:</strong> My most-starred repo — used by the community to get a complex AI 3D pipeline running.
                             </p>
                             <div class="project-features">
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/cpu.svg" alt="AI Inference" class="feature-icon" loading="lazy" decoding="async">
-                                    AI Inference
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/box.svg" alt="3D Assets" class="feature-icon" loading="lazy" decoding="async">
-                                    3D Assets
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/package-check.svg" alt="Delivery" class="feature-icon" loading="lazy" decoding="async">
-                                    Asset Delivery
-                                </span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/book-open.svg" alt="Documentation" class="feature-icon" loading="lazy" decoding="async">Technical Writing</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/cpu.svg" alt="GPU Setup" class="feature-icon" loading="lazy" decoding="async">GPU Setup</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/ethanstoner/Hunyuan3D-2.1-Complete-Install-Guide" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
                             </div>
                         </div>
 
@@ -483,37 +483,22 @@
                             <div class="project-header">
                                 <h3 class="project-title project-title-small">QA Automation Framework</h3>
                                 <div class="project-badges">
-                                    <span class="project-badge">
-                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">
-                                        Python
-                                    </span>
-                                    <span class="project-badge">
-                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/typescript.svg" alt="TypeScript" class="project-icon" loading="lazy" decoding="async">
-                                        TypeScript
-                                    </span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">Python</span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/playwright.svg" alt="Playwright" class="project-icon" loading="lazy" decoding="async">Playwright</span>
                                 </div>
                             </div>
                             <p class="project-description">
-                                <strong>Built:</strong> An automated QA workflow using Python and TypeScript tooling for repeatable browser and application testing.<br><br>
-                                <strong>Hands-On Work:</strong> Used Playwright, pytest, Jest, and Dockerized execution to make tests more consistent and easier to run across environments.<br><br>
-                                <strong>Why It Matters:</strong> Shows testing discipline, automation thinking, and practical reliability work.
+                                <strong>Built:</strong> A reusable, Dockerized QA pipeline that runs against any project.<br><br>
+                                <strong>Hands-On Work:</strong> Unit tests, static analysis, security scanning, Playwright E2E, and HTML/JSON reporting in containerized execution for consistency across environments.<br><br>
+                                <strong>Why It Matters:</strong> Testing discipline, automation thinking, and practical reliability work.
                             </p>
                             <div class="project-architecture">
                                 <p class="architecture-text"><strong>Architecture:</strong> Playwright -> Test Runner -> CI Pipeline -> Docker Container -> Reports</p>
                             </div>
                             <div class="project-features">
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/playwright.svg" alt="Playwright" class="feature-icon" loading="lazy" decoding="async">
-                                    Playwright
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/pytest.svg" alt="pytest" class="feature-icon" loading="lazy" decoding="async">
-                                    pytest
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/docker.svg" alt="Docker" class="feature-icon" loading="lazy" decoding="async">
-                                    Docker
-                                </span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/playwright.svg" alt="Playwright" class="feature-icon" loading="lazy" decoding="async">Playwright</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/pytest.svg" alt="pytest" class="feature-icon" loading="lazy" decoding="async">pytest</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/docker.svg" alt="Docker" class="feature-icon" loading="lazy" decoding="async">Docker</span>
                             </div>
                             <div class="project-links">
                                 <a href="https://github.com/ethanstoner/qa-instructions" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
@@ -522,72 +507,18 @@
 
                         <div class="project-card">
                             <div class="project-header">
-                                <h3 class="project-title">Portfolio Website</h3>
-                                <div class="project-badges">
-                                    <span class="project-badge">
-                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/javascript.svg" alt="JavaScript" class="project-icon" loading="lazy" decoding="async">
-                                        JavaScript
-                                    </span>
-                                    <span class="project-badge">
-                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/html5.svg" alt="HTML" class="project-icon" loading="lazy" decoding="async">
-                                        HTML/CSS
-                                    </span>
-                                </div>
-                            </div>
-                            <p class="project-description">
-                                <strong>Built:</strong> A responsive portfolio site for presenting projects, technical skills, and work experience on GitHub Pages.<br><br>
-                                <strong>Hands-On Work:</strong> Built the frontend in vanilla HTML, CSS, and JavaScript with custom scrolling behavior, section navigation, and polished presentation.<br><br>
-                                <strong>Why It Matters:</strong> Shows frontend implementation skills and attention to detail in the final product.
-                            </p>
-                            <div class="project-architecture">
-                                <p class="architecture-text"><strong>Architecture:</strong> Browser -> HTML/CSS/JS -> GitHub Pages -> CDN Delivery</p>
-                            </div>
-                            <div class="project-features">
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/layout.svg" alt="Responsive Design" class="feature-icon" loading="lazy" decoding="async">
-                                    Responsive Design
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/playwright.svg" alt="Playwright" class="feature-icon" loading="lazy" decoding="async">
-                                    Playwright
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/github.svg" alt="GitHub Pages" class="feature-icon" loading="lazy" decoding="async">
-                                    GitHub Pages
-                                </span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/ethanstoner/ethanstoner.github.io" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
-                                <a href="https://ethanstoner.github.io" target="_blank" rel="noopener noreferrer" class="project-link">Live Demo</a>
-                            </div>
-                        </div>
-
-                        <div class="project-card">
-                            <div class="project-header">
                                 <h3 class="project-title">DelayEdge</h3>
-                                <span class="project-badge">
-                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">
-                                    Python
-                                </span>
+                                <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">Python</span>
                             </div>
                             <p class="project-description">
-                                <strong>Built:</strong> An automated arbitrage trading system for HowTheMarketWorks.com.<br><br>
-                                <strong>Hands-On Work:</strong> Implemented real-time price scanning, automated trade execution, position tracking, and guardrails for market timing and risk control.<br><br>
-                                <strong>Why It Matters:</strong> Demonstrates automation, algorithmic logic, and real-time decision making.
+                                <strong>Built:</strong> An automated trading bot for the HowTheMarketWorks stock-market simulator.<br><br>
+                                <strong>Hands-On Work:</strong> Real-time price scanning, automated execution, fixed-target exits, position tracking, and market-hours guardrails.<br><br>
+                                <strong>Why It Matters:</strong> Automation, algorithmic logic, and real-time decision making.
                             </p>
                             <div class="project-features">
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/trending-up.svg" alt="Trading" class="feature-icon" loading="lazy" decoding="async">
-                                    Algorithmic Trading
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/zap.svg" alt="Automation" class="feature-icon" loading="lazy" decoding="async">
-                                    Automation
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/shield-check.svg" alt="Risk Management" class="feature-icon" loading="lazy" decoding="async">
-                                    Risk Management
-                                </span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/trending-up.svg" alt="Trading" class="feature-icon" loading="lazy" decoding="async">Algorithmic Logic</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/zap.svg" alt="Automation" class="feature-icon" loading="lazy" decoding="async">Automation</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/shield-check.svg" alt="Risk" class="feature-icon" loading="lazy" decoding="async">Risk Guards</span>
                             </div>
                             <div class="project-links">
                                 <a href="https://github.com/ethanstoner/delayedge" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
@@ -598,34 +529,19 @@
                             <div class="project-header">
                                 <h3 class="project-title">Vulture</h3>
                                 <div class="project-badges">
-                                    <span class="project-badge">
-                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">
-                                        Python
-                                    </span>
-                                    <span class="project-badge">
-                                        <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/openjdk.svg" alt="Java" class="project-icon" loading="lazy" decoding="async">
-                                        Java
-                                    </span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">Python</span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/openjdk.svg" alt="Java" class="project-icon" loading="lazy" decoding="async">Java</span>
                                 </div>
                             </div>
                             <p class="project-description">
                                 <strong>Built:</strong> A toolkit for analyzing, decompiling, and safely inspecting obfuscated Minecraft mods.<br><br>
-                                <strong>Hands-On Work:</strong> Combined static analysis, decompiler support, and Docker-isolated execution to reduce risk while examining untrusted code.<br><br>
-                                <strong>Why It Matters:</strong> Shows security analysis, reverse engineering, and containment-minded tooling.
+                                <strong>Hands-On Work:</strong> Combined static analysis, decompiler support, suspicious-pattern detection, and Docker-isolated execution to reduce risk while examining untrusted code.<br><br>
+                                <strong>Why It Matters:</strong> Security analysis, reverse engineering, and containment-minded tooling.
                             </p>
                             <div class="project-features">
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/rotate-ccw.svg" alt="Reverse Engineering" class="feature-icon" loading="lazy" decoding="async">
-                                    Reverse Engineering
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/shield-alert.svg" alt="Security Analysis" class="feature-icon" loading="lazy" decoding="async">
-                                    Security Analysis
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/docker.svg" alt="Docker" class="feature-icon" loading="lazy" decoding="async">
-                                    Docker
-                                </span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/rotate-ccw.svg" alt="Reverse Engineering" class="feature-icon" loading="lazy" decoding="async">Reverse Engineering</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/shield-alert.svg" alt="Security" class="feature-icon" loading="lazy" decoding="async">Security Analysis</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/docker.svg" alt="Docker" class="feature-icon" loading="lazy" decoding="async">Docker</span>
                             </div>
                             <div class="project-links">
                                 <a href="https://github.com/ethanstoner/vulture" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
@@ -634,26 +550,56 @@
 
                         <div class="project-card">
                             <div class="project-header">
-                                <h3 class="project-title">Exploding Ball Engine</h3>
-                                <span class="project-badge">
-                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/javascript.svg" alt="JavaScript" class="project-icon" loading="lazy" decoding="async">
-                                    JavaScript
-                                </span>
+                                <h3 class="project-title project-title-small">Quiz Sorter for TAs</h3>
+                                <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">Python</span>
                             </div>
                             <p class="project-description">
-                                <strong>Built:</strong> A game engine project focused on physics, rendering, and system structure.<br><br>
-                                <strong>Hands-On Work:</strong> Implemented simulation behavior, collision handling, and modular architecture designed for extension and experimentation.<br><br>
-                                <strong>Why It Matters:</strong> Demonstrates systems thinking and clean implementation in a graphics-oriented project.
+                                <strong>Built:</strong> A Wayground quiz organizer for Teaching Assistants.<br><br>
+                                <strong>Hands-On Work:</strong> Attendance matching, configurable curve caps, multi-quiz merge, and sorted CSV/PDF output.<br><br>
+                                <strong>Why It Matters:</strong> A practical tool that solved a real workflow problem for educators.
                             </p>
                             <div class="project-features">
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/gamepad-2.svg" alt="Game Engine" class="feature-icon" loading="lazy" decoding="async">
-                                    Game Engine
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/atom.svg" alt="Physics" class="feature-icon" loading="lazy" decoding="async">
-                                    Physics
-                                </span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/table.svg" alt="Data" class="feature-icon" loading="lazy" decoding="async">Data Processing</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/file-text.svg" alt="PDF" class="feature-icon" loading="lazy" decoding="async">CSV / PDF Output</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/ethanstoner/Quiz-Sorter-Program" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-header">
+                                <h3 class="project-title">HumanType</h3>
+                                <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/csharp.svg" alt="C#" class="project-icon" loading="lazy" decoding="async">C#</span>
+                            </div>
+                            <p class="project-description">
+                                <strong>Built:</strong> A cross-platform realistic typing emulator for macOS and Windows.<br><br>
+                                <strong>Hands-On Work:</strong> QWERTY-based typo simulation, natural rhythm, and a packaged Windows app with update checks.<br><br>
+                                <strong>Why It Matters:</strong> Cross-platform automation work with attention to behavioral detail.
+                            </p>
+                            <div class="project-features">
+                                <span class="feature-tag tech-feature-tag"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/apple.svg" alt="macOS" class="feature-icon" loading="lazy" decoding="async">macOS</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/monitor.svg" alt="Windows" class="feature-icon" loading="lazy" decoding="async">Windows</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/zap.svg" alt="Automation" class="feature-icon" loading="lazy" decoding="async">Automation</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/ethanstoner/humanlike-typer" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-header">
+                                <h3 class="project-title">Exploding Ball Engine</h3>
+                                <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/javascript.svg" alt="JavaScript" class="project-icon" loading="lazy" decoding="async">JavaScript</span>
+                            </div>
+                            <p class="project-description">
+                                <strong>Built:</strong> A web physics simulation with collision detection and particle effects.<br><br>
+                                <strong>Hands-On Work:</strong> Implemented simulation behavior, collision handling, and a modular architecture built for extension.<br><br>
+                                <strong>Why It Matters:</strong> Systems thinking and clean implementation in a graphics-oriented project.
+                            </p>
+                            <div class="project-features">
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/gamepad-2.svg" alt="Engine" class="feature-icon" loading="lazy" decoding="async">Physics Engine</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/atom.svg" alt="Physics" class="feature-icon" loading="lazy" decoding="async">Matter.js</span>
                             </div>
                             <div class="project-links">
                                 <a href="https://github.com/ethanstoner/exploding-ball-engine" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
@@ -662,35 +608,27 @@
 
                         <div class="project-card">
                             <div class="project-header">
-                                <h3 class="project-title">HumanLike Typer</h3>
-                                <span class="project-badge">
-                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/csharp.svg" alt="C#" class="project-icon" loading="lazy" decoding="async">
-                                    C#
-                                </span>
+                                <h3 class="project-title">Portfolio Website</h3>
+                                <div class="project-badges">
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/javascript.svg" alt="JavaScript" class="project-icon" loading="lazy" decoding="async">JavaScript</span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/html5.svg" alt="HTML" class="project-icon" loading="lazy" decoding="async">HTML/CSS</span>
+                                </div>
                             </div>
                             <p class="project-description">
-                                <strong>Built:</strong> A realistic typing emulator for macOS and Windows.<br><br>
-                                <strong>Hands-On Work:</strong> Added human-like typing patterns, typo behavior, and variable rhythm to make automation feel less mechanical.<br><br>
-                                <strong>Why It Matters:</strong> Shows cross-platform automation work and attention to behavioral detail.
+                                <strong>Built:</strong> This responsive portfolio site, presenting projects, skills, and experience on GitHub Pages.<br><br>
+                                <strong>Hands-On Work:</strong> Vanilla HTML, CSS, and JavaScript with custom scroll behavior, scrollspy navigation, and reveal animations.<br><br>
+                                <strong>Why It Matters:</strong> Frontend implementation skill and attention to detail in the final product.
                             </p>
                             <div class="project-features">
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/apple.svg" alt="macOS" class="feature-icon" loading="lazy" decoding="async">
-                                    macOS
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/windows.svg" alt="Windows" class="feature-icon" loading="lazy" decoding="async">
-                                    Windows
-                                </span>
-                                <span class="feature-tag tech-feature-tag">
-                                    <img src="https://unpkg.com/lucide-static@0.561.0/icons/zap.svg" alt="Automation" class="feature-icon" loading="lazy" decoding="async">
-                                    Automation
-                                </span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/layout.svg" alt="Responsive" class="feature-icon" loading="lazy" decoding="async">Responsive Design</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/github.svg" alt="GitHub Pages" class="feature-icon" loading="lazy" decoding="async">GitHub Pages</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/ethanstoner/humanlike-typer" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
+                                <a href="https://github.com/ethanstoner/ethanstoner.github.io" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
+                                <a href="https://ethanstoner.github.io" target="_blank" rel="noopener noreferrer" class="project-link">Live Site</a>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </section>
