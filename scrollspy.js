@@ -153,8 +153,12 @@
     }
 
     function scheduleUpdate() {
+        // Coalesce: if an update is already scheduled for the next frame,
+        // let it run. Cancelling + rescheduling on every scroll event
+        // starves the callback during continuous scrolling, which makes
+        // the active link lag ~a section behind the real scroll position.
         if (rafId) {
-            cancelAnimationFrame(rafId);
+            return;
         }
         rafId = requestAnimationFrame(() => {
             rafId = null;
