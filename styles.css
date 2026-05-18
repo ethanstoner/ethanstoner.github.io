@@ -1584,6 +1584,8 @@ html {
 
 .email-text {
     flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
     text-align: center;
     margin: 0 auto;
 }
@@ -2187,7 +2189,7 @@ html {
     }
 
     .contact-links {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 24px;
     }
 
@@ -2407,4 +2409,81 @@ html {
 .projects-more-link:hover {
     opacity: 1;
     transform: translateX(4px);
+}
+
+/* Collapse nav to hamburger for tablet & below — the horizontal nav and
+   logo collide below ~1024px (logo wraps, "Tech Stack" breaks apart). */
+@media (max-width: 1024px) {
+    .header {
+        padding: 0 24px;
+        height: 60px;
+    }
+
+    .logo {
+        line-height: 60px;
+    }
+
+    .logo-text {
+        font-size: 16px;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+        z-index: 101;
+        position: relative;
+    }
+
+    .nav {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(15, 15, 15, 0.98);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px 0;
+        gap: 0;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 99;
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+    }
+
+    .nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-link {
+        display: flex;
+        padding: 16px 24px;
+        line-height: 1.5;
+        min-height: auto;
+        width: 100%;
+        justify-content: flex-start;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-link:last-child {
+        border-bottom: none;
+    }
+
+    .nav-link::after {
+        display: none;
+    }
+}
+
+/* Very small phones: decorative floating icons sit too far out and clip
+   against the viewport edges below ~360px — hide them (purely cosmetic). */
+@media (max-width: 360px) {
+    .floating-icon {
+        display: none !important;
+    }
 }
