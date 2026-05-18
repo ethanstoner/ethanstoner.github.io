@@ -2408,7 +2408,6 @@ html {
 
 .projects-more-link:hover {
     opacity: 1;
-    transform: translateX(4px);
 }
 
 /* Collapse nav to hamburger for tablet & below — the horizontal nav and
