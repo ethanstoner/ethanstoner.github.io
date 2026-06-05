@@ -11,13 +11,19 @@
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "test:report": "playwright show-report",
-    "test:logos": "playwright test tests/logo-validation.spec.js"
+    "test:logos": "playwright test tests/logo-validation.spec.js",
+    "build:resume": "node build-resume.js"
   },
-  "keywords": ["portfolio", "ethanstoner", "qa", "playwright"],
+  "keywords": [
+    "portfolio",
+    "ethanstoner",
+    "qa",
+    "playwright"
+  ],
   "author": "Ethan Stoner",
   "license": "MIT",
   "devDependencies": {
-    "@playwright/test": "^1.40.0"
+    "@playwright/test": "^1.60.0"
   },
   "dependencies": {
     "serve": "^14.2.1"

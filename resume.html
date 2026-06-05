@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ethan Stoner — Resume</title>
+<style>
+  @page { size: Letter; margin: 0.4in 0.5in; }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #1a1a1a;
+    font-size: 9.6pt;
+    line-height: 1.28;
+  }
+  a { color: #2056a4; text-decoration: none; }
+  .name {
+    text-align: center;
+    font-size: 22pt;
+    font-weight: 700;
+    color: #1b3a72;
+    letter-spacing: 0.5px;
+    margin: 0 0 2px;
+  }
+  .tagline {
+    text-align: center;
+    font-size: 8.5pt;
+    letter-spacing: 3px;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    margin: 0 0 4px;
+  }
+  .contact {
+    text-align: center;
+    font-size: 9pt;
+    margin: 0 0 8px;
+    color: #1a1a1a;
+  }
+  .contact a { color: #2056a4; }
+  h2.section {
+    color: #1b3a72;
+    font-size: 10pt;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border-bottom: 1.2px solid #1b3a72;
+    padding-bottom: 1px;
+    margin: 8px 0 4px;
+    text-transform: uppercase;
+  }
+  p.summary { margin: 0 0 2px; }
+  table.skills { width: 100%; border-collapse: collapse; }
+  table.skills td { padding: 1px 0; vertical-align: top; }
+  table.skills td.label { width: 135px; font-weight: 700; }
+  .role {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 4px;
+  }
+  .role .left { font-size: 10pt; }
+  .role .left strong { font-weight: 700; }
+  .role .right { font-size: 9.2pt; color: #444; white-space: nowrap; }
+  .subrole { font-style: italic; font-size: 9.2pt; color: #444; margin: 0; }
+  ul.bullets {
+    margin: 1px 0 0 14px;
+    padding: 0;
+    list-style: none;
+  }
+  ul.bullets li {
+    position: relative;
+    padding-left: 10px;
+    margin: 1px 0;
+  }
+  ul.bullets li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #2056a4;
+    font-weight: 700;
+  }
+  .project-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 4px;
+  }
+  .project-head .name-col { font-weight: 700; font-size: 10pt; }
+  .project-head .link-col a { font-size: 9.2pt; }
+  .edu-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1px;
+  }
+  .edu-row .left { font-weight: 700; }
+  .edu-row .right { color: #444; }
+</style>
+</head>
+<body>
+
+<h1 class="name">Ethan Stoner</h1>
+<p class="tagline">Cloud &amp; Systems &middot; Full-Stack &amp; AI Pipelines</p>
+<p class="contact">
+  Temecula, CA &nbsp;|&nbsp; <a href="mailto:ethanstoner08@gmail.com">ethanstoner08@gmail.com</a><br>
+  <a href="https://linkedin.com/in/eastoner">linkedin.com/in/eastoner</a> &nbsp;|&nbsp;
+  <a href="https://github.com/ethanstoner">github.com/ethanstoner</a> &nbsp;|&nbsp;
+  <a href="https://ethanstoner.github.io">ethanstoner.github.io</a>
+</p>
+
+<h2 class="section">Professional Summary</h2>
+<p class="summary">
+  Cloud- and systems-focused recent high school graduate (June 2026) who builds, ships, and self-hosts live full-stack and
+  AI products on local GPU hardware — owning everything from deployment and DNS to uptime and troubleshooting. Combines
+  hands-on engineering with strong customer communication and collaborative Git-based development. Available full-time;
+  pursuing the AWS Certified Cloud Practitioner (CLF-C02) certification.
+</p>
+
+<h2 class="section">Technical Skills</h2>
+<table class="skills">
+  <tr><td class="label">Cloud &amp; DevOps</td><td>AWS, Docker, GitHub Actions, Linux, Self-Hosted Deployment, Systems Administration</td></tr>
+  <tr><td class="label">Programming</td><td>Python, JavaScript, TypeScript, C#</td></tr>
+  <tr><td class="label">AI &amp; Computer Vision</td><td>ComfyUI, Local Model Inference, Whisper, YOLOv8, OpenCV, GPU Workloads</td></tr>
+  <tr><td class="label">Automation &amp; Testing</td><td>Playwright, pytest, GitHub Actions CI, Workflow Automation, Scripting</td></tr>
+  <tr><td class="label">Web &amp; Systems</td><td>FastAPI, Next.js, SQLite, WebSockets, REST APIs, Git, DNS, Site Reliability</td></tr>
+</table>
+
+<h2 class="section">Experience</h2>
+
+<div class="role">
+  <div class="left"><strong>Freelance Web Developer</strong> — Self-Employed</div>
+  <div class="right">2024 – Present</div>
+</div>
+<ul class="bullets">
+  <li>Design, build, deploy, and maintain production websites for small-business clients end to end.</li>
+  <li>Delivered <a href="https://gsi.fluximetry.com">gsi.fluximetry.com</a> — a live Next.js site for GSI Sand &amp; Gravel; manage its DNS, hosting, and uptime.</li>
+</ul>
+
+<div class="role">
+  <div class="left"><strong>Riffyx Labs Mentorship</strong> — Mentored by Cisco Professionals</div>
+  <div class="right">2025 – 2026</div>
+</div>
+<p class="subrole">Mentee / Project Collaborator</p>
+<ul class="bullets">
+  <li>Built hands-on AWS, debugging, and real-world troubleshooting experience across mentored projects.</li>
+  <li>Used Git workflows — branches, commits, and pull requests — alongside experienced engineers.</li>
+</ul>
+
+<div class="role">
+  <div class="left"><strong>Cheryl's Caramels</strong> — Oceanside, CA</div>
+  <div class="right">2022 – 2025</div>
+</div>
+<p class="subrole">Team Member</p>
+<ul class="bullets">
+  <li>Engaged customers at markets and events; handled cash and digital transactions accurately.</li>
+  <li>Tested Stripe checkout flows before release to verify payment reliability.</li>
+</ul>
+
+<div class="role">
+  <div class="left"><strong>TrashCan Powerwashing</strong> — Co-Founder</div>
+  <div class="right">Aug – Oct 2025</div>
+</div>
+<ul class="bullets">
+  <li>Co-founded a residential power-washing business; ran scheduling, customer communication, and finances.</li>
+</ul>
+
+<h2 class="section">Projects</h2>
+
+<div class="project-head">
+  <div class="name-col">Qorlyt — Image-to-3D Generator</div>
+  <div class="link-col"><a href="https://qorlyt.com">qorlyt.com</a></div>
+</div>
+<ul class="bullets">
+  <li>Live self-hosted product: one image → a textured 3D model in ~80s via local ComfyUI + Hunyuan3D 2.1.</li>
+  <li>FastAPI backend with a persistent WebSocket for real-time progress and an async GPU job queue with live ETA.</li>
+</ul>
+
+<div class="project-head">
+  <div class="name-col">Lyric Generator</div>
+  <div class="link-col"><a href="https://github.com/ethanstoner/lyric-generator">github.com/ethanstoner/lyric-generator</a></div>
+</div>
+<ul class="bullets">
+  <li>FastAPI pipeline: Spotify → yt-dlp → Whisper word-timing → Pillow → ffmpeg, with an async job queue.</li>
+  <li>Packaged with pyproject.toml and tested in GitHub Actions CI on every push.</li>
+</ul>
+
+<div class="project-head">
+  <div class="name-col">CSUSM Campus Monitor</div>
+  <div class="link-col"><a href="https://github.com/ethanstoner/csusm-monitor">github.com/ethanstoner/csusm-monitor</a></div>
+</div>
+<ul class="bullets">
+  <li>Real-time occupancy monitor: YOLOv8 detection on live HLS streams with false-positive filtering.</li>
+  <li>FastAPI + SQLite dashboard with live video, heatmaps, and best-times; CI-tested.</li>
+</ul>
+
+<div class="project-head">
+  <div class="name-col">AI-Generated 3D Digital Assets</div>
+  <div class="link-col"></div>
+</div>
+<ul class="bullets">
+  <li>Sold <strong>~9,900 AI-generated 3D assets</strong> to date via a self-hosted ComfyUI + Hunyuan3D GPU pipeline — automated, monetized, and generating recurring revenue.</li>
+</ul>
+
+<h2 class="section">Education &amp; Certification</h2>
+<div class="edu-row">
+  <div class="left">Great Oak High School</div>
+  <div class="right">Graduated June 2026</div>
+</div>
+<div class="edu-row">
+  <div class="left">AWS Certified Cloud Practitioner (CLF-C02)</div>
+  <div class="right">In Progress</div>
+</div>
+
+</body>
+</html>
