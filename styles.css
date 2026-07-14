@@ -2561,8 +2561,8 @@ html {
 
 .certs-thumbs {
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
 }
 
 .cert-mini {
@@ -2601,13 +2601,13 @@ html {
     color: rgba(255, 255, 255, 0.5);
 }
 
-@media (max-width: 900px) {
-    .certs-thumbs { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 760px) {
+    .certs-thumbs { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 560px) {
     .certs-showcase { padding: 24px 20px 26px; }
-    .certs-thumbs { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .certs-thumbs { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .certs-view-all { width: 100%; justify-content: center; }
 }
 
