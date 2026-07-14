@@ -150,7 +150,7 @@
                                             <path d="m8 6-6 6 6 6"></path>
                                         </svg>
                                         <div class="stat-content">
-                                            <span class="stat-value">15</span>
+                                            <span class="stat-value">20+</span>
                                             <span class="stat-label">Projects Shipped</span>
                                         </div>
                                     </div>
@@ -302,6 +302,33 @@
 
                         <div class="project-card">
                             <div class="project-header">
+                                <h3 class="project-title">Pincer — Real-Time Computer-Vision Agent</h3>
+                                <div class="project-badges">
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">Python</span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/pytorch.svg" alt="PyTorch" class="project-icon" loading="lazy" decoding="async">PyTorch</span>
+                                    <span class="project-badge"><img src="https://unpkg.com/lucide-static@0.561.0/icons/scan-eye.svg" alt="Computer Vision" class="project-icon" loading="lazy" decoding="async">Computer Vision</span>
+                                </div>
+                            </div>
+                            <p class="project-description">
+                                <strong>Built:</strong> A real-time computer-vision agent that drives physical Android phones autonomously to play a mobile game — streaming live video off each device over USB, locating targets with a fine-tuned <strong>YOLO11</strong> detector, and executing the on-screen gestures to act on them, closing the perception → decision → actuation loop end to end.<br><br>
+                                <strong>Hands-On Work:</strong> Fine-tuned YOLO11-small on <strong>5,400+ self-collected frames</strong> via a self-supervised data flywheel — the running agent labels its own training data, corrected through a human-in-the-loop review UI, then retrained on a train → validation-gate → ship pipeline with ONNX export. Cut per-frame capture from ~600ms to ~1.3ms and each tap from ~200ms to ~20ms; multi-device orchestration with self-healing recovery and a live MJPEG monitoring dashboard.<br><br>
+                                <strong>Why It Matters:</strong> My most technically deep project — a complete perception-to-actuation loop with a self-improving ML pipeline, <strong>127 automated tests</strong>, and structural safety invariants enforced in code and covered by tests, so it runs unattended for hours.
+                            </p>
+                            <div class="project-architecture">
+                                <p class="architecture-text"><strong>Architecture:</strong> Phones (USB / adb) -> H.264 stream -> YOLO11 detector -> decision + on-device actuation -> self-labeled dataset -> retrain / validation-gate / ship</p>
+                            </div>
+                            <div class="project-features">
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/scan-eye.svg" alt="Real-Time Detection" class="feature-icon" loading="lazy" decoding="async">Real-Time Detection</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/refresh-cw.svg" alt="Self-Training Flywheel" class="feature-icon" loading="lazy" decoding="async">Self-Training Flywheel</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/shield-check.svg" alt="127 Automated Tests" class="feature-icon" loading="lazy" decoding="async">127 Automated Tests</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/ethanstoner/pincer" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-header">
                                 <h3 class="project-title">Qorlyt — Image-to-3D Generator</h3>
                                 <div class="project-badges">
                                     <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/python.svg" alt="Python" class="project-icon" loading="lazy" decoding="async">Python</span>
@@ -325,6 +352,33 @@
                             <div class="project-links">
                                 <a href="https://qorlyt.com" target="_blank" rel="noopener noreferrer" class="project-link">Live Site</a>
                                 <a href="https://github.com/ethanstoner/3d-generator" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-header">
+                                <h3 class="project-title">kvstore — Redis-Compatible Database</h3>
+                                <div class="project-badges">
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/openjdk.svg" alt="Java 21" class="project-icon" loading="lazy" decoding="async">Java 21</span>
+                                    <span class="project-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/redis.svg" alt="RESP Protocol" class="project-icon" loading="lazy" decoding="async">RESP Protocol</span>
+                                    <span class="project-badge"><img src="https://unpkg.com/lucide-static@0.561.0/icons/database.svg" alt="LSM-Tree" class="project-icon" loading="lazy" decoding="async">LSM-Tree</span>
+                                </div>
+                            </div>
+                            <p class="project-description">
+                                <strong>Built:</strong> A persistent, Redis-compatible key-value database written from scratch in <strong>Java 21</strong> — an LSM-tree storage engine behind a TCP server that speaks the Redis <strong>RESP</strong> protocol, so standard Redis clients connect to it directly.<br><br>
+                                <strong>Hands-On Work:</strong> Built the LSM-tree engine end to end — write-ahead log, leveled compaction, bloom filters, and concurrent flush — plus TLS, multi-user auth, pub/sub, and snapshots. Covered by <strong>203 automated tests</strong>.<br><br>
+                                <strong>Why It Matters:</strong> A systems-programming showcase — durable storage, concurrency control, and wire-protocol compatibility — the database and distributed-systems fundamentals that back real cloud infrastructure.
+                            </p>
+                            <div class="project-architecture">
+                                <p class="architecture-text"><strong>Architecture:</strong> Redis client -> RESP over TCP (TLS) -> command layer (auth, pub/sub) -> LSM engine (WAL -> memtable -> SSTables, bloom filters, leveled compaction)</p>
+                            </div>
+                            <div class="project-features">
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/layers.svg" alt="LSM-Tree Engine" class="feature-icon" loading="lazy" decoding="async">LSM-Tree Engine</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/shield-check.svg" alt="203 Tests" class="feature-icon" loading="lazy" decoding="async">203 Automated Tests</span>
+                                <span class="feature-tag tech-feature-tag"><img src="https://unpkg.com/lucide-static@0.561.0/icons/lock.svg" alt="RESP + TLS" class="feature-icon" loading="lazy" decoding="async">RESP + TLS</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/ethanstoner/kvstore" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub</a>
                             </div>
                         </div>
 
