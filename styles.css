@@ -2601,6 +2601,20 @@ html {
     color: rgba(255, 255, 255, 0.5);
 }
 
+.certs-showcase-note a {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 400;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    transition: color 0.25s ease, border-color 0.25s ease;
+    white-space: nowrap;
+}
+
+.certs-showcase-note a:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
 @media (max-width: 760px) {
     .certs-thumbs { grid-template-columns: repeat(3, 1fr); }
 }
