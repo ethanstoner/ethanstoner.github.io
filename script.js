@@ -200,30 +200,25 @@ function initSmoothScroll() {
             
             // Handle home link - scroll to top
             if (!href || href === '#' || href === '' || href === '#home') {
-                // Detect mobile for optimized scrolling
-                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
-                
-                if (isMobile) {
-                    // On mobile, use native smooth scroll only
-                    document.documentElement.style.scrollBehavior = 'smooth';
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                } else {
-                    // Desktop: use polyfill for better control
-                    smoothScrollToTop();
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
+                // Cancel any in-flight custom animation, then let the browser do
+                // ONE native smooth scroll. (Previously the desktop path ran a
+                // rAF polyfill AND a native smooth scroll at the same time, so
+                // they fought and the scroll came out jagged.)
+                if (window.scrollAnimationId) {
+                    cancelAnimationFrame(window.scrollAnimationId);
+                    window.scrollAnimationId = null;
                 }
-                
+                if (window.homeScrollAnimation) {
+                    cancelAnimationFrame(window.homeScrollAnimation);
+                    window.homeScrollAnimation = null;
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
                 // Update URL without hash
                 if (history.pushState) {
                     history.pushState(null, null, window.location.pathname + window.location.search);
                 }
-                
+
                 return false;
             }
             
@@ -249,59 +244,18 @@ function initSmoothScroll() {
             const targetTop = target.offsetTop;
             const desiredPosition = Math.max(0, targetTop - headerOffset);
             
-            // Detect mobile device for optimized scrolling
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
-            
-            // On mobile, use native smooth scroll only (faster, smoother)
-            if (isMobile) {
-                // Cancel any ongoing scroll animations
-                if (window.scrollAnimationId) {
-                    cancelAnimationFrame(window.scrollAnimationId);
-                    window.scrollAnimationId = null;
-                }
-                
-                // Force smooth scroll on mobile - ensure CSS supports it
-                document.documentElement.style.scrollBehavior = 'smooth';
-                document.body.style.scrollBehavior = 'smooth';
-                
-                // Use native smooth scroll - ensure no interference
-                window.scrollTo({
-                    top: desiredPosition,
-                    behavior: 'smooth'
-                });
-                
-            } else {
-                // Desktop: use optimized polyfill for better control
-                const startPosition = window.pageYOffset;
-                const distance = desiredPosition - startPosition;
-                const duration = Math.min(600, Math.abs(distance) * 0.5); // Adaptive duration
-                let start = null;
-                let animationId = null;
-                
-                function scrollStep(timestamp) {
-                    if (!start) start = timestamp;
-                    const progress = timestamp - start;
-                    const percentage = Math.min(progress / duration, 1);
-                    
-                    // Easing function (ease-in-out)
-                    const ease = percentage < 0.5
-                        ? 2 * percentage * percentage
-                        : 1 - Math.pow(-2 * percentage + 2, 2) / 2;
-                    
-                    const currentPos = startPosition + distance * ease;
-                    window.scrollTo(0, currentPos);
-                    
-                    if (progress < duration) {
-                        animationId = window.requestAnimationFrame(scrollStep);
-                    } else {
-                        // Ensure we end at exact position
-                        window.scrollTo(0, desiredPosition);
-                    }
-                }
-                
-                // Start polyfill animation
-                animationId = window.requestAnimationFrame(scrollStep);
+            // Cancel any in-flight custom animation, then do ONE native smooth
+            // scroll. The old desktop path ran a requestAnimationFrame polyfill
+            // that called window.scrollTo() every frame — but the global
+            // `scroll-behavior: smooth` CSS turned each of those per-frame calls
+            // into its own native animation, so they fought each other and the
+            // scroll came out jagged. A single native smooth scroll is smooth
+            // on its own and works on desktop and mobile alike.
+            if (window.scrollAnimationId) {
+                cancelAnimationFrame(window.scrollAnimationId);
+                window.scrollAnimationId = null;
             }
+            window.scrollTo({ top: desiredPosition, behavior: 'smooth' });
             
             // Update URL without hash
             if (history.pushState) {
