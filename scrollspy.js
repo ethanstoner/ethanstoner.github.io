@@ -202,13 +202,17 @@
             scrollTimer = null;
         }
         if (flag) {
-            // Re-enable scroll-based updates after smooth scroll finishes.
-            // Hard cap so the lock can never get stuck permanently.
+            // Safety net only: the nav click handler releases this lock precisely
+            // when its smooth scroll settles on target (holdNavIndicatorUntilSettled).
+            // This timer just guarantees the lock can never get stuck permanently.
+            // It must be LONGER than any real smooth scroll — a short cap (e.g. 700ms)
+            // used to expire mid-flight on long top-to-bottom scrolls and make the
+            // active nav indicator bounce through the sections it passed.
             scrollTimer = setTimeout(() => {
                 isScrolling = false;
                 scrollTimer = null;
                 scheduleUpdate();
-            }, 700);
+            }, 3500);
         } else {
             scheduleUpdate();
         }

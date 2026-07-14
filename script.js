@@ -4,6 +4,38 @@
 // polyfill — the polyfill fought the global CSS `scroll-behavior: smooth`
 // and made scrolling jagged. See the click handler in initSmoothScroll().
 
+// Keep the scrollspy's active-link lock engaged until a programmatic smooth
+// scroll actually reaches its destination. A native smooth scroll to a far
+// section can take well over a second; without this, scrollspy's own safety
+// timer expires mid-flight and briefly highlights whatever section we're
+// passing (e.g. Tech Stack) before snapping back to the real target — the
+// nav-indicator "bounce". We poll until we've arrived and stopped moving,
+// then release the lock so scrollspy recomputes exactly once, on target.
+function holdNavIndicatorUntilSettled(targetY) {
+    if (window.__navSettleRaf) {
+        cancelAnimationFrame(window.__navSettleRaf);
+        window.__navSettleRaf = null;
+    }
+    let lastY = null;
+    const startTime = performance.now();
+    function check() {
+        const y = window.pageYOffset;
+        const atTarget = Math.abs(y - targetY) <= 2;
+        const notMoving = lastY !== null && Math.abs(y - lastY) < 1;
+        lastY = y;
+        // Settle when we've arrived and stopped, or as a hard fallback after 3s.
+        if ((atTarget && notMoving) || performance.now() - startTime > 3000) {
+            window.__navSettleRaf = null;
+            if (window.scrollspySetScrolling) {
+                window.scrollspySetScrolling(false);
+            }
+            return;
+        }
+        window.__navSettleRaf = requestAnimationFrame(check);
+    }
+    window.__navSettleRaf = requestAnimationFrame(check);
+}
+
 // Smooth scroll function - can be called immediately or on DOMContentLoaded
 function initSmoothScroll() {
     // Smooth scroll for anchor links only (not mailto, http, https, or email cards)
@@ -107,6 +139,7 @@ function initSmoothScroll() {
                     window.homeScrollAnimation = null;
                 }
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+                holdNavIndicatorUntilSettled(0);
 
                 // Update URL without hash
                 if (history.pushState) {
@@ -150,7 +183,8 @@ function initSmoothScroll() {
                 window.scrollAnimationId = null;
             }
             window.scrollTo({ top: desiredPosition, behavior: 'smooth' });
-            
+            holdNavIndicatorUntilSettled(desiredPosition);
+
             // Update URL without hash
             if (history.pushState) {
                 history.pushState(null, null, window.location.pathname + window.location.search);
