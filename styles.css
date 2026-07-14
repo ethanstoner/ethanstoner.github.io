@@ -2489,3 +2489,120 @@ html {
         display: none !important;
     }
 }
+
+/* ---------------------------------------------------------------------------
+   Inline links inside the About details lists (e.g. "view certificate").
+   Previously fell back to the browser default blue/purple visited style,
+   which clashed with the site. Style them to match: subtle underlined white.
+   --------------------------------------------------------------------------- */
+.detail-item ul li a,
+.detail-item ul li a:link,
+.detail-item ul li a:visited {
+    color: rgba(255, 255, 255, 0.92);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+    padding-bottom: 1px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.detail-item ul li a:hover,
+.detail-item ul li a:focus-visible {
+    color: #fff;
+    border-bottom-color: rgba(255, 255, 255, 0.75);
+}
+
+/* ---------------------------------------------------------------------------
+   Certifications section — a compact panel linking to the /certs gallery.
+   --------------------------------------------------------------------------- */
+.certs-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+    flex-wrap: wrap;
+    padding: 44px 48px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    text-decoration: none;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.4s ease, background 0.4s ease;
+}
+
+.certs-panel:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.certs-panel-main { max-width: 640px; }
+
+.certs-count {
+    display: inline-block;
+    font-family: "Roboto Mono", ui-monospace, monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 16px;
+}
+
+.certs-panel-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.3px;
+    margin: 0 0 10px;
+}
+
+.certs-panel-sub {
+    font-size: 15px;
+    line-height: 1.65;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 24px;
+}
+
+.certs-chips {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.certs-chip {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: var(--c);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.certs-panel-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    padding: 15px 26px;
+    border-radius: 12px;
+    background: #fff;
+    color: #0f0f0f;
+    font-size: 15px;
+    font-weight: 500;
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.certs-panel:hover .certs-panel-cta { background: #ececec; }
+.certs-panel-cta svg { transition: transform 0.3s ease; }
+.certs-panel:hover .certs-panel-cta svg { transform: translateX(4px); }
+
+@media (max-width: 760px) {
+    .certs-panel { padding: 34px 28px; gap: 30px; }
+    .certs-panel-cta { width: 100%; justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .certs-panel,
+    .certs-panel-cta,
+    .certs-panel-cta svg { transition: none; }
+    .certs-panel:hover { transform: none; }
+}
