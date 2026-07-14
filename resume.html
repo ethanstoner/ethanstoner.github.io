@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Ethan Stoner — Resume</title>
 <style>
-  @page { size: Letter; margin: 0.4in 0.5in; }
+  @page { size: Letter; margin: 0.35in 0.5in; }
   * { box-sizing: border-box; }
   html, body {
     margin: 0;
@@ -12,7 +12,7 @@
     font-family: "Helvetica Neue", Arial, sans-serif;
     color: #1a1a1a;
     font-size: 9.6pt;
-    line-height: 1.28;
+    line-height: 1.25;
   }
   a { color: #2056a4; text-decoration: none; }
   .name {
@@ -45,7 +45,7 @@
     letter-spacing: 2px;
     border-bottom: 1.2px solid #1b3a72;
     padding-bottom: 1px;
-    margin: 8px 0 4px;
+    margin: 6px 0 3px;
     text-transform: uppercase;
   }
   p.summary { margin: 0 0 2px; }
@@ -167,6 +167,15 @@
 <h2 class="section">Projects</h2>
 
 <div class="project-head">
+  <div class="name-col">Pincer — Real-Time Computer-Vision Agent</div>
+  <div class="link-col"><a href="https://github.com/ethanstoner/pincer">github.com/ethanstoner/pincer</a></div>
+</div>
+<ul class="bullets">
+  <li>Closed-loop agent that drives physical Android devices over USB (ADB): fine-tuned YOLO11 detects on-screen targets and actuates gestures — perception → decision → actuation at ~1.3ms/frame.</li>
+  <li>Self-labeling data flywheel with a human-in-the-loop review UI (5,400+ frames), a train → validation-gate → ONNX-export pipeline, and 120+ automated tests.</li>
+</ul>
+
+<div class="project-head">
   <div class="name-col">Qorlyt — Image-to-3D Generator</div>
   <div class="link-col"><a href="https://qorlyt.com">qorlyt.com</a></div>
 </div>
@@ -211,7 +220,7 @@
   <div class="right">Graduated June 2026</div>
 </div>
 <div class="edu-row">
-  <div class="left"><a href="https://ethanstoner.github.io/certs/">Anthropic — Claude with the Anthropic API, Claude Code 101 &amp; Claude Code in Action (Certificates of Completion)</a></div>
+  <div class="left"><a href="https://ethanstoner.github.io/certs/">Anthropic — Claude API, Claude Code 101 &amp; Code in Action (Certificates of Completion)</a></div>
   <div class="right">2026</div>
 </div>
 <div class="edu-row">
