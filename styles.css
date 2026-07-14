@@ -2561,8 +2561,8 @@ html {
 
 .certs-thumbs {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 11px;
 }
 
 .cert-mini {
