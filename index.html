@@ -305,7 +305,7 @@
                             <p class="project-description">
                                 <strong>Deployed:</strong> Took AWS's multi-provider Generative AI gateway from an empty repo to a live, <strong>TLS-secured production endpoint</strong> — provisioning <strong>~120 AWS resources with Terraform</strong> and owning the full deployment lifecycle. An OpenAI-compatible API layer (LiteLLM) sits in front of <strong>Amazon Bedrock</strong>, exposing Amazon Nova and Anthropic Claude through a single endpoint with usage-based routing and automatic fallbacks.<br><br>
                                 <strong>Hands-On Work:</strong> Provisioned VPC, ECS Fargate, ALB, PostgreSQL on RDS, Redis on ElastiCache, WAF, Secrets Manager, and Bedrock VPC endpoints via Terraform with a remote <strong>S3 state backend</strong> for reproducible, team-managed infra. Custom domain on Route 53 + DNS-validated ACM certificate; horizontal autoscaling, least-privilege IAM, Redis caching, and per-key cost/token observability. Layered <strong>Bedrock Guardrails</strong> + a <strong>Microsoft Presidio</strong> sidecar for PII masking — then traced a masking defect to a dependency version and fixed it via a controlled upgrade and regression testing. Built one-command spin-up / spin-down cost controls and rebuilt the entire stack from Terraform state to verify it.<br><br>
-                                <strong>Scope &amp; credit:</strong> A real production cloud/DevOps engagement mentored at <strong>Riffyx Labs</strong>. This was hands-on <em>deployment and operation</em> of AWS's official &ldquo;Guidance for Multi-Provider Generative AI Gateway on AWS&rdquo; reference architecture — infrastructure and ops work, not original authorship of the codebase.
+                                <strong>Scope &amp; credit:</strong> A real production cloud/DevOps engagement mentored by <strong>Cisco professionals at Riffyx Labs</strong>. This was hands-on <em>deployment and operation</em> of AWS's official &ldquo;Guidance for Multi-Provider Generative AI Gateway on AWS&rdquo; reference architecture — infrastructure and ops work, not original authorship of the codebase.
                             </p>
                             <div class="project-architecture">
                                 <p class="architecture-text"><strong>Architecture:</strong> Client -> Route 53 + ACM (TLS) -> ALB + WAF -> ECS Fargate (LiteLLM + Presidio PII sidecar) -> Amazon Bedrock (Nova / Claude), with RDS + ElastiCache + Secrets Manager</p>
@@ -614,13 +614,13 @@
                                 </div>
                             </div>
                             <p class="project-description">
-                                Built hands-on experience with AWS fundamentals, debugging, and real-world technical issues in mentored projects.<br><br>
-                                Used Git-based workflows to make code updates, work across branches, and submit pull requests for review while collaborating with experienced engineers.
+                                Worked alongside <strong>Cisco professionals</strong> to deploy and operate a production Generative AI gateway on AWS — provisioning <strong>~120 resources with Terraform</strong> (ECS Fargate, RDS, ALB, WAF, Bedrock) with Guardrails and PII masking. <em>(See the GenAI Gateway on AWS project above.)</em><br><br>
+                                Used Git-based workflows — branches, commits, and pull requests — plus hands-on production debugging to ship and maintain real infrastructure with experienced engineers.
                             </p>
                             <div class="project-features">
                                 <span class="feature-tag tech-feature-tag">
                                     <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/amazonaws.svg" alt="AWS" class="feature-icon" loading="lazy" decoding="async">
-                                    AWS Fundamentals
+                                    AWS + Terraform
                                 </span>
                                 <span class="feature-tag tech-feature-tag">
                                     <img src="https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/git.svg" alt="Git" class="feature-icon" loading="lazy" decoding="async">
